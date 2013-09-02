@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Thu Aug 22 11:39:31 2013
+# Time: Mon Sep  2 20:31:58 2013
 #
 
 
@@ -12,7 +12,7 @@ Already cloned
 Already up-to-date.
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-3ab17ac25e92ade48325472994b6660c5efd05b5	refs/heads/master
+d4f5315cfac4e14091d5440a6d482e033ba21b1b	refs/heads/master
 
 
 git_clone('https://github.com/raspberrypi/linux', '/home/pi/linux', 'rpi-3.6.y')
@@ -26,9 +26,9 @@ Switched to branch 'rpi-3.6.y'
 => cd /home/pi/linux && git pull
 Already up-to-date.
 
-=> cd /home/pi/linux && git checkout 63b69a8806ce1890711ff55280c90673ea415933
+=> cd /home/pi/linux && git checkout 1587f775d0a3c437485262ba951afc5e30be69fa
 
-Note: checking out '63b69a8806ce1890711ff55280c90673ea415933'.
+Note: checking out '1587f775d0a3c437485262ba951afc5e30be69fa'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
@@ -39,7 +39,7 @@ do so (now or later) by using -b with the checkout command again. Example:
 
   git checkout -b new_branch_name
 
-HEAD is now at 63b69a8... Changes for new NOOBS multi partition booting from gsh
+HEAD is now at 1587f77... Enable CONFIG_COMPACTION and move to SLUB memory allocator. See: https://github.com/raspberrypi/linux/pull/349
 
 Remove 'roundup_pow_of_two' line in '/home/pi/linux/drivers/spi/spi-bcm2708.c'
 
@@ -55,14 +55,14 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Thu Aug 22 11:39:49 2013
-# Elapsed: 0.30 min
+# Time: Mon Sep  2 20:32:06 2013
+# Elapsed: 0.13 min
 #
 
 
 #
 # Begin: config
-# Time: Thu Aug 22 11:39:49 2013
+# Time: Mon Sep  2 20:32:06 2013
 #
 
 
@@ -107,91 +107,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 *
 * Support for small TFT LCD display modules
 *
-Support for small TFT LCD display modules (FB_TFT) [N/m/y] (NEW)   FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) *
-* Graphics support
-*
-*
-* Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)
-*
-Direct Rendering Manager (XFree86 4.1.0 and higher DRI support) (DRM) [N/m/y/?] n
-Lowlevel video output switch controls (VIDEO_OUTPUT_CONTROL) [N/m/y/?] n
-*
-* Support for frame buffer devices
-*
-Support for frame buffer devices (FB) [Y/n/m/?] y
-  Enable firmware EDID (FIRMWARE_EDID) [N/y/?] n
-  *
-  * Framebuffer foreign endianness support
-  *
-  Framebuffer foreign endianness support (FB_FOREIGN_ENDIAN) [N/y/?] n
-  Enable Video Mode Handling Helpers (FB_MODE_HELPERS) [N/y/?] n
-  Enable Tile Blitting Support (FB_TILEBLITTING) [N/y/?] n
-  *
-  * Frame buffer hardware drivers
-  *
-  BCM2708 framebuffer support (FB_BCM2708) [Y/n/m/?] y
-  ARM PrimeCell PL110 support (FB_ARMCLCD) [N/m/y/?] n
-  Userspace VESA VGA graphics support (FB_UVESA) [N/m/?] n
-  Epson S1D13XXX framebuffer support (FB_S1D13XXX) [N/m/y/?] n
-  SMSC UFX6000/7000 USB Framebuffer support (FB_SMSCUFX) [N/m/y/?] n
-  Displaylink USB Framebuffer support (FB_UDL) [N/m/y/?] n
-  Virtual Frame Buffer support (ONLY FOR TESTING!) (FB_VIRTUAL) [N/m/y/?] n
-  E-Ink Metronome/8track controller support (FB_METRONOME) [N/m/y/?] n
-  E-Ink Broadsheet/Epson S1D13521 controller support (FB_BROADSHEET) [N/m/y/?] n
-  AUO-K190X EPD controller support (FB_AUO_K190X) [N/m/y/?] n
-  *
-  * Support for small TFT LCD display modules
-  *
-  Support for small TFT LCD display modules (FB_TFT) [M/n/y] m
-    FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [M/n/?] m
-    FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [M/n/?] m
-    FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [M/n/?] m
-    FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [M/n/?] m
-    FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [M/n/?] m
-    FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [M/n/?] m
-    FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [M/n/?] m
-    FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [M/n/?] m
-    FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [M/n/?] m
-    Generic FB driver for TFT LCD displays (FB_FLEX) [M/n/?] m
-    Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [M/n] m
-Module for adding an ads7846 device (TOUCHSCREEN_ADS7846_DEVICE) [N/m/y] (NEW) *
-* Exynos Video driver support
-*
-Exynos Video driver support (EXYNOS_VIDEO) [N/y/?] n
-*
-* Backlight & LCD device support
-*
-Backlight & LCD device support (BACKLIGHT_LCD_SUPPORT) [Y/?] y
-  Lowlevel LCD controls (LCD_CLASS_DEVICE) [M/n/y/?] m
-    Epson L4F00242T03 LCD (LCD_L4F00242T03) [N/m/?] n
-    Samsung LMS283GF05 LCD (LCD_LMS283GF05) [N/m/?] n
-    Samsung LTV350QV LCD Panel (LCD_LTV350QV) [N/m/?] n
-    Toppoly TDO24M  and TDO35S LCD Panels support (LCD_TDO24M) [N/m/?] n
-    VGG2432A4 LCM device support (LCD_VGG2432A4) [N/m/?] n
-    Platform LCD controls (LCD_PLATFORM) [N/m/?] n
-    S6E63M0 AMOLED LCD Driver (LCD_S6E63M0) [N/m/?] n
-    LD9040 AMOLED LCD Driver (LCD_LD9040) [N/m/?] n
-    AMS369FG06 AMOLED LCD Driver (LCD_AMS369FG06) [N/m/?] n
-  Lowlevel Backlight controls (BACKLIGHT_CLASS_DEVICE) [Y/?] y
-    Generic (aka Sharp Corgi) Backlight Driver (BACKLIGHT_GENERIC) [N/m/y/?] n
-    Backlight Driver for ADP8860/ADP8861/ADP8863 using WLED (BACKLIGHT_ADP8860) [N/m/y/?] n
-    Backlight Driver for ADP8870 using WLED (BACKLIGHT_ADP8870) [N/m/y/?] n
-    Backlight driver for TI LP855X (BACKLIGHT_LP855X) [N/m/y/?] n
-*
-* Console display driver support
-*
-Framebuffer Console support (FRAMEBUFFER_CONSOLE) [Y/n/m/?] y
-  Map the console to the primary display device (FRAMEBUFFER_CONSOLE_DETECT_PRIMARY) [N/y/?] n
-  Framebuffer Console Rotation (FRAMEBUFFER_CONSOLE_ROTATION) [N/y/?] n
-Select compiled-in fonts (FONTS) [N/y/?] n
-*
-* Bootup logo
-*
-Bootup logo (LOGO) [Y/n/?] y
-  Standard black and white Linux logo (LOGO_LINUX_MONO) [N/y] n
-  Standard 16-color Linux logo (LOGO_LINUX_VGA16) [N/y] n
-  Standard 224-color Linux logo (LOGO_LINUX_CLUT224) [Y/n] y
-#
+Support for small TFT LCD display modules (FB_TFT) [N/m/y] (NEW)   FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) #
 # configuration written to .config
 #
 yes: standard output: Broken pipe
@@ -264,14 +180,14 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Thu Aug 22 11:40:35 2013
-# Elapsed: 0.76 min
+# Time: Mon Sep  2 20:32:45 2013
+# Elapsed: 0.65 min
 #
 
 
 #
 # Begin: extra
-# Time: Thu Aug 22 12:58:07 2013
+# Time: Mon Sep  2 21:42:41 2013
 #
 
 
@@ -303,33 +219,51 @@ Already up-to-date.
   INSTALL /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
   DEPMOD  3.6.11+
 
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device modules
+  CC [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/ads7846_device/ads7846_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+  DEPMOD  3.6.11+
+
 git_clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
 Already cloned
+
+=> cd /home/pi/PiBits && git checkout -- .
 
 => cd /home/pi/PiBits && git pull
 Already up-to-date.
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster modules
-  CC [M]  /home/pi/PiBits/ServoBlaster/servoblaster.o
+Build ServoBlaster kernel module for board revision 2
+
+
+=> sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel modules
+  CC [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.o
   Building modules, stage 2.
   MODPOST 1 modules
-  CC      /home/pi/PiBits/ServoBlaster/servoblaster.mod.o
-  LD [M]  /home/pi/PiBits/ServoBlaster/servoblaster.ko
+  CC      /home/pi/PiBits/ServoBlaster/kernel/servoblaster.mod.o
+  LD [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster INSTALL_MOD_PATH=/home/pi/modules modules_install
-  INSTALL /home/pi/PiBits/ServoBlaster/servoblaster.ko
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
   DEPMOD  3.6.11+
 
 #
 # End: extra
-# Time: Thu Aug 22 12:58:34 2013
-# Elapsed: 0.46 min
+# Time: Mon Sep  2 21:43:17 2013
+# Elapsed: 0.60 min
 #
 
 
 #
 # Begin: update
-# Time: Thu Aug 22 12:58:34 2013
+# Time: Mon Sep  2 21:43:17 2013
 #
 
 
@@ -380,47 +314,47 @@ Already up-to-date.
 => cp -a /home/pi/linux/.config /home/pi/rpi-firmware/extra/
 
 => ls -l /home/pi/rpi-firmware
-total 21148
--rw-rw-r-- 1 pi pi   17816 Aug 21 16:37 bootcode.bin
--rw-rw-r-- 1 pi pi   18693 Aug 21 16:37 COPYING.linux
-drwxrwxr-x 2 pi pi    4096 Aug 22 12:58 extra
--rw-rw-r-- 1 pi pi    2034 Aug 21 16:37 fixup_cd.dat
--rw-rw-r-- 1 pi pi    5742 Aug 21 16:37 fixup.dat
--rw-rw-r-- 1 pi pi    8689 Aug 21 16:37 fixup_x.dat
--rw-rw-r-- 1 pi pi 9614632 Aug 21 16:37 kernel_emergency.img
--rwxrwxr-x 1 pi pi 5522604 Aug 22 12:52 kernel.img
--rw-rw-r-- 1 pi pi    1447 Aug 21 16:37 LICENCE.broadcom
-drwxrwxr-x 3 pi pi    4096 Aug 22 12:58 modules
--rw-rw-r-- 1 pi pi  470968 Aug 21 16:37 start_cd.elf
--rw-rw-r-- 1 pi pi 2495284 Aug 21 16:37 start.elf
--rw-rw-r-- 1 pi pi 3462628 Aug 21 16:37 start_x.elf
-drwxrwxr-x 5 pi pi    4096 Aug 22 12:58 vc
+total 21192
+-rw-rw-r-- 1 pi pi   17816 Sep  2 12:04 bootcode.bin
+-rw-rw-r-- 1 pi pi   18693 Sep  2 12:04 COPYING.linux
+drwxrwxr-x 2 pi pi    4096 Sep  2 21:43 extra
+-rw-rw-r-- 1 pi pi    2037 Sep  2 12:04 fixup_cd.dat
+-rw-rw-r-- 1 pi pi    5746 Sep  2 12:04 fixup.dat
+-rw-rw-r-- 1 pi pi    8779 Sep  2 12:04 fixup_x.dat
+-rw-rw-r-- 1 pi pi 9614632 Sep  2 12:04 kernel_emergency.img
+-rwxrwxr-x 1 pi pi 5547524 Sep  2 21:37 kernel.img
+-rw-rw-r-- 1 pi pi    1447 Sep  2 12:04 LICENCE.broadcom
+drwxrwxr-x 3 pi pi    4096 Sep  2 21:43 modules
+-rw-rw-r-- 1 pi pi  471256 Sep  2 12:04 start_cd.elf
+-rw-rw-r-- 1 pi pi 2497684 Sep  2 12:04 start.elf
+-rw-rw-r-- 1 pi pi 3476100 Sep  2 12:04 start_x.elf
+drwxrwxr-x 5 pi pi    4096 Sep  2 21:43 vc
 
 #
 # End: update
-# Time: Thu Aug 22 12:58:39 2013
-# Elapsed: 0.08 min
+# Time: Mon Sep  2 21:43:22 2013
+# Elapsed: 0.07 min
 #
 
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-3ab17ac25e92ade48325472994b6660c5efd05b5	refs/heads/master
+d4f5315cfac4e14091d5440a6d482e033ba21b1b	refs/heads/master
 
 
 => cd /home/pi/linux && git rev-parse HEAD
-63b69a8806ce1890711ff55280c90673ea415933
+1587f775d0a3c437485262ba951afc5e30be69fa
 
 
 => cd /home/pi/linux/drivers/video/fbtft && git rev-parse HEAD
-76b5b981191344afd9380a04e3c0ee6b5e985856
+25e1b0eb0822da905e89016e81740d98174d826d
 
 
 => cd /home/pi/fbtft_tools && git rev-parse HEAD
-2a4294361711f869ca537a2404ba932e4ad17cf9
+3c63895e612ceacd48c5a6956535a363e5685439
 
 
 => cd /home/pi/PiBits && git rev-parse HEAD
-fdf979c383c3d02dc9d5ce9846ef6a02baf0fa27
+071fc182bcf4e2e69591a781805b63f8e251f3f6
 
 => writef(/home/pi/rpi-firmware/README.md)
 
@@ -436,15 +370,15 @@ Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/ext
 ### Sources
 
 * Firmware  
-https://github.com/raspberrypi/firmware/tree/3ab17ac25e92ade48325472994b6660c5efd05b5
+https://github.com/raspberrypi/firmware/tree/d4f5315cfac4e14091d5440a6d482e033ba21b1b
 * Linux kernel  
-https://github.com/raspberrypi/linux/tree/63b69a8806ce1890711ff55280c90673ea415933
+https://github.com/raspberrypi/linux/tree/1587f775d0a3c437485262ba951afc5e30be69fa
 * FBTFT  
-https://github.com/notro/fbtft/tree/76b5b981191344afd9380a04e3c0ee6b5e985856
+https://github.com/notro/fbtft/tree/25e1b0eb0822da905e89016e81740d98174d826d
 * gpio_mouse_device, gpio_keys_device  
-https://github.com/notro/fbtft_tools/tree/2a4294361711f869ca537a2404ba932e4ad17cf9
+https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/fdf979c383c3d02dc9d5ce9846ef6a02baf0fa27
+https://github.com/richardghirst/PiBits/tree/071fc182bcf4e2e69591a781805b63f8e251f3f6
 
 
 ### Kernel source changes
@@ -496,6 +430,5 @@ CONFIG_KEYBOARD_GPIO=m
 CONFIG_KEYBOARD_GPIO_POLLED=m
 CONFIG_MOUSE_GPIO=m
 CONFIG_TOUCHSCREEN_ADS7846=m
-CONFIG_TOUCHSCREEN_ADS7846_DEVICE=m
 ```
 

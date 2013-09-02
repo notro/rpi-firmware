@@ -106,7 +106,6 @@ kernel/drivers/video/fbtft/fb_ssd1351.ko
 kernel/drivers/video/fbtft/fb_st7735r.ko
 kernel/drivers/video/fbtft/flexfb.ko
 kernel/drivers/video/fbtft/fbtft_device.ko
-kernel/drivers/video/fbtft/ads7846_device.ko
 kernel/drivers/char/hw_random/rng-core.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko
 kernel/drivers/block/pktcdvd.ko

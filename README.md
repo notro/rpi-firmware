@@ -11,15 +11,15 @@ Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/ext
 ### Sources
 
 * Firmware  
-https://github.com/raspberrypi/firmware/tree/3ab17ac25e92ade48325472994b6660c5efd05b5
+https://github.com/raspberrypi/firmware/tree/d4f5315cfac4e14091d5440a6d482e033ba21b1b
 * Linux kernel  
-https://github.com/raspberrypi/linux/tree/63b69a8806ce1890711ff55280c90673ea415933
+https://github.com/raspberrypi/linux/tree/1587f775d0a3c437485262ba951afc5e30be69fa
 * FBTFT  
-https://github.com/notro/fbtft/tree/76b5b981191344afd9380a04e3c0ee6b5e985856
+https://github.com/notro/fbtft/tree/25e1b0eb0822da905e89016e81740d98174d826d
 * gpio_mouse_device, gpio_keys_device  
-https://github.com/notro/fbtft_tools/tree/2a4294361711f869ca537a2404ba932e4ad17cf9
+https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/fdf979c383c3d02dc9d5ce9846ef6a02baf0fa27
+https://github.com/richardghirst/PiBits/tree/071fc182bcf4e2e69591a781805b63f8e251f3f6
 
 
 ### Kernel source changes
@@ -71,5 +71,4 @@ CONFIG_KEYBOARD_GPIO=m
 CONFIG_KEYBOARD_GPIO_POLLED=m
 CONFIG_MOUSE_GPIO=m
 CONFIG_TOUCHSCREEN_ADS7846=m
-CONFIG_TOUCHSCREEN_ADS7846_DEVICE=m
 ```
