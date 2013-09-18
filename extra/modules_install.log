@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Mon Sep  2 21:42:18 2013
+# Time: Wed Sep 18 21:17:19 2013
 #
 
 
@@ -545,6 +545,7 @@
   INSTALL drivers/misc/eeprom/eeprom_93cx6.ko
   INSTALL drivers/mmc/host/mmc_spi.ko
   INSTALL drivers/net/bonding/bonding.ko
+  INSTALL drivers/net/dummy.ko
   INSTALL drivers/net/hamradio/6pack.ko
   INSTALL drivers/net/hamradio/baycom_ser_fdx.ko
   INSTALL drivers/net/hamradio/baycom_ser_hdx.ko
@@ -787,6 +788,7 @@
   INSTALL drivers/video/fbtft/fb_ssd1289.ko
   INSTALL drivers/video/fbtft/fb_ssd1351.ko
   INSTALL drivers/video/fbtft/fb_st7735r.ko
+  INSTALL drivers/video/fbtft/fb_watterott.ko
   INSTALL drivers/video/fbtft/fbtft.ko
   INSTALL drivers/video/fbtft/fbtft_device.ko
   INSTALL drivers/video/fbtft/flexfb.ko
@@ -812,6 +814,7 @@
   INSTALL fs/binfmt_misc.ko
   INSTALL fs/btrfs/btrfs.ko
   INSTALL fs/cifs/cifs.ko
+  INSTALL fs/dlm/dlm.ko
   INSTALL fs/ecryptfs/ecryptfs.ko
   INSTALL fs/fuse/cuse.ko
   INSTALL fs/fuse/fuse.ko
@@ -866,8 +869,11 @@
   INSTALL fs/ocfs2/dlmfs/ocfs2_dlmfs.ko
   INSTALL fs/ocfs2/ocfs2.ko
   INSTALL fs/ocfs2/ocfs2_stack_o2cb.ko
+  INSTALL fs/ocfs2/ocfs2_stack_user.ko
   INSTALL fs/ocfs2/ocfs2_stackglue.ko
   INSTALL fs/quota/quota_tree.ko
+  INSTALL fs/quota/quota_v1.ko
+  INSTALL fs/quota/quota_v2.ko
   INSTALL fs/reiserfs/reiserfs.ko
   INSTALL fs/squashfs/squashfs.ko
   INSTALL fs/udf/udf.ko
@@ -1230,7 +1236,7 @@
 
 #
 # End: modules_install
-# Time: Mon Sep  2 21:42:41 2013
-# Elapsed: 0.38 min
+# Time: Wed Sep 18 21:17:43 2013
+# Elapsed: 0.40 min
 #
 

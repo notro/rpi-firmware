@@ -8,23 +8,46 @@ Raspberry Pi kernel and firmware with support for FBTFT.
 Build scripts used: https://github.com/notro/rpi-build  
 Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/extra) directory
 
+
+### Install
+
+If [rpi-update](https://github.com/Hexxeh/rpi-update) is older than 12. august 2013, then it has to be manually updated first (or REPO_URI will be overwritten):
+```text
+sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
+```
+
+Because of an [issue](https://github.com/Hexxeh/rpi-update/issues/106), the following command is needed when going from the vanilla kernel to this kernel (not needed on subsequent notro/rpi-firmware updates):
+```text
+sudo mv /lib/modules/$(uname -r) /lib/modules/$(uname -r).bak
+```
+
+**Install**
+```text
+sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
+sudo shutdown -r now
+```
+
+
 ### Sources
 
 * Firmware  
-https://github.com/raspberrypi/firmware/tree/d4f5315cfac4e14091d5440a6d482e033ba21b1b
+https://github.com/raspberrypi/firmware/tree/fadc4cbd10d8144d301c894dd9975704db6206fa
 * Linux kernel  
-https://github.com/raspberrypi/linux/tree/1587f775d0a3c437485262ba951afc5e30be69fa
+https://github.com/raspberrypi/linux/tree/cbd6672e7e1b2dc5026f5dc7929a13a9a68f2a62
 * FBTFT  
-https://github.com/notro/fbtft/tree/25e1b0eb0822da905e89016e81740d98174d826d
-* gpio_mouse_device, gpio_keys_device  
+https://github.com/notro/fbtft/tree/e207c4ec58429d24e8a03de5dce800c1a03dd36e
+* [gpio_mouse_device](https://github.com/notro/fbtft_tools/wiki/gpio_mouse_device), [gpio_keys_device](https://github.com/notro/fbtft_tools/wiki/gpio_keys_device), [ads7846_device](https://github.com/notro/fbtft_tools/wiki/ads7846_device)  
 https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/071fc182bcf4e2e69591a781805b63f8e251f3f6
+https://github.com/richardghirst/PiBits/tree/3f4804aa906525ca3be42ecce30914eeec02af4d
+* DMA capable SPI master driver [spi-bcm2708](https://github.com/notro/spi-bcm2708/wiki)  
+https://github.com/notro/spi-bcm2708/tree/3209afa4e96c8a6e1f6e582b305d9468aa64d5f9
 
 
-### Kernel source changes
+### Kernel patches
 
-* spi-bcm2708.c: bcm2708_setup_state(): removed ```roundup_pow_of_two()``` limitation
+* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/fbtft.patch)
+* [bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/bcm2708.patch)
 
 
 ### Kernel configuration changes
@@ -55,6 +78,7 @@ CONFIG_FB_TFT_PCD8544=m
 CONFIG_FB_TFT_SSD1289=m
 CONFIG_FB_TFT_SSD1351=m
 CONFIG_FB_TFT_ST7735R=m
+CONFIG_FB_TFT_WATTEROTT=m
 CONFIG_FONTS=y
 CONFIG_FONT_10x18=y
 CONFIG_FONT_6x11=y

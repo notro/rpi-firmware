@@ -39,6 +39,7 @@ alias platform:fb_ssd1351 fb_ssd1351
 alias spi:fb_ssd1351 fb_ssd1351
 alias platform:fb_st7735r fb_st7735r
 alias spi:fb_st7735r fb_st7735r
+alias spi:fb_watterott fb_watterott
 alias block-major-147-* drbd
 alias usb:v054Cp02E1d*dc*dsc*dp*ic*isc*ip*in* pn533
 alias usb:v04E6p5591d*dc*dsc*dp*ic*isc*ip*in* pn533
@@ -1133,6 +1134,7 @@ alias usb:v1410pB001d*dc*dsc*dp*ic02isc06ip00in* qmi_wwan
 alias usb:v12D1p*d*dc*dsc*dp*icFFisc01ip39in* qmi_wwan
 alias usb:v12D1p*d*dc*dsc*dp*icFFisc01ip09in* qmi_wwan
 alias rtnl-link-bond bonding
+alias rtnl-link-dummy dummy
 alias rtnl-link-macvlan macvlan
 alias devname:net/tun tun
 alias char-major-10-200 tun

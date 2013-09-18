@@ -1,4 +1,6 @@
 kernel/arch/arm/mach-bcm2708/dmaer_master.ko:
+kernel/fs/quota/quota_v1.ko:
+kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
 kernel/fs/quota/quota_tree.ko:
 kernel/fs/nls/nls_cp737.ko:
 kernel/fs/nls/nls_cp775.ko:
@@ -39,6 +41,7 @@ kernel/fs/nls/nls_koi8-u.ko:
 kernel/fs/nls/nls_koi8-ru.ko:
 kernel/fs/nls/nls_utf8.ko:
 kernel/fs/binfmt_misc.ko:
+kernel/fs/dlm/dlm.ko: kernel/net/sctp/sctp.ko kernel/net/ipv6/ipv6.ko
 kernel/fs/reiserfs/reiserfs.ko:
 kernel/fs/squashfs/squashfs.ko: kernel/lib/xz/xz_dec.ko kernel/lib/lzo/lzo_decompress.ko kernel/lib/zlib_inflate/zlib_inflate.ko
 kernel/fs/isofs/isofs.ko: kernel/lib/zlib_inflate/zlib_inflate.ko
@@ -58,6 +61,7 @@ kernel/fs/nilfs2/nilfs2.ko:
 kernel/fs/ocfs2/ocfs2.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko kernel/fs/ocfs2/ocfs2_stackglue.ko kernel/fs/quota/quota_tree.ko
 kernel/fs/ocfs2/ocfs2_stackglue.ko:
 kernel/fs/ocfs2/ocfs2_stack_o2cb.ko: kernel/fs/ocfs2/dlm/ocfs2_dlm.ko kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko kernel/fs/ocfs2/ocfs2_stackglue.ko
+kernel/fs/ocfs2/ocfs2_stack_user.ko: kernel/fs/dlm/dlm.ko kernel/net/sctp/sctp.ko kernel/net/ipv6/ipv6.ko kernel/fs/ocfs2/ocfs2_stackglue.ko
 kernel/fs/ocfs2/dlmfs/ocfs2_dlmfs.ko: kernel/fs/ocfs2/ocfs2_stackglue.ko kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
 kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko:
 kernel/fs/ocfs2/dlm/ocfs2_dlm.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
@@ -104,6 +108,7 @@ kernel/drivers/video/fbtft/fb_pcd8544.ko: kernel/drivers/video/fbtft/fbtft.ko ke
 kernel/drivers/video/fbtft/fb_ssd1289.ko: kernel/drivers/video/fbtft/fbtft.ko kernel/drivers/video/fb_sys_fops.ko kernel/drivers/video/sysimgblt.ko kernel/drivers/video/sysfillrect.ko kernel/drivers/video/syscopyarea.ko
 kernel/drivers/video/fbtft/fb_ssd1351.ko: kernel/drivers/video/fbtft/fbtft.ko kernel/drivers/video/fb_sys_fops.ko kernel/drivers/video/sysimgblt.ko kernel/drivers/video/sysfillrect.ko kernel/drivers/video/syscopyarea.ko
 kernel/drivers/video/fbtft/fb_st7735r.ko: kernel/drivers/video/fbtft/fbtft.ko kernel/drivers/video/fb_sys_fops.ko kernel/drivers/video/sysimgblt.ko kernel/drivers/video/sysfillrect.ko kernel/drivers/video/syscopyarea.ko
+kernel/drivers/video/fbtft/fb_watterott.ko: kernel/drivers/video/fbtft/fbtft.ko kernel/drivers/video/fb_sys_fops.ko kernel/drivers/video/sysimgblt.ko kernel/drivers/video/sysfillrect.ko kernel/drivers/video/syscopyarea.ko
 kernel/drivers/video/fbtft/flexfb.ko: kernel/drivers/video/fbtft/fbtft.ko kernel/drivers/video/fb_sys_fops.ko kernel/drivers/video/sysimgblt.ko kernel/drivers/video/sysfillrect.ko kernel/drivers/video/syscopyarea.ko
 kernel/drivers/video/fbtft/fbtft_device.ko: kernel/drivers/video/fbtft/fbtft.ko kernel/drivers/video/fb_sys_fops.ko kernel/drivers/video/sysimgblt.ko kernel/drivers/video/sysfillrect.ko kernel/drivers/video/syscopyarea.ko
 kernel/drivers/char/hw_random/rng-core.ko:
@@ -183,6 +188,7 @@ kernel/drivers/net/usb/cdc_ncm.ko:
 kernel/drivers/net/usb/lg-vl600.ko: kernel/drivers/net/usb/cdc_ether.ko
 kernel/drivers/net/usb/qmi_wwan.ko: kernel/drivers/usb/class/cdc-wdm.ko
 kernel/drivers/net/bonding/bonding.ko:
+kernel/drivers/net/dummy.ko:
 kernel/drivers/net/macvlan.ko:
 kernel/drivers/net/netconsole.ko:
 kernel/drivers/net/phy/libphy.ko:

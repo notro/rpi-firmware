@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Mon Sep  2 20:31:58 2013
+# Time: Wed Sep 18 20:16:45 2013
 #
 
 
@@ -11,9 +11,17 @@ Already cloned
 => cd /home/pi/tools && git pull
 Already up-to-date.
 
-=> git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-d4f5315cfac4e14091d5440a6d482e033ba21b1b	refs/heads/master
 
+ Get firmware
+--------------
+
+=> git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
+fadc4cbd10d8144d301c894dd9975704db6206fa	refs/heads/master
+
+
+
+ Get kernel source
+-------------------
 
 git_clone('https://github.com/raspberrypi/linux', '/home/pi/linux', 'rpi-3.6.y')
 Already cloned
@@ -26,9 +34,9 @@ Switched to branch 'rpi-3.6.y'
 => cd /home/pi/linux && git pull
 Already up-to-date.
 
-=> cd /home/pi/linux && git checkout 1587f775d0a3c437485262ba951afc5e30be69fa
+=> cd /home/pi/linux && git checkout cbd6672e7e1b2dc5026f5dc7929a13a9a68f2a62
 
-Note: checking out '1587f775d0a3c437485262ba951afc5e30be69fa'.
+Note: checking out 'cbd6672e7e1b2dc5026f5dc7929a13a9a68f2a62'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
@@ -39,11 +47,44 @@ do so (now or later) by using -b with the checkout command again. Example:
 
   git checkout -b new_branch_name
 
-HEAD is now at 1587f77... Enable CONFIG_COMPACTION and move to SLUB memory allocator. See: https://github.com/raspberrypi/linux/pull/349
+HEAD is now at cbd6672... Add new config options: CPU_FREQ_STAT_DETAILS, DUMMY, QFMT_V1, QFMT_V2, DLM
 
-Remove 'roundup_pow_of_two' line in '/home/pi/linux/drivers/spi/spi-bcm2708.c'
 
-=> sed -i '/roundup_pow_of_two/d' /home/pi/linux/drivers/spi/spi-bcm2708.c
+ 
+Get DMA capable SPI master driver
+------------------------------------
+
+=> wget -O /home/pi/linux/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2013-09-18 20:16:51--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+Resolving raw.github.com (raw.github.com)... 185.31.16.133
+Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 26671 (26K) [text/plain]
+Saving to: `/home/pi/linux/drivers/spi/spi-bcm2708.c'
+
+     0K .......... .......... ......                          100%  554K=0.05s
+
+2013-09-18 20:16:51 (554 KB/s) - `/home/pi/linux/drivers/spi/spi-bcm2708.c' saved [26671/26671]
+
+
+
+ Apply kernel patches
+----------------------
+
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/fbtft.patch
+Checking patch drivers/video/Kconfig...
+Checking patch drivers/video/Makefile...
+Applied patch drivers/video/Kconfig cleanly.
+Applied patch drivers/video/Makefile cleanly.
+
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/bcm2708.patch
+Checking patch arch/arm/mach-bcm2708/bcm2708.c...
+Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
+
+
+ 
+Get FBTFT
+------------
 
 git_clone('https://github.com/notro/fbtft.git', '/home/pi/linux/drivers/video/fbtft', '')
 Already cloned
@@ -51,20 +92,22 @@ Already cloned
 => cd /home/pi/linux/drivers/video/fbtft && git pull
 Already up-to-date.
 
-=> cd /home/pi/linux && git apply /home/pi/fbtft.patch
-
 #
 # End: init
-# Time: Mon Sep  2 20:32:06 2013
+# Time: Wed Sep 18 20:16:53 2013
 # Elapsed: 0.13 min
 #
 
 
 #
 # Begin: config
-# Time: Mon Sep  2 20:32:06 2013
+# Time: Wed Sep 18 20:16:53 2013
 #
 
+
+
+ make mrproper
+---------------
 
 => cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
   CLEAN   .
@@ -87,10 +130,18 @@ Already up-to-date.
   CLEAN   include/config include/generated arch/arm/include/generated
   CLEAN   .config .config.old .version include/linux/version.h Module.symvers
 
+
+ Get config from the Raspberry Pi standard kernel
+--------------------------------------------------
+
 => /home/pi/linux/scripts/extract-ikconfig /home/pi/firmware/boot/kernel.img > /home/pi/linux/.config
 tail: write error: Broken pipe
 
 => cp -a /home/pi/linux/.config /home/pi/linux/.config.standard
+
+
+ Build all FBTFT modules as loadable modules
+---------------------------------------------
 
 => cd /home/pi/linux && yes m | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
   HOSTCC  scripts/basic/fixdep
@@ -107,11 +158,15 @@ scripts/kconfig/conf --oldconfig Kconfig
 *
 * Support for small TFT LCD display modules
 *
-Support for small TFT LCD display modules (FB_TFT) [N/m/y] (NEW)   FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) #
+Support for small TFT LCD display modules (FB_TFT) [N/m/y] (NEW)   FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) #
 # configuration written to .config
 #
 yes: standard output: Broken pipe
 yes: write error
+
+
+ Add all console fonts as builtins
+-----------------------------------
 
 => cd /home/pi/linux && scripts/config --enable FONTS
 
@@ -134,6 +189,10 @@ Select compiled-in fonts (FONTS) [Y/n/?] y
 #
 yes: standard output: Broken pipe
 yes: write error
+
+
+ Add touchscreen, mouse and keyboard support
+---------------------------------------------
 
 => cd /home/pi/linux && scripts/config --enable INPUT_TOUCHSCREEN
 
@@ -172,6 +231,10 @@ yes: write error
 
 => cd /home/pi/linux && scripts/config --module KEYBOARD_GPIO_POLLED
 
+
+ Verify config
+---------------
+
 => cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 #
@@ -180,14 +243,14 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Mon Sep  2 20:32:45 2013
-# Elapsed: 0.65 min
+# Time: Wed Sep 18 20:17:24 2013
+# Elapsed: 0.53 min
 #
 
 
 #
 # Begin: extra
-# Time: Mon Sep  2 21:42:41 2013
+# Time: Wed Sep 18 21:17:43 2013
 #
 
 
@@ -230,6 +293,10 @@ Already up-to-date.
   INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
   DEPMOD  3.6.11+
 
+
+ Build ServoBlaster kernel module for board revision 2
+-------------------------------------------------------
+
 git_clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
 Already cloned
 
@@ -237,9 +304,6 @@ Already cloned
 
 => cd /home/pi/PiBits && git pull
 Already up-to-date.
-
-Build ServoBlaster kernel module for board revision 2
-
 
 => sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
 
@@ -256,14 +320,14 @@ Build ServoBlaster kernel module for board revision 2
 
 #
 # End: extra
-# Time: Mon Sep  2 21:43:17 2013
-# Elapsed: 0.60 min
+# Time: Wed Sep 18 21:18:15 2013
+# Elapsed: 0.53 min
 #
 
 
 #
 # Begin: update
-# Time: Mon Sep  2 21:43:17 2013
+# Time: Wed Sep 18 21:18:15 2013
 #
 
 
@@ -313,40 +377,23 @@ Build ServoBlaster kernel module for board revision 2
 
 => cp -a /home/pi/linux/.config /home/pi/rpi-firmware/extra/
 
-=> ls -l /home/pi/rpi-firmware
-total 21192
--rw-rw-r-- 1 pi pi   17816 Sep  2 12:04 bootcode.bin
--rw-rw-r-- 1 pi pi   18693 Sep  2 12:04 COPYING.linux
-drwxrwxr-x 2 pi pi    4096 Sep  2 21:43 extra
--rw-rw-r-- 1 pi pi    2037 Sep  2 12:04 fixup_cd.dat
--rw-rw-r-- 1 pi pi    5746 Sep  2 12:04 fixup.dat
--rw-rw-r-- 1 pi pi    8779 Sep  2 12:04 fixup_x.dat
--rw-rw-r-- 1 pi pi 9614632 Sep  2 12:04 kernel_emergency.img
--rwxrwxr-x 1 pi pi 5547524 Sep  2 21:37 kernel.img
--rw-rw-r-- 1 pi pi    1447 Sep  2 12:04 LICENCE.broadcom
-drwxrwxr-x 3 pi pi    4096 Sep  2 21:43 modules
--rw-rw-r-- 1 pi pi  471256 Sep  2 12:04 start_cd.elf
--rw-rw-r-- 1 pi pi 2497684 Sep  2 12:04 start.elf
--rw-rw-r-- 1 pi pi 3476100 Sep  2 12:04 start_x.elf
-drwxrwxr-x 5 pi pi    4096 Sep  2 21:43 vc
-
 #
 # End: update
-# Time: Mon Sep  2 21:43:22 2013
-# Elapsed: 0.07 min
+# Time: Wed Sep 18 21:18:18 2013
+# Elapsed: 0.05 min
 #
 
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-d4f5315cfac4e14091d5440a6d482e033ba21b1b	refs/heads/master
+fadc4cbd10d8144d301c894dd9975704db6206fa	refs/heads/master
 
 
 => cd /home/pi/linux && git rev-parse HEAD
-1587f775d0a3c437485262ba951afc5e30be69fa
+cbd6672e7e1b2dc5026f5dc7929a13a9a68f2a62
 
 
 => cd /home/pi/linux/drivers/video/fbtft && git rev-parse HEAD
-25e1b0eb0822da905e89016e81740d98174d826d
+e207c4ec58429d24e8a03de5dce800c1a03dd36e
 
 
 => cd /home/pi/fbtft_tools && git rev-parse HEAD
@@ -354,7 +401,11 @@ d4f5315cfac4e14091d5440a6d482e033ba21b1b	refs/heads/master
 
 
 => cd /home/pi/PiBits && git rev-parse HEAD
-071fc182bcf4e2e69591a781805b63f8e251f3f6
+3f4804aa906525ca3be42ecce30914eeec02af4d
+
+
+=> cd /home/pi/spi-bcm2708 && git rev-parse HEAD
+3209afa4e96c8a6e1f6e582b305d9468aa64d5f9
 
 => writef(/home/pi/rpi-firmware/README.md)
 
@@ -367,23 +418,46 @@ Raspberry Pi kernel and firmware with support for FBTFT.
 Build scripts used: https://github.com/notro/rpi-build  
 Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/extra) directory
 
+
+### Install
+
+If [rpi-update](https://github.com/Hexxeh/rpi-update) is older than 12. august 2013, then it has to be manually updated first (or REPO_URI will be overwritten):
+```text
+sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
+```
+
+Because of an [issue](https://github.com/Hexxeh/rpi-update/issues/106), the following command is needed when going from the vanilla kernel to this kernel (not needed on subsequent notro/rpi-firmware updates):
+```text
+sudo mv /lib/modules/$(uname -r) /lib/modules/$(uname -r).bak
+```
+
+**Install**
+```text
+sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
+sudo shutdown -r now
+```
+
+
 ### Sources
 
 * Firmware  
-https://github.com/raspberrypi/firmware/tree/d4f5315cfac4e14091d5440a6d482e033ba21b1b
+https://github.com/raspberrypi/firmware/tree/fadc4cbd10d8144d301c894dd9975704db6206fa
 * Linux kernel  
-https://github.com/raspberrypi/linux/tree/1587f775d0a3c437485262ba951afc5e30be69fa
+https://github.com/raspberrypi/linux/tree/cbd6672e7e1b2dc5026f5dc7929a13a9a68f2a62
 * FBTFT  
-https://github.com/notro/fbtft/tree/25e1b0eb0822da905e89016e81740d98174d826d
-* gpio_mouse_device, gpio_keys_device  
+https://github.com/notro/fbtft/tree/e207c4ec58429d24e8a03de5dce800c1a03dd36e
+* [gpio_mouse_device](https://github.com/notro/fbtft_tools/wiki/gpio_mouse_device), [gpio_keys_device](https://github.com/notro/fbtft_tools/wiki/gpio_keys_device), [ads7846_device](https://github.com/notro/fbtft_tools/wiki/ads7846_device)  
 https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/071fc182bcf4e2e69591a781805b63f8e251f3f6
+https://github.com/richardghirst/PiBits/tree/3f4804aa906525ca3be42ecce30914eeec02af4d
+* DMA capable SPI master driver [spi-bcm2708](https://github.com/notro/spi-bcm2708/wiki)  
+https://github.com/notro/spi-bcm2708/tree/3209afa4e96c8a6e1f6e582b305d9468aa64d5f9
 
 
-### Kernel source changes
+### Kernel patches
 
-* spi-bcm2708.c: bcm2708_setup_state(): removed ```roundup_pow_of_two()``` limitation
+* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/fbtft.patch)
+* [bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/bcm2708.patch)
 
 
 ### Kernel configuration changes
@@ -414,6 +488,7 @@ CONFIG_FB_TFT_PCD8544=m
 CONFIG_FB_TFT_SSD1289=m
 CONFIG_FB_TFT_SSD1351=m
 CONFIG_FB_TFT_ST7735R=m
+CONFIG_FB_TFT_WATTEROTT=m
 CONFIG_FONTS=y
 CONFIG_FONT_10x18=y
 CONFIG_FONT_6x11=y
