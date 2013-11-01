@@ -1,7 +1,7 @@
 
 #
-# Begin: modules_install
-# Time: Wed Sep 18 21:17:19 2013
+# Begin: modules_install: Install kernel modules
+# Time: Thu Oct 31 22:44:06 2013
 #
 
 
@@ -9,7 +9,7 @@
 
 => mkdir -p /home/pi/modules
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- INSTALL_MOD_PATH=/home/pi/modules make modules_install
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
   INSTALL arch/arm/mach-bcm2708/dmaer_master.ko
   INSTALL arch/arm/oprofile/oprofile.ko
   INSTALL crypto/aes_generic.ko
@@ -545,6 +545,9 @@
   INSTALL drivers/misc/eeprom/eeprom_93cx6.ko
   INSTALL drivers/mmc/host/mmc_spi.ko
   INSTALL drivers/net/bonding/bonding.ko
+  INSTALL drivers/net/can/mcp251x.ko
+  INSTALL drivers/net/can/slcan.ko
+  INSTALL drivers/net/can/vcan.ko
   INSTALL drivers/net/dummy.ko
   INSTALL drivers/net/hamradio/6pack.ko
   INSTALL drivers/net/hamradio/baycom_ser_fdx.ko
@@ -896,6 +899,7 @@
   INSTALL net/802/stp.ko
   INSTALL net/8021q/8021q.ko
   INSTALL net/9p/9pnet.ko
+  INSTALL net/appletalk/appletalk.ko
   INSTALL net/ax25/ax25.ko
   INSTALL net/batman-adv/batman-adv.ko
   INSTALL net/bluetooth/bluetooth.ko
@@ -925,6 +929,8 @@
   INSTALL net/bridge/netfilter/ebtable_filter.ko
   INSTALL net/bridge/netfilter/ebtable_nat.ko
   INSTALL net/bridge/netfilter/ebtables.ko
+  INSTALL net/can/can-bcm.ko
+  INSTALL net/can/can-raw.ko
   INSTALL net/core/pktgen.ko
   INSTALL net/ipv4/ah4.ko
   INSTALL net/ipv4/esp4.ko
@@ -1235,8 +1241,8 @@
   DEPMOD  3.6.11+
 
 #
-# End: modules_install
-# Time: Wed Sep 18 21:17:43 2013
-# Elapsed: 0.40 min
+# End: modules_install: Install kernel modules
+# Time: Thu Oct 31 22:44:31 2013
+# Elapsed: 0.42 min
 #
 

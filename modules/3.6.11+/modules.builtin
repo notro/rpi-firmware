@@ -63,6 +63,7 @@ kernel/drivers/mmc/host/sdhci.ko
 kernel/drivers/mmc/host/sdhci-bcm2708.ko
 kernel/drivers/mmc/host/sdhci-pltfm.ko
 kernel/drivers/net/mii.ko
+kernel/drivers/net/can/can-dev.ko
 kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/scsi/scsi_mod.ko
@@ -90,6 +91,7 @@ kernel/drivers/video/console/bitblit.ko
 kernel/drivers/video/console/font.ko
 kernel/drivers/video/console/softcursor.ko
 kernel/sound/soundcore.ko
+kernel/net/can/can.ko
 kernel/net/dns_resolver/dns_resolver.ko
 kernel/net/ipv4/tcp_cubic.ko
 kernel/net/packet/af_packet.ko

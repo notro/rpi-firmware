@@ -53,6 +53,9 @@ alias scsi:t-0x05* sr_mod
 alias block-major-11-* sr_mod
 alias spi:spidev spidev
 alias platform:bcm2708_spi spi_bcm2708
+alias tty-ldisc-17 slcan
+alias spi:mcp2515 mcp251x
+alias spi:mcp2510 mcp251x
 alias tty-ldisc-5 mkiss
 alias tty-ldisc-7 6pack
 alias usb:v03EBp7615d*dc*dsc*dp*ic*isc*ip*in* at76c50x_usb
@@ -657,7 +660,9 @@ alias usb:v0CF3p7010d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v1668p1200d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v0CF3p7015d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v057Cp8403d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
+alias usb:v057Cp8403d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v0CF3pB003d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
+alias usb:v0CF3pB002d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v040Dp3801d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v04CAp4605d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v13D3p3350d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
@@ -6140,9 +6145,12 @@ alias xfrm-mode-10-0 xfrm6_mode_transport
 alias xfrm-mode-10-1 xfrm6_mode_tunnel
 alias xfrm-mode-10-4 xfrm6_mode_beet
 alias netdev-sit0 sit
+alias can-proto-1 can_raw
+alias can-proto-2 can_bcm
 alias rtnl-link-vlan 8021q
 alias net-pf-15 af_key
 alias rtnl-link-bridge bridge
+alias net-pf-5 appletalk
 alias net-pf-6 netrom
 alias net-pf-11 rose
 alias net-pf-3 ax25
@@ -6157,3 +6165,4 @@ alias net-pf-10-proto-132 sctp
 alias net-pf-2-proto-132 sctp
 alias net-pf-16-proto-16-family-nfc nfc
 alias net-pf-39 nfc
+alias platform:spi_config spi_config

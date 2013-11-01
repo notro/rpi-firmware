@@ -1,0 +1,102 @@
+
+#
+# Begin: extra: Various out-of-tree kernel modules
+# Time: Thu Oct 31 22:44:32 2013
+#
+
+
+
+ gpio_mouse_device, gpio_keys_device, ads7846_device
+-----------------------------------------------------
+
+git.clone('https://github.com/notro/fbtft_tools', '/home/pi/fbtft_tools', '')
+Already cloned
+
+=> cd /home/pi/fbtft_tools && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+  DEPMOD  3.6.11+
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+  DEPMOD  3.6.11+
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device modules
+  CC [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/ads7846_device/ads7846_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+  DEPMOD  3.6.11+
+
+
+ ServoBlaster kernel module for board revision 2
+-------------------------------------------------
+
+git.clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
+Already cloned
+
+=> cd /home/pi/PiBits && git checkout -- .
+
+=> cd /home/pi/PiBits && git pull
+Already up-to-date.
+
+=> sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel modules
+  CC [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/PiBits/ServoBlaster/kernel/servoblaster.mod.o
+  LD [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+  DEPMOD  3.6.11+
+
+
+ spi-config
+------------
+
+git.clone('https://github.com/msperl/spi-config', '/home/pi/spi-config', '')
+Already cloned
+
+=> cd /home/pi/spi-config && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config modules
+  CC [M]  /home/pi/spi-config/spi-config.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/spi-config/spi-config.mod.o
+  LD [M]  /home/pi/spi-config/spi-config.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/spi-config/spi-config.ko
+  DEPMOD  3.6.11+
+
+#
+# End: extra: Various out-of-tree kernel modules
+# Time: Thu Oct 31 22:45:16 2013
+# Elapsed: 0.75 min
+#
+

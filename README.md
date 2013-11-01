@@ -9,6 +9,7 @@ Build scripts used: https://github.com/notro/rpi-build
 Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/extra) directory
 
 
+
 ### Install
 
 If [rpi-update](https://github.com/Hexxeh/rpi-update) is older than 12. august 2013, then it has to be manually updated first (or REPO_URI will be overwritten):
@@ -30,22 +31,21 @@ sudo shutdown -r now
 
 ### Sources
 
-* Firmware  
-https://github.com/raspberrypi/firmware/tree/fadc4cbd10d8144d301c894dd9975704db6206fa
-* Linux kernel  
-https://github.com/raspberrypi/linux/tree/cbd6672e7e1b2dc5026f5dc7929a13a9a68f2a62
+* Linux Kernel  
+https://github.com/raspberrypi/linux/tree/10bc58289a7ebf6b1ab724636e0a16116278e339
+* spi-bcm2708: DMA capable SPI master driver  
+https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
-https://github.com/notro/fbtft/tree/e207c4ec58429d24e8a03de5dce800c1a03dd36e
-* [gpio_mouse_device](https://github.com/notro/fbtft_tools/wiki/gpio_mouse_device), [gpio_keys_device](https://github.com/notro/fbtft_tools/wiki/gpio_keys_device), [ads7846_device](https://github.com/notro/fbtft_tools/wiki/ads7846_device)  
+https://github.com/notro/fbtft.git/tree/e207c4ec58429d24e8a03de5dce800c1a03dd36e
+* Various SPI device adding modules  
 https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/3f4804aa906525ca3be42ecce30914eeec02af4d
-* DMA capable SPI master driver [spi-bcm2708](https://github.com/notro/spi-bcm2708/wiki)  
-https://github.com/notro/spi-bcm2708/tree/3209afa4e96c8a6e1f6e582b305d9468aa64d5f9
+https://github.com/richardghirst/PiBits/tree/ab34d81e536c601295b79e00c6842b393947c894
+* spi-config: SPI device adding module  
+https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea87
 
 
 ### Kernel patches
-
 * [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/fbtft.patch)
 * [bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/bcm2708.patch)
 
@@ -60,6 +60,14 @@ CONFIG_BACKLIGHT_CLASS_DEVICE=m
 Added:  
 ```text
 CONFIG_BACKLIGHT_CLASS_DEVICE=y
+CONFIG_CAN=y
+CONFIG_CAN_BCM=m
+CONFIG_CAN_CALC_BITTIMING=y
+CONFIG_CAN_DEV=y
+CONFIG_CAN_MCP251X=m
+CONFIG_CAN_RAW=m
+CONFIG_CAN_SLCAN=m
+CONFIG_CAN_VCAN=m
 CONFIG_FB_BACKLIGHT=y
 CONFIG_FB_DEFERRED_IO=y
 CONFIG_FB_FLEX=m
