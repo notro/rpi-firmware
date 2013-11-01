@@ -32,7 +32,7 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/10bc58289a7ebf6b1ab724636e0a16116278e339
+https://github.com/raspberrypi/linux/tree/f604ccc8759e46c9fdf54fe7407b726f144d3a91
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
@@ -47,7 +47,6 @@ https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea
 
 ### Kernel patches
 * [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/fbtft.patch)
-* [bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/bcm2708.patch)
 
 
 ### Kernel configuration changes
@@ -64,6 +63,7 @@ CONFIG_CAN=y
 CONFIG_CAN_BCM=m
 CONFIG_CAN_CALC_BITTIMING=y
 CONFIG_CAN_DEV=y
+CONFIG_CAN_GW=y
 CONFIG_CAN_MCP251X=m
 CONFIG_CAN_RAW=m
 CONFIG_CAN_SLCAN=m

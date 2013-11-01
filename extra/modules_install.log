@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install: Install kernel modules
-# Time: Thu Oct 31 22:44:06 2013
+# Time: Fri Nov  1 17:37:11 2013
 #
 
 
@@ -10,24 +10,14 @@
 => mkdir -p /home/pi/modules
 
 => cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
-  INSTALL arch/arm/mach-bcm2708/dmaer_master.ko
   INSTALL arch/arm/oprofile/oprofile.ko
-  INSTALL crypto/aes_generic.ko
   INSTALL crypto/arc4.ko
-  INSTALL crypto/async_tx/async_memcpy.ko
-  INSTALL crypto/async_tx/async_pq.ko
-  INSTALL crypto/async_tx/async_raid6_recov.ko
-  INSTALL crypto/async_tx/async_tx.ko
-  INSTALL crypto/async_tx/async_xor.ko
   INSTALL crypto/authenc.ko
   INSTALL crypto/authencesn.ko
-  INSTALL crypto/cast5.ko
-  INSTALL crypto/cryptd.ko
-  INSTALL crypto/crypto_null.ko
-  INSTALL crypto/crypto_user.ko
+  INSTALL crypto/cast5_generic.ko
+  INSTALL crypto/cast_common.ko
   INSTALL crypto/deflate.ko
   INSTALL crypto/ecb.ko
-  INSTALL crypto/gf128mul.ko
   INSTALL crypto/md4.ko
   INSTALL crypto/michael_mic.ko
   INSTALL crypto/seqiv.ko
@@ -37,7 +27,6 @@
   INSTALL crypto/wp512.ko
   INSTALL crypto/xcbc.ko
   INSTALL crypto/xor.ko
-  INSTALL crypto/xts.ko
   INSTALL drivers/block/cryptoloop.ko
   INSTALL drivers/block/drbd/drbd.ko
   INSTALL drivers/block/nbd.ko
@@ -49,11 +38,9 @@
   INSTALL drivers/bluetooth/btmrvl.ko
   INSTALL drivers/bluetooth/btmrvl_sdio.ko
   INSTALL drivers/bluetooth/btusb.ko
+  INSTALL drivers/bluetooth/btwilink.ko
   INSTALL drivers/bluetooth/hci_vhci.ko
   INSTALL drivers/cdrom/cdrom.ko
-  INSTALL drivers/char/hw_random/bcm2708-rng.ko
-  INSTALL drivers/char/hw_random/rng-core.ko
-  INSTALL drivers/connector/cn.ko
   INSTALL drivers/cpufreq/cpufreq_stats.ko
   INSTALL drivers/hid/hid-a4tech.ko
   INSTALL drivers/hid/hid-apple.ko
@@ -74,7 +61,6 @@
   INSTALL drivers/hid/hid-keytouch.ko
   INSTALL drivers/hid/hid-kye.ko
   INSTALL drivers/hid/hid-lcpower.ko
-  INSTALL drivers/hid/hid-logitech-dj.ko
   INSTALL drivers/hid/hid-logitech.ko
   INSTALL drivers/hid/hid-magicmouse.ko
   INSTALL drivers/hid/hid-microsoft.ko
@@ -90,7 +76,9 @@
   INSTALL drivers/hid/hid-roccat-isku.ko
   INSTALL drivers/hid/hid-roccat-kone.ko
   INSTALL drivers/hid/hid-roccat-koneplus.ko
+  INSTALL drivers/hid/hid-roccat-konepure.ko
   INSTALL drivers/hid/hid-roccat-kovaplus.ko
+  INSTALL drivers/hid/hid-roccat-lua.ko
   INSTALL drivers/hid/hid-roccat-pyra.ko
   INSTALL drivers/hid/hid-roccat-savu.ko
   INSTALL drivers/hid/hid-roccat.ko
@@ -99,6 +87,7 @@
   INSTALL drivers/hid/hid-sony.ko
   INSTALL drivers/hid/hid-speedlink.ko
   INSTALL drivers/hid/hid-sunplus.ko
+  INSTALL drivers/hid/hid-thingm.ko
   INSTALL drivers/hid/hid-tmff.ko
   INSTALL drivers/hid/hid-topseed.ko
   INSTALL drivers/hid/hid-twinhan.ko
@@ -112,12 +101,9 @@
   INSTALL drivers/i2c/busses/i2c-bcm2708.ko
   INSTALL drivers/i2c/i2c-dev.ko
   INSTALL drivers/input/evdev.ko
-  INSTALL drivers/input/ff-memless.ko
-  INSTALL drivers/input/gameport/gameport.ko
-  INSTALL drivers/input/gameport/lightning.ko
-  INSTALL drivers/input/gameport/ns558.ko
   INSTALL drivers/input/input-polldev.ko
   INSTALL drivers/input/joydev.ko
+  INSTALL drivers/input/joystick/iforce/iforce.ko
   INSTALL drivers/input/keyboard/gpio_keys.ko
   INSTALL drivers/input/keyboard/gpio_keys_polled.ko
   INSTALL drivers/input/misc/ad714x-i2c.ko
@@ -135,206 +121,112 @@
   INSTALL drivers/input/misc/uinput.ko
   INSTALL drivers/input/misc/yealink.ko
   INSTALL drivers/input/mouse/gpio_mouse.ko
-  INSTALL drivers/input/serio/serio.ko
-  INSTALL drivers/input/serio/serio_raw.ko
-  INSTALL drivers/input/serio/serport.ko
   INSTALL drivers/input/touchscreen/ads7846.ko
   INSTALL drivers/leds/led-class.ko
   INSTALL drivers/leds/leds-gpio.ko
-  INSTALL drivers/leds/ledtrig-default-on.ko
-  INSTALL drivers/leds/ledtrig-heartbeat.ko
-  INSTALL drivers/leds/ledtrig-timer.ko
+  INSTALL drivers/leds/trigger/ledtrig-camera.ko
+  INSTALL drivers/leds/trigger/ledtrig-transient.ko
   INSTALL drivers/md/dm-crypt.ko
-  INSTALL drivers/md/dm-delay.ko
-  INSTALL drivers/md/dm-log-userspace.ko
-  INSTALL drivers/md/dm-log.ko
-  INSTALL drivers/md/dm-mirror.ko
   INSTALL drivers/md/dm-mod.ko
-  INSTALL drivers/md/dm-raid.ko
-  INSTALL drivers/md/dm-region-hash.ko
-  INSTALL drivers/md/dm-snapshot.ko
-  INSTALL drivers/md/dm-zero.ko
-  INSTALL drivers/md/md-mod.ko
-  INSTALL drivers/md/raid0.ko
-  INSTALL drivers/md/raid1.ko
-  INSTALL drivers/md/raid10.ko
-  INSTALL drivers/md/raid456.ko
-  INSTALL drivers/media/common/tuners/fc0011.ko
-  INSTALL drivers/media/common/tuners/fc0012.ko
-  INSTALL drivers/media/common/tuners/fc0013.ko
-  INSTALL drivers/media/common/tuners/max2165.ko
-  INSTALL drivers/media/common/tuners/mc44s803.ko
-  INSTALL drivers/media/common/tuners/mt2060.ko
-  INSTALL drivers/media/common/tuners/mt2063.ko
-  INSTALL drivers/media/common/tuners/mt20xx.ko
-  INSTALL drivers/media/common/tuners/mt2131.ko
-  INSTALL drivers/media/common/tuners/mt2266.ko
-  INSTALL drivers/media/common/tuners/mxl5005s.ko
-  INSTALL drivers/media/common/tuners/mxl5007t.ko
-  INSTALL drivers/media/common/tuners/qt1010.ko
-  INSTALL drivers/media/common/tuners/tda18212.ko
-  INSTALL drivers/media/common/tuners/tda18218.ko
-  INSTALL drivers/media/common/tuners/tda18271.ko
-  INSTALL drivers/media/common/tuners/tda827x.ko
-  INSTALL drivers/media/common/tuners/tda8290.ko
-  INSTALL drivers/media/common/tuners/tda9887.ko
-  INSTALL drivers/media/common/tuners/tea5761.ko
-  INSTALL drivers/media/common/tuners/tea5767.ko
-  INSTALL drivers/media/common/tuners/tua9001.ko
-  INSTALL drivers/media/common/tuners/tuner-simple.ko
-  INSTALL drivers/media/common/tuners/tuner-types.ko
-  INSTALL drivers/media/common/tuners/tuner-xc2028.ko
-  INSTALL drivers/media/common/tuners/xc4000.ko
-  INSTALL drivers/media/common/tuners/xc5000.ko
-  INSTALL drivers/media/dvb/b2c2/b2c2-flexcop-usb.ko
-  INSTALL drivers/media/dvb/b2c2/b2c2-flexcop.ko
-  INSTALL drivers/media/dvb/dvb-core/dvb-core.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-a800.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-af9005-remote.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-af9005.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-af9015.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-af9035.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-anysee.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-au6610.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-az6007.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-az6027.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-ce6230.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-cinergyT2.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-cxusb.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dib0700.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dibusb-common.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dibusb-mb.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dibusb-mc.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-digitv.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dtt200u.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dtv5100.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-dw2102.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-ec168.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-friio.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-gl861.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-gp8psk.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-it913x.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-lmedm04.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-m920x.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-mxl111sf.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-nova-t-usb2.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-opera.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-pctv452e.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-rtl28xxu.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-technisat-usb2.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-ttusb2.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-umt-010.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-vp702x.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb-vp7045.ko
-  INSTALL drivers/media/dvb/dvb-usb/dvb-usb.ko
-  INSTALL drivers/media/dvb/dvb-usb/mxl111sf-demod.ko
-  INSTALL drivers/media/dvb/dvb-usb/mxl111sf-tuner.ko
-  INSTALL drivers/media/dvb/frontends/a8293.ko
-  INSTALL drivers/media/dvb/frontends/af9013.ko
-  INSTALL drivers/media/dvb/frontends/af9033.ko
-  INSTALL drivers/media/dvb/frontends/atbm8830.ko
-  INSTALL drivers/media/dvb/frontends/au8522_common.ko
-  INSTALL drivers/media/dvb/frontends/au8522_decoder.ko
-  INSTALL drivers/media/dvb/frontends/au8522_dig.ko
-  INSTALL drivers/media/dvb/frontends/bcm3510.ko
-  INSTALL drivers/media/dvb/frontends/cx22700.ko
-  INSTALL drivers/media/dvb/frontends/cx22702.ko
-  INSTALL drivers/media/dvb/frontends/cx24110.ko
-  INSTALL drivers/media/dvb/frontends/cx24113.ko
-  INSTALL drivers/media/dvb/frontends/cx24116.ko
-  INSTALL drivers/media/dvb/frontends/cx24123.ko
-  INSTALL drivers/media/dvb/frontends/cxd2820r.ko
-  INSTALL drivers/media/dvb/frontends/dib0070.ko
-  INSTALL drivers/media/dvb/frontends/dib0090.ko
-  INSTALL drivers/media/dvb/frontends/dib3000mb.ko
-  INSTALL drivers/media/dvb/frontends/dib3000mc.ko
-  INSTALL drivers/media/dvb/frontends/dib7000m.ko
-  INSTALL drivers/media/dvb/frontends/dib7000p.ko
-  INSTALL drivers/media/dvb/frontends/dib8000.ko
-  INSTALL drivers/media/dvb/frontends/dib9000.ko
-  INSTALL drivers/media/dvb/frontends/dibx000_common.ko
-  INSTALL drivers/media/dvb/frontends/drxd.ko
-  INSTALL drivers/media/dvb/frontends/drxk.ko
-  INSTALL drivers/media/dvb/frontends/ds3000.ko
-  INSTALL drivers/media/dvb/frontends/dvb-pll.ko
-  INSTALL drivers/media/dvb/frontends/ec100.ko
-  INSTALL drivers/media/dvb/frontends/hd29l2.ko
-  INSTALL drivers/media/dvb/frontends/isl6405.ko
-  INSTALL drivers/media/dvb/frontends/isl6421.ko
-  INSTALL drivers/media/dvb/frontends/isl6423.ko
-  INSTALL drivers/media/dvb/frontends/it913x-fe.ko
-  INSTALL drivers/media/dvb/frontends/itd1000.ko
-  INSTALL drivers/media/dvb/frontends/ix2505v.ko
-  INSTALL drivers/media/dvb/frontends/l64781.ko
-  INSTALL drivers/media/dvb/frontends/lg2160.ko
-  INSTALL drivers/media/dvb/frontends/lgdt3305.ko
-  INSTALL drivers/media/dvb/frontends/lgdt330x.ko
-  INSTALL drivers/media/dvb/frontends/lgs8gl5.ko
-  INSTALL drivers/media/dvb/frontends/lgs8gxx.ko
-  INSTALL drivers/media/dvb/frontends/lnbp21.ko
-  INSTALL drivers/media/dvb/frontends/lnbp22.ko
-  INSTALL drivers/media/dvb/frontends/m88rs2000.ko
-  INSTALL drivers/media/dvb/frontends/mb86a16.ko
-  INSTALL drivers/media/dvb/frontends/mb86a20s.ko
-  INSTALL drivers/media/dvb/frontends/mt312.ko
-  INSTALL drivers/media/dvb/frontends/mt352.ko
-  INSTALL drivers/media/dvb/frontends/nxt200x.ko
-  INSTALL drivers/media/dvb/frontends/nxt6000.ko
-  INSTALL drivers/media/dvb/frontends/or51132.ko
-  INSTALL drivers/media/dvb/frontends/or51211.ko
-  INSTALL drivers/media/dvb/frontends/rtl2830.ko
-  INSTALL drivers/media/dvb/frontends/rtl2832.ko
-  INSTALL drivers/media/dvb/frontends/s5h1409.ko
-  INSTALL drivers/media/dvb/frontends/s5h1411.ko
-  INSTALL drivers/media/dvb/frontends/s5h1420.ko
-  INSTALL drivers/media/dvb/frontends/s5h1432.ko
-  INSTALL drivers/media/dvb/frontends/s921.ko
-  INSTALL drivers/media/dvb/frontends/si21xx.ko
-  INSTALL drivers/media/dvb/frontends/sp8870.ko
-  INSTALL drivers/media/dvb/frontends/sp887x.ko
-  INSTALL drivers/media/dvb/frontends/stb0899.ko
-  INSTALL drivers/media/dvb/frontends/stb6000.ko
-  INSTALL drivers/media/dvb/frontends/stb6100.ko
-  INSTALL drivers/media/dvb/frontends/stv0288.ko
-  INSTALL drivers/media/dvb/frontends/stv0297.ko
-  INSTALL drivers/media/dvb/frontends/stv0299.ko
-  INSTALL drivers/media/dvb/frontends/stv0367.ko
-  INSTALL drivers/media/dvb/frontends/stv0900.ko
-  INSTALL drivers/media/dvb/frontends/stv090x.ko
-  INSTALL drivers/media/dvb/frontends/stv6110.ko
-  INSTALL drivers/media/dvb/frontends/stv6110x.ko
-  INSTALL drivers/media/dvb/frontends/tda10021.ko
-  INSTALL drivers/media/dvb/frontends/tda10023.ko
-  INSTALL drivers/media/dvb/frontends/tda10048.ko
-  INSTALL drivers/media/dvb/frontends/tda1004x.ko
-  INSTALL drivers/media/dvb/frontends/tda10071.ko
-  INSTALL drivers/media/dvb/frontends/tda10086.ko
-  INSTALL drivers/media/dvb/frontends/tda18271c2dd.ko
-  INSTALL drivers/media/dvb/frontends/tda665x.ko
-  INSTALL drivers/media/dvb/frontends/tda8083.ko
-  INSTALL drivers/media/dvb/frontends/tda8261.ko
-  INSTALL drivers/media/dvb/frontends/tda826x.ko
-  INSTALL drivers/media/dvb/frontends/tua6100.ko
-  INSTALL drivers/media/dvb/frontends/ves1820.ko
-  INSTALL drivers/media/dvb/frontends/ves1x93.ko
-  INSTALL drivers/media/dvb/frontends/zl10036.ko
-  INSTALL drivers/media/dvb/frontends/zl10039.ko
-  INSTALL drivers/media/dvb/frontends/zl10353.ko
-  INSTALL drivers/media/dvb/siano/smsdvb.ko
-  INSTALL drivers/media/dvb/siano/smsmdtv.ko
-  INSTALL drivers/media/dvb/siano/smsusb.ko
-  INSTALL drivers/media/dvb/ttpci/ttpci-eeprom.ko
+  INSTALL drivers/media/common/b2c2/b2c2-flexcop.ko
+  INSTALL drivers/media/common/cx2341x.ko
+  INSTALL drivers/media/common/cypress_firmware.ko
+  INSTALL drivers/media/common/siano/smsdvb.ko
+  INSTALL drivers/media/common/siano/smsmdtv.ko
+  INSTALL drivers/media/common/tveeprom.ko
+  INSTALL drivers/media/dvb-core/dvb-core.ko
+  INSTALL drivers/media/dvb-frontends/a8293.ko
+  INSTALL drivers/media/dvb-frontends/af9013.ko
+  INSTALL drivers/media/dvb-frontends/af9033.ko
+  INSTALL drivers/media/dvb-frontends/atbm8830.ko
+  INSTALL drivers/media/dvb-frontends/au8522_common.ko
+  INSTALL drivers/media/dvb-frontends/au8522_decoder.ko
+  INSTALL drivers/media/dvb-frontends/au8522_dig.ko
+  INSTALL drivers/media/dvb-frontends/bcm3510.ko
+  INSTALL drivers/media/dvb-frontends/cx22702.ko
+  INSTALL drivers/media/dvb-frontends/cx24113.ko
+  INSTALL drivers/media/dvb-frontends/cx24116.ko
+  INSTALL drivers/media/dvb-frontends/cx24123.ko
+  INSTALL drivers/media/dvb-frontends/cxd2820r.ko
+  INSTALL drivers/media/dvb-frontends/dib0070.ko
+  INSTALL drivers/media/dvb-frontends/dib0090.ko
+  INSTALL drivers/media/dvb-frontends/dib3000mb.ko
+  INSTALL drivers/media/dvb-frontends/dib3000mc.ko
+  INSTALL drivers/media/dvb-frontends/dib7000m.ko
+  INSTALL drivers/media/dvb-frontends/dib7000p.ko
+  INSTALL drivers/media/dvb-frontends/dib8000.ko
+  INSTALL drivers/media/dvb-frontends/dibx000_common.ko
+  INSTALL drivers/media/dvb-frontends/drxd.ko
+  INSTALL drivers/media/dvb-frontends/drxk.ko
+  INSTALL drivers/media/dvb-frontends/ds3000.ko
+  INSTALL drivers/media/dvb-frontends/dvb-pll.ko
+  INSTALL drivers/media/dvb-frontends/ec100.ko
+  INSTALL drivers/media/dvb-frontends/isl6421.ko
+  INSTALL drivers/media/dvb-frontends/isl6423.ko
+  INSTALL drivers/media/dvb-frontends/it913x-fe.ko
+  INSTALL drivers/media/dvb-frontends/itd1000.ko
+  INSTALL drivers/media/dvb-frontends/ix2505v.ko
+  INSTALL drivers/media/dvb-frontends/lg2160.ko
+  INSTALL drivers/media/dvb-frontends/lgdt3305.ko
+  INSTALL drivers/media/dvb-frontends/lgdt330x.ko
+  INSTALL drivers/media/dvb-frontends/lgs8gxx.ko
+  INSTALL drivers/media/dvb-frontends/lnbp21.ko
+  INSTALL drivers/media/dvb-frontends/lnbp22.ko
+  INSTALL drivers/media/dvb-frontends/m88rs2000.ko
+  INSTALL drivers/media/dvb-frontends/mb86a20s.ko
+  INSTALL drivers/media/dvb-frontends/mt312.ko
+  INSTALL drivers/media/dvb-frontends/mt352.ko
+  INSTALL drivers/media/dvb-frontends/nxt200x.ko
+  INSTALL drivers/media/dvb-frontends/nxt6000.ko
+  INSTALL drivers/media/dvb-frontends/rtl2830.ko
+  INSTALL drivers/media/dvb-frontends/rtl2832.ko
+  INSTALL drivers/media/dvb-frontends/s5h1409.ko
+  INSTALL drivers/media/dvb-frontends/s5h1411.ko
+  INSTALL drivers/media/dvb-frontends/s5h1420.ko
+  INSTALL drivers/media/dvb-frontends/s921.ko
+  INSTALL drivers/media/dvb-frontends/si21xx.ko
+  INSTALL drivers/media/dvb-frontends/stb0899.ko
+  INSTALL drivers/media/dvb-frontends/stb6000.ko
+  INSTALL drivers/media/dvb-frontends/stb6100.ko
+  INSTALL drivers/media/dvb-frontends/stv0288.ko
+  INSTALL drivers/media/dvb-frontends/stv0297.ko
+  INSTALL drivers/media/dvb-frontends/stv0299.ko
+  INSTALL drivers/media/dvb-frontends/stv0900.ko
+  INSTALL drivers/media/dvb-frontends/stv090x.ko
+  INSTALL drivers/media/dvb-frontends/stv6110.ko
+  INSTALL drivers/media/dvb-frontends/stv6110x.ko
+  INSTALL drivers/media/dvb-frontends/tda10023.ko
+  INSTALL drivers/media/dvb-frontends/tda10048.ko
+  INSTALL drivers/media/dvb-frontends/tda1004x.ko
+  INSTALL drivers/media/dvb-frontends/tda10071.ko
+  INSTALL drivers/media/dvb-frontends/tda10086.ko
+  INSTALL drivers/media/dvb-frontends/tda18271c2dd.ko
+  INSTALL drivers/media/dvb-frontends/tda826x.ko
+  INSTALL drivers/media/dvb-frontends/ts2020.ko
+  INSTALL drivers/media/dvb-frontends/zl10039.ko
+  INSTALL drivers/media/dvb-frontends/zl10353.ko
+  INSTALL drivers/media/i2c/cs53l32a.ko
+  INSTALL drivers/media/i2c/cx25840/cx25840.ko
+  INSTALL drivers/media/i2c/ir-kbd-i2c.ko
+  INSTALL drivers/media/i2c/msp3400.ko
+  INSTALL drivers/media/i2c/mt9v011.ko
+  INSTALL drivers/media/i2c/saa7115.ko
+  INSTALL drivers/media/i2c/tvp5150.ko
+  INSTALL drivers/media/i2c/wm8775.ko
   INSTALL drivers/media/media.ko
+  INSTALL drivers/media/pci/ttpci/ttpci-eeprom.ko
   INSTALL drivers/media/radio/dsbr100.ko
   INSTALL drivers/media/radio/radio-keene.ko
+  INSTALL drivers/media/radio/radio-ma901.ko
   INSTALL drivers/media/radio/radio-mr800.ko
   INSTALL drivers/media/radio/radio-shark.ko
   INSTALL drivers/media/radio/radio-si4713.ko
-  INSTALL drivers/media/radio/radio-tea5764.ko
   INSTALL drivers/media/radio/saa7706h.ko
   INSTALL drivers/media/radio/shark2.ko
+  INSTALL drivers/media/radio/si470x/radio-usb-si470x.ko
   INSTALL drivers/media/radio/si4713-i2c.ko
   INSTALL drivers/media/radio/tef6862.ko
+  INSTALL drivers/media/radio/wl128x/fm_drv.ko
   INSTALL drivers/media/rc/ati_remote.ko
   INSTALL drivers/media/rc/gpio-ir-recv.ko
   INSTALL drivers/media/rc/iguanair.ko
@@ -428,6 +320,7 @@
   INSTALL drivers/media/rc/keymaps/rc-pv951.ko
   INSTALL drivers/media/rc/keymaps/rc-rc6-mce.ko
   INSTALL drivers/media/rc/keymaps/rc-real-audio-220-32-keys.ko
+  INSTALL drivers/media/rc/keymaps/rc-reddo.ko
   INSTALL drivers/media/rc/keymaps/rc-snapstream-firefly.ko
   INSTALL drivers/media/rc/keymaps/rc-streamzap.ko
   INSTALL drivers/media/rc/keymaps/rc-tbs-nec.ko
@@ -437,6 +330,7 @@
   INSTALL drivers/media/rc/keymaps/rc-terratec-slim.ko
   INSTALL drivers/media/rc/keymaps/rc-tevii-nec.ko
   INSTALL drivers/media/rc/keymaps/rc-tivo.ko
+  INSTALL drivers/media/rc/keymaps/rc-total-media-in-hand-02.ko
   INSTALL drivers/media/rc/keymaps/rc-total-media-in-hand.ko
   INSTALL drivers/media/rc/keymaps/rc-trekstor.ko
   INSTALL drivers/media/rc/keymaps/rc-tt-1500.ko
@@ -452,99 +346,161 @@
   INSTALL drivers/media/rc/rc-loopback.ko
   INSTALL drivers/media/rc/redrat3.ko
   INSTALL drivers/media/rc/streamzap.ko
-  INSTALL drivers/media/video/au0828/au0828.ko
-  INSTALL drivers/media/video/cpia2/cpia2.ko
-  INSTALL drivers/media/video/cs53l32a.ko
-  INSTALL drivers/media/video/cx231xx/cx231xx-alsa.ko
-  INSTALL drivers/media/video/cx231xx/cx231xx-dvb.ko
-  INSTALL drivers/media/video/cx231xx/cx231xx.ko
-  INSTALL drivers/media/video/cx2341x.ko
-  INSTALL drivers/media/video/cx25840/cx25840.ko
-  INSTALL drivers/media/video/em28xx/em28xx-alsa.ko
-  INSTALL drivers/media/video/em28xx/em28xx-dvb.ko
-  INSTALL drivers/media/video/em28xx/em28xx-rc.ko
-  INSTALL drivers/media/video/em28xx/em28xx.ko
-  INSTALL drivers/media/video/gspca/gl860/gspca_gl860.ko
-  INSTALL drivers/media/video/gspca/gspca_benq.ko
-  INSTALL drivers/media/video/gspca/gspca_conex.ko
-  INSTALL drivers/media/video/gspca/gspca_cpia1.ko
-  INSTALL drivers/media/video/gspca/gspca_etoms.ko
-  INSTALL drivers/media/video/gspca/gspca_finepix.ko
-  INSTALL drivers/media/video/gspca/gspca_jeilinj.ko
-  INSTALL drivers/media/video/gspca/gspca_jl2005bcd.ko
-  INSTALL drivers/media/video/gspca/gspca_kinect.ko
-  INSTALL drivers/media/video/gspca/gspca_konica.ko
-  INSTALL drivers/media/video/gspca/gspca_main.ko
-  INSTALL drivers/media/video/gspca/gspca_mars.ko
-  INSTALL drivers/media/video/gspca/gspca_mr97310a.ko
-  INSTALL drivers/media/video/gspca/gspca_nw80x.ko
-  INSTALL drivers/media/video/gspca/gspca_ov519.ko
-  INSTALL drivers/media/video/gspca/gspca_ov534.ko
-  INSTALL drivers/media/video/gspca/gspca_ov534_9.ko
-  INSTALL drivers/media/video/gspca/gspca_pac207.ko
-  INSTALL drivers/media/video/gspca/gspca_pac7302.ko
-  INSTALL drivers/media/video/gspca/gspca_pac7311.ko
-  INSTALL drivers/media/video/gspca/gspca_se401.ko
-  INSTALL drivers/media/video/gspca/gspca_sn9c2028.ko
-  INSTALL drivers/media/video/gspca/gspca_sn9c20x.ko
-  INSTALL drivers/media/video/gspca/gspca_sonixb.ko
-  INSTALL drivers/media/video/gspca/gspca_sonixj.ko
-  INSTALL drivers/media/video/gspca/gspca_spca1528.ko
-  INSTALL drivers/media/video/gspca/gspca_spca500.ko
-  INSTALL drivers/media/video/gspca/gspca_spca501.ko
-  INSTALL drivers/media/video/gspca/gspca_spca505.ko
-  INSTALL drivers/media/video/gspca/gspca_spca506.ko
-  INSTALL drivers/media/video/gspca/gspca_spca508.ko
-  INSTALL drivers/media/video/gspca/gspca_spca561.ko
-  INSTALL drivers/media/video/gspca/gspca_sq905.ko
-  INSTALL drivers/media/video/gspca/gspca_sq905c.ko
-  INSTALL drivers/media/video/gspca/gspca_sq930x.ko
-  INSTALL drivers/media/video/gspca/gspca_stk014.ko
-  INSTALL drivers/media/video/gspca/gspca_stv0680.ko
-  INSTALL drivers/media/video/gspca/gspca_sunplus.ko
-  INSTALL drivers/media/video/gspca/gspca_t613.ko
-  INSTALL drivers/media/video/gspca/gspca_topro.ko
-  INSTALL drivers/media/video/gspca/gspca_tv8532.ko
-  INSTALL drivers/media/video/gspca/gspca_vc032x.ko
-  INSTALL drivers/media/video/gspca/gspca_vicam.ko
-  INSTALL drivers/media/video/gspca/gspca_xirlink_cit.ko
-  INSTALL drivers/media/video/gspca/gspca_zc3xx.ko
-  INSTALL drivers/media/video/gspca/m5602/gspca_m5602.ko
-  INSTALL drivers/media/video/gspca/stv06xx/gspca_stv06xx.ko
-  INSTALL drivers/media/video/hdpvr/hdpvr.ko
-  INSTALL drivers/media/video/ir-kbd-i2c.ko
-  INSTALL drivers/media/video/msp3400.ko
-  INSTALL drivers/media/video/mt9v011.ko
-  INSTALL drivers/media/video/pvrusb2/pvrusb2.ko
-  INSTALL drivers/media/video/pwc/pwc.ko
-  INSTALL drivers/media/video/s2255drv.ko
-  INSTALL drivers/media/video/saa7115.ko
-  INSTALL drivers/media/video/sn9c102/sn9c102.ko
-  INSTALL drivers/media/video/stkwebcam.ko
-  INSTALL drivers/media/video/tlg2300/poseidon.ko
-  INSTALL drivers/media/video/tm6000/tm6000-alsa.ko
-  INSTALL drivers/media/video/tm6000/tm6000-dvb.ko
-  INSTALL drivers/media/video/tm6000/tm6000.ko
-  INSTALL drivers/media/video/tuner.ko
-  INSTALL drivers/media/video/tveeprom.ko
-  INSTALL drivers/media/video/tvp5150.ko
-  INSTALL drivers/media/video/usbvision/usbvision.ko
-  INSTALL drivers/media/video/uvc/uvcvideo.ko
-  INSTALL drivers/media/video/v4l2-common.ko
-  INSTALL drivers/media/video/v4l2-int-device.ko
-  INSTALL drivers/media/video/videobuf-core.ko
-  INSTALL drivers/media/video/videobuf-dvb.ko
-  INSTALL drivers/media/video/videobuf-vmalloc.ko
-  INSTALL drivers/media/video/videobuf2-core.ko
-  INSTALL drivers/media/video/videobuf2-memops.ko
-  INSTALL drivers/media/video/videobuf2-vmalloc.ko
-  INSTALL drivers/media/video/videodev.ko
-  INSTALL drivers/media/video/vivi.ko
-  INSTALL drivers/media/video/wm8775.ko
-  INSTALL drivers/media/video/zr364xx.ko
+  INSTALL drivers/media/rc/ttusbir.ko
+  INSTALL drivers/media/tuners/e4000.ko
+  INSTALL drivers/media/tuners/fc0011.ko
+  INSTALL drivers/media/tuners/fc0012.ko
+  INSTALL drivers/media/tuners/fc0013.ko
+  INSTALL drivers/media/tuners/fc2580.ko
+  INSTALL drivers/media/tuners/max2165.ko
+  INSTALL drivers/media/tuners/mc44s803.ko
+  INSTALL drivers/media/tuners/mt2060.ko
+  INSTALL drivers/media/tuners/mt2063.ko
+  INSTALL drivers/media/tuners/mt20xx.ko
+  INSTALL drivers/media/tuners/mt2266.ko
+  INSTALL drivers/media/tuners/mxl5005s.ko
+  INSTALL drivers/media/tuners/mxl5007t.ko
+  INSTALL drivers/media/tuners/qt1010.ko
+  INSTALL drivers/media/tuners/r820t.ko
+  INSTALL drivers/media/tuners/tda18212.ko
+  INSTALL drivers/media/tuners/tda18218.ko
+  INSTALL drivers/media/tuners/tda18271.ko
+  INSTALL drivers/media/tuners/tda827x.ko
+  INSTALL drivers/media/tuners/tda8290.ko
+  INSTALL drivers/media/tuners/tda9887.ko
+  INSTALL drivers/media/tuners/tea5761.ko
+  INSTALL drivers/media/tuners/tea5767.ko
+  INSTALL drivers/media/tuners/tua9001.ko
+  INSTALL drivers/media/tuners/tuner-simple.ko
+  INSTALL drivers/media/tuners/tuner-types.ko
+  INSTALL drivers/media/tuners/tuner-xc2028.ko
+  INSTALL drivers/media/tuners/tuner_it913x.ko
+  INSTALL drivers/media/tuners/xc4000.ko
+  INSTALL drivers/media/tuners/xc5000.ko
+  INSTALL drivers/media/usb/au0828/au0828.ko
+  INSTALL drivers/media/usb/b2c2/b2c2-flexcop-usb.ko
+  INSTALL drivers/media/usb/cpia2/cpia2.ko
+  INSTALL drivers/media/usb/cx231xx/cx231xx-alsa.ko
+  INSTALL drivers/media/usb/cx231xx/cx231xx-dvb.ko
+  INSTALL drivers/media/usb/cx231xx/cx231xx.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-af9015.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-af9035.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-anysee.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-au6610.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-az6007.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-ce6230.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-ec168.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-gl861.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-it913x.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-lmedm04.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-mxl111sf.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb-usb-rtl28xxu.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/dvb_usb_v2.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/mxl111sf-demod.ko
+  INSTALL drivers/media/usb/dvb-usb-v2/mxl111sf-tuner.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-a800.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-af9005-remote.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-af9005.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-az6027.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-cinergyT2.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-cxusb.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dib0700.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dibusb-common.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dibusb-mb.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dibusb-mc.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-digitv.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dtt200u.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dtv5100.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-dw2102.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-friio.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-gp8psk.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-m920x.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-nova-t-usb2.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-opera.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-pctv452e.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-technisat-usb2.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-ttusb2.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-umt-010.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-vp702x.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb-vp7045.ko
+  INSTALL drivers/media/usb/dvb-usb/dvb-usb.ko
+  INSTALL drivers/media/usb/em28xx/em28xx-alsa.ko
+  INSTALL drivers/media/usb/em28xx/em28xx-dvb.ko
+  INSTALL drivers/media/usb/em28xx/em28xx-rc.ko
+  INSTALL drivers/media/usb/em28xx/em28xx.ko
+  INSTALL drivers/media/usb/gspca/gl860/gspca_gl860.ko
+  INSTALL drivers/media/usb/gspca/gspca_benq.ko
+  INSTALL drivers/media/usb/gspca/gspca_conex.ko
+  INSTALL drivers/media/usb/gspca/gspca_cpia1.ko
+  INSTALL drivers/media/usb/gspca/gspca_etoms.ko
+  INSTALL drivers/media/usb/gspca/gspca_finepix.ko
+  INSTALL drivers/media/usb/gspca/gspca_jeilinj.ko
+  INSTALL drivers/media/usb/gspca/gspca_jl2005bcd.ko
+  INSTALL drivers/media/usb/gspca/gspca_kinect.ko
+  INSTALL drivers/media/usb/gspca/gspca_konica.ko
+  INSTALL drivers/media/usb/gspca/gspca_main.ko
+  INSTALL drivers/media/usb/gspca/gspca_mars.ko
+  INSTALL drivers/media/usb/gspca/gspca_mr97310a.ko
+  INSTALL drivers/media/usb/gspca/gspca_nw80x.ko
+  INSTALL drivers/media/usb/gspca/gspca_ov519.ko
+  INSTALL drivers/media/usb/gspca/gspca_ov534.ko
+  INSTALL drivers/media/usb/gspca/gspca_ov534_9.ko
+  INSTALL drivers/media/usb/gspca/gspca_pac207.ko
+  INSTALL drivers/media/usb/gspca/gspca_pac7302.ko
+  INSTALL drivers/media/usb/gspca/gspca_pac7311.ko
+  INSTALL drivers/media/usb/gspca/gspca_se401.ko
+  INSTALL drivers/media/usb/gspca/gspca_sn9c2028.ko
+  INSTALL drivers/media/usb/gspca/gspca_sn9c20x.ko
+  INSTALL drivers/media/usb/gspca/gspca_sonixb.ko
+  INSTALL drivers/media/usb/gspca/gspca_sonixj.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca1528.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca500.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca501.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca505.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca506.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca508.ko
+  INSTALL drivers/media/usb/gspca/gspca_spca561.ko
+  INSTALL drivers/media/usb/gspca/gspca_sq905.ko
+  INSTALL drivers/media/usb/gspca/gspca_sq905c.ko
+  INSTALL drivers/media/usb/gspca/gspca_sq930x.ko
+  INSTALL drivers/media/usb/gspca/gspca_stk014.ko
+  INSTALL drivers/media/usb/gspca/gspca_stv0680.ko
+  INSTALL drivers/media/usb/gspca/gspca_sunplus.ko
+  INSTALL drivers/media/usb/gspca/gspca_t613.ko
+  INSTALL drivers/media/usb/gspca/gspca_topro.ko
+  INSTALL drivers/media/usb/gspca/gspca_tv8532.ko
+  INSTALL drivers/media/usb/gspca/gspca_vc032x.ko
+  INSTALL drivers/media/usb/gspca/gspca_vicam.ko
+  INSTALL drivers/media/usb/gspca/gspca_xirlink_cit.ko
+  INSTALL drivers/media/usb/gspca/gspca_zc3xx.ko
+  INSTALL drivers/media/usb/gspca/m5602/gspca_m5602.ko
+  INSTALL drivers/media/usb/gspca/stv06xx/gspca_stv06xx.ko
+  INSTALL drivers/media/usb/hdpvr/hdpvr.ko
+  INSTALL drivers/media/usb/pvrusb2/pvrusb2.ko
+  INSTALL drivers/media/usb/pwc/pwc.ko
+  INSTALL drivers/media/usb/s2255/s2255drv.ko
+  INSTALL drivers/media/usb/siano/smsusb.ko
+  INSTALL drivers/media/usb/sn9c102/sn9c102.ko
+  INSTALL drivers/media/usb/stk1160/stk1160.ko
+  INSTALL drivers/media/usb/stkwebcam/stkwebcam.ko
+  INSTALL drivers/media/usb/tlg2300/poseidon.ko
+  INSTALL drivers/media/usb/tm6000/tm6000-alsa.ko
+  INSTALL drivers/media/usb/tm6000/tm6000-dvb.ko
+  INSTALL drivers/media/usb/tm6000/tm6000.ko
+  INSTALL drivers/media/usb/usbvision/usbvision.ko
+  INSTALL drivers/media/usb/uvc/uvcvideo.ko
+  INSTALL drivers/media/usb/zr364xx/zr364xx.ko
+  INSTALL drivers/media/v4l2-core/tuner.ko
+  INSTALL drivers/media/v4l2-core/v4l2-common.ko
+  INSTALL drivers/media/v4l2-core/videobuf-core.ko
+  INSTALL drivers/media/v4l2-core/videobuf-dvb.ko
+  INSTALL drivers/media/v4l2-core/videobuf-vmalloc.ko
+  INSTALL drivers/media/v4l2-core/videobuf2-core.ko
+  INSTALL drivers/media/v4l2-core/videobuf2-memops.ko
+  INSTALL drivers/media/v4l2-core/videobuf2-vmalloc.ko
+  INSTALL drivers/media/v4l2-core/videodev.ko
   INSTALL drivers/misc/eeprom/eeprom_93cx6.ko
-  INSTALL drivers/mmc/host/mmc_spi.ko
-  INSTALL drivers/net/bonding/bonding.ko
+  INSTALL drivers/misc/ti-st/st_drv.ko
   INSTALL drivers/net/can/mcp251x.ko
   INSTALL drivers/net/can/slcan.ko
   INSTALL drivers/net/can/vcan.ko
@@ -564,18 +520,13 @@
   INSTALL drivers/net/irda/mcs7780.ko
   INSTALL drivers/net/irda/sir-dev.ko
   INSTALL drivers/net/irda/stir4200.ko
-  INSTALL drivers/net/macvlan.ko
   INSTALL drivers/net/netconsole.ko
-  INSTALL drivers/net/phy/libphy.ko
   INSTALL drivers/net/phy/mdio-bitbang.ko
   INSTALL drivers/net/ppp/bsd_comp.ko
   INSTALL drivers/net/ppp/ppp_async.ko
   INSTALL drivers/net/ppp/ppp_deflate.ko
   INSTALL drivers/net/ppp/ppp_generic.ko
-  INSTALL drivers/net/ppp/ppp_mppe.ko
   INSTALL drivers/net/ppp/ppp_synctty.ko
-  INSTALL drivers/net/ppp/pppoe.ko
-  INSTALL drivers/net/ppp/pppox.ko
   INSTALL drivers/net/slip/slhc.ko
   INSTALL drivers/net/slip/slip.ko
   INSTALL drivers/net/tun.ko
@@ -583,7 +534,7 @@
   INSTALL drivers/net/usb/catc.ko
   INSTALL drivers/net/usb/cdc_eem.ko
   INSTALL drivers/net/usb/cdc_ether.ko
-  INSTALL drivers/net/usb/cdc_ncm.ko
+  INSTALL drivers/net/usb/cdc_mbim.ko
   INSTALL drivers/net/usb/cdc_subset.ko
   INSTALL drivers/net/usb/cx82310_eth.ko
   INSTALL drivers/net/usb/dm9601.ko
@@ -598,6 +549,7 @@
   INSTALL drivers/net/usb/pegasus.ko
   INSTALL drivers/net/usb/plusb.ko
   INSTALL drivers/net/usb/qmi_wwan.ko
+  INSTALL drivers/net/usb/r8152.ko
   INSTALL drivers/net/usb/rndis_host.ko
   INSTALL drivers/net/usb/rtl8150.ko
   INSTALL drivers/net/usb/sierra_net.ko
@@ -606,12 +558,17 @@
   INSTALL drivers/net/wimax/i2400m/i2400m-usb.ko
   INSTALL drivers/net/wimax/i2400m/i2400m.ko
   INSTALL drivers/net/wireless/at76c50x-usb.ko
+  INSTALL drivers/net/wireless/ath/ar5523/ar5523.ko
   INSTALL drivers/net/wireless/ath/ath.ko
+  INSTALL drivers/net/wireless/ath/ath6kl/ath6kl_core.ko
+  INSTALL drivers/net/wireless/ath/ath6kl/ath6kl_usb.ko
   INSTALL drivers/net/wireless/ath/ath9k/ath9k.ko
   INSTALL drivers/net/wireless/ath/ath9k/ath9k_common.ko
   INSTALL drivers/net/wireless/ath/ath9k/ath9k_htc.ko
   INSTALL drivers/net/wireless/ath/ath9k/ath9k_hw.ko
   INSTALL drivers/net/wireless/ath/carl9170/carl9170.ko
+  INSTALL drivers/net/wireless/b43/b43.ko
+  INSTALL drivers/net/wireless/b43legacy/b43legacy.ko
   INSTALL drivers/net/wireless/hostap/hostap.ko
   INSTALL drivers/net/wireless/libertas/libertas.ko
   INSTALL drivers/net/wireless/libertas/libertas_sdio.ko
@@ -635,6 +592,7 @@
   INSTALL drivers/net/wireless/zd1201.ko
   INSTALL drivers/net/wireless/zd1211rw/zd1211rw.ko
   INSTALL drivers/nfc/pn533.ko
+  INSTALL drivers/power/ds2760_battery.ko
   INSTALL drivers/rtc/rtc-bq32k.ko
   INSTALL drivers/rtc/rtc-ds1305.ko
   INSTALL drivers/rtc/rtc-ds1307.ko
@@ -653,40 +611,24 @@
   INSTALL drivers/rtc/rtc-max6900.ko
   INSTALL drivers/rtc/rtc-max6902.ko
   INSTALL drivers/rtc/rtc-pcf2123.ko
+  INSTALL drivers/rtc/rtc-pcf8523.ko
   INSTALL drivers/rtc/rtc-pcf8563.ko
   INSTALL drivers/rtc/rtc-pcf8583.ko
   INSTALL drivers/rtc/rtc-r9701.ko
   INSTALL drivers/rtc/rtc-rs5c348.ko
   INSTALL drivers/rtc/rtc-rs5c372.ko
   INSTALL drivers/rtc/rtc-rv3029c2.ko
+  INSTALL drivers/rtc/rtc-rx4581.ko
   INSTALL drivers/rtc/rtc-rx8025.ko
   INSTALL drivers/rtc/rtc-rx8581.ko
   INSTALL drivers/rtc/rtc-s35390a.ko
   INSTALL drivers/rtc/rtc-x1205.ko
-  INSTALL drivers/scsi/iscsi_tcp.ko
-  INSTALL drivers/scsi/libiscsi.ko
-  INSTALL drivers/scsi/libiscsi_tcp.ko
-  INSTALL drivers/scsi/osst.ko
+  INSTALL drivers/scsi/sd_mod.ko
   INSTALL drivers/scsi/sr_mod.ko
-  INSTALL drivers/scsi/st.ko
   INSTALL drivers/spi/spi-bcm2708.ko
   INSTALL drivers/spi/spidev.ko
-  INSTALL drivers/staging/media/as102/dvb-as102.ko
-  INSTALL drivers/staging/media/easycap/easycap.ko
-  INSTALL drivers/staging/media/lirc/lirc_igorplugusb.ko
-  INSTALL drivers/staging/media/lirc/lirc_imon.ko
+  INSTALL drivers/ssb/ssb.ko
   INSTALL drivers/staging/media/lirc/lirc_rpi.ko
-  INSTALL drivers/staging/media/lirc/lirc_sasem.ko
-  INSTALL drivers/staging/media/lirc/lirc_serial.ko
-  INSTALL drivers/staging/media/lirc/lirc_ttusbir.ko
-  INSTALL drivers/staging/rtl8712/r8712u.ko
-  INSTALL drivers/staging/speakup/speakup.ko
-  INSTALL drivers/staging/speakup/speakup_soft.ko
-  INSTALL drivers/staging/vt6656/vt6656_stage.ko
-  INSTALL drivers/staging/winbond/w35und.ko
-  INSTALL drivers/staging/wlan-ng/prism2_usb.ko
-  INSTALL drivers/staging/zram/zram.ko
-  INSTALL drivers/staging/zsmalloc/zsmalloc.ko
   INSTALL drivers/uio/uio.ko
   INSTALL drivers/uio/uio_pdrv.ko
   INSTALL drivers/uio/uio_pdrv_genirq.ko
@@ -701,6 +643,7 @@
   INSTALL drivers/usb/misc/cytherm.ko
   INSTALL drivers/usb/misc/emi26.ko
   INSTALL drivers/usb/misc/emi62.ko
+  INSTALL drivers/usb/misc/ezusb.ko
   INSTALL drivers/usb/misc/ftdi-elan.ko
   INSTALL drivers/usb/misc/idmouse.ko
   INSTALL drivers/usb/misc/iowarrior.ko
@@ -766,7 +709,10 @@
   INSTALL drivers/usb/serial/visor.ko
   INSTALL drivers/usb/serial/vivopay-serial.ko
   INSTALL drivers/usb/serial/whiteheat.ko
+  INSTALL drivers/usb/serial/wishbone-serial.ko
+  INSTALL drivers/usb/serial/xsens_mt.ko
   INSTALL drivers/usb/serial/zio.ko
+  INSTALL drivers/usb/serial/zte_ev.ko
   INSTALL drivers/usb/storage/ums-alauda.ko
   INSTALL drivers/usb/storage/ums-cypress.ko
   INSTALL drivers/usb/storage/ums-datafab.ko
@@ -780,6 +726,7 @@
   INSTALL drivers/usb/storage/ums-sddr09.ko
   INSTALL drivers/usb/storage/ums-sddr55.ko
   INSTALL drivers/usb/storage/ums-usbat.ko
+  INSTALL drivers/video/backlight/generic_bl.ko
   INSTALL drivers/video/backlight/lcd.ko
   INSTALL drivers/video/fb_sys_fops.ko
   INSTALL drivers/video/fbtft/fb_hx8340bn.ko
@@ -804,11 +751,14 @@
   INSTALL drivers/w1/masters/w1-gpio.ko
   INSTALL drivers/w1/slaves/w1_bq27000.ko
   INSTALL drivers/w1/slaves/w1_ds2408.ko
+  INSTALL drivers/w1/slaves/w1_ds2413.ko
   INSTALL drivers/w1/slaves/w1_ds2423.ko
   INSTALL drivers/w1/slaves/w1_ds2431.ko
   INSTALL drivers/w1/slaves/w1_ds2433.ko
   INSTALL drivers/w1/slaves/w1_ds2760.ko
   INSTALL drivers/w1/slaves/w1_ds2780.ko
+  INSTALL drivers/w1/slaves/w1_ds2781.ko
+  INSTALL drivers/w1/slaves/w1_ds28e04.ko
   INSTALL drivers/w1/slaves/w1_smem.ko
   INSTALL drivers/w1/slaves/w1_therm.ko
   INSTALL drivers/w1/wire.ko
@@ -818,12 +768,9 @@
   INSTALL fs/btrfs/btrfs.ko
   INSTALL fs/cifs/cifs.ko
   INSTALL fs/dlm/dlm.ko
-  INSTALL fs/ecryptfs/ecryptfs.ko
   INSTALL fs/fuse/cuse.ko
   INSTALL fs/fuse/fuse.ko
   INSTALL fs/gfs2/gfs2.ko
-  INSTALL fs/hfs/hfs.ko
-  INSTALL fs/hfsplus/hfsplus.ko
   INSTALL fs/isofs/isofs.ko
   INSTALL fs/jfs/jfs.ko
   INSTALL fs/nfsd/nfsd.ko
@@ -882,7 +829,6 @@
   INSTALL fs/udf/udf.ko
   INSTALL fs/xfs/xfs.ko
   INSTALL lib/crc-ccitt.ko
-  INSTALL lib/crc7.ko
   INSTALL lib/lru_cache.ko
   INSTALL lib/lzo/lzo_compress.ko
   INSTALL lib/lzo/lzo_decompress.ko
@@ -892,7 +838,6 @@
   INSTALL lib/ts_kmp.ko
   INSTALL lib/xz/xz_dec.ko
   INSTALL lib/zlib_deflate/zlib_deflate.ko
-  INSTALL lib/zlib_inflate/zlib_inflate.ko
   INSTALL net/802/garp.ko
   INSTALL net/802/p8022.ko
   INSTALL net/802/psnap.ko
@@ -934,20 +879,16 @@
   INSTALL net/core/pktgen.ko
   INSTALL net/ipv4/ah4.ko
   INSTALL net/ipv4/esp4.ko
-  INSTALL net/ipv4/gre.ko
   INSTALL net/ipv4/inet_diag.ko
   INSTALL net/ipv4/inet_lro.ko
-  INSTALL net/ipv4/ip_gre.ko
+  INSTALL net/ipv4/ip_tunnel.ko
   INSTALL net/ipv4/ipcomp.ko
-  INSTALL net/ipv4/ipip.ko
   INSTALL net/ipv4/netfilter/arp_tables.ko
   INSTALL net/ipv4/netfilter/arpt_mangle.ko
   INSTALL net/ipv4/netfilter/arptable_filter.ko
   INSTALL net/ipv4/netfilter/ip_tables.ko
   INSTALL net/ipv4/netfilter/ipt_ECN.ko
   INSTALL net/ipv4/netfilter/ipt_MASQUERADE.ko
-  INSTALL net/ipv4/netfilter/ipt_NETMAP.ko
-  INSTALL net/ipv4/netfilter/ipt_REDIRECT.ko
   INSTALL net/ipv4/netfilter/ipt_REJECT.ko
   INSTALL net/ipv4/netfilter/ipt_ULOG.ko
   INSTALL net/ipv4/netfilter/ipt_ah.ko
@@ -957,19 +898,11 @@
   INSTALL net/ipv4/netfilter/iptable_raw.ko
   INSTALL net/ipv4/netfilter/nf_conntrack_ipv4.ko
   INSTALL net/ipv4/netfilter/nf_defrag_ipv4.ko
-  INSTALL net/ipv4/netfilter/nf_nat.ko
-  INSTALL net/ipv4/netfilter/nf_nat_amanda.ko
-  INSTALL net/ipv4/netfilter/nf_nat_ftp.ko
   INSTALL net/ipv4/netfilter/nf_nat_h323.ko
-  INSTALL net/ipv4/netfilter/nf_nat_irc.ko
+  INSTALL net/ipv4/netfilter/nf_nat_ipv4.ko
   INSTALL net/ipv4/netfilter/nf_nat_pptp.ko
-  INSTALL net/ipv4/netfilter/nf_nat_proto_dccp.ko
   INSTALL net/ipv4/netfilter/nf_nat_proto_gre.ko
-  INSTALL net/ipv4/netfilter/nf_nat_proto_sctp.ko
-  INSTALL net/ipv4/netfilter/nf_nat_proto_udplite.ko
-  INSTALL net/ipv4/netfilter/nf_nat_sip.ko
   INSTALL net/ipv4/netfilter/nf_nat_snmp_basic.ko
-  INSTALL net/ipv4/netfilter/nf_nat_tftp.ko
   INSTALL net/ipv4/tcp_diag.ko
   INSTALL net/ipv4/tunnel4.ko
   INSTALL net/ipv4/xfrm4_mode_beet.ko
@@ -981,6 +914,8 @@
   INSTALL net/ipv6/ipcomp6.ko
   INSTALL net/ipv6/ipv6.ko
   INSTALL net/ipv6/netfilter/ip6_tables.ko
+  INSTALL net/ipv6/netfilter/ip6t_MASQUERADE.ko
+  INSTALL net/ipv6/netfilter/ip6t_NPT.ko
   INSTALL net/ipv6/netfilter/ip6t_REJECT.ko
   INSTALL net/ipv6/netfilter/ip6t_ah.ko
   INSTALL net/ipv6/netfilter/ip6t_eui64.ko
@@ -991,9 +926,11 @@
   INSTALL net/ipv6/netfilter/ip6t_rt.ko
   INSTALL net/ipv6/netfilter/ip6table_filter.ko
   INSTALL net/ipv6/netfilter/ip6table_mangle.ko
+  INSTALL net/ipv6/netfilter/ip6table_nat.ko
   INSTALL net/ipv6/netfilter/ip6table_raw.ko
   INSTALL net/ipv6/netfilter/nf_conntrack_ipv6.ko
   INSTALL net/ipv6/netfilter/nf_defrag_ipv6.ko
+  INSTALL net/ipv6/netfilter/nf_nat_ipv6.ko
   INSTALL net/ipv6/sit.ko
   INSTALL net/ipv6/tunnel6.ko
   INSTALL net/ipv6/xfrm6_mode_beet.ko
@@ -1051,8 +988,18 @@
   INSTALL net/netfilter/nf_conntrack_sip.ko
   INSTALL net/netfilter/nf_conntrack_snmp.ko
   INSTALL net/netfilter/nf_conntrack_tftp.ko
+  INSTALL net/netfilter/nf_nat.ko
+  INSTALL net/netfilter/nf_nat_amanda.ko
+  INSTALL net/netfilter/nf_nat_ftp.ko
+  INSTALL net/netfilter/nf_nat_irc.ko
+  INSTALL net/netfilter/nf_nat_proto_dccp.ko
+  INSTALL net/netfilter/nf_nat_proto_sctp.ko
+  INSTALL net/netfilter/nf_nat_proto_udplite.ko
+  INSTALL net/netfilter/nf_nat_sip.ko
+  INSTALL net/netfilter/nf_nat_tftp.ko
   INSTALL net/netfilter/nf_tproxy_core.ko
   INSTALL net/netfilter/nfnetlink.ko
+  INSTALL net/netfilter/nfnetlink_acct.ko
   INSTALL net/netfilter/nfnetlink_log.ko
   INSTALL net/netfilter/nfnetlink_queue.ko
   INSTALL net/netfilter/x_tables.ko
@@ -1066,19 +1013,22 @@
   INSTALL net/netfilter/xt_IDLETIMER.ko
   INSTALL net/netfilter/xt_LED.ko
   INSTALL net/netfilter/xt_LOG.ko
+  INSTALL net/netfilter/xt_NETMAP.ko
   INSTALL net/netfilter/xt_NFLOG.ko
   INSTALL net/netfilter/xt_NFQUEUE.ko
-  INSTALL net/netfilter/xt_NOTRACK.ko
   INSTALL net/netfilter/xt_RATEEST.ko
+  INSTALL net/netfilter/xt_REDIRECT.ko
   INSTALL net/netfilter/xt_TCPMSS.ko
   INSTALL net/netfilter/xt_TCPOPTSTRIP.ko
   INSTALL net/netfilter/xt_TEE.ko
   INSTALL net/netfilter/xt_TPROXY.ko
   INSTALL net/netfilter/xt_TRACE.ko
   INSTALL net/netfilter/xt_addrtype.ko
+  INSTALL net/netfilter/xt_bpf.ko
   INSTALL net/netfilter/xt_cluster.ko
   INSTALL net/netfilter/xt_comment.ko
   INSTALL net/netfilter/xt_connbytes.ko
+  INSTALL net/netfilter/xt_connlabel.ko
   INSTALL net/netfilter/xt_connlimit.ko
   INSTALL net/netfilter/xt_connmark.ko
   INSTALL net/netfilter/xt_conntrack.ko
@@ -1097,6 +1047,8 @@
   INSTALL net/netfilter/xt_mac.ko
   INSTALL net/netfilter/xt_mark.ko
   INSTALL net/netfilter/xt_multiport.ko
+  INSTALL net/netfilter/xt_nat.ko
+  INSTALL net/netfilter/xt_nfacct.ko
   INSTALL net/netfilter/xt_osf.ko
   INSTALL net/netfilter/xt_owner.ko
   INSTALL net/netfilter/xt_physdev.ko
@@ -1118,6 +1070,7 @@
   INSTALL net/netfilter/xt_u32.ko
   INSTALL net/netrom/netrom.ko
   INSTALL net/nfc/nfc.ko
+  INSTALL net/openvswitch/openvswitch.ko
   INSTALL net/rfkill/rfkill.ko
   INSTALL net/rose/rose.ko
   INSTALL net/sched/act_csum.ko
@@ -1139,6 +1092,7 @@
   INSTALL net/sched/cls_tcindex.ko
   INSTALL net/sched/cls_u32.ko
   INSTALL net/sched/em_cmp.ko
+  INSTALL net/sched/em_ipset.ko
   INSTALL net/sched/em_meta.ko
   INSTALL net/sched/em_nbyte.ko
   INSTALL net/sched/em_text.ko
@@ -1172,6 +1126,7 @@
   INSTALL net/wireless/lib80211_crypt_tkip.ko
   INSTALL net/wireless/lib80211_crypt_wep.ko
   INSTALL net/xfrm/xfrm_ipcomp.ko
+  INSTALL sound/ac97_bus.ko
   INSTALL sound/arm/snd-bcm2835.ko
   INSTALL sound/core/oss/snd-mixer-oss.ko
   INSTALL sound/core/oss/snd-pcm-oss.ko
@@ -1197,6 +1152,7 @@
   INSTALL sound/drivers/snd-serial-u16550.ko
   INSTALL sound/drivers/snd-virmidi.ko
   INSTALL sound/i2c/other/snd-tea575x-tuner.ko
+  INSTALL sound/pci/ac97/snd-ac97-codec.ko
   INSTALL sound/sound_firmware.ko
   INSTALL sound/usb/6fire/snd-usb-6fire.ko
   INSTALL sound/usb/caiaq/snd-usb-caiaq.ko
@@ -1238,11 +1194,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.6.11+
+  DEPMOD  3.10.17+
 
 #
 # End: modules_install: Install kernel modules
-# Time: Thu Oct 31 22:44:31 2013
-# Elapsed: 0.42 min
+# Time: Fri Nov  1 17:37:37 2013
+# Elapsed: 0.43 min
 #
 
