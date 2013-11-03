@@ -1,0 +1,23 @@
+
+cat <<EOM
+
+
+
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !!                       !!
+    !!       IMPORTANT       !!
+    !!                       !!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Make sure /boot/config.txt contains the following:
+
+device_tree=bcm2708-rpi-b.dtb
+device_tree_address=0x100
+kernel_address=0x8000
+disable_commandline_tags=1
+
+
+
+
+EOM

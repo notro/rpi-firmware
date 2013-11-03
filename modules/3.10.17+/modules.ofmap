@@ -1,0 +1,7 @@
+# of module          name                 type                 compatible
+spidev               *                    *                    rohm,dh2228fv
+rotary_encoder       *                    *                    rotary-encoder
+rtc-pcf8523          *                    *                    nxp,pcf8523
+rtc-pcf8563          *                    *                    nxp,pcf8563
+gpio-ir-recv         *                    *                    gpio-ir-receiver
+snd-bcm2835          *                    *                    brcm,bcm2835-audio

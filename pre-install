@@ -1,0 +1,4 @@
+
+echo "     Work around rpi-update issue #106 by deleting ${FW_MODPATH}/$(uname -r)/kernel"
+rm -rf "${FW_MODPATH}/$(uname -r)/kernel"
+echo

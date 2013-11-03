@@ -1,7 +1,7 @@
 
 #
-# Begin: init: Setup tools, firmware and kernel sources
-# Time: Thu Oct 31 21:34:06 2013
+# Begin: init
+# Time: Sun Nov  3 18:56:36 2013
 #
 
 
@@ -33,79 +33,133 @@ Already up-to-date.
  Get kernel source
 -------------------
 
-git.clone('https://github.com/raspberrypi/linux', '/home/pi/linux', 'rpi-3.6.y')
+git.clone('https://github.com/raspberrypi/linux', '/home/pi/linux', 'rpi-3.10.y')
 Already cloned
 
 => cd /home/pi/linux && git checkout -- .
 
 => cd /home/pi/linux && git clean -fd
-Removing drivers/video/fbtft/
+Removing arch/arm/boot/dts/bcm2708-rpi-b.dts
+Removing arch/arm/boot/dts/bcm2708.dtsi
+Removing arch/arm/mach-bcm2708/pinctrl-bcm2708.c
 
-=> cd /home/pi/linux && git checkout rpi-3.6.y
-Switched to branch 'rpi-3.6.y'
+=> cd /home/pi/linux && git checkout rpi-3.10.y
+Already on 'rpi-3.10.y'
 
 => cd /home/pi/linux && git pull
 Already up-to-date.
 
-=> cd /home/pi/linux && git checkout 10bc58289a7ebf6b1ab724636e0a16116278e339
 
-Note: checking out '10bc58289a7ebf6b1ab724636e0a16116278e339'.
+ ads7846: Use Device Tree enabled version
+------------------------------------------
 
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b new_branch_name
-
-HEAD is now at 10bc582... Merge pull request #390 from P33M/rpi-3.6.y
-
-
- Get DMA capable SPI master driver
------------------------------------
-
-=> wget -O /home/pi/linux/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2013-10-31 21:34:24--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+=> wget -O /home/pi/linux/drivers/input/touchscreen/ads7846.c https://raw.github.com/torvalds/linux/master/drivers/input/touchscreen/ads7846.c
+--2013-11-03 18:56:51--  https://raw.github.com/torvalds/linux/master/drivers/input/touchscreen/ads7846.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 26638 (26K) [text/plain]
-Saving to: `/home/pi/linux/drivers/spi/spi-bcm2708.c'
+Length: 37365 (36K) [text/plain]
+Saving to: `/home/pi/linux/drivers/input/touchscreen/ads7846.c'
 
-     0K .......... .......... ......                          100%  615K=0.04s
+     0K .......... .......... .......... ......               100%  610K=0.06s
 
-2013-10-31 21:34:25 (615 KB/s) - `/home/pi/linux/drivers/spi/spi-bcm2708.c' saved [26638/26638]
+2013-11-03 18:56:52 (610 KB/s) - `/home/pi/linux/drivers/input/touchscreen/ads7846.c' saved [37365/37365]
 
 
 
  Apply kernel patches
 ----------------------
 
-=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/fbtft.patch
-Checking patch drivers/video/Kconfig...
-Checking patch drivers/video/Makefile...
-Applied patch drivers/video/Kconfig cleanly.
-Applied patch drivers/video/Makefile cleanly.
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/dt_enable_bcm2708_part2.patch
+Checking patch arch/arm/boot/dts/bcm2708-rpi-b.dts...
+Checking patch arch/arm/boot/dts/bcm2708.dtsi...
+Checking patch arch/arm/mach-bcm2708/pinctrl-bcm2708.c...
+Applied patch arch/arm/boot/dts/bcm2708-rpi-b.dts cleanly.
+Applied patch arch/arm/boot/dts/bcm2708.dtsi cleanly.
+Applied patch arch/arm/mach-bcm2708/pinctrl-bcm2708.c cleanly.
 
-=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/bcm2708.patch
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/dt_enable_bcm2708.patch
+/home/pi/rpi-build/patches/dt/dt_enable_bcm2708.patch:38: trailing whitespace.
+	help 
+Checking patch arch/arm/boot/dts/Makefile...
+Checking patch arch/arm/mach-bcm2708/Kconfig...
+Checking patch arch/arm/mach-bcm2708/Makefile...
+Checking patch arch/arm/mach-bcm2708/armctrl.c...
 Checking patch arch/arm/mach-bcm2708/bcm2708.c...
+Hunk #2 succeeded at 696 (offset 4 lines).
+Hunk #3 succeeded at 964 (offset 4 lines).
+Hunk #4 succeeded at 978 (offset 4 lines).
+Checking patch arch/arm/mach-bcm2708/clock.c...
+Checking patch arch/arm/mach-bcm2708/dma.c...
+Checking patch arch/arm/mach-bcm2708/vc_mem.c...
+Checking patch arch/arm/mach-bcm2708/vcio.c...
+Checking patch drivers/clk/Makefile...
+Applied patch arch/arm/boot/dts/Makefile cleanly.
+Applied patch arch/arm/mach-bcm2708/Kconfig cleanly.
+Applied patch arch/arm/mach-bcm2708/Makefile cleanly.
+Applied patch arch/arm/mach-bcm2708/armctrl.c cleanly.
 Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
+Applied patch arch/arm/mach-bcm2708/clock.c cleanly.
+Applied patch arch/arm/mach-bcm2708/dma.c cleanly.
+Applied patch arch/arm/mach-bcm2708/vc_mem.c cleanly.
+Applied patch arch/arm/mach-bcm2708/vcio.c cleanly.
+Applied patch drivers/clk/Makefile cleanly.
+warning: 1 line adds whitespace errors.
 
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/enable_core_debug_output.patch
+Checking patch drivers/gpio/gpiolib.c...
+Checking patch drivers/of/platform.c...
+Checking patch drivers/pinctrl/core.c...
+Checking patch kernel/irq/irqdomain.c...
+Checking patch kernel/irq/manage.c...
+Checking patch kernel/resource.c...
+Applied patch drivers/gpio/gpiolib.c cleanly.
+Applied patch drivers/of/platform.c cleanly.
+Applied patch drivers/pinctrl/core.c cleanly.
+Applied patch kernel/irq/irqdomain.c cleanly.
+Applied patch kernel/irq/manage.c cleanly.
+Applied patch kernel/resource.c cleanly.
 
- Get FBTFT
------------
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/enable_i2c-bcm2835_and_spi-bcm2835.patch
+Checking patch drivers/i2c/busses/Kconfig...
+Checking patch drivers/spi/Kconfig...
+Applied patch drivers/i2c/busses/Kconfig cleanly.
+Applied patch drivers/spi/Kconfig cleanly.
 
-git.clone('https://github.com/notro/fbtft.git', '/home/pi/linux/drivers/video/fbtft', '')
-Already cloned
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/enable_driver_debug_output.patch
+Checking patch drivers/video/bcm2708_fb.c...
+Checking patch sound/arm/bcm2835.c...
+Applied patch drivers/video/bcm2708_fb.c cleanly.
+Applied patch sound/arm/bcm2835.c cleanly.
 
-=> cd /home/pi/linux/drivers/video/fbtft && git pull
-Already up-to-date.
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/dt_enable_drivers.patch
+Checking patch drivers/hwmon/bcm2835-hwmon.c...
+Checking patch drivers/i2c/busses/i2c-bcm2708.c...
+Checking patch drivers/mmc/host/sdhci-bcm2708.c...
+Checking patch drivers/net/usb/smsc95xx.c...
+Checking patch drivers/net/usb/smsc95xx.h...
+Checking patch drivers/spi/spi-bcm2708.c...
+Checking patch drivers/thermal/bcm2835-thermal.c...
+Checking patch drivers/video/bcm2708_fb.c...
+Hunk #1 succeeded at 30 (offset 3 lines).
+Hunk #2 succeeded at 547 (offset 3 lines).
+Hunk #3 succeeded at 626 (offset 3 lines).
+Checking patch sound/arm/bcm2835.c...
+Hunk #1 succeeded at 219 (offset 2 lines).
+Hunk #2 succeeded at 235 (offset 2 lines).
+Applied patch drivers/hwmon/bcm2835-hwmon.c cleanly.
+Applied patch drivers/i2c/busses/i2c-bcm2708.c cleanly.
+Applied patch drivers/mmc/host/sdhci-bcm2708.c cleanly.
+Applied patch drivers/net/usb/smsc95xx.c cleanly.
+Applied patch drivers/net/usb/smsc95xx.h cleanly.
+Applied patch drivers/spi/spi-bcm2708.c cleanly.
+Applied patch drivers/thermal/bcm2835-thermal.c cleanly.
+Applied patch drivers/video/bcm2708_fb.c cleanly.
+Applied patch sound/arm/bcm2835.c cleanly.
 
 #
-# End: init: Setup tools, firmware and kernel sources
-# Time: Thu Oct 31 21:34:26 2013
-# Elapsed: 0.33 min
+# End: init
+# Time: Sun Nov  3 18:56:52 2013
+# Elapsed: 0.26 min
 #
 
