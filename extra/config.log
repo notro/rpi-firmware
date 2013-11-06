@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Sun Nov  3 18:56:52 2013
+# Time: Wed Nov  6 14:12:21 2013
 #
 
 
@@ -10,20 +10,7 @@
 ---------------
 
 => cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
-  CLEAN   .
-  CLEAN   arch/arm/kernel
-  CLEAN   drivers/tty/vt
-  CLEAN   drivers/video/logo
-  CLEAN   firmware
-  CLEAN   kernel/debug/kdb
-  CLEAN   kernel
-  CLEAN   lib/raid6
-  CLEAN   lib
-  CLEAN   usr
-  CLEAN   arch/arm/boot/compressed
   CLEAN   arch/arm/boot/dts
-  CLEAN   arch/arm/boot
-  CLEAN   .tmp_versions
   CLEAN   scripts/basic
   CLEAN   scripts/dtc
   CLEAN   scripts/genksyms
@@ -31,7 +18,7 @@
   CLEAN   scripts/mod
   CLEAN   scripts
   CLEAN   include/config include/generated arch/arm/include/generated
-  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
+  CLEAN   .config .config.old
 
 
  make bcmrpi_defconfig
@@ -420,6 +407,20 @@ scripts/kconfig/conf --oldconfig Kconfig
 #
 
 
+ Enable Dynamic Debug
+----------------------
+
+=> cd /home/pi/linux && scripts/config --enable DYNAMIC_DEBUG
+
+=> cd /home/pi/linux && yes "" | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+scripts/kconfig/conf --oldconfig Kconfig
+#
+# configuration written to .config
+#
+yes: standard output: Broken pipe
+yes: write error
+
+
  Turn some modules into builtins
 ---------------------------------
 
@@ -652,7 +653,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Sun Nov  3 18:57:40 2013
-# Elapsed: 0.80 min
+# Time: Wed Nov  6 14:12:58 2013
+# Elapsed: 0.62 min
 #
 

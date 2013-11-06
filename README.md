@@ -35,16 +35,16 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/f604ccc8759e46c9fdf54fe7407b726f144d3a91
+https://github.com/raspberrypi/linux/tree/a987a783807aeed2232280248a49ed8fa5981858
 
 
 ### Kernel patches
-* [dt_enable_bcm2708_part2.patch](https://github.com/notro/rpi-build/blob/master/patches/dt_enable_bcm2708_part2.patch)
-* [dt_enable_bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/dt_enable_bcm2708.patch)
-* [enable_core_debug_output.patch](https://github.com/notro/rpi-build/blob/master/patches/enable_core_debug_output.patch)
-* [enable_i2c-bcm2835_and_spi-bcm2835.patch](https://github.com/notro/rpi-build/blob/master/patches/enable_i2c-bcm2835_and_spi-bcm2835.patch)
-* [enable_driver_debug_output.patch](https://github.com/notro/rpi-build/blob/master/patches/enable_driver_debug_output.patch)
-* [dt_enable_drivers.patch](https://github.com/notro/rpi-build/blob/master/patches/dt_enable_drivers.patch)
+* [dt_enable_bcm2708_part2.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/dt_enable_bcm2708_part2.patch)
+* [dt_enable_bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/dt_enable_bcm2708.patch)
+* [enable_i2c-bcm2835_and_spi-bcm2835.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/enable_i2c-bcm2835_and_spi-bcm2835.patch)
+* [add_a_few_pr_debug_to_core.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/add_a_few_pr_debug_to_core.patch)
+* [enable_driver_debug_output.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/enable_driver_debug_output.patch)
+* [dt_enable_drivers.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/dt_enable_drivers.patch)
 
 
 ### Kernel configuration changes
@@ -68,6 +68,7 @@ CONFIG_BCM2708_DT=y
 CONFIG_COMMON_CLK=y
 CONFIG_COMMON_CLK_DEBUG=y
 CONFIG_DTC=y
+CONFIG_DYNAMIC_DEBUG=y
 CONFIG_HAVE_CLK_PREPARE=y
 CONFIG_I2C_BCM2708=y
 CONFIG_I2C_CHARDEV=y

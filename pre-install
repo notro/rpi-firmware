@@ -1,4 +1,7 @@
 
-echo "     Work around rpi-update issue #106 by deleting ${FW_MODPATH}/$(uname -r)/kernel"
-rm -rf "${FW_MODPATH}/$(uname -r)/kernel"
+echo "Work around rpi-update issue #106"
+find "${FW_REPOLOCAL}/modules" -mindepth 1 -maxdepth 1 -type d | while read DIR; do
+	BASEDIR=$(basename "${DIR}")
+	rm -vrf "${FW_MODPATH}/${BASEDIR}/kernel"
+done
 echo

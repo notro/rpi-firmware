@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Sun Nov  3 20:05:09 2013
+# Time: Wed Nov  6 15:25:58 2013
 #
 
 
@@ -12,6 +12,11 @@
 => cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
   INSTALL arch/arm/oprofile/oprofile.ko
   INSTALL crypto/arc4.ko
+  INSTALL crypto/async_tx/async_memcpy.ko
+  INSTALL crypto/async_tx/async_pq.ko
+  INSTALL crypto/async_tx/async_raid6_recov.ko
+  INSTALL crypto/async_tx/async_tx.ko
+  INSTALL crypto/async_tx/async_xor.ko
   INSTALL crypto/authenc.ko
   INSTALL crypto/authencesn.ko
   INSTALL crypto/cast5_generic.ko
@@ -118,7 +123,19 @@
   INSTALL drivers/leds/trigger/ledtrig-camera.ko
   INSTALL drivers/leds/trigger/ledtrig-transient.ko
   INSTALL drivers/md/dm-crypt.ko
+  INSTALL drivers/md/dm-delay.ko
+  INSTALL drivers/md/dm-log.ko
+  INSTALL drivers/md/dm-mirror.ko
   INSTALL drivers/md/dm-mod.ko
+  INSTALL drivers/md/dm-raid.ko
+  INSTALL drivers/md/dm-region-hash.ko
+  INSTALL drivers/md/dm-snapshot.ko
+  INSTALL drivers/md/dm-zero.ko
+  INSTALL drivers/md/md-mod.ko
+  INSTALL drivers/md/raid0.ko
+  INSTALL drivers/md/raid1.ko
+  INSTALL drivers/md/raid10.ko
+  INSTALL drivers/md/raid456.ko
   INSTALL drivers/media/common/b2c2/b2c2-flexcop.ko
   INSTALL drivers/media/common/cx2341x.ko
   INSTALL drivers/media/common/cypress_firmware.ko
@@ -611,11 +628,16 @@
   INSTALL drivers/rtc/rtc-rx8581.ko
   INSTALL drivers/rtc/rtc-s35390a.ko
   INSTALL drivers/rtc/rtc-x1205.ko
-  INSTALL drivers/scsi/sd_mod.ko
+  INSTALL drivers/scsi/iscsi_boot_sysfs.ko
+  INSTALL drivers/scsi/iscsi_tcp.ko
+  INSTALL drivers/scsi/libiscsi.ko
+  INSTALL drivers/scsi/libiscsi_tcp.ko
+  INSTALL drivers/scsi/scsi_transport_iscsi.ko
   INSTALL drivers/scsi/sr_mod.ko
   INSTALL drivers/spi/spidev.ko
   INSTALL drivers/ssb/ssb.ko
   INSTALL drivers/staging/media/lirc/lirc_rpi.ko
+  INSTALL drivers/staging/rtl8712/r8712u.ko
   INSTALL drivers/uio/uio.ko
   INSTALL drivers/uio/uio_pdrv.ko
   INSTALL drivers/uio/uio_pdrv_genirq.ko
@@ -1161,11 +1183,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.17+
+  DEPMOD  3.10.18+
 
 #
 # End: modules_install
-# Time: Sun Nov  3 20:05:28 2013
-# Elapsed: 0.32 min
+# Time: Wed Nov  6 15:26:22 2013
+# Elapsed: 0.41 min
 #
 

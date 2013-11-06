@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Sun Nov  3 18:56:36 2013
+# Time: Wed Nov  6 14:12:15 2013
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-4c1456944b5f6cc9e5141077ed4e158398811fc1	refs/heads/master
+5343d029a5f2f09bd9801914eac0d4bf95cadc1f	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -54,16 +54,16 @@ Already up-to-date.
 ------------------------------------------
 
 => wget -O /home/pi/linux/drivers/input/touchscreen/ads7846.c https://raw.github.com/torvalds/linux/master/drivers/input/touchscreen/ads7846.c
---2013-11-03 18:56:51--  https://raw.github.com/torvalds/linux/master/drivers/input/touchscreen/ads7846.c
+--2013-11-06 14:12:20--  https://raw.github.com/torvalds/linux/master/drivers/input/touchscreen/ads7846.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 37365 (36K) [text/plain]
 Saving to: `/home/pi/linux/drivers/input/touchscreen/ads7846.c'
 
-     0K .......... .......... .......... ......               100%  610K=0.06s
+     0K .......... .......... .......... ......               100%  459K=0.08s
 
-2013-11-03 18:56:52 (610 KB/s) - `/home/pi/linux/drivers/input/touchscreen/ads7846.c' saved [37365/37365]
+2013-11-06 14:12:21 (459 KB/s) - `/home/pi/linux/drivers/input/touchscreen/ads7846.c' saved [37365/37365]
 
 
 
@@ -79,24 +79,21 @@ Applied patch arch/arm/boot/dts/bcm2708.dtsi cleanly.
 Applied patch arch/arm/mach-bcm2708/pinctrl-bcm2708.c cleanly.
 
 => cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/dt_enable_bcm2708.patch
-/home/pi/rpi-build/patches/dt/dt_enable_bcm2708.patch:38: trailing whitespace.
-	help 
 Checking patch arch/arm/boot/dts/Makefile...
-Checking patch arch/arm/mach-bcm2708/Kconfig...
 Checking patch arch/arm/mach-bcm2708/Makefile...
+Checking patch arch/arm/mach-bcm2708/Kconfig...
 Checking patch arch/arm/mach-bcm2708/armctrl.c...
 Checking patch arch/arm/mach-bcm2708/bcm2708.c...
 Hunk #2 succeeded at 696 (offset 4 lines).
 Hunk #3 succeeded at 964 (offset 4 lines).
-Hunk #4 succeeded at 978 (offset 4 lines).
 Checking patch arch/arm/mach-bcm2708/clock.c...
 Checking patch arch/arm/mach-bcm2708/dma.c...
 Checking patch arch/arm/mach-bcm2708/vc_mem.c...
 Checking patch arch/arm/mach-bcm2708/vcio.c...
 Checking patch drivers/clk/Makefile...
 Applied patch arch/arm/boot/dts/Makefile cleanly.
-Applied patch arch/arm/mach-bcm2708/Kconfig cleanly.
 Applied patch arch/arm/mach-bcm2708/Makefile cleanly.
+Applied patch arch/arm/mach-bcm2708/Kconfig cleanly.
 Applied patch arch/arm/mach-bcm2708/armctrl.c cleanly.
 Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
 Applied patch arch/arm/mach-bcm2708/clock.c cleanly.
@@ -104,27 +101,20 @@ Applied patch arch/arm/mach-bcm2708/dma.c cleanly.
 Applied patch arch/arm/mach-bcm2708/vc_mem.c cleanly.
 Applied patch arch/arm/mach-bcm2708/vcio.c cleanly.
 Applied patch drivers/clk/Makefile cleanly.
-warning: 1 line adds whitespace errors.
-
-=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/enable_core_debug_output.patch
-Checking patch drivers/gpio/gpiolib.c...
-Checking patch drivers/of/platform.c...
-Checking patch drivers/pinctrl/core.c...
-Checking patch kernel/irq/irqdomain.c...
-Checking patch kernel/irq/manage.c...
-Checking patch kernel/resource.c...
-Applied patch drivers/gpio/gpiolib.c cleanly.
-Applied patch drivers/of/platform.c cleanly.
-Applied patch drivers/pinctrl/core.c cleanly.
-Applied patch kernel/irq/irqdomain.c cleanly.
-Applied patch kernel/irq/manage.c cleanly.
-Applied patch kernel/resource.c cleanly.
 
 => cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/enable_i2c-bcm2835_and_spi-bcm2835.patch
 Checking patch drivers/i2c/busses/Kconfig...
 Checking patch drivers/spi/Kconfig...
 Applied patch drivers/i2c/busses/Kconfig cleanly.
 Applied patch drivers/spi/Kconfig cleanly.
+
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/add_a_few_pr_debug_to_core.patch
+Checking patch kernel/irq/irqdomain.c...
+Checking patch kernel/irq/manage.c...
+Checking patch kernel/resource.c...
+Applied patch kernel/irq/irqdomain.c cleanly.
+Applied patch kernel/irq/manage.c cleanly.
+Applied patch kernel/resource.c cleanly.
 
 => cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/dt/enable_driver_debug_output.patch
 Checking patch drivers/video/bcm2708_fb.c...
@@ -159,7 +149,7 @@ Applied patch sound/arm/bcm2835.c cleanly.
 
 #
 # End: init
-# Time: Sun Nov  3 18:56:52 2013
-# Elapsed: 0.26 min
+# Time: Wed Nov  6 14:12:21 2013
+# Elapsed: 0.10 min
 #
 
