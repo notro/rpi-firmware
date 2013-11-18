@@ -1,7 +1,7 @@
 
 #
-# Begin: modules_install: Install kernel modules
-# Time: Thu Oct 31 22:44:06 2013
+# Begin: modules_install
+# Time: Mon Nov 18 17:54:12 2013
 #
 
 
@@ -786,9 +786,12 @@
   INSTALL drivers/video/fbtft/fb_hx8347d.ko
   INSTALL drivers/video/fbtft/fb_ili9320.ko
   INSTALL drivers/video/fbtft/fb_ili9325.ko
+  INSTALL drivers/video/fbtft/fb_ili9340.ko
   INSTALL drivers/video/fbtft/fb_ili9341.ko
   INSTALL drivers/video/fbtft/fb_pcd8544.ko
   INSTALL drivers/video/fbtft/fb_ssd1289.ko
+  INSTALL drivers/video/fbtft/fb_ssd1306.ko
+  INSTALL drivers/video/fbtft/fb_ssd1331.ko
   INSTALL drivers/video/fbtft/fb_ssd1351.ko
   INSTALL drivers/video/fbtft/fb_st7735r.ko
   INSTALL drivers/video/fbtft/fb_watterott.ko
@@ -1241,8 +1244,8 @@
   DEPMOD  3.6.11+
 
 #
-# End: modules_install: Install kernel modules
-# Time: Thu Oct 31 22:44:31 2013
-# Elapsed: 0.42 min
+# End: modules_install
+# Time: Mon Nov 18 17:54:40 2013
+# Elapsed: 0.47 min
 #
 

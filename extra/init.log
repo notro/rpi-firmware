@@ -1,7 +1,7 @@
 
 #
-# Begin: init: Setup tools, firmware and kernel sources
-# Time: Thu Oct 31 21:34:06 2013
+# Begin: init
+# Time: Mon Nov 18 16:35:57 2013
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-4c1456944b5f6cc9e5141077ed4e158398811fc1	refs/heads/master
+b38194cf997f4ee291e1c77c914911752f40af65	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -42,56 +42,42 @@ Already cloned
 Removing drivers/video/fbtft/
 
 => cd /home/pi/linux && git checkout rpi-3.6.y
-Switched to branch 'rpi-3.6.y'
+Already on 'rpi-3.6.y'
 
 => cd /home/pi/linux && git pull
 Already up-to-date.
-
-=> cd /home/pi/linux && git checkout 10bc58289a7ebf6b1ab724636e0a16116278e339
-
-Note: checking out '10bc58289a7ebf6b1ab724636e0a16116278e339'.
-
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b new_branch_name
-
-HEAD is now at 10bc582... Merge pull request #390 from P33M/rpi-3.6.y
 
 
  Get DMA capable SPI master driver
 -----------------------------------
 
 => wget -O /home/pi/linux/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2013-10-31 21:34:24--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2013-11-18 16:36:04--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26638 (26K) [text/plain]
 Saving to: `/home/pi/linux/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  615K=0.04s
+     0K .......... .......... ......                          100%  660K=0.04s
 
-2013-10-31 21:34:25 (615 KB/s) - `/home/pi/linux/drivers/spi/spi-bcm2708.c' saved [26638/26638]
+2013-11-18 16:36:04 (660 KB/s) - `/home/pi/linux/drivers/spi/spi-bcm2708.c' saved [26638/26638]
 
 
 
  Apply kernel patches
 ----------------------
 
-=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/fbtft.patch
-Checking patch drivers/video/Kconfig...
-Checking patch drivers/video/Makefile...
-Applied patch drivers/video/Kconfig cleanly.
-Applied patch drivers/video/Makefile cleanly.
-
 => cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/bcm2708.patch
 Checking patch arch/arm/mach-bcm2708/bcm2708.c...
 Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
+
+=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/fbtft.patch
+Checking patch drivers/video/Kconfig...
+Hunk #1 succeeded at 2460 (offset -26 lines).
+Checking patch drivers/video/Makefile...
+Applied patch drivers/video/Kconfig cleanly.
+Applied patch drivers/video/Makefile cleanly.
 
 
  Get FBTFT
@@ -104,8 +90,8 @@ Already cloned
 Already up-to-date.
 
 #
-# End: init: Setup tools, firmware and kernel sources
-# Time: Thu Oct 31 21:34:26 2013
-# Elapsed: 0.33 min
+# End: init
+# Time: Mon Nov 18 16:36:06 2013
+# Elapsed: 0.14 min
 #
 

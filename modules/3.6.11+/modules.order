@@ -103,9 +103,12 @@ kernel/drivers/video/fbtft/fb_hx8340bn.ko
 kernel/drivers/video/fbtft/fb_hx8347d.ko
 kernel/drivers/video/fbtft/fb_ili9320.ko
 kernel/drivers/video/fbtft/fb_ili9325.ko
+kernel/drivers/video/fbtft/fb_ili9340.ko
 kernel/drivers/video/fbtft/fb_ili9341.ko
 kernel/drivers/video/fbtft/fb_pcd8544.ko
 kernel/drivers/video/fbtft/fb_ssd1289.ko
+kernel/drivers/video/fbtft/fb_ssd1306.ko
+kernel/drivers/video/fbtft/fb_ssd1331.ko
 kernel/drivers/video/fbtft/fb_ssd1351.ko
 kernel/drivers/video/fbtft/fb_st7735r.ko
 kernel/drivers/video/fbtft/fb_watterott.ko

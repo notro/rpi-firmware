@@ -1,7 +1,7 @@
 
 #
-# Begin: config: Configure kernel
-# Time: Thu Oct 31 21:34:27 2013
+# Begin: config
+# Time: Mon Nov 18 16:36:06 2013
 #
 
 
@@ -10,25 +10,10 @@
 ---------------
 
 => cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
-  CLEAN   .
-  CLEAN   arch/arm/kernel
-  CLEAN   drivers/tty/vt
-  CLEAN   drivers/video/logo
-  CLEAN   firmware
-  CLEAN   kernel/debug/kdb
-  CLEAN   kernel
-  CLEAN   lib/raid6
-  CLEAN   lib
-  CLEAN   arch/arm/boot/compressed
-  CLEAN   arch/arm/boot
-  CLEAN   .tmp_versions
   CLEAN   scripts/basic
-  CLEAN   scripts/genksyms
   CLEAN   scripts/kconfig
-  CLEAN   scripts/mod
-  CLEAN   scripts
-  CLEAN   include/config include/generated arch/arm/include/generated
-  CLEAN   .config .config.old .version include/linux/version.h Module.symvers
+  CLEAN   include/config
+  CLEAN   .config
 
 
  make bcmrpi_defconfig
@@ -63,17 +48,19 @@ scripts/kconfig/conf --oldconfig Kconfig
 * Support for small TFT LCD display modules
 *
 Support for small TFT LCD display modules (FB_TFT) [M/n/y] m
-  FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) #
+  FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9340 LCD Controller (FB_TFT_ILI9340) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1306 OLED Controller (FB_TFT_SSD1306) [N/m/?] (NEW)   FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) #
 # configuration written to .config
 #
 yes: standard output: Broken pipe
 yes: write error
 
 
- All console fonts as builtins
--------------------------------
+ All console fonts as builtins and rotation
+--------------------------------------------
 
 => cd /home/pi/linux && scripts/config --enable FONTS
+
+=> cd /home/pi/linux && scripts/config --enable FRAMEBUFFER_CONSOLE_ROTATION
 
 => cd /home/pi/linux && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
@@ -85,7 +72,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 *
 Framebuffer Console support (FRAMEBUFFER_CONSOLE) [Y/n/m/?] y
   Map the console to the primary display device (FRAMEBUFFER_CONSOLE_DETECT_PRIMARY) [N/y/?] n
-  Framebuffer Console Rotation (FRAMEBUFFER_CONSOLE_ROTATION) [N/y/?] n
+  Framebuffer Console Rotation (FRAMEBUFFER_CONSOLE_ROTATION) [Y/n/?] y
 Select compiled-in fonts (FONTS) [Y/n/?] y
   VGA 8x8 font (FONT_8x8) [Y/n/?] y
   VGA 8x16 font (FONT_8x16) [Y/?] y
@@ -261,8 +248,8 @@ scripts/kconfig/conf --oldconfig Kconfig
 #
 
 #
-# End: config: Configure kernel
-# Time: Thu Oct 31 21:35:13 2013
-# Elapsed: 0.77 min
+# End: config
+# Time: Mon Nov 18 16:36:53 2013
+# Elapsed: 0.78 min
 #
 

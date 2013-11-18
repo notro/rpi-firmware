@@ -100,3 +100,784 @@ Already up-to-date.
 # Elapsed: 0.75 min
 #
 
+
+#
+# Begin: extra: Various out-of-tree kernel modules
+# Time: Fri Nov  1 17:37:38 2013
+#
+
+
+
+ gpio_mouse_device, gpio_keys_device, ads7846_device
+-----------------------------------------------------
+
+git.clone('https://github.com/notro/fbtft_tools', '/home/pi/fbtft_tools', '')
+Already cloned
+
+=> cd /home/pi/fbtft_tools && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+  DEPMOD  3.10.17+
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+  DEPMOD  3.10.17+
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device modules
+  CC [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/ads7846_device/ads7846_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+  DEPMOD  3.10.17+
+
+
+ ServoBlaster kernel module for board revision 2
+-------------------------------------------------
+
+git.clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
+Already cloned
+
+=> cd /home/pi/PiBits && git checkout -- .
+
+=> cd /home/pi/PiBits && git pull
+Already up-to-date.
+
+=> sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel modules
+  CC [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/PiBits/ServoBlaster/kernel/servoblaster.mod.o
+  LD [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+  DEPMOD  3.10.17+
+
+
+ spi-config
+------------
+
+git.clone('https://github.com/msperl/spi-config', '/home/pi/spi-config', '')
+Already cloned
+
+=> cd /home/pi/spi-config && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config modules
+  CC [M]  /home/pi/spi-config/spi-config.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/spi-config/spi-config.mod.o
+  LD [M]  /home/pi/spi-config/spi-config.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/spi-config/spi-config.ko
+  DEPMOD  3.10.17+
+
+#
+# End: extra: Various out-of-tree kernel modules
+# Time: Fri Nov  1 17:38:19 2013
+# Elapsed: 0.69 min
+#
+
+
+#
+# Begin: extra
+# Time: Sun Nov  3 14:03:30 2013
+#
+
+
+#
+# End: extra
+# Time: Sun Nov  3 14:03:30 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Sun Nov  3 20:05:28 2013
+#
+
+
+#
+# End: extra
+# Time: Sun Nov  3 20:05:28 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Tue Nov  5 20:21:56 2013
+#
+
+
+#
+# End: extra
+# Time: Tue Nov  5 20:21:56 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Tue Nov  5 21:45:53 2013
+#
+
+
+#
+# End: extra
+# Time: Tue Nov  5 21:45:53 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Wed Nov  6 15:26:22 2013
+#
+
+
+#
+# End: extra
+# Time: Wed Nov  6 15:26:22 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov  7 14:19:33 2013
+#
+
+
+#
+# End: extra
+# Time: Thu Nov  7 14:19:33 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov  7 18:44:28 2013
+#
+
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159442	   7032	 224180	 390654	  5f5fe	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov  7 18:45:36 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    460 Bytes = 0.45 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 452 Bytes = 0.44 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov  7 18:45:36 2013
+# Elapsed: 1.14 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov  7 19:19:11 2013
+#
+
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159442	   7032	 224180	 390654	  5f5fe	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov  7 19:20:20 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    460 Bytes = 0.45 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 452 Bytes = 0.44 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov  7 19:20:20 2013
+# Elapsed: 1.14 min
+#
+
+
+#
+# Begin: extra
+# Time: Sat Nov  9 14:44:53 2013
+#
+
+
+#
+# End: extra
+# Time: Sat Nov  9 14:44:53 2013
+# Elapsed: 0.00 min
+#
+
+
+#
+# Begin: extra
+# Time: Sat Nov  9 17:20:25 2013
+#
+
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159442	   7032	 224180	 390654	  5f5fe	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Sat Nov  9 17:21:52 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Sat Nov  9 17:21:53 2013
+# Elapsed: 1.45 min
+#
+
+
+#
+# Begin: extra
+# Time: Sat Nov  9 20:54:42 2013
+#
+
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159442	   7032	 224180	 390654	  5f5fe	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Sat Nov  9 20:56:09 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Sat Nov  9 20:56:09 2013
+# Elapsed: 1.45 min
+#
+
+
+#
+# Begin: extra
+# Time: Sun Nov 10 16:07:59 2013
+#
+
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Sun Nov 10 16:09:32 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    460 Bytes = 0.45 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 452 Bytes = 0.44 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Sun Nov 10 16:09:32 2013
+# Elapsed: 1.55 min
+#
+
+
+#
+# Begin: extra
+# Time: Sun Nov 10 16:35:51 2013
+#
+
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Sun Nov 10 16:37:30 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    460 Bytes = 0.45 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 452 Bytes = 0.44 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Sun Nov 10 16:37:30 2013
+# Elapsed: 1.65 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 18:58:01 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 18:59:27 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 18:59:27 2013
+# Elapsed: 1.43 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 20:06:32 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 20:07:53 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 20:07:53 2013
+# Elapsed: 1.36 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 20:45:32 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 20:47:01 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 20:47:01 2013
+# Elapsed: 1.48 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 21:28:35 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 21:30:01 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 21:30:01 2013
+# Elapsed: 1.43 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 22:12:34 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 22:13:56 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 22:13:56 2013
+# Elapsed: 1.36 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 22:52:54 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 22:54:27 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 22:54:27 2013
+# Elapsed: 1.56 min
+#
+
+
+#
+# Begin: extra
+# Time: Thu Nov 14 23:24:47 2013
+#
+
+
+
+ U-Boot
+--------
+
+git.clone('git://git.denx.de/u-boot-arm.git', '/home/pi/u-boot-arm', '')
+Already cloned
+
+=> cd /home/pi/u-boot-arm && git pull
+Already up-to-date.
+
+=> cd /home/pi/u-boot-arm && CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- ./MAKEALL rpi_b
+Configuring for rpi_b board...
+   text	   data	    bss	    dec	    hex	filename
+ 159546	   7036	 224224	 390806	  5f696	./u-boot
+
+--------------------- SUMMARY ----------------------------
+Boards compiled: 1
+----------------------------------------------------------
+
+=> /home/pi/u-boot-arm/tools/mkimage -T script -d /home/pi/boot.scr /home/pi/boot.scr.uimg
+Image Name:   
+Created:      Thu Nov 14 23:26:15 2013
+Image Type:   PowerPC Linux Script (gzip compressed)
+Data Size:    864 Bytes = 0.84 kB = 0.00 MB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+   Image 0: 856 Bytes = 0.84 kB = 0.00 MB
+
+#
+# End: extra
+# Time: Thu Nov 14 23:26:15 2013
+# Elapsed: 1.47 min
+#
+
+
+#
+# Begin: extra
+# Time: Mon Nov 18 17:54:41 2013
+#
+
+
+
+ gpio_mouse_device, gpio_keys_device, ads7846_device
+-----------------------------------------------------
+
+git.clone('https://github.com/notro/fbtft_tools', '/home/pi/fbtft_tools', '')
+Already cloned
+
+=> cd /home/pi/fbtft_tools && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+  DEPMOD  3.6.11+
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+  DEPMOD  3.6.11+
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device modules
+  CC [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/ads7846_device/ads7846_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+  DEPMOD  3.6.11+
+
+
+ ServoBlaster kernel module for board revision 2
+-------------------------------------------------
+
+git.clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
+Already cloned
+
+=> cd /home/pi/PiBits && git checkout -- .
+
+=> cd /home/pi/PiBits && git pull
+Already up-to-date.
+
+=> sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel modules
+  CC [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/PiBits/ServoBlaster/kernel/servoblaster.mod.o
+  LD [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+  DEPMOD  3.6.11+
+
+
+ spi-config
+------------
+
+git.clone('https://github.com/msperl/spi-config', '/home/pi/spi-config', '')
+Already cloned
+
+=> cd /home/pi/spi-config && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config modules
+  CC [M]  /home/pi/spi-config/spi-config.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/spi-config/spi-config.mod.o
+  LD [M]  /home/pi/spi-config/spi-config.ko
+
+=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/spi-config/spi-config.ko
+  DEPMOD  3.6.11+
+
+#
+# End: extra
+# Time: Mon Nov 18 17:55:31 2013
+# Elapsed: 0.84 min
+#
+
