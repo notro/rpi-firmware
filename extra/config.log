@@ -1,7 +1,7 @@
 
 #
-# Begin: config: Configure kernel
-# Time: Fri Nov  1 16:25:42 2013
+# Begin: config
+# Time: Tue Nov 19 19:32:14 2013
 #
 
 
@@ -9,17 +9,33 @@
  make mrproper
 ---------------
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
+  CLEAN   .
+  CLEAN   arch/arm/kernel
+  CLEAN   drivers/tty/vt
+  CLEAN   drivers/video/logo
+  CLEAN   firmware
+  CLEAN   kernel/debug/kdb
+  CLEAN   kernel
+  CLEAN   lib/raid6
+  CLEAN   lib
+  CLEAN   usr
+  CLEAN   arch/arm/boot/compressed
+  CLEAN   arch/arm/boot
+  CLEAN   .tmp_versions
   CLEAN   scripts/basic
+  CLEAN   scripts/genksyms
   CLEAN   scripts/kconfig
-  CLEAN   include/config
-  CLEAN   .config
+  CLEAN   scripts/mod
+  CLEAN   scripts
+  CLEAN   include/config include/generated arch/arm/include/generated
+  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
 
 
  make bcmrpi_defconfig
 -----------------------
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make bcmrpi_defconfig
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make bcmrpi_defconfig
   HOSTCC  scripts/basic/fixdep
   HOSTCC  scripts/kconfig/conf.o
   SHIPPED scripts/kconfig/zconf.tab.c
@@ -31,15 +47,15 @@
 # configuration written to .config
 #
 
-=> cp -a /home/pi/linux/.config /home/pi/linux/.config.standard
+=> cp -a /home/pi/linux-rpi-3.10.y/.config /home/pi/linux-rpi-3.10.y/.config.standard
 
 
  All FBTFT modules as loadable modules
 ---------------------------------------
 
-=> cd /home/pi/linux && scripts/config --module FB_TFT
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module FB_TFT
 
-=> cd /home/pi/linux && yes m | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes m | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -52,9 +68,12 @@ Support for small TFT LCD display modules (FB_TFT) [M/n/y] m
   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW) 
   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW) 
   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW) 
+  FB driver for the ILI9340 LCD Controller (FB_TFT_ILI9340) [N/m/?] (NEW) 
   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW) 
   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW) 
   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW) 
+  FB driver for the SSD1306 OLED Controller (FB_TFT_SSD1306) [N/m/?] (NEW) 
+  FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/?] (NEW) 
   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW) 
   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW) 
   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW) 
@@ -67,12 +86,14 @@ yes: standard output: Broken pipe
 yes: write error
 
 
- All console fonts as builtins
--------------------------------
+ All console fonts as builtins and rotation
+--------------------------------------------
 
-=> cd /home/pi/linux && scripts/config --enable FONTS
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable FONTS
 
-=> cd /home/pi/linux && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable FRAMEBUFFER_CONSOLE_ROTATION
+
+=> cd /home/pi/linux-rpi-3.10.y && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -82,7 +103,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 *
 Framebuffer Console support (FRAMEBUFFER_CONSOLE) [Y/n/m/?] y
   Map the console to the primary display device (FRAMEBUFFER_CONSOLE_DETECT_PRIMARY) [N/y/?] n
-  Framebuffer Console Rotation (FRAMEBUFFER_CONSOLE_ROTATION) [N/y/?] n
+  Framebuffer Console Rotation (FRAMEBUFFER_CONSOLE_ROTATION) [Y/n/?] y
 Select compiled-in fonts (FONTS) [Y/n/?] y
   VGA 8x8 font (FONT_8x8) [Y/n/?] y
   VGA 8x16 font (FONT_8x16) [Y/n/?] y
@@ -104,13 +125,13 @@ yes: write error
  Touchscreen, mouse and keyboard subsystem support
 ---------------------------------------------------
 
-=> cd /home/pi/linux && scripts/config --enable INPUT_TOUCHSCREEN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable INPUT_TOUCHSCREEN
 
-=> cd /home/pi/linux && scripts/config --enable INPUT_MOUSE
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable INPUT_MOUSE
 
-=> cd /home/pi/linux && scripts/config --enable INPUT_KEYBOARD
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable INPUT_KEYBOARD
 
-=> cd /home/pi/linux && yes n | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes n | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -205,15 +226,15 @@ yes: write error
  TOUCHSCREEN_ADS7846, MOUSE_GPIO, KEYBOARD_GPIO, KEYBOARD_GPIO_POLLED
 ----------------------------------------------------------------------
 
-=> cd /home/pi/linux && scripts/config --module TOUCHSCREEN_ADS7846
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module TOUCHSCREEN_ADS7846
 
-=> cd /home/pi/linux && scripts/config --module MOUSE_GPIO
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module MOUSE_GPIO
 
-=> cd /home/pi/linux && scripts/config --module KEYBOARD_GPIO
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module KEYBOARD_GPIO
 
-=> cd /home/pi/linux && scripts/config --module KEYBOARD_GPIO_POLLED
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module KEYBOARD_GPIO_POLLED
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 #
 # configuration written to .config
@@ -223,9 +244,9 @@ scripts/kconfig/conf --oldconfig Kconfig
  CAN bus
 ---------
 
-=> cd /home/pi/linux && scripts/config --enable CONFIG_CAN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable CONFIG_CAN
 
-=> cd /home/pi/linux && yes "" | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes "" | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -338,25 +359,25 @@ CAN bus subsystem support (CAN) [Y/n/m/?] y
 yes: standard output: Broken pipe
 yes: write error
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_RAW
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_RAW
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_BCM
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_BCM
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_VCAN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_VCAN
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_SLCAN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_SLCAN
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_MCP251X
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_MCP251X
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 #
 # configuration written to .config
 #
 
 #
-# End: config: Configure kernel
-# Time: Fri Nov  1 16:26:23 2013
-# Elapsed: 0.68 min
+# End: config
+# Time: Tue Nov 19 19:33:08 2013
+# Elapsed: 0.90 min
 #
 

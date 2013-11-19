@@ -1,7 +1,7 @@
 
 #
-# Begin: modules_install: Install kernel modules
-# Time: Fri Nov  1 17:37:11 2013
+# Begin: modules_install
+# Time: Tue Nov 19 20:00:13 2013
 #
 
 
@@ -9,24 +9,39 @@
 
 => mkdir -p /home/pi/modules
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL arch/arm/crypto/aes-arm.ko
+  INSTALL arch/arm/crypto/sha1-arm.ko
   INSTALL arch/arm/oprofile/oprofile.ko
   INSTALL crypto/arc4.ko
+  INSTALL crypto/async_tx/async_memcpy.ko
+  INSTALL crypto/async_tx/async_pq.ko
+  INSTALL crypto/async_tx/async_raid6_recov.ko
+  INSTALL crypto/async_tx/async_tx.ko
+  INSTALL crypto/async_tx/async_xor.ko
   INSTALL crypto/authenc.ko
   INSTALL crypto/authencesn.ko
   INSTALL crypto/cast5_generic.ko
   INSTALL crypto/cast_common.ko
+  INSTALL crypto/cryptd.ko
+  INSTALL crypto/crypto_null.ko
+  INSTALL crypto/crypto_user.ko
   INSTALL crypto/deflate.ko
   INSTALL crypto/ecb.ko
+  INSTALL crypto/gf128mul.ko
+  INSTALL crypto/hmac.ko
   INSTALL crypto/md4.ko
+  INSTALL crypto/md5.ko
   INSTALL crypto/michael_mic.ko
   INSTALL crypto/seqiv.ko
+  INSTALL crypto/sha1_generic.ko
   INSTALL crypto/sha256_generic.ko
   INSTALL crypto/sha512_generic.ko
   INSTALL crypto/tgr192.ko
   INSTALL crypto/wp512.ko
   INSTALL crypto/xcbc.ko
   INSTALL crypto/xor.ko
+  INSTALL crypto/xts.ko
   INSTALL drivers/block/cryptoloop.ko
   INSTALL drivers/block/drbd/drbd.ko
   INSTALL drivers/block/nbd.ko
@@ -41,6 +56,8 @@
   INSTALL drivers/bluetooth/btwilink.ko
   INSTALL drivers/bluetooth/hci_vhci.ko
   INSTALL drivers/cdrom/cdrom.ko
+  INSTALL drivers/char/hw_random/bcm2708-rng.ko
+  INSTALL drivers/connector/cn.ko
   INSTALL drivers/cpufreq/cpufreq_stats.ko
   INSTALL drivers/hid/hid-a4tech.ko
   INSTALL drivers/hid/hid-apple.ko
@@ -101,6 +118,9 @@
   INSTALL drivers/i2c/busses/i2c-bcm2708.ko
   INSTALL drivers/i2c/i2c-dev.ko
   INSTALL drivers/input/evdev.ko
+  INSTALL drivers/input/gameport/gameport.ko
+  INSTALL drivers/input/gameport/lightning.ko
+  INSTALL drivers/input/gameport/ns558.ko
   INSTALL drivers/input/input-polldev.ko
   INSTALL drivers/input/joydev.ko
   INSTALL drivers/input/joystick/iforce/iforce.ko
@@ -121,13 +141,30 @@
   INSTALL drivers/input/misc/uinput.ko
   INSTALL drivers/input/misc/yealink.ko
   INSTALL drivers/input/mouse/gpio_mouse.ko
+  INSTALL drivers/input/serio/serio.ko
+  INSTALL drivers/input/serio/serio_raw.ko
+  INSTALL drivers/input/serio/serport.ko
   INSTALL drivers/input/touchscreen/ads7846.ko
   INSTALL drivers/leds/led-class.ko
   INSTALL drivers/leds/leds-gpio.ko
   INSTALL drivers/leds/trigger/ledtrig-camera.ko
   INSTALL drivers/leds/trigger/ledtrig-transient.ko
   INSTALL drivers/md/dm-crypt.ko
+  INSTALL drivers/md/dm-delay.ko
+  INSTALL drivers/md/dm-log-userspace.ko
+  INSTALL drivers/md/dm-log.ko
+  INSTALL drivers/md/dm-mirror.ko
   INSTALL drivers/md/dm-mod.ko
+  INSTALL drivers/md/dm-raid.ko
+  INSTALL drivers/md/dm-region-hash.ko
+  INSTALL drivers/md/dm-snapshot.ko
+  INSTALL drivers/md/dm-zero.ko
+  INSTALL drivers/md/linear.ko
+  INSTALL drivers/md/md-mod.ko
+  INSTALL drivers/md/raid0.ko
+  INSTALL drivers/md/raid1.ko
+  INSTALL drivers/md/raid10.ko
+  INSTALL drivers/md/raid456.ko
   INSTALL drivers/media/common/b2c2/b2c2-flexcop.ko
   INSTALL drivers/media/common/cx2341x.ko
   INSTALL drivers/media/common/cypress_firmware.ko
@@ -221,8 +258,11 @@
   INSTALL drivers/media/radio/radio-mr800.ko
   INSTALL drivers/media/radio/radio-shark.ko
   INSTALL drivers/media/radio/radio-si4713.ko
+  INSTALL drivers/media/radio/radio-tea5764.ko
+  INSTALL drivers/media/radio/radio-wl1273.ko
   INSTALL drivers/media/radio/saa7706h.ko
   INSTALL drivers/media/radio/shark2.ko
+  INSTALL drivers/media/radio/si470x/radio-i2c-si470x.ko
   INSTALL drivers/media/radio/si470x/radio-usb-si470x.ko
   INSTALL drivers/media/radio/si4713-i2c.ko
   INSTALL drivers/media/radio/tef6862.ko
@@ -499,8 +539,12 @@
   INSTALL drivers/media/v4l2-core/videobuf2-memops.ko
   INSTALL drivers/media/v4l2-core/videobuf2-vmalloc.ko
   INSTALL drivers/media/v4l2-core/videodev.ko
+  INSTALL drivers/mfd/mfd-core.ko
+  INSTALL drivers/mfd/wl1273-core.ko
   INSTALL drivers/misc/eeprom/eeprom_93cx6.ko
   INSTALL drivers/misc/ti-st/st_drv.ko
+  INSTALL drivers/mmc/host/mmc_spi.ko
+  INSTALL drivers/net/bonding/bonding.ko
   INSTALL drivers/net/can/mcp251x.ko
   INSTALL drivers/net/can/slcan.ko
   INSTALL drivers/net/can/vcan.ko
@@ -520,13 +564,17 @@
   INSTALL drivers/net/irda/mcs7780.ko
   INSTALL drivers/net/irda/sir-dev.ko
   INSTALL drivers/net/irda/stir4200.ko
+  INSTALL drivers/net/macvlan.ko
   INSTALL drivers/net/netconsole.ko
   INSTALL drivers/net/phy/mdio-bitbang.ko
   INSTALL drivers/net/ppp/bsd_comp.ko
   INSTALL drivers/net/ppp/ppp_async.ko
   INSTALL drivers/net/ppp/ppp_deflate.ko
   INSTALL drivers/net/ppp/ppp_generic.ko
+  INSTALL drivers/net/ppp/ppp_mppe.ko
   INSTALL drivers/net/ppp/ppp_synctty.ko
+  INSTALL drivers/net/ppp/pppoe.ko
+  INSTALL drivers/net/ppp/pppox.ko
   INSTALL drivers/net/slip/slhc.ko
   INSTALL drivers/net/slip/slip.ko
   INSTALL drivers/net/tun.ko
@@ -535,6 +583,7 @@
   INSTALL drivers/net/usb/cdc_eem.ko
   INSTALL drivers/net/usb/cdc_ether.ko
   INSTALL drivers/net/usb/cdc_mbim.ko
+  INSTALL drivers/net/usb/cdc_ncm.ko
   INSTALL drivers/net/usb/cdc_subset.ko
   INSTALL drivers/net/usb/cx82310_eth.ko
   INSTALL drivers/net/usb/dm9601.ko
@@ -623,12 +672,27 @@
   INSTALL drivers/rtc/rtc-rx8581.ko
   INSTALL drivers/rtc/rtc-s35390a.ko
   INSTALL drivers/rtc/rtc-x1205.ko
-  INSTALL drivers/scsi/sd_mod.ko
+  INSTALL drivers/scsi/iscsi_boot_sysfs.ko
+  INSTALL drivers/scsi/iscsi_tcp.ko
+  INSTALL drivers/scsi/libiscsi.ko
+  INSTALL drivers/scsi/libiscsi_tcp.ko
+  INSTALL drivers/scsi/osst.ko
   INSTALL drivers/scsi/sr_mod.ko
+  INSTALL drivers/scsi/st.ko
   INSTALL drivers/spi/spi-bcm2708.ko
-  INSTALL drivers/spi/spidev.ko
   INSTALL drivers/ssb/ssb.ko
+  INSTALL drivers/staging/media/as102/dvb-as102.ko
+  INSTALL drivers/staging/media/lirc/lirc_igorplugusb.ko
+  INSTALL drivers/staging/media/lirc/lirc_imon.ko
   INSTALL drivers/staging/media/lirc/lirc_rpi.ko
+  INSTALL drivers/staging/media/lirc/lirc_sasem.ko
+  INSTALL drivers/staging/media/lirc/lirc_serial.ko
+  INSTALL drivers/staging/rtl8712/r8712u.ko
+  INSTALL drivers/staging/speakup/speakup.ko
+  INSTALL drivers/staging/speakup/speakup_soft.ko
+  INSTALL drivers/staging/vt6656/vt6656_stage.ko
+  INSTALL drivers/staging/winbond/w35und.ko
+  INSTALL drivers/staging/wlan-ng/prism2_usb.ko
   INSTALL drivers/uio/uio.ko
   INSTALL drivers/uio/uio_pdrv.ko
   INSTALL drivers/uio/uio_pdrv_genirq.ko
@@ -726,16 +790,18 @@
   INSTALL drivers/usb/storage/ums-sddr09.ko
   INSTALL drivers/usb/storage/ums-sddr55.ko
   INSTALL drivers/usb/storage/ums-usbat.ko
-  INSTALL drivers/video/backlight/generic_bl.ko
   INSTALL drivers/video/backlight/lcd.ko
   INSTALL drivers/video/fb_sys_fops.ko
   INSTALL drivers/video/fbtft/fb_hx8340bn.ko
   INSTALL drivers/video/fbtft/fb_hx8347d.ko
   INSTALL drivers/video/fbtft/fb_ili9320.ko
   INSTALL drivers/video/fbtft/fb_ili9325.ko
+  INSTALL drivers/video/fbtft/fb_ili9340.ko
   INSTALL drivers/video/fbtft/fb_ili9341.ko
   INSTALL drivers/video/fbtft/fb_pcd8544.ko
   INSTALL drivers/video/fbtft/fb_ssd1289.ko
+  INSTALL drivers/video/fbtft/fb_ssd1306.ko
+  INSTALL drivers/video/fbtft/fb_ssd1331.ko
   INSTALL drivers/video/fbtft/fb_ssd1351.ko
   INSTALL drivers/video/fbtft/fb_st7735r.ko
   INSTALL drivers/video/fbtft/fb_watterott.ko
@@ -768,9 +834,12 @@
   INSTALL fs/btrfs/btrfs.ko
   INSTALL fs/cifs/cifs.ko
   INSTALL fs/dlm/dlm.ko
+  INSTALL fs/ecryptfs/ecryptfs.ko
   INSTALL fs/fuse/cuse.ko
   INSTALL fs/fuse/fuse.ko
   INSTALL fs/gfs2/gfs2.ko
+  INSTALL fs/hfs/hfs.ko
+  INSTALL fs/hfsplus/hfsplus.ko
   INSTALL fs/isofs/isofs.ko
   INSTALL fs/jfs/jfs.ko
   INSTALL fs/nfsd/nfsd.ko
@@ -829,6 +898,7 @@
   INSTALL fs/udf/udf.ko
   INSTALL fs/xfs/xfs.ko
   INSTALL lib/crc-ccitt.ko
+  INSTALL lib/crc7.ko
   INSTALL lib/lru_cache.ko
   INSTALL lib/lzo/lzo_compress.ko
   INSTALL lib/lzo/lzo_decompress.ko
@@ -879,10 +949,13 @@
   INSTALL net/core/pktgen.ko
   INSTALL net/ipv4/ah4.ko
   INSTALL net/ipv4/esp4.ko
+  INSTALL net/ipv4/gre.ko
   INSTALL net/ipv4/inet_diag.ko
   INSTALL net/ipv4/inet_lro.ko
+  INSTALL net/ipv4/ip_gre.ko
   INSTALL net/ipv4/ip_tunnel.ko
   INSTALL net/ipv4/ipcomp.ko
+  INSTALL net/ipv4/ipip.ko
   INSTALL net/ipv4/netfilter/arp_tables.ko
   INSTALL net/ipv4/netfilter/arpt_mangle.ko
   INSTALL net/ipv4/netfilter/arptable_filter.ko
@@ -944,6 +1017,7 @@
   INSTALL net/irda/irnet/irnet.ko
   INSTALL net/key/af_key.ko
   INSTALL net/l2tp/l2tp_core.ko
+  INSTALL net/l2tp/l2tp_ppp.ko
   INSTALL net/llc/llc.ko
   INSTALL net/mac80211/mac80211.ko
   INSTALL net/netfilter/ipset/ip_set.ko
@@ -1042,6 +1116,7 @@
   INSTALL net/netfilter/xt_helper.ko
   INSTALL net/netfilter/xt_hl.ko
   INSTALL net/netfilter/xt_iprange.ko
+  INSTALL net/netfilter/xt_ipvs.ko
   INSTALL net/netfilter/xt_length.ko
   INSTALL net/netfilter/xt_limit.ko
   INSTALL net/netfilter/xt_mac.ko
@@ -1194,11 +1269,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.17+
+  DEPMOD  3.10.19+
 
 #
-# End: modules_install: Install kernel modules
-# Time: Fri Nov  1 17:37:37 2013
-# Elapsed: 0.43 min
+# End: modules_install
+# Time: Tue Nov 19 20:00:27 2013
+# Elapsed: 0.25 min
 #
 
