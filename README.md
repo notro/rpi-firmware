@@ -27,21 +27,20 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/10bc58289a7ebf6b1ab724636e0a16116278e339
+https://github.com/raspberrypi/linux/tree/5ebf1db80e2c03e92d570605b53f91a06112574f
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
-https://github.com/notro/fbtft.git/tree/63282b8cd35480936df842bc465722a326d5229c
+https://github.com/notro/fbtft.git/tree/6938e0049b728b02276f552592fc9b0ebda7c5ff
 * Various SPI device adding modules  
 https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/ab34d81e536c601295b79e00c6842b393947c894
+https://github.com/richardghirst/PiBits/tree/1b78f9ad6bb826dbce97b55862e06db8d4aea7f4
 * spi-config: SPI device adding module  
 https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea87
 
 
 ### Kernel patches
-* [bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/master/bcm2708.patch)
 * [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/master/fbtft.patch)
 
 
@@ -59,6 +58,7 @@ CONFIG_CAN=y
 CONFIG_CAN_BCM=m
 CONFIG_CAN_CALC_BITTIMING=y
 CONFIG_CAN_DEV=y
+CONFIG_CAN_GW=y
 CONFIG_CAN_MCP251X=m
 CONFIG_CAN_RAW=m
 CONFIG_CAN_SLCAN=m
@@ -79,6 +79,7 @@ CONFIG_FB_TFT_ILI9325=m
 CONFIG_FB_TFT_ILI9340=m
 CONFIG_FB_TFT_ILI9341=m
 CONFIG_FB_TFT_PCD8544=m
+CONFIG_FB_TFT_S6D1121=m
 CONFIG_FB_TFT_SSD1289=m
 CONFIG_FB_TFT_SSD1306=m
 CONFIG_FB_TFT_SSD1331=m

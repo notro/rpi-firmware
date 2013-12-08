@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Mon Nov 18 16:35:57 2013
+# Time: Sun Dec  8 17:23:32 2013
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-b38194cf997f4ee291e1c77c914911752f40af65	refs/heads/master
+288684fa47f2c3d4721df9da45e0eacf08aa7992	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -33,48 +33,43 @@ Already up-to-date.
  Get kernel source
 -------------------
 
-git.clone('https://github.com/raspberrypi/linux', '/home/pi/linux', 'rpi-3.6.y')
+git.clone('https://github.com/raspberrypi/linux', '/home/pi/linux-rpi-3.10.y', 'rpi-3.10.y')
 Already cloned
 
-=> cd /home/pi/linux && git checkout -- .
+=> cd /home/pi/linux-rpi-3.10.y && git checkout -- .
 
-=> cd /home/pi/linux && git clean -fd
+=> cd /home/pi/linux-rpi-3.10.y && git clean -fd
 Removing drivers/video/fbtft/
 
-=> cd /home/pi/linux && git checkout rpi-3.6.y
-Already on 'rpi-3.6.y'
+=> cd /home/pi/linux-rpi-3.10.y && git checkout rpi-3.10.y
+Already on 'rpi-3.10.y'
 
-=> cd /home/pi/linux && git pull
+=> cd /home/pi/linux-rpi-3.10.y && git pull
 Already up-to-date.
 
 
  Get DMA capable SPI master driver
 -----------------------------------
 
-=> wget -O /home/pi/linux/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2013-11-18 16:36:04--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+=> wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2013-12-08 17:23:53--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26638 (26K) [text/plain]
-Saving to: `/home/pi/linux/drivers/spi/spi-bcm2708.c'
+Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  660K=0.04s
+     0K .......... .......... ......                          100%  677K=0.04s
 
-2013-11-18 16:36:04 (660 KB/s) - `/home/pi/linux/drivers/spi/spi-bcm2708.c' saved [26638/26638]
+2013-12-08 17:23:54 (677 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26638/26638]
 
 
 
  Apply kernel patches
 ----------------------
 
-=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/bcm2708.patch
-Checking patch arch/arm/mach-bcm2708/bcm2708.c...
-Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
-
-=> cd /home/pi/linux && git apply -v /home/pi/rpi-build/patches/master/fbtft.patch
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/master/fbtft.patch
 Checking patch drivers/video/Kconfig...
-Hunk #1 succeeded at 2460 (offset -26 lines).
 Checking patch drivers/video/Makefile...
 Applied patch drivers/video/Kconfig cleanly.
 Applied patch drivers/video/Makefile cleanly.
@@ -83,15 +78,15 @@ Applied patch drivers/video/Makefile cleanly.
  Get FBTFT
 -----------
 
-git.clone('https://github.com/notro/fbtft.git', '/home/pi/linux/drivers/video/fbtft', '')
+git.clone('https://github.com/notro/fbtft.git', '/home/pi/linux-rpi-3.10.y/drivers/video/fbtft', '')
 Already cloned
 
-=> cd /home/pi/linux/drivers/video/fbtft && git pull
+=> cd /home/pi/linux-rpi-3.10.y/drivers/video/fbtft && git pull
 Already up-to-date.
 
 #
 # End: init
-# Time: Mon Nov 18 16:36:06 2013
-# Elapsed: 0.14 min
+# Time: Sun Dec  8 17:23:55 2013
+# Elapsed: 0.38 min
 #
 

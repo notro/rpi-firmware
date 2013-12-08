@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Mon Nov 18 16:36:06 2013
+# Time: Sun Dec  8 17:23:55 2013
 #
 
 
@@ -9,17 +9,33 @@
  make mrproper
 ---------------
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
+  CLEAN   .
+  CLEAN   arch/arm/kernel
+  CLEAN   drivers/tty/vt
+  CLEAN   drivers/video/logo
+  CLEAN   firmware
+  CLEAN   kernel/debug/kdb
+  CLEAN   kernel
+  CLEAN   lib/raid6
+  CLEAN   lib
+  CLEAN   usr
+  CLEAN   arch/arm/boot/compressed
+  CLEAN   arch/arm/boot
+  CLEAN   .tmp_versions
   CLEAN   scripts/basic
+  CLEAN   scripts/genksyms
   CLEAN   scripts/kconfig
-  CLEAN   include/config
-  CLEAN   .config
+  CLEAN   scripts/mod
+  CLEAN   scripts
+  CLEAN   include/config include/generated arch/arm/include/generated
+  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
 
 
  make bcmrpi_defconfig
 -----------------------
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make bcmrpi_defconfig
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make bcmrpi_defconfig
   HOSTCC  scripts/basic/fixdep
   HOSTCC  scripts/kconfig/conf.o
   SHIPPED scripts/kconfig/zconf.tab.c
@@ -31,15 +47,15 @@
 # configuration written to .config
 #
 
-=> cp -a /home/pi/linux/.config /home/pi/linux/.config.standard
+=> cp -a /home/pi/linux-rpi-3.10.y/.config /home/pi/linux-rpi-3.10.y/.config.standard
 
 
  All FBTFT modules as loadable modules
 ---------------------------------------
 
-=> cd /home/pi/linux && scripts/config --module FB_TFT
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module FB_TFT
 
-=> cd /home/pi/linux && yes m | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes m | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -48,7 +64,23 @@ scripts/kconfig/conf --oldconfig Kconfig
 * Support for small TFT LCD display modules
 *
 Support for small TFT LCD display modules (FB_TFT) [M/n/y] m
-  FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW)   FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW)   FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW)   FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW)   FB driver for the ILI9340 LCD Controller (FB_TFT_ILI9340) [N/m/?] (NEW)   FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW)   FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW)   FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW)   FB driver for the SSD1306 OLED Controller (FB_TFT_SSD1306) [N/m/?] (NEW)   FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/?] (NEW)   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW)   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW)   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW)   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW)   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) #
+  FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW) 
+  FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW) 
+  FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW) 
+  FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW) 
+  FB driver for the ILI9340 LCD Controller (FB_TFT_ILI9340) [N/m/?] (NEW) 
+  FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW) 
+  FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW) 
+  FB driver for the S6D1211 LCD Controller (FB_TFT_S6D1121) [N/m/?] (NEW) 
+  FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW) 
+  FB driver for the SSD1306 OLED Controller (FB_TFT_SSD1306) [N/m/?] (NEW) 
+  FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/?] (NEW) 
+  FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW) 
+  FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW) 
+  FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW) 
+  Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW) 
+  Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) 
+#
 # configuration written to .config
 #
 yes: standard output: Broken pipe
@@ -58,11 +90,11 @@ yes: write error
  All console fonts as builtins and rotation
 --------------------------------------------
 
-=> cd /home/pi/linux && scripts/config --enable FONTS
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable FONTS
 
-=> cd /home/pi/linux && scripts/config --enable FRAMEBUFFER_CONSOLE_ROTATION
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable FRAMEBUFFER_CONSOLE_ROTATION
 
-=> cd /home/pi/linux && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -75,8 +107,16 @@ Framebuffer Console support (FRAMEBUFFER_CONSOLE) [Y/n/m/?] y
   Framebuffer Console Rotation (FRAMEBUFFER_CONSOLE_ROTATION) [Y/n/?] y
 Select compiled-in fonts (FONTS) [Y/n/?] y
   VGA 8x8 font (FONT_8x8) [Y/n/?] y
-  VGA 8x16 font (FONT_8x16) [Y/?] y
-  Mac console 6x11 font (not supported by all drivers) (FONT_6x11) [N/y/?] (NEW)   console 7x14 font (not supported by all drivers) (FONT_7x14) [N/y/?] (NEW)   Pearl (old m68k) console 8x8 font (FONT_PEARL_8x8) [N/y/?] (NEW)   Acorn console 8x8 font (FONT_ACORN_8x8) [N/y/?] (NEW)   Mini 4x6 font (FONT_MINI_4x6) [N/y] (NEW) Sparc console 8x16 font (FONT_SUN8x16) [N/y/?] (NEW) Sparc console 12x22 font (not supported by all drivers) (FONT_SUN12x22) [N/y/?] (NEW) console 10x18 font (not supported by all drivers) (FONT_10x18) [N/y/?] (NEW) #
+  VGA 8x16 font (FONT_8x16) [Y/n/?] y
+  Mac console 6x11 font (not supported by all drivers) (FONT_6x11) [N/y/?] (NEW) 
+  console 7x14 font (not supported by all drivers) (FONT_7x14) [N/y/?] (NEW) 
+  Pearl (old m68k) console 8x8 font (FONT_PEARL_8x8) [N/y/?] (NEW) 
+  Acorn console 8x8 font (FONT_ACORN_8x8) [N/y/?] (NEW) 
+  Mini 4x6 font (FONT_MINI_4x6) [N/y] (NEW) 
+Sparc console 8x16 font (FONT_SUN8x16) [N/y/?] (NEW) 
+Sparc console 12x22 font (not supported by all drivers) (FONT_SUN12x22) [N/y/?] (NEW) 
+console 10x18 font (not supported by all drivers) (FONT_10x18) [N/y/?] (NEW) 
+#
 # configuration written to .config
 #
 yes: standard output: Broken pipe
@@ -86,13 +126,13 @@ yes: write error
  Touchscreen, mouse and keyboard subsystem support
 ---------------------------------------------------
 
-=> cd /home/pi/linux && scripts/config --enable INPUT_TOUCHSCREEN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable INPUT_TOUCHSCREEN
 
-=> cd /home/pi/linux && scripts/config --enable INPUT_MOUSE
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable INPUT_MOUSE
 
-=> cd /home/pi/linux && scripts/config --enable INPUT_KEYBOARD
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable INPUT_KEYBOARD
 
-=> cd /home/pi/linux && yes n | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes n | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -101,15 +141,83 @@ scripts/kconfig/conf --oldconfig Kconfig
 * Keyboards
 *
 Keyboards (INPUT_KEYBOARD) [Y/n/?] y
-  ADP5588/87 I2C QWERTY Keypad and IO Expander (KEYBOARD_ADP5588) [N/m/y/?] (NEW)   ADP5585/ADP5589 I2C QWERTY Keypad and IO Expander (KEYBOARD_ADP5589) [N/m/y/?] (NEW)   AT keyboard (KEYBOARD_ATKBD) [Y/n/m/?] (NEW)   Atmel AT42QT1070 Touch Sensor Chip (KEYBOARD_QT1070) [N/m/y/?] (NEW)   Atmel AT42QT2160 Touch Sensor Chip (KEYBOARD_QT2160) [N/m/y/?] (NEW)   DECstation/VAXstation LK201/LK401 keyboard (KEYBOARD_LKKBD) [N/m/y/?] (NEW)   GPIO Buttons (KEYBOARD_GPIO) [N/m/y/?] (NEW)   Polled GPIO buttons (KEYBOARD_GPIO_POLLED) [N/m/y/?] (NEW)   TCA6416/TCA6408A Keypad Support (KEYBOARD_TCA6416) [N/m/y/?] (NEW)   TCA8418 Keypad Support (KEYBOARD_TCA8418) [N/m/y/?] (NEW)   GPIO driven matrix keypad support (KEYBOARD_MATRIX) [N/m/y/?] (NEW)   LM8323 keypad chip (KEYBOARD_LM8323) [N/m/?] (NEW)   LM8333 keypad chip (KEYBOARD_LM8333) [N/m/y/?] (NEW)   Maxim MAX7359 Key Switch Controller (KEYBOARD_MAX7359) [N/m/y/?] (NEW)   MELFAS MCS Touchkey (KEYBOARD_MCS) [N/m/y/?] (NEW)   Freescale MPR121 Touchkey (KEYBOARD_MPR121) [N/m/y/?] (NEW)   Newton keyboard (KEYBOARD_NEWTON) [N/m/y/?] (NEW)   OpenCores Keyboard Controller (KEYBOARD_OPENCORES) [N/m/y/?] (NEW)   Samsung keypad support (KEYBOARD_SAMSUNG) [N/m/y/?] (NEW)   Stowaway keyboard (KEYBOARD_STOWAWAY) [N/m/y/?] (NEW)   Sun Type 4 and Type 5 keyboard (KEYBOARD_SUNKBD) [N/m/y/?] (NEW)   TI OMAP4+ keypad support (KEYBOARD_OMAP4) [N/m/y/?] (NEW)   XT keyboard (KEYBOARD_XTKBD) [N/m/y/?] (NEW) *
+  ADP5588/87 I2C QWERTY Keypad and IO Expander (KEYBOARD_ADP5588) [N/m/y/?] (NEW) 
+  ADP5585/ADP5589 I2C QWERTY Keypad and IO Expander (KEYBOARD_ADP5589) [N/m/y/?] (NEW) 
+  AT keyboard (KEYBOARD_ATKBD) [Y/n/m/?] (NEW) 
+  Atmel AT42QT1070 Touch Sensor Chip (KEYBOARD_QT1070) [N/m/y/?] (NEW) 
+  Atmel AT42QT2160 Touch Sensor Chip (KEYBOARD_QT2160) [N/m/y/?] (NEW) 
+  DECstation/VAXstation LK201/LK401 keyboard (KEYBOARD_LKKBD) [N/m/y/?] (NEW) 
+  GPIO Buttons (KEYBOARD_GPIO) [N/m/y/?] (NEW) 
+  Polled GPIO buttons (KEYBOARD_GPIO_POLLED) [N/m/y/?] (NEW) 
+  TCA6416/TCA6408A Keypad Support (KEYBOARD_TCA6416) [N/m/y/?] (NEW) 
+  TCA8418 Keypad Support (KEYBOARD_TCA8418) [N/m/y/?] (NEW) 
+  GPIO driven matrix keypad support (KEYBOARD_MATRIX) [N/m/y/?] (NEW) 
+  LM8323 keypad chip (KEYBOARD_LM8323) [N/m/?] (NEW) 
+  LM8333 keypad chip (KEYBOARD_LM8333) [N/m/y/?] (NEW) 
+  Maxim MAX7359 Key Switch Controller (KEYBOARD_MAX7359) [N/m/y/?] (NEW) 
+  MELFAS MCS Touchkey (KEYBOARD_MCS) [N/m/y/?] (NEW) 
+  Freescale MPR121 Touchkey (KEYBOARD_MPR121) [N/m/y/?] (NEW) 
+  Newton keyboard (KEYBOARD_NEWTON) [N/m/y/?] (NEW) 
+  OpenCores Keyboard Controller (KEYBOARD_OPENCORES) [N/m/y/?] (NEW) 
+  Samsung keypad support (KEYBOARD_SAMSUNG) [N/m/y/?] (NEW) 
+  Stowaway keyboard (KEYBOARD_STOWAWAY) [N/m/y/?] (NEW) 
+  Sun Type 4 and Type 5 keyboard (KEYBOARD_SUNKBD) [N/m/y/?] (NEW) 
+  XT keyboard (KEYBOARD_XTKBD) [N/m/y/?] (NEW) 
+*
 * Mice
 *
 Mice (INPUT_MOUSE) [Y/n/?] y
-  PS/2 mouse (MOUSE_PS2) [Y/n/m/?] (NEW)   Serial mouse (MOUSE_SERIAL) [N/m/y/?] (NEW)   Apple USB Touchpad support (MOUSE_APPLETOUCH) [N/m/y/?] (NEW)   Apple USB BCM5974 Multitouch trackpad support (MOUSE_BCM5974) [N/m/y/?] (NEW)   DEC VSXXX-AA/GA mouse and VSXXX-AB tablet (MOUSE_VSXXXAA) [N/m/y/?] (NEW)   GPIO mouse (MOUSE_GPIO) [N/m/y/?] (NEW)   Synaptics I2C Touchpad support (MOUSE_SYNAPTICS_I2C) [N/m/y/?] (NEW)   Synaptics USB device support (MOUSE_SYNAPTICS_USB) [N/m/y/?] (NEW) *
+  PS/2 mouse (MOUSE_PS2) [Y/n/m/?] (NEW) 
+  Serial mouse (MOUSE_SERIAL) [N/m/y/?] (NEW) 
+  Apple USB Touchpad support (MOUSE_APPLETOUCH) [N/m/y/?] (NEW) 
+  Apple USB BCM5974 Multitouch trackpad support (MOUSE_BCM5974) [N/m/y/?] (NEW) 
+  Cypress APA I2C Trackpad support (MOUSE_CYAPA) [N/m/y/?] (NEW) 
+  DEC VSXXX-AA/GA mouse and VSXXX-AB tablet (MOUSE_VSXXXAA) [N/m/y/?] (NEW) 
+  GPIO mouse (MOUSE_GPIO) [N/m/y/?] (NEW) 
+  Synaptics I2C Touchpad support (MOUSE_SYNAPTICS_I2C) [N/m/y/?] (NEW) 
+  Synaptics USB device support (MOUSE_SYNAPTICS_USB) [N/m/y/?] (NEW) 
+*
 * Touchscreens
 *
 Touchscreens (INPUT_TOUCHSCREEN) [Y/n/?] y
-  ADS7846/TSC2046/AD7873 and AD(S)7843 based touchscreens (TOUCHSCREEN_ADS7846) [N/m/y/?] (NEW)   AD7877 based touchscreens (TOUCHSCREEN_AD7877) [N/m/y/?] (NEW)   Analog Devices AD7879-1/AD7889-1 touchscreen interface (TOUCHSCREEN_AD7879) [N/m/y/?] (NEW)   Atmel mXT I2C Touchscreen (TOUCHSCREEN_ATMEL_MXT) [N/m/y/?] (NEW)   AUO in-cell touchscreen using Pixcir ICs (TOUCHSCREEN_AUO_PIXCIR) [N/m/y/?] (NEW)   BU21013 based touch panel controllers (TOUCHSCREEN_BU21013) [N/m/y/?] (NEW)   cy8ctmg110 touchscreen (TOUCHSCREEN_CY8CTMG110) [N/m/y/?] (NEW)   Cypress TTSP touchscreen (TOUCHSCREEN_CYTTSP_CORE) [N/m/y/?] (NEW)   Dynapro serial touchscreen (TOUCHSCREEN_DYNAPRO) [N/m/y/?] (NEW)   Hampshire serial touchscreen (TOUCHSCREEN_HAMPSHIRE) [N/m/y/?] (NEW)   EETI touchscreen panel support (TOUCHSCREEN_EETI) [N/m/y/?] (NEW)   EETI eGalax multi-touch panel support (TOUCHSCREEN_EGALAX) [N/m/y/?] (NEW)   Fujitsu serial touchscreen (TOUCHSCREEN_FUJITSU) [N/m/y/?] (NEW)   Ilitek ILI210X based touchscreen (TOUCHSCREEN_ILI210X) [N/m/y/?] (NEW)   Gunze AHL-51S touchscreen (TOUCHSCREEN_GUNZE) [N/m/y/?] (NEW)   Elo serial touchscreens (TOUCHSCREEN_ELO) [N/m/y/?] (NEW)   Wacom W8001 penabled serial touchscreen (TOUCHSCREEN_WACOM_W8001) [N/m/y/?] (NEW)   Wacom Tablet support (I2C) (TOUCHSCREEN_WACOM_I2C) [N/m/y/?] (NEW)   MAX11801 based touchscreens (TOUCHSCREEN_MAX11801) [N/m/y/?] (NEW)   MELFAS MCS-5000 touchscreen (TOUCHSCREEN_MCS5000) [N/m/y/?] (NEW)   MELFAS MMS114 touchscreen (TOUCHSCREEN_MMS114) [N/m/y/?] (NEW)   MicroTouch serial touchscreens (TOUCHSCREEN_MTOUCH) [N/m/y/?] (NEW)   iNexio serial touchscreens (TOUCHSCREEN_INEXIO) [N/m/y/?] (NEW)   ICS MicroClock MK712 touchscreen (TOUCHSCREEN_MK712) [N/m/y/?] (NEW)   Penmount serial touchscreen (TOUCHSCREEN_PENMOUNT) [N/m/y/?] (NEW)   EDT FocalTech FT5x06 I2C Touchscreen support (TOUCHSCREEN_EDT_FT5X06) [N/m/y/?] (NEW)   Touchright serial touchscreen (TOUCHSCREEN_TOUCHRIGHT) [N/m/y/?] (NEW)   Touchwin serial touchscreen (TOUCHSCREEN_TOUCHWIN) [N/m/y/?] (NEW)   PIXCIR I2C touchscreens (TOUCHSCREEN_PIXCIR) [N/m/y/?] (NEW)   USB Touchscreen Driver (TOUCHSCREEN_USB_COMPOSITE) [N/m/y/?] (NEW)   Sahara TouchIT-213 touchscreen (TOUCHSCREEN_TOUCHIT213) [N/m/y/?] (NEW)   TSC-10/25/40 serial touchscreen support (TOUCHSCREEN_TSC_SERIO) [N/m/y/?] (NEW)   TSC2005 based touchscreens (TOUCHSCREEN_TSC2005) [N/m/y/?] (NEW)   TSC2007 based touchscreens (TOUCHSCREEN_TSC2007) [N/m/y/?] (NEW)   W90P910 touchscreen driver (TOUCHSCREEN_W90X900) [N/m/y/?] (NEW)   Sitronix ST1232 touchscreen controllers (TOUCHSCREEN_ST1232) [N/m/y/?] (NEW)   TPS6507x based touchscreens (TOUCHSCREEN_TPS6507X) [N/m/y/?] (NEW) #
+  ADS7846/TSC2046/AD7873 and AD(S)7843 based touchscreens (TOUCHSCREEN_ADS7846) [N/m/y/?] (NEW) 
+  AD7877 based touchscreens (TOUCHSCREEN_AD7877) [N/m/y/?] (NEW) 
+  Analog Devices AD7879-1/AD7889-1 touchscreen interface (TOUCHSCREEN_AD7879) [N/m/y/?] (NEW) 
+  Atmel mXT I2C Touchscreen (TOUCHSCREEN_ATMEL_MXT) [N/m/y/?] (NEW) 
+  AUO in-cell touchscreen using Pixcir ICs (TOUCHSCREEN_AUO_PIXCIR) [N/m/y/?] (NEW) 
+  BU21013 based touch panel controllers (TOUCHSCREEN_BU21013) [N/m/y/?] (NEW) 
+  cy8ctmg110 touchscreen (TOUCHSCREEN_CY8CTMG110) [N/m/y/?] (NEW) 
+  Cypress TTSP touchscreen (TOUCHSCREEN_CYTTSP_CORE) [N/m/y/?] (NEW) 
+  Dynapro serial touchscreen (TOUCHSCREEN_DYNAPRO) [N/m/y/?] (NEW) 
+  Hampshire serial touchscreen (TOUCHSCREEN_HAMPSHIRE) [N/m/y/?] (NEW) 
+  EETI touchscreen panel support (TOUCHSCREEN_EETI) [N/m/y/?] (NEW) 
+  Fujitsu serial touchscreen (TOUCHSCREEN_FUJITSU) [N/m/y/?] (NEW) 
+  Ilitek ILI210X based touchscreen (TOUCHSCREEN_ILI210X) [N/m/y/?] (NEW) 
+  Gunze AHL-51S touchscreen (TOUCHSCREEN_GUNZE) [N/m/y/?] (NEW) 
+  Elo serial touchscreens (TOUCHSCREEN_ELO) [N/m/y/?] (NEW) 
+  Wacom W8001 penabled serial touchscreen (TOUCHSCREEN_WACOM_W8001) [N/m/y/?] (NEW) 
+  Wacom Tablet support (I2C) (TOUCHSCREEN_WACOM_I2C) [N/m/y/?] (NEW) 
+  MAX11801 based touchscreens (TOUCHSCREEN_MAX11801) [N/m/y/?] (NEW) 
+  MELFAS MCS-5000 touchscreen (TOUCHSCREEN_MCS5000) [N/m/y/?] (NEW) 
+  MELFAS MMS114 touchscreen (TOUCHSCREEN_MMS114) [N/m/y/?] (NEW) 
+  MicroTouch serial touchscreens (TOUCHSCREEN_MTOUCH) [N/m/y/?] (NEW) 
+  iNexio serial touchscreens (TOUCHSCREEN_INEXIO) [N/m/y/?] (NEW) 
+  ICS MicroClock MK712 touchscreen (TOUCHSCREEN_MK712) [N/m/y/?] (NEW) 
+  Penmount serial touchscreen (TOUCHSCREEN_PENMOUNT) [N/m/y/?] (NEW) 
+  EDT FocalTech FT5x06 I2C Touchscreen support (TOUCHSCREEN_EDT_FT5X06) [N/m/y/?] (NEW) 
+  Touchright serial touchscreen (TOUCHSCREEN_TOUCHRIGHT) [N/m/y/?] (NEW) 
+  Touchwin serial touchscreen (TOUCHSCREEN_TOUCHWIN) [N/m/y/?] (NEW) 
+  PIXCIR I2C touchscreens (TOUCHSCREEN_PIXCIR) [N/m/y/?] (NEW) 
+  Support for WM97xx AC97 touchscreen controllers (TOUCHSCREEN_WM97XX) [N/m/?] (NEW) 
+  USB Touchscreen Driver (TOUCHSCREEN_USB_COMPOSITE) [N/m/y/?] (NEW) 
+  Sahara TouchIT-213 touchscreen (TOUCHSCREEN_TOUCHIT213) [N/m/y/?] (NEW) 
+  TSC-10/25/40 serial touchscreen support (TOUCHSCREEN_TSC_SERIO) [N/m/y/?] (NEW) 
+  TSC2005 based touchscreens (TOUCHSCREEN_TSC2005) [N/m/y/?] (NEW) 
+  TSC2007 based touchscreens (TOUCHSCREEN_TSC2007) [N/m/y/?] (NEW) 
+  W90P910 touchscreen driver (TOUCHSCREEN_W90X900) [N/m/y/?] (NEW) 
+  Sitronix ST1232 touchscreen controllers (TOUCHSCREEN_ST1232) [N/m/y/?] (NEW) 
+  TPS6507x based touchscreens (TOUCHSCREEN_TPS6507X) [N/m/y/?] (NEW) 
+#
 # configuration written to .config
 #
 yes: standard output: Broken pipe
@@ -119,15 +227,15 @@ yes: write error
  TOUCHSCREEN_ADS7846, MOUSE_GPIO, KEYBOARD_GPIO, KEYBOARD_GPIO_POLLED
 ----------------------------------------------------------------------
 
-=> cd /home/pi/linux && scripts/config --module TOUCHSCREEN_ADS7846
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module TOUCHSCREEN_ADS7846
 
-=> cd /home/pi/linux && scripts/config --module MOUSE_GPIO
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module MOUSE_GPIO
 
-=> cd /home/pi/linux && scripts/config --module KEYBOARD_GPIO
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module KEYBOARD_GPIO
 
-=> cd /home/pi/linux && scripts/config --module KEYBOARD_GPIO_POLLED
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module KEYBOARD_GPIO_POLLED
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 #
 # configuration written to .config
@@ -137,9 +245,9 @@ scripts/kconfig/conf --oldconfig Kconfig
  CAN bus
 ---------
 
-=> cd /home/pi/linux && scripts/config --enable CONFIG_CAN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable CONFIG_CAN
 
-=> cd /home/pi/linux && yes "" | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes "" | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -193,7 +301,8 @@ QoS and/or fair queueing (NET_SCHED) [Y/n/?] y
     U32 key (NET_EMATCH_U32) [M/n/y/?] m
     Metadata (NET_EMATCH_META) [M/n/y/?] m
     Textsearch (NET_EMATCH_TEXT) [M/n/y/?] m
-    CAN Identifier (NET_EMATCH_CANID) [N/m/y/?] (NEW)     IPset (NET_EMATCH_IPSET) [N/m/?] n
+    CAN Identifier (NET_EMATCH_CANID) [N/m/y/?] (NEW) 
+    IPset (NET_EMATCH_IPSET) [M/n/?] m
   Actions (NET_CLS_ACT) [Y/n/?] y
     Traffic Policing (NET_ACT_POLICE) [M/n/y/?] m
     Generic actions (NET_ACT_GACT) [M/n/y/?] m
@@ -210,38 +319,58 @@ QoS and/or fair queueing (NET_SCHED) [Y/n/?] y
 * CAN bus subsystem support
 *
 CAN bus subsystem support (CAN) [Y/n/m/?] y
-  Raw CAN Protocol (raw access with CAN-ID filtering) (CAN_RAW) [N/m/y/?] (NEW)   Broadcast Manager CAN Protocol (with content filtering) (CAN_BCM) [N/m/y/?] (NEW)   CAN Gateway/Router (with netlink configuration) (CAN_GW) [N/m/y/?] (NEW)   *
+  Raw CAN Protocol (raw access with CAN-ID filtering) (CAN_RAW) [Y/n/m/?] (NEW) 
+  Broadcast Manager CAN Protocol (with content filtering) (CAN_BCM) [Y/n/m/?] (NEW) 
+  CAN Gateway/Router (with netlink configuration) (CAN_GW) [Y/n/m/?] (NEW) 
+  *
   * CAN Device Drivers
   *
-  Virtual Local CAN Interface (vcan) (CAN_VCAN) [N/m/y/?] (NEW)   Serial / USB serial CAN Adaptors (slcan) (CAN_SLCAN) [N/m/y/?] (NEW)   Platform CAN drivers with Netlink support (CAN_DEV) [Y/n/m/?] (NEW)     CAN bit-timing calculation (CAN_CALC_BITTIMING) [Y/n/?] (NEW)     Microchip MCP251x SPI CAN controllers (CAN_MCP251X) [N/m/y/?] (NEW)   *
-  * Philips/NXP SJA1000 devices
-  *
-  Philips/NXP SJA1000 devices (CAN_SJA1000) [N/m/y] (NEW)   *
-  * Bosch C_CAN/D_CAN devices
-  *
-  Bosch C_CAN/D_CAN devices (CAN_C_CAN) [N/m/y] (NEW)   *
-  * Bosch CC770 and Intel AN82527 devices
-  *
-  Bosch CC770 and Intel AN82527 devices (CAN_CC770) [N/m/y] (NEW)   *
-  * CAN USB interfaces
-  *
-  EMS CPC-USB/ARM7 CAN/USB interface (CAN_EMS_USB) [N/m/y/?] (NEW)   ESD USB/2 CAN/USB interface (CAN_ESD_USB2) [N/m/y/?] (NEW)   PEAK PCAN-USB/USB Pro interfaces (CAN_PEAK_USB) [N/m/y/?] (NEW)   Softing Gmbh CAN generic support (CAN_SOFTING) [N/m/y/?] (NEW)   CAN devices debugging messages (CAN_DEBUG_DEVICES) [N/y/?] (NEW) #
+  Virtual Local CAN Interface (vcan) (CAN_VCAN) [N/m/y/?] (NEW) 
+  Serial / USB serial CAN Adaptors (slcan) (CAN_SLCAN) [N/m/y/?] (NEW) 
+  Platform CAN drivers with Netlink support (CAN_DEV) [Y/n/m/?] (NEW) 
+    CAN bit-timing calculation (CAN_CALC_BITTIMING) [Y/n/?] (NEW) 
+    Enable LED triggers for Netlink based drivers (CAN_LEDS) [N/y/?] (NEW) 
+    Atmel AT91 onchip CAN controller (CAN_AT91) [N/m/y/?] (NEW) 
+    Microchip MCP251x SPI CAN controllers (CAN_MCP251X) [N/m/y/?] (NEW) 
+    *
+    * Philips/NXP SJA1000 devices
+    *
+    Philips/NXP SJA1000 devices (CAN_SJA1000) [N/m/y] (NEW) 
+    *
+    * Bosch C_CAN/D_CAN devices
+    *
+    Bosch C_CAN/D_CAN devices (CAN_C_CAN) [N/m/y] (NEW) 
+    *
+    * Bosch CC770 and Intel AN82527 devices
+    *
+    Bosch CC770 and Intel AN82527 devices (CAN_CC770) [N/m/y] (NEW) 
+    *
+    * CAN USB interfaces
+    *
+    EMS CPC-USB/ARM7 CAN/USB interface (CAN_EMS_USB) [N/m/y/?] (NEW) 
+    ESD USB/2 CAN/USB interface (CAN_ESD_USB2) [N/m/y/?] (NEW) 
+    Kvaser CAN/USB interface (CAN_KVASER_USB) [N/m/y/?] (NEW) 
+    PEAK PCAN-USB/USB Pro interfaces (CAN_PEAK_USB) [N/m/y/?] (NEW) 
+    8 devices USB2CAN interface (CAN_8DEV_USB) [N/m/y/?] (NEW) 
+    Softing Gmbh CAN generic support (CAN_SOFTING) [N/m/y/?] (NEW) 
+  CAN devices debugging messages (CAN_DEBUG_DEVICES) [N/y/?] (NEW) 
+#
 # configuration written to .config
 #
 yes: standard output: Broken pipe
 yes: write error
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_RAW
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_RAW
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_BCM
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_BCM
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_VCAN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_VCAN
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_SLCAN
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_SLCAN
 
-=> cd /home/pi/linux && scripts/config --module CONFIG_CAN_MCP251X
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_CAN_MCP251X
 
-=> cd /home/pi/linux && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 #
 # configuration written to .config
@@ -249,7 +378,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Mon Nov 18 16:36:53 2013
-# Elapsed: 0.78 min
+# Time: Sun Dec  8 17:24:27 2013
+# Elapsed: 0.52 min
 #
 
