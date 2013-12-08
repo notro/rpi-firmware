@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Tue Nov 19 20:00:13 2013
+# Time: Sun Dec  8 20:15:54 2013
 #
 
 
@@ -9,7 +9,7 @@
 
 => mkdir -p /home/pi/modules
 
-=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
+=> cd /home/pi/linux-rpi-3.12.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make INSTALL_MOD_PATH=/home/pi/modules modules_install
   INSTALL arch/arm/crypto/aes-arm.ko
   INSTALL arch/arm/crypto/sha1-arm.ko
   INSTALL arch/arm/oprofile/oprofile.ko
@@ -23,6 +23,7 @@
   INSTALL crypto/authencesn.ko
   INSTALL crypto/cast5_generic.ko
   INSTALL crypto/cast_common.ko
+  INSTALL crypto/cmac.ko
   INSTALL crypto/cryptd.ko
   INSTALL crypto/crypto_null.ko
   INSTALL crypto/crypto_user.ko
@@ -73,6 +74,7 @@
   INSTALL drivers/hid/hid-gaff.ko
   INSTALL drivers/hid/hid-gyration.ko
   INSTALL drivers/hid/hid-holtek-kbd.ko
+  INSTALL drivers/hid/hid-holtek-mouse.ko
   INSTALL drivers/hid/hid-holtekff.ko
   INSTALL drivers/hid/hid-kensington.ko
   INSTALL drivers/hid/hid-keytouch.ko
@@ -252,6 +254,7 @@
   INSTALL drivers/media/i2c/wm8775.ko
   INSTALL drivers/media/media.ko
   INSTALL drivers/media/pci/ttpci/ttpci-eeprom.ko
+  INSTALL drivers/media/platform/bcm2835/bcm2835-v4l2.ko
   INSTALL drivers/media/radio/dsbr100.ko
   INSTALL drivers/media/radio/radio-keene.ko
   INSTALL drivers/media/radio/radio-ma901.ko
@@ -265,6 +268,7 @@
   INSTALL drivers/media/radio/si470x/radio-i2c-si470x.ko
   INSTALL drivers/media/radio/si470x/radio-usb-si470x.ko
   INSTALL drivers/media/radio/si4713-i2c.ko
+  INSTALL drivers/media/radio/tea575x.ko
   INSTALL drivers/media/radio/tef6862.ko
   INSTALL drivers/media/radio/wl128x/fm_drv.ko
   INSTALL drivers/media/rc/ati_remote.ko
@@ -302,6 +306,7 @@
   INSTALL drivers/media/rc/keymaps/rc-budget-ci-old.ko
   INSTALL drivers/media/rc/keymaps/rc-cinergy-1400.ko
   INSTALL drivers/media/rc/keymaps/rc-cinergy.ko
+  INSTALL drivers/media/rc/keymaps/rc-delock-61959.ko
   INSTALL drivers/media/rc/keymaps/rc-dib0700-nec.ko
   INSTALL drivers/media/rc/keymaps/rc-dib0700-rc5.ko
   INSTALL drivers/media/rc/keymaps/rc-digitalnow-tinytwin.ko
@@ -521,7 +526,6 @@
   INSTALL drivers/media/usb/s2255/s2255drv.ko
   INSTALL drivers/media/usb/siano/smsusb.ko
   INSTALL drivers/media/usb/sn9c102/sn9c102.ko
-  INSTALL drivers/media/usb/stk1160/stk1160.ko
   INSTALL drivers/media/usb/stkwebcam/stkwebcam.ko
   INSTALL drivers/media/usb/tlg2300/poseidon.ko
   INSTALL drivers/media/usb/tm6000/tm6000-alsa.ko
@@ -532,6 +536,7 @@
   INSTALL drivers/media/usb/zr364xx/zr364xx.ko
   INSTALL drivers/media/v4l2-core/tuner.ko
   INSTALL drivers/media/v4l2-core/v4l2-common.ko
+  INSTALL drivers/media/v4l2-core/v4l2-dv-timings.ko
   INSTALL drivers/media/v4l2-core/videobuf-core.ko
   INSTALL drivers/media/v4l2-core/videobuf-dvb.ko
   INSTALL drivers/media/v4l2-core/videobuf-vmalloc.ko
@@ -556,6 +561,7 @@
   INSTALL drivers/net/hamradio/hdlcdrv.ko
   INSTALL drivers/net/hamradio/mkiss.ko
   INSTALL drivers/net/hamradio/yam.ko
+  INSTALL drivers/net/ifb.ko
   INSTALL drivers/net/irda/irda-usb.ko
   INSTALL drivers/net/irda/irtty-sir.ko
   INSTALL drivers/net/irda/kingsun-sir.ko
@@ -599,6 +605,7 @@
   INSTALL drivers/net/usb/plusb.ko
   INSTALL drivers/net/usb/qmi_wwan.ko
   INSTALL drivers/net/usb/r8152.ko
+  INSTALL drivers/net/usb/r815x.ko
   INSTALL drivers/net/usb/rndis_host.ko
   INSTALL drivers/net/usb/rtl8150.ko
   INSTALL drivers/net/usb/sierra_net.ko
@@ -694,7 +701,6 @@
   INSTALL drivers/staging/winbond/w35und.ko
   INSTALL drivers/staging/wlan-ng/prism2_usb.ko
   INSTALL drivers/uio/uio.ko
-  INSTALL drivers/uio/uio_pdrv.ko
   INSTALL drivers/uio/uio_pdrv_genirq.ko
   INSTALL drivers/usb/class/cdc-acm.ko
   INSTALL drivers/usb/class/cdc-wdm.ko
@@ -733,9 +739,7 @@
   INSTALL drivers/usb/serial/empeg.ko
   INSTALL drivers/usb/serial/f81232.ko
   INSTALL drivers/usb/serial/ftdi_sio.ko
-  INSTALL drivers/usb/serial/funsoft.ko
   INSTALL drivers/usb/serial/garmin_gps.ko
-  INSTALL drivers/usb/serial/hp4x.ko
   INSTALL drivers/usb/serial/io_edgeport.ko
   INSTALL drivers/usb/serial/io_ti.ko
   INSTALL drivers/usb/serial/ipaq.ko
@@ -750,7 +754,6 @@
   INSTALL drivers/usb/serial/metro-usb.ko
   INSTALL drivers/usb/serial/mos7720.ko
   INSTALL drivers/usb/serial/mos7840.ko
-  INSTALL drivers/usb/serial/moto_modem.ko
   INSTALL drivers/usb/serial/navman.ko
   INSTALL drivers/usb/serial/omninet.ko
   INSTALL drivers/usb/serial/opticon.ko
@@ -761,7 +764,6 @@
   INSTALL drivers/usb/serial/qcserial.ko
   INSTALL drivers/usb/serial/quatech2.ko
   INSTALL drivers/usb/serial/safe_serial.ko
-  INSTALL drivers/usb/serial/siemens_mpi.ko
   INSTALL drivers/usb/serial/sierra.ko
   INSTALL drivers/usb/serial/spcp8x5.ko
   INSTALL drivers/usb/serial/ssu100.ko
@@ -771,11 +773,9 @@
   INSTALL drivers/usb/serial/usb_wwan.ko
   INSTALL drivers/usb/serial/usbserial.ko
   INSTALL drivers/usb/serial/visor.ko
-  INSTALL drivers/usb/serial/vivopay-serial.ko
   INSTALL drivers/usb/serial/whiteheat.ko
   INSTALL drivers/usb/serial/wishbone-serial.ko
   INSTALL drivers/usb/serial/xsens_mt.ko
-  INSTALL drivers/usb/serial/zio.ko
   INSTALL drivers/usb/serial/zte_ev.ko
   INSTALL drivers/usb/storage/ums-alauda.ko
   INSTALL drivers/usb/storage/ums-cypress.ko
@@ -799,6 +799,7 @@
   INSTALL drivers/video/fbtft/fb_ili9340.ko
   INSTALL drivers/video/fbtft/fb_ili9341.ko
   INSTALL drivers/video/fbtft/fb_pcd8544.ko
+  INSTALL drivers/video/fbtft/fb_s6d1121.ko
   INSTALL drivers/video/fbtft/fb_ssd1289.ko
   INSTALL drivers/video/fbtft/fb_ssd1306.ko
   INSTALL drivers/video/fbtft/fb_ssd1331.ko
@@ -1071,7 +1072,6 @@
   INSTALL net/netfilter/nf_nat_proto_udplite.ko
   INSTALL net/netfilter/nf_nat_sip.ko
   INSTALL net/netfilter/nf_nat_tftp.ko
-  INSTALL net/netfilter/nf_tproxy_core.ko
   INSTALL net/netfilter/nfnetlink.ko
   INSTALL net/netfilter/nfnetlink_acct.ko
   INSTALL net/netfilter/nfnetlink_log.ko
@@ -1201,7 +1201,6 @@
   INSTALL net/wireless/lib80211_crypt_tkip.ko
   INSTALL net/wireless/lib80211_crypt_wep.ko
   INSTALL net/xfrm/xfrm_ipcomp.ko
-  INSTALL sound/ac97_bus.ko
   INSTALL sound/arm/snd-bcm2835.ko
   INSTALL sound/core/oss/snd-mixer-oss.ko
   INSTALL sound/core/oss/snd-pcm-oss.ko
@@ -1226,8 +1225,6 @@
   INSTALL sound/drivers/snd-mtpav.ko
   INSTALL sound/drivers/snd-serial-u16550.ko
   INSTALL sound/drivers/snd-virmidi.ko
-  INSTALL sound/i2c/other/snd-tea575x-tuner.ko
-  INSTALL sound/pci/ac97/snd-ac97-codec.ko
   INSTALL sound/sound_firmware.ko
   INSTALL sound/usb/6fire/snd-usb-6fire.ko
   INSTALL sound/usb/caiaq/snd-usb-caiaq.ko
@@ -1269,11 +1266,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.19+
+  DEPMOD  3.12.3+
 
 #
 # End: modules_install
-# Time: Tue Nov 19 20:00:27 2013
-# Elapsed: 0.25 min
+# Time: Sun Dec  8 20:16:10 2013
+# Elapsed: 0.27 min
 #
 

@@ -27,15 +27,15 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/b49aafd02fa7572d387acd34550beea5b4c3d239
+https://github.com/raspberrypi/linux/tree/7dac37b9865ab51f7a68b7703bf6792b698fee1b
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
-https://github.com/notro/fbtft.git/tree/63282b8cd35480936df842bc465722a326d5229c
+https://github.com/notro/fbtft.git/tree/6938e0049b728b02276f552592fc9b0ebda7c5ff
 * Various SPI device adding modules  
 https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/ab34d81e536c601295b79e00c6842b393947c894
+https://github.com/richardghirst/PiBits/tree/1b78f9ad6bb826dbce97b55862e06db8d4aea7f4
 * spi-config: SPI device adding module  
 https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea87
 
@@ -79,6 +79,7 @@ CONFIG_FB_TFT_ILI9325=m
 CONFIG_FB_TFT_ILI9340=m
 CONFIG_FB_TFT_ILI9341=m
 CONFIG_FB_TFT_PCD8544=m
+CONFIG_FB_TFT_S6D1121=m
 CONFIG_FB_TFT_SSD1289=m
 CONFIG_FB_TFT_SSD1306=m
 CONFIG_FB_TFT_SSD1331=m

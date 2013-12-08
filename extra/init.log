@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Tue Nov 19 19:31:35 2013
+# Time: Sun Dec  8 19:46:54 2013
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-b38194cf997f4ee291e1c77c914911752f40af65	refs/heads/master
+288684fa47f2c3d4721df9da45e0eacf08aa7992	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -33,42 +33,41 @@ Already up-to-date.
  Get kernel source
 -------------------
 
-git.clone('https://github.com/raspberrypi/linux', '/home/pi/linux-rpi-3.10.y', 'rpi-3.10.y')
+git.clone('https://github.com/raspberrypi/linux', '/home/pi/linux-rpi-3.12.y', 'rpi-3.12.y')
 Already cloned
 
-=> cd /home/pi/linux-rpi-3.10.y && git checkout -- .
+=> cd /home/pi/linux-rpi-3.12.y && git checkout -- .
 
-=> cd /home/pi/linux-rpi-3.10.y && git clean -fd
-Removing drivers/video/fbtft/
+=> cd /home/pi/linux-rpi-3.12.y && git clean -fd
 
-=> cd /home/pi/linux-rpi-3.10.y && git checkout rpi-3.10.y
-Already on 'rpi-3.10.y'
+=> cd /home/pi/linux-rpi-3.12.y && git checkout rpi-3.12.y
+Already on 'rpi-3.12.y'
 
-=> cd /home/pi/linux-rpi-3.10.y && git pull
+=> cd /home/pi/linux-rpi-3.12.y && git pull
 Already up-to-date.
 
 
  Get DMA capable SPI master driver
 -----------------------------------
 
-=> wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2013-11-19 19:32:12--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+=> wget -O /home/pi/linux-rpi-3.12.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2013-12-08 19:46:58--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26638 (26K) [text/plain]
-Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
+Saving to: `/home/pi/linux-rpi-3.12.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  663K=0.04s
+     0K .......... .......... ......                          100%  646K=0.04s
 
-2013-11-19 19:32:13 (663 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26638/26638]
+2013-12-08 19:46:59 (646 KB/s) - `/home/pi/linux-rpi-3.12.y/drivers/spi/spi-bcm2708.c' saved [26638/26638]
 
 
 
  Apply kernel patches
 ----------------------
 
-=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/next/fbtft.patch
+=> cd /home/pi/linux-rpi-3.12.y && git apply -v /home/pi/rpi-build/patches/next/fbtft.patch
 Checking patch drivers/video/Kconfig...
 Checking patch drivers/video/Makefile...
 Applied patch drivers/video/Kconfig cleanly.
@@ -78,15 +77,20 @@ Applied patch drivers/video/Makefile cleanly.
  Get FBTFT
 -----------
 
-git.clone('https://github.com/notro/fbtft.git', '/home/pi/linux-rpi-3.10.y/drivers/video/fbtft', '')
-Already cloned
+=> git clone --progress  https://github.com/notro/fbtft.git /home/pi/linux-rpi-3.12.y/drivers/video/fbtft
+Cloning into '/home/pi/linux-rpi-3.12.y/drivers/video/fbtft'...
+remote: Counting objects: 898, done.[K
+remote: Compressing objects:   0% (1/416)   [Kremote: Compressing objects:   1% (5/416)   [Kremote: Compressing objects:   2% (9/416)   [Kremote: Compressing objects:   3% (13/416)   [Kremote: Compressing objects:   4% (17/416)   [Kremote: Compressing objects:   5% (21/416)   [Kremote: Compressing objects:   6% (25/416)   [Kremote: Compressing objects:   7% (30/416)   [Kremote: Compressing objects:   8% (34/416)   [Kremote: Compressing objects:   9% (38/416)   [Kremote: Compressing objects:  10% (42/416)   [Kremote: Compressing objects:  11% (46/416)   [Kremote: Compressing objects:  12% (50/416)   [Kremote: Compressing objects:  13% (55/416)   [Kremote: Compressing objects:  14% (59/416)   [Kremote: Compressing objects:  15% (63/416)   [Kremote: Compressing objects:  16% (67/416)   [Kremote: Compressing objects:  17% (71/416)   [Kremote: Compressing objects:  18% (75/416)   [Kremote: Compressing objects:  19% (80/416)   [Kremote: Compressing objects:  20% (84/416)   [Kremote: Compressing objects:  21% (88/416)   [Kremote: Compressing objects:  22% (92/416)   [Kremote: Compressing objects:  23% (96/416)   [Kremote: Compressing objects:  24% (100/416)   [Kremote: Compressing objects:  25% (104/416)   [Kremote: Compressing objects:  26% (109/416)   [Kremote: Compressing objects:  27% (113/416)   [Kremote: Compressing objects:  28% (117/416)   [Kremote: Compressing objects:  29% (121/416)   [Kremote: Compressing objects:  30% (125/416)   [Kremote: Compressing objects:  31% (129/416)   [Kremote: Compressing objects:  32% (134/416)   [Kremote: Compressing objects:  33% (138/416)   [Kremote: Compressing objects:  34% (142/416)   [Kremote: Compressing objects:  35% (146/416)   [Kremote: Compressing objects:  36% (150/416)   [Kremote: Compressing objects:  37% (154/416)   [Kremote: Compressing objects:  38% (159/416)   [Kremote: Compressing objects:  39% (163/416)   [Kremote: Compressing objects:  40% (167/416)   [Kremote: Compressing objects:  41% (171/416)   [Kremote: Compressing objects:  42% (175/416)   [Kremote: Compressing objects:  43% (179/416)   [Kremote: Compressing objects:  44% (184/416)   [Kremote: Compressing objects:  45% (188/416)   [Kremote: Compressing objects:  46% (192/416)   [Kremote: Compressing objects:  47% (196/416)   [Kremote: Compressing objects:  48% (200/416)   [Kremote: Compressing objects:  49% (204/416)   [Kremote: Compressing objects:  50% (208/416)   [Kremote: Compressing objects:  51% (213/416)   [Kremote: Compressing objects:  52% (217/416)   [Kremote: Compressing objects:  53% (221/416)   [Kremote: Compressing objects:  54% (225/416)   [Kremote: Compressing objects:  55% (229/416)   [Kremote: Compressing objects:  56% (233/416)   [Kremote: Compressing objects:  57% (238/416)   [Kremote: Compressing objects:  58% (242/416)   [Kremote: Compressing objects:  59% (246/416)   [Kremote: Compressing objects:  60% (250/416)   [Kremote: Compressing objects:  61% (254/416)   [Kremote: Compressing objects:  62% (258/416)   [Kremote: Compressing objects:  63% (263/416)   [Kremote: Compressing objects:  64% (267/416)   [Kremote: Compressing objects:  65% (271/416)   [Kremote: Compressing objects:  66% (275/416)   [Kremote: Compressing objects:  67% (279/416)   [Kremote: Compressing objects:  68% (283/416)   [Kremote: Compressing objects:  69% (288/416)   [Kremote: Compressing objects:  70% (292/416)   [Kremote: Compressing objects:  71% (296/416)   [Kremote: Compressing objects:  72% (300/416)   [Kremote: Compressing objects:  73% (304/416)   [Kremote: Compressing objects:  74% (308/416)   [Kremote: Compressing objects:  75% (312/416)   [Kremote: Compressing objects:  76% (317/416)   [Kremote: Compressing objects:  77% (321/416)   [Kremote: Compressing objects:  78% (325/416)   [Kremote: Compressing objects:  79% (329/416)   [Kremote: Compressing objects:  80% (333/416)   [Kremote: Compressing objects:  81% (337/416)   [Kremote: Compressing objects:  82% (342/416)   [Kremote: Compressing objects:  83% (346/416)   [Kremote: Compressing objects:  84% (350/416)   [Kremote: Compressing objects:  85% (354/416)   [Kremote: Compressing objects:  86% (358/416)   [Kremote: Compressing objects:  87% (362/416)   [Kremote: Compressing objects:  88% (367/416)   [Kremote: Compressing objects:  89% (371/416)   [Kremote: Compressing objects:  90% (375/416)   [Kremote: Compressing objects:  91% (379/416)   [Kremote: Compressing objects:  92% (383/416)   [Kremote: Compressing objects:  93% (387/416)   [Kremote: Compressing objects:  94% (392/416)   [Kremote: Compressing objects:  95% (396/416)   [Kremote: Compressing objects:  96% (400/416)   [Kremote: Compressing objects:  97% (404/416)   [Kremote: Compressing objects:  98% (408/416)   [Kremote: Compressing objects:  99% (412/416)   [Kremote: Compressing objects: 100% (416/416)   [Kremote: Compressing objects: 100% (416/416), done.[K
+Receiving objects:   0% (1/898)   Receiving objects:   1% (9/898)   Receiving objects:   2% (18/898)   Receiving objects:   3% (27/898)   Receiving objects:   4% (36/898)   Receiving objects:   5% (45/898)   Receiving objects:   6% (54/898)   Receiving objects:   7% (63/898)   Receiving objects:   8% (72/898)   Receiving objects:   9% (81/898)   Receiving objects:  10% (90/898)   Receiving objects:  11% (99/898)   Receiving objects:  12% (108/898)   Receiving objects:  13% (117/898)   Receiving objects:  14% (126/898)   Receiving objects:  15% (135/898)   Receiving objects:  16% (144/898)   Receiving objects:  17% (153/898)   Receiving objects:  18% (162/898)   Receiving objects:  19% (171/898)   Receiving objects:  20% (180/898)   Receiving objects:  21% (189/898)   Receiving objects:  22% (198/898)   Receiving objects:  23% (207/898)   Receiving objects:  24% (216/898)   Receiving objects:  25% (225/898)   Receiving objects:  26% (234/898)   Receiving objects:  27% (243/898)   Receiving objects:  28% (252/898)   Receiving objects:  29% (261/898)   Receiving objects:  30% (270/898)   Receiving objects:  31% (279/898)   Receiving objects:  32% (288/898)   Receiving objects:  33% (297/898)   Receiving objects:  34% (306/898)   Receiving objects:  35% (315/898)   Receiving objects:  36% (324/898)   Receiving objects:  37% (333/898)   Receiving objects:  38% (342/898)   Receiving objects:  39% (351/898)   Receiving objects:  40% (360/898)   Receiving objects:  41% (369/898)   Receiving objects:  42% (378/898)   Receiving objects:  43% (387/898)   Receiving objects:  44% (396/898)   Receiving objects:  45% (405/898)   Receiving objects:  46% (414/898)   Receiving objects:  47% (423/898)   Receiving objects:  48% (432/898)   Receiving objects:  49% (441/898)   Receiving objects:  50% (449/898)   Receiving objects:  51% (458/898)   Receiving objects:  52% (467/898)   Receiving objects:  53% (476/898)   Receiving objects:  54% (485/898)   Receiving objects:  55% (494/898)   Receiving objects:  56% (503/898)   Receiving objects:  57% (512/898)   Receiving objects:  58% (521/898)   Receiving objects:  59% (530/898)   Receiving objects:  60% (539/898)   Receiving objects:  61% (548/898)   Receiving objects:  62% (557/898)   Receiving objects:  63% (566/898)   Receiving objects:  64% (575/898), 228.00 KiB | 379 KiB/s   Receiving objects:  65% (584/898), 228.00 KiB | 379 KiB/s   Receiving objects:  66% (593/898), 228.00 KiB | 379 KiB/s   Receiving objects:  67% (602/898), 228.00 KiB | 379 KiB/s   Receiving objects:  68% (611/898), 228.00 KiB | 379 KiB/s   Receiving objects:  69% (620/898), 228.00 KiB | 379 KiB/s   Receiving objects:  70% (629/898), 228.00 KiB | 379 KiB/s   Receiving objects:  71% (638/898), 228.00 KiB | 379 KiB/s   Receiving objects:  72% (647/898), 228.00 KiB | 379 KiB/s   Receiving objects:  73% (656/898), 228.00 KiB | 379 KiB/s   Receiving objects:  74% (665/898), 228.00 KiB | 379 KiB/s   Receiving objects:  75% (674/898), 228.00 KiB | 379 KiB/s   Receiving objects:  76% (683/898), 228.00 KiB | 379 KiB/s   Receiving objects:  77% (692/898), 228.00 KiB | 379 KiB/s   Receiving objects:  78% (701/898), 228.00 KiB | 379 KiB/s   Receiving objects:  79% (710/898), 228.00 KiB | 379 KiB/s   Receiving objects:  80% (719/898), 228.00 KiB | 379 KiB/s   Receiving objects:  81% (728/898), 228.00 KiB | 379 KiB/s   Receiving objects:  82% (737/898), 228.00 KiB | 379 KiB/s   Receiving objects:  83% (746/898), 228.00 KiB | 379 KiB/s   Receiving objects:  84% (755/898), 228.00 KiB | 379 KiB/s   Receiving objects:  85% (764/898), 228.00 KiB | 379 KiB/s   Receiving objects:  86% (773/898), 228.00 KiB | 379 KiB/s   Receiving objects:  87% (782/898), 228.00 KiB | 379 KiB/s   Receiving objects:  88% (791/898), 228.00 KiB | 379 KiB/s   Receiving objects:  89% (800/898), 228.00 KiB | 379 KiB/s   Receiving objects:  90% (809/898), 228.00 KiB | 379 KiB/s   remote: Total 898 (delta 568), reused 798 (delta 482)[K
+Receiving objects:  91% (818/898), 228.00 KiB | 379 KiB/s   Receiving objects:  92% (827/898), 228.00 KiB | 379 KiB/s   Receiving objects:  93% (836/898), 228.00 KiB | 379 KiB/s   Receiving objects:  94% (845/898), 228.00 KiB | 379 KiB/s   Receiving objects:  95% (854/898), 228.00 KiB | 379 KiB/s   Receiving objects:  96% (863/898), 228.00 KiB | 379 KiB/s   Receiving objects:  97% (872/898), 228.00 KiB | 379 KiB/s   Receiving objects:  98% (881/898), 228.00 KiB | 379 KiB/s   Receiving objects:  99% (890/898), 228.00 KiB | 379 KiB/s   Receiving objects: 100% (898/898), 228.00 KiB | 379 KiB/s   Receiving objects: 100% (898/898), 358.76 KiB | 379 KiB/s, done.
+Resolving deltas:   0% (0/568)   Resolving deltas:   4% (24/568)   Resolving deltas:   9% (52/568)   Resolving deltas:  14% (82/568)   Resolving deltas:  15% (86/568)   Resolving deltas:  16% (92/568)   Resolving deltas:  17% (97/568)   Resolving deltas:  24% (141/568)   Resolving deltas:  25% (144/568)   Resolving deltas:  27% (155/568)   Resolving deltas:  35% (200/568)   Resolving deltas:  36% (207/568)   Resolving deltas:  41% (235/568)   Resolving deltas:  45% (256/568)   Resolving deltas:  46% (266/568)   Resolving deltas:  48% (274/568)   Resolving deltas:  49% (283/568)   Resolving deltas:  51% (291/568)   Resolving deltas:  52% (298/568)   Resolving deltas:  53% (303/568)   Resolving deltas:  54% (307/568)   Resolving deltas:  55% (313/568)   Resolving deltas:  56% (320/568)   Resolving deltas:  60% (344/568)   Resolving deltas:  61% (351/568)   Resolving deltas:  63% (361/568)   Resolving deltas:  64% (364/568)   Resolving deltas:  67% (383/568)   Resolving deltas:  68% (388/568)   Resolving deltas:  70% (400/568)   Resolving deltas:  74% (422/568)   Resolving deltas:  75% (426/568)   Resolving deltas:  76% (435/568)   Resolving deltas:  77% (438/568)   Resolving deltas:  81% (463/568)   Resolving deltas:  85% (488/568)   Resolving deltas:  86% (489/568)   Resolving deltas:  89% (508/568)   Resolving deltas:  90% (512/568)   Resolving deltas:  91% (522/568)   Resolving deltas:  92% (524/568)   Resolving deltas:  93% (532/568)   Resolving deltas:  94% (536/568)   Resolving deltas:  95% (540/568)   Resolving deltas:  97% (553/568)   Resolving deltas:  98% (557/568)   Resolving deltas:  99% (567/568)   Resolving deltas: 100% (568/568)   Resolving deltas: 100% (568/568), done.
 
-=> cd /home/pi/linux-rpi-3.10.y/drivers/video/fbtft && git pull
+=> cd /home/pi/linux-rpi-3.12.y/drivers/video/fbtft && git pull
 Already up-to-date.
 
 #
 # End: init
-# Time: Tue Nov 19 19:32:14 2013
-# Elapsed: 0.64 min
+# Time: Sun Dec  8 19:47:02 2013
+# Elapsed: 0.14 min
 #
 
