@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Sun Dec  8 17:51:59 2013
+# Time: Sat Dec 14 22:06:20 2013
 #
 
 
@@ -42,6 +42,9 @@
   INSTALL crypto/xcbc.ko
   INSTALL crypto/xor.ko
   INSTALL crypto/xts.ko
+  INSTALL drivers/base/regmap/regmap-i2c.ko
+  INSTALL drivers/base/regmap/regmap-mmio.ko
+  INSTALL drivers/base/regmap/regmap-spi.ko
   INSTALL drivers/block/cryptoloop.ko
   INSTALL drivers/block/drbd/drbd.ko
   INSTALL drivers/block/nbd.ko
@@ -59,6 +62,8 @@
   INSTALL drivers/char/hw_random/bcm2708-rng.ko
   INSTALL drivers/connector/cn.ko
   INSTALL drivers/cpufreq/cpufreq_stats.ko
+  INSTALL drivers/dma/bcm2708-dmaengine.ko
+  INSTALL drivers/dma/virt-dma.ko
   INSTALL drivers/hid/hid-a4tech.ko
   INSTALL drivers/hid/hid-apple.ko
   INSTALL drivers/hid/hid-axff.ko
@@ -118,12 +123,14 @@
   INSTALL drivers/i2c/busses/i2c-bcm2708.ko
   INSTALL drivers/i2c/i2c-dev.ko
   INSTALL drivers/input/evdev.ko
+  INSTALL drivers/input/ff-memless.ko
   INSTALL drivers/input/gameport/gameport.ko
   INSTALL drivers/input/gameport/lightning.ko
   INSTALL drivers/input/gameport/ns558.ko
   INSTALL drivers/input/input-polldev.ko
   INSTALL drivers/input/joydev.ko
   INSTALL drivers/input/joystick/iforce/iforce.ko
+  INSTALL drivers/input/joystick/xpad.ko
   INSTALL drivers/input/keyboard/gpio_keys.ko
   INSTALL drivers/input/keyboard/gpio_keys_polled.ko
   INSTALL drivers/input/misc/ad714x-i2c.ko
@@ -569,6 +576,7 @@
   INSTALL drivers/net/irda/stir4200.ko
   INSTALL drivers/net/macvlan.ko
   INSTALL drivers/net/netconsole.ko
+  INSTALL drivers/net/phy/libphy.ko
   INSTALL drivers/net/phy/mdio-bitbang.ko
   INSTALL drivers/net/ppp/bsd_comp.ko
   INSTALL drivers/net/ppp/ppp_async.ko
@@ -582,6 +590,7 @@
   INSTALL drivers/net/slip/slip.ko
   INSTALL drivers/net/tun.ko
   INSTALL drivers/net/usb/asix.ko
+  INSTALL drivers/net/usb/ax88179_178a.ko
   INSTALL drivers/net/usb/catc.ko
   INSTALL drivers/net/usb/cdc_eem.ko
   INSTALL drivers/net/usb/cdc_ether.ko
@@ -808,6 +817,7 @@
   INSTALL drivers/video/fbtft/fb_ssd1331.ko
   INSTALL drivers/video/fbtft/fb_ssd1351.ko
   INSTALL drivers/video/fbtft/fb_st7735r.ko
+  INSTALL drivers/video/fbtft/fb_tinylcd.ko
   INSTALL drivers/video/fbtft/fb_watterott.ko
   INSTALL drivers/video/fbtft/fbtft.ko
   INSTALL drivers/video/fbtft/fbtft_device.ko
@@ -904,8 +914,6 @@
   INSTALL lib/crc-ccitt.ko
   INSTALL lib/crc7.ko
   INSTALL lib/lru_cache.ko
-  INSTALL lib/lzo/lzo_compress.ko
-  INSTALL lib/lzo/lzo_decompress.ko
   INSTALL lib/raid6/raid6_pq.ko
   INSTALL lib/ts_bm.ko
   INSTALL lib/ts_fsm.ko
@@ -1216,6 +1224,7 @@
   INSTALL sound/core/seq/snd-seq-midi.ko
   INSTALL sound/core/seq/snd-seq-virmidi.ko
   INSTALL sound/core/seq/snd-seq.ko
+  INSTALL sound/core/snd-compress.ko
   INSTALL sound/core/snd-hrtimer.ko
   INSTALL sound/core/snd-hwdep.ko
   INSTALL sound/core/snd-page-alloc.ko
@@ -1232,6 +1241,12 @@
   INSTALL sound/drivers/snd-virmidi.ko
   INSTALL sound/i2c/other/snd-tea575x-tuner.ko
   INSTALL sound/pci/ac97/snd-ac97-codec.ko
+  INSTALL sound/soc/bcm/snd-soc-bcm2708-i2s.ko
+  INSTALL sound/soc/bcm/snd-soc-hifiberry-dac.ko
+  INSTALL sound/soc/bcm/snd-soc-rpi-dac.ko
+  INSTALL sound/soc/codecs/snd-soc-pcm1794a.ko
+  INSTALL sound/soc/codecs/snd-soc-pcm5102a.ko
+  INSTALL sound/soc/snd-soc-core.ko
   INSTALL sound/sound_firmware.ko
   INSTALL sound/usb/6fire/snd-usb-6fire.ko
   INSTALL sound/usb/caiaq/snd-usb-caiaq.ko
@@ -1273,11 +1288,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.22+
+  DEPMOD  3.10.24+
 
 #
 # End: modules_install
-# Time: Sun Dec  8 17:52:13 2013
-# Elapsed: 0.24 min
+# Time: Sat Dec 14 22:06:33 2013
+# Elapsed: 0.22 min
 #
 

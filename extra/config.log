@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Sun Dec  8 17:23:55 2013
+# Time: Sat Dec 14 21:37:50 2013
 #
 
 
@@ -77,6 +77,7 @@ Support for small TFT LCD display modules (FB_TFT) [M/n/y] m
   FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/?] (NEW) 
   FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW) 
   FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW) 
+  FB driver for tinylcd.com display (FB_TFT_TINYLCD) [N/m/?] (NEW) 
   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW) 
   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW) 
   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) 
@@ -378,7 +379,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Sun Dec  8 17:24:27 2013
-# Elapsed: 0.52 min
+# Time: Sat Dec 14 21:38:26 2013
+# Elapsed: 0.61 min
 #
 

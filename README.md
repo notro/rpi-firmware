@@ -27,11 +27,11 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/5ebf1db80e2c03e92d570605b53f91a06112574f
+https://github.com/raspberrypi/linux/tree/ff9f6d87957877265086ab8368bdabf27d35f491
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
-https://github.com/notro/fbtft.git/tree/6938e0049b728b02276f552592fc9b0ebda7c5ff
+https://github.com/notro/fbtft.git/tree/5fc26ff3be79745151b2dd59e24f01a7c1d3bc56
 * Various SPI device adding modules  
 https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
 * ServoBlaster  
@@ -85,6 +85,7 @@ CONFIG_FB_TFT_SSD1306=m
 CONFIG_FB_TFT_SSD1331=m
 CONFIG_FB_TFT_SSD1351=m
 CONFIG_FB_TFT_ST7735R=m
+CONFIG_FB_TFT_TINYLCD=m
 CONFIG_FB_TFT_WATTEROTT=m
 CONFIG_FONTS=y
 CONFIG_FONT_10x18=y
