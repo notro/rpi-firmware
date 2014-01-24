@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Sat Dec 14 21:36:31 2013
+# Time: Fri Jan 24 18:59:00 2014
 #
 
 
@@ -23,64 +23,64 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-e618d4ff2dc20051bc726834b22487fe2e236fe5	refs/heads/master
+940dc3b5ea0a001096c5fbb2d483a961d42fe85c	refs/heads/master
 
 
 => rm -rf /home/pi/firmware
 
-=> wget --progress=dot:mega -O /tmp/tmpq1D7ST https://api.github.com/repos/raspberrypi/firmware/tarball
---2013-12-14 21:36:33--  https://api.github.com/repos/raspberrypi/firmware/tarball
-Resolving api.github.com (api.github.com)... 192.30.252.137
-Connecting to api.github.com (api.github.com)|192.30.252.137|:443... connected.
+=> wget --progress=dot:mega -O /tmp/tmpySxbb8 https://api.github.com/repos/raspberrypi/firmware/tarball
+--2014-01-24 18:59:03--  https://api.github.com/repos/raspberrypi/firmware/tarball
+Resolving api.github.com (api.github.com)... 192.30.252.139
+Connecting to api.github.com (api.github.com)|192.30.252.139|:443... connected.
 HTTP request sent, awaiting response... 302 Found
 Location: https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master [following]
---2013-12-14 21:36:34--  https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master
-Resolving codeload.github.com (codeload.github.com)... 192.30.252.146
-Connecting to codeload.github.com (codeload.github.com)|192.30.252.146|:443... connected.
+--2014-01-24 18:59:04--  https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master
+Resolving codeload.github.com (codeload.github.com)... 192.30.252.145
+Connecting to codeload.github.com (codeload.github.com)|192.30.252.145|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [application/x-gzip]
-Saving to: `/tmp/tmpq1D7ST'
+Saving to: `/tmp/tmpySxbb8'
 
-     0K ........ ........ ........ ........ ........ ........ 1.05M
-  3072K ........ ........ ........ ........ ........ ........ 2.83M
-  6144K ........ ........ ........ ........ ........ ........ 3.17M
-  9216K ........ ........ ........ ........ ........ ........ 3.36M
- 12288K ........ ........ ........ ........ ........ ........ 3.02M
- 15360K ........ ........ ........ ........ ........ ........ 1.91M
- 18432K ........ ........ ........ ........ ........ ........ 2.04M
- 21504K ........ ........ ........ ........ ........ ........ 2.13M
- 24576K ........ ........ ........ ........ ........ ........ 2.10M
- 27648K ........ ........ ........ ........ ........ ........ 2.15M
- 30720K ........ ........ ........ ........ ........ ........ 2.24M
- 33792K ........ ........ ........ ........ ........ ........ 2.46M
- 36864K ........ ........ ........ ........ ........ ........ 2.87M
- 39936K ........ ........ ........ ........ ........ ........ 3.31M
- 43008K ........ ........ ........ ........ ........ ........ 3.52M
- 46080K ........ ........ ........ ........ ........ ........ 2.78M
- 49152K ........ ........ ........ ........ ........ ........ 3.30M
- 52224K ........ ........ ........ ........ ........ ........ 2.58M
- 55296K ........ ........ ........ ........ ........ ........ 2.81M
- 58368K ........ ........ ........ ........ ........ ........ 2.99M
- 61440K ........ ........ ........ ........ ........ ........ 3.05M
- 64512K ........ ........ ........ ........ ........ ........ 3.08M
- 67584K ........ ........ ........ ........ ........ ........ 3.07M
- 70656K ........ ........ ........ ........ ........ ........ 3.11M
- 73728K ........ ........ ........ ........ ........ ........ 3.13M
- 76800K ........ ........ ........ ........ ........ ........ 3.20M
- 79872K ........ ........ ........ ........ ........ ........ 3.00M
- 82944K ........ ........ ........ ........ ........ ........ 2.46M
- 86016K ........ ........ ........ ........ ........ ........ 2.85M
- 89088K ........ ........ ........ ........ ........ ........ 3.05M
- 92160K ........ ....                                         3.21M=35s
+     0K ........ ........ ........ ........ ........ ........ 1.87M
+  3072K ........ ........ ........ ........ ........ ........ 3.40M
+  6144K ........ ........ ........ ........ ........ ........ 2.87M
+  9216K ........ ........ ........ ........ ........ ........ 3.01M
+ 12288K ........ ........ ........ ........ ........ ........ 3.34M
+ 15360K ........ ........ ........ ........ ........ ........ 2.59M
+ 18432K ........ ........ ........ ........ ........ ........ 2.80M
+ 21504K ........ ........ ........ ........ ........ ........ 2.95M
+ 24576K ........ ........ ........ ........ ........ ........ 2.98M
+ 27648K ........ ........ ........ ........ ........ ........ 2.28M
+ 30720K ........ ........ ........ ........ ........ ........ 2.62M
+ 33792K ........ ........ ........ ........ ........ ........ 2.84M
+ 36864K ........ ........ ........ ........ ........ ........ 3.01M
+ 39936K ........ ........ ........ ........ ........ ........ 3.04M
+ 43008K ........ ........ ........ ........ ........ ........ 3.09M
+ 46080K ........ ........ ........ ........ ........ ........ 3.04M
+ 49152K ........ ........ ........ ........ ........ ........ 3.08M
+ 52224K ........ ........ ........ ........ ........ ........ 3.08M
+ 55296K ........ ........ ........ ........ ........ ........ 3.22M
+ 58368K ........ ........ ........ ........ ........ ........ 3.38M
+ 61440K ........ ........ ........ ........ ........ ........ 1.80M
+ 64512K ........ ........ ........ ........ ........ ........ 2.98M
+ 67584K ........ ........ ........ ........ ........ ........ 3.23M
+ 70656K ........ ........ ........ ........ ........ ........ 3.37M
+ 73728K ........ ........ ........ ........ ........ ........ 2.69M
+ 76800K ........ ........ ........ ........ ........ ........ 2.56M
+ 79872K ........ ........ ........ ........ ........ ........ 2.82M
+ 82944K ........ ........ ........ ........ ........ ........ 2.95M
+ 86016K ........ ........ ........ ........ ........ ........ 2.66M
+ 89088K ........ ........ ........ ........ ........ ........ 3.06M
+ 92160K ........ ......                                       3.02M=32s
 
-2013-12-14 21:37:10 (2.60 MB/s) - `/tmp/tmpq1D7ST' saved [95167678]
+2014-01-24 18:59:37 (2.83 MB/s) - `/tmp/tmpySxbb8' saved [95310138]
 
 
-=> tar -C /home/pi -zxf /tmp/tmpq1D7ST
+=> tar -C /home/pi -zxf /tmp/tmpySxbb8
 
-=> mv /home/pi/raspberrypi-firmware-e618d4f /home/pi/firmware
+=> mv /home/pi/raspberrypi-firmware-940dc3b /home/pi/firmware
 
-=> rm -rf /tmp/tmpq1D7ST
+=> rm -rf /tmp/tmpySxbb8
 
 
  Get kernel source
@@ -93,240 +93,39 @@ Already cloned
 
 => cd /home/pi/linux-rpi-3.10.y && git clean -fd
 Removing drivers/video/fbtft/
+Removing include/linux/platform_data/fbtft.h
 
 => cd /home/pi/linux-rpi-3.10.y && git checkout rpi-3.10.y
 Already on 'rpi-3.10.y'
 
 => cd /home/pi/linux-rpi-3.10.y && git pull
 From https://github.com/raspberrypi/linux
-   5ebf1db..ff9f6d8  rpi-3.10.y -> origin/rpi-3.10.y
- + 7dac37b...9fbb114 rpi-3.12.y -> origin/rpi-3.12.y  (forced update)
- + 10bc582...2a8d45e rpi-3.6.y  -> origin/rpi-3.6.y  (forced update)
-Updating 5ebf1db..ff9f6d8
+   ab2ed0d..943b563  rpi-3.10.y -> origin/rpi-3.10.y
+   71397e1..8f768c5  rpi-3.11.y -> origin/rpi-3.11.y
+   7b3d622..da8d7c7  rpi-3.12.y -> origin/rpi-3.12.y
+ * [new branch]      rpi-3.13.y -> origin/rpi-3.13.y
+Updating ab2ed0d..943b563
 Fast-forward
- Documentation/networking/ip-sysctl.txt         |    3 -
- Makefile                                       |    2 +-
- arch/arm/boot/dts/armada-370-xp.dtsi           |    2 +-
- arch/arm/boot/dts/armada-xp-mv78230.dtsi       |   16 +-
- arch/arm/boot/dts/armada-xp-mv78260.dtsi       |   78 +-
- arch/arm/configs/bcmrpi_defconfig              |   10 +-
- arch/arm/include/asm/pgtable.h                 |    2 +-
- arch/arm/mach-at91/sama5d3.c                   |    6 +-
- arch/arm/mach-bcm2708/bcm2708.c                |   64 ++
- arch/arm/mach-bcm2708/include/mach/dma.h       |    2 +
- arch/arm/mach-bcm2708/include/mach/platform.h  |    2 +
- arch/arm/mach-footbridge/common.c              |    3 +
- arch/arm/mach-footbridge/dc21285.c             |    2 -
- arch/arm/mach-footbridge/ebsa285.c             |   22 +-
- arch/arm/mm/mmap.c                             |    2 +-
- arch/arm/mm/pgd.c                              |    3 +-
- arch/parisc/kernel/sys_parisc.c                |   25 +-
- arch/s390/crypto/aes_s390.c                    |   31 +-
- arch/x86/Makefile                              |    8 +-
- block/blk-cgroup.h                             |    8 +-
- block/blk-core.c                               |   10 +-
- block/elevator.c                               |   22 +-
- crypto/algif_hash.c                            |    5 +-
- crypto/algif_skcipher.c                        |    4 +-
- crypto/authenc.c                               |    7 +-
- crypto/ccm.c                                   |    3 +-
- drivers/ata/libata-scsi.c                      |    1 +
- drivers/atm/idt77252.c                         |    2 +-
- drivers/char/i8k.c                             |    7 +
- drivers/connector/cn_proc.c                    |   72 +-
- drivers/dma/Kconfig                            |    6 +
- drivers/dma/Makefile                           |    1 +
- drivers/dma/bcm2708-dmaengine.c                |  588 +++++++++++++++
- drivers/firewire/sbp2.c                        |    1 +
- drivers/gpio/gpio-mpc8xxx.c                    |    8 +-
- drivers/gpu/drm/radeon/r600_hdmi.c             |   74 +-
- drivers/hid/hid-ids.h                          |    5 +
- drivers/hid/hid-lg.c                           |   58 ++
- drivers/hid/usbhid/hid-quirks.c                |    3 +
- drivers/input/Kconfig                          |    2 +-
- drivers/input/keyboard/Kconfig                 |    4 +-
- drivers/input/serio/Kconfig                    |    6 +-
- drivers/iommu/intel-iommu.c                    |    6 +-
- drivers/iommu/intel_irq_remapping.c            |   13 +-
- drivers/isdn/isdnloop/isdnloop.c               |    8 +-
- drivers/isdn/mISDN/socket.c                    |   13 +-
- drivers/misc/enclosure.c                       |    7 +
- drivers/misc/mei/hw-me-regs.h                  |    6 +-
- drivers/misc/mei/pci-me.c                      |    5 +-
- drivers/mmc/card/block.c                       |   45 +-
- drivers/net/bonding/bond_sysfs.c               |   11 +-
- drivers/net/can/c_can/c_can.c                  |   21 +-
- drivers/net/can/sja1000/sja1000.c              |   17 +-
- drivers/net/ethernet/broadcom/tg3.c            |   12 +-
- drivers/net/ethernet/mellanox/mlx4/en_main.c   |    8 +-
- drivers/net/ethernet/realtek/8139cp.c          |    5 +-
- drivers/net/ethernet/realtek/r8169.c           |    5 +
- drivers/net/ethernet/smsc/smc91x.h             |   22 +-
- drivers/net/macvtap.c                          |    8 +-
- drivers/net/ppp/pppoe.c                        |    2 -
- drivers/net/team/team.c                        |    4 +
- drivers/net/tun.c                              |   10 +-
- drivers/net/usb/usbnet.c                       |    3 -
- drivers/net/wireless/iwlwifi/dvm/tx.c          |   14 +-
- drivers/scsi/3w-9xxx.c                         |    3 +-
- drivers/scsi/3w-sas.c                          |    3 +-
- drivers/scsi/3w-xxxx.c                         |    3 +-
- drivers/scsi/aacraid/linit.c                   |    1 +
- drivers/scsi/arcmsr/arcmsr_hba.c               |    1 +
- drivers/scsi/bfa/bfa_fcs.h                     |    1 +
- drivers/scsi/bfa/bfa_fcs_lport.c               |   14 +-
- drivers/scsi/bfa/bfad_attr.c                   |    7 +-
- drivers/scsi/gdth.c                            |    1 +
- drivers/scsi/hosts.c                           |    1 +
- drivers/scsi/hpsa.c                            |    5 +-
- drivers/scsi/ipr.c                             |    3 +-
- drivers/scsi/ips.c                             |    1 +
- drivers/scsi/libsas/sas_ata.c                  |    2 +-
- drivers/scsi/megaraid.c                        |    1 +
- drivers/scsi/megaraid/megaraid_mbox.c          |    1 +
- drivers/scsi/megaraid/megaraid_sas_base.c      |    1 +
- drivers/scsi/pmcraid.c                         |    1 +
- drivers/scsi/sd.c                              |    6 +
- drivers/scsi/storvsc_drv.c                     |    1 +
- drivers/usb/class/cdc-acm.c                    |    2 +
- drivers/usb/serial/ftdi_sio.c                  |   37 +-
- drivers/usb/serial/mos7840.c                   |   32 +-
- drivers/usb/serial/pl2303.c                    |   32 +-
- drivers/usb/serial/spcp8x5.c                   |   30 +-
- drivers/video/kyro/fbdev.c                     |    6 +-
- drivers/xen/grant-table.c                      |    6 +-
- fs/aio.c                                       |   10 +-
- fs/nfs/nfs4proc.c                              |   10 +-
- fs/pipe.c                                      |   39 +-
- fs/xfs/xfs_ioctl.c                             |    6 +
- include/crypto/scatterwalk.h                   |    3 +-
- include/linux/clockchips.h                     |    4 +-
- include/linux/genalloc.h                       |    4 +-
- include/linux/net.h                            |    8 +
- include/linux/random.h                         |    6 +-
- include/linux/skbuff.h                         |   32 -
- include/linux/vm_event_item.h                  |    1 +
- include/net/ip.h                               |    2 +-
- include/net/ip_vs.h                            |   32 +-
- include/net/ipv6.h                             |    6 +-
- include/net/netfilter/ipv6/nf_defrag_ipv6.h    |    5 +-
- include/scsi/scsi_host.h                       |    6 +
- include/sound/soc-dai.h                        |    3 +
- kernel/irq/pm.c                                |    2 +-
- kernel/time/clockevents.c                      |   36 +-
- kernel/time/ntp.c                              |    3 +-
- kernel/time/tick-broadcast.c                   |   33 +-
- kernel/time/tick-common.c                      |  106 ++-
- kernel/time/tick-internal.h                    |    7 +-
- kernel/time/timekeeping.c                      |    2 +-
- lib/genalloc.c                                 |   19 +-
- lib/random32.c                                 |   14 +-
- mm/mprotect.c                                  |    7 +-
- mm/vmstat.c                                    |    1 +
- net/appletalk/ddp.c                            |   16 +-
- net/atm/common.c                               |    2 -
- net/ax25/af_ax25.c                             |    4 +-
- net/bluetooth/af_bluetooth.c                   |    4 -
- net/bluetooth/hci_sock.c                       |    2 -
- net/bluetooth/rfcomm/sock.c                    |    1 -
- net/bluetooth/sco.c                            |    1 -
- net/bridge/br_if.c                             |    2 +
- net/caif/caif_socket.c                         |    4 -
- net/compat.c                                   |    5 +-
- net/core/dev.c                                 |    2 +-
- net/core/fib_rules.c                           |    3 +-
- net/core/iovec.c                               |    3 +-
- net/core/pktgen.c                              |    7 +
- net/core/skbuff.c                              |    3 -
- net/ieee802154/6lowpan.c                       |    4 +-
- net/ieee802154/dgram.c                         |    3 +-
- net/ipv4/datagram.c                            |    2 +-
- net/ipv4/ip_sockglue.c                         |    3 +-
- net/ipv4/ip_vti.c                              |    1 +
- net/ipv4/ping.c                                |   13 +-
- net/ipv4/raw.c                                 |    6 +-
- net/ipv4/route.c                               |    8 +-
- net/ipv4/tcp.c                                 |   19 +-
- net/ipv4/tcp_ipv4.c                            |    2 +-
- net/ipv4/tcp_metrics.c                         |    5 +-
- net/ipv4/tcp_output.c                          |    7 +-
- net/ipv4/udp.c                                 |   14 +-
- net/ipv6/datagram.c                            |    8 +-
- net/ipv6/ip6_flowlabel.c                       |    2 +
- net/ipv6/ip6_output.c                          |    7 +-
- net/ipv6/netfilter/nf_conntrack_l3proto_ipv6.c |   54 +-
- net/ipv6/netfilter/nf_conntrack_reasm.c        |   19 +-
- net/ipv6/netfilter/nf_defrag_ipv6_hooks.c      |    7 +-
- net/ipv6/raw.c                                 |    8 +-
- net/ipv6/route.c                               |    7 +-
- net/ipv6/udp.c                                 |    9 +-
- net/ipv6/udp_offload.c                         |    2 +-
- net/ipx/af_ipx.c                               |    3 +-
- net/irda/af_irda.c                             |    4 -
- net/iucv/af_iucv.c                             |    2 -
- net/key/af_key.c                               |    1 -
- net/l2tp/l2tp_ip.c                             |    4 +-
- net/l2tp/l2tp_ip6.c                            |    2 +-
- net/l2tp/l2tp_ppp.c                            |    2 -
- net/llc/af_llc.c                               |    2 -
- net/netfilter/ipvs/ip_vs_core.c                |   55 +-
- net/netfilter/ipvs/ip_vs_pe_sip.c              |    8 +-
- net/netlink/af_netlink.c                       |    2 -
- net/netrom/af_netrom.c                         |    3 +-
- net/nfc/llcp_sock.c                            |    2 -
- net/nfc/rawsock.c                              |    2 -
- net/packet/af_packet.c                         |   95 +--
- net/packet/internal.h                          |    1 +
- net/phonet/datagram.c                          |    9 +-
- net/rds/recv.c                                 |    2 -
- net/rose/af_rose.c                             |    8 +-
- net/rxrpc/ar-recvmsg.c                         |    9 +-
- net/socket.c                                   |   24 +-
- net/tipc/socket.c                              |    6 -
- net/unix/af_unix.c                             |    5 -
- net/vmw_vsock/af_vsock.c                       |    2 -
- net/vmw_vsock/vmci_transport.c                 |    2 -
- net/x25/af_x25.c                               |    3 +-
- sound/pci/hda/patch_realtek.c                  |   55 +-
- sound/soc/Kconfig                              |    1 +
- sound/soc/Makefile                             |    1 +
- sound/soc/bcm/Kconfig                          |   24 +
- sound/soc/bcm/Makefile                         |   11 +
- sound/soc/bcm/bcm2708-i2s.c                    |  945 ++++++++++++++++++++++++
- sound/soc/bcm/hifiberry_dac.c                  |  100 +++
- sound/soc/bcm/rpi-dac.c                        |   97 +++
- sound/soc/codecs/Kconfig                       |    8 +
- sound/soc/codecs/Makefile                      |    4 +
- sound/soc/codecs/pcm1794a.c                    |   62 ++
- sound/soc/codecs/pcm5102a.c                    |   63 ++
- sound/soc/codecs/wm8731.c                      |    4 +-
- sound/soc/codecs/wm8990.c                      |    2 +
- sound/soc/soc-core.c                           |   16 +
- 198 files changed, 3068 insertions(+), 886 deletions(-)
- create mode 100644 drivers/dma/bcm2708-dmaengine.c
- create mode 100644 sound/soc/bcm/Kconfig
- create mode 100644 sound/soc/bcm/Makefile
- create mode 100644 sound/soc/bcm/bcm2708-i2s.c
- create mode 100644 sound/soc/bcm/hifiberry_dac.c
- create mode 100644 sound/soc/bcm/rpi-dac.c
- create mode 100644 sound/soc/codecs/pcm1794a.c
- create mode 100644 sound/soc/codecs/pcm5102a.c
+ arch/arm/Kconfig                          |    1 +
+ arch/arm/mach-bcm2708/bcm2708_gpio.c      |   28 ++++++++++++++--------------
+ arch/arm/mach-bcm2708/include/mach/gpio.h |    4 ++--
+ 3 files changed, 17 insertions(+), 16 deletions(-)
 
 
  Get DMA capable SPI master driver
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2013-12-14 21:37:47--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
-Resolving raw.github.com (raw.github.com)... 185.31.17.133
-Connecting to raw.github.com (raw.github.com)|185.31.17.133|:443... connected.
+--2014-01-24 19:01:28--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+Resolving raw.github.com (raw.github.com)... 185.31.16.133
+Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26638 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  844K=0.03s
+     0K .......... .......... ......                          100%  888K=0.03s
 
-2013-12-14 21:37:47 (844 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26638/26638]
+2014-01-24 19:01:28 (888 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26638/26638]
 
 
 
@@ -348,19 +147,15 @@ Already cloned
 
 => cd /home/pi/linux-rpi-3.10.y/drivers/video/fbtft && git pull
 From https://github.com/notro/fbtft
-   6938e00..5fc26ff  master     -> origin/master
-Updating 6938e00..5fc26ff
+   5fc26ff..238c3ad  master     -> origin/master
+Updating 5fc26ff..238c3ad
 Fast-forward
- Kconfig        |    6 +++
- Makefile       |    1 +
- fb_tinylcd.c   |  123 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- fbtft_device.c |   23 ++++++++++-
- 4 files changed, 152 insertions(+), 1 deletion(-)
- create mode 100644 fb_tinylcd.c
+ fbtft_device.c |  137 ++++++++++++++++++++++++++++++++------------------------
+ 1 file changed, 78 insertions(+), 59 deletions(-)
 
 #
 # End: init
-# Time: Sat Dec 14 21:37:50 2013
-# Elapsed: 1.31 min
+# Time: Fri Jan 24 19:01:30 2014
+# Elapsed: 2.50 min
 #
 

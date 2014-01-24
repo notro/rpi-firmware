@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Sat Dec 14 22:06:20 2013
+# Time: Fri Jan 24 19:30:21 2014
 #
 
 
@@ -996,6 +996,7 @@
   INSTALL net/ipv4/xfrm4_tunnel.ko
   INSTALL net/ipv6/ah6.ko
   INSTALL net/ipv6/esp6.ko
+  INSTALL net/ipv6/ip6_tunnel.ko
   INSTALL net/ipv6/ipcomp6.ko
   INSTALL net/ipv6/ipv6.ko
   INSTALL net/ipv6/netfilter/ip6_tables.ko
@@ -1243,9 +1244,11 @@
   INSTALL sound/pci/ac97/snd-ac97-codec.ko
   INSTALL sound/soc/bcm/snd-soc-bcm2708-i2s.ko
   INSTALL sound/soc/bcm/snd-soc-hifiberry-dac.ko
+  INSTALL sound/soc/bcm/snd-soc-hifiberry-digi.ko
   INSTALL sound/soc/bcm/snd-soc-rpi-dac.ko
   INSTALL sound/soc/codecs/snd-soc-pcm1794a.ko
   INSTALL sound/soc/codecs/snd-soc-pcm5102a.ko
+  INSTALL sound/soc/codecs/snd-soc-wm8804.ko
   INSTALL sound/soc/snd-soc-core.ko
   INSTALL sound/sound_firmware.ko
   INSTALL sound/usb/6fire/snd-usb-6fire.ko
@@ -1288,11 +1291,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.24+
+  DEPMOD  3.10.27+
 
 #
 # End: modules_install
-# Time: Sat Dec 14 22:06:33 2013
+# Time: Fri Jan 24 19:30:35 2014
 # Elapsed: 0.22 min
 #
 
