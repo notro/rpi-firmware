@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Fri Jan 24 19:01:31 2014
+# Time: Fri Jan 24 20:19:50 2014
 #
 
 
@@ -12,16 +12,11 @@
 => cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
   CLEAN   .
   CLEAN   arch/arm/kernel
-  CLEAN   drivers/tty/vt
-  CLEAN   drivers/video/logo
-  CLEAN   firmware
   CLEAN   kernel/debug/kdb
   CLEAN   kernel
   CLEAN   lib/raid6
   CLEAN   lib
   CLEAN   usr
-  CLEAN   arch/arm/boot/compressed
-  CLEAN   arch/arm/boot
   CLEAN   .tmp_versions
   CLEAN   scripts/basic
   CLEAN   scripts/genksyms
@@ -29,7 +24,7 @@
   CLEAN   scripts/mod
   CLEAN   scripts
   CLEAN   include/config include/generated arch/arm/include/generated
-  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
+  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h
 
 
  make bcmrpi_defconfig
@@ -49,13 +44,17 @@
 
 => cp -a /home/pi/linux-rpi-3.10.y/.config /home/pi/linux-rpi-3.10.y/.config.standard
 
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable SPI_BCM2708
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --disable BCM2708_SPIDEV
+
 
  All FBTFT modules as loadable modules
 ---------------------------------------
 
-=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module FB_TFT
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable FB_TFT
 
-=> cd /home/pi/linux-rpi-3.10.y && yes m | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+=> cd /home/pi/linux-rpi-3.10.y && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
 scripts/kconfig/conf --oldconfig Kconfig
 *
 * Restart config...
@@ -63,24 +62,24 @@ scripts/kconfig/conf --oldconfig Kconfig
 *
 * Support for small TFT LCD display modules
 *
-Support for small TFT LCD display modules (FB_TFT) [M/n/y] m
-  FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/?] (NEW) 
-  FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/?] (NEW) 
-  FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/?] (NEW) 
-  FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/?] (NEW) 
-  FB driver for the ILI9340 LCD Controller (FB_TFT_ILI9340) [N/m/?] (NEW) 
-  FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/?] (NEW) 
-  FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/?] (NEW) 
-  FB driver for the S6D1211 LCD Controller (FB_TFT_S6D1121) [N/m/?] (NEW) 
-  FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/?] (NEW) 
-  FB driver for the SSD1306 OLED Controller (FB_TFT_SSD1306) [N/m/?] (NEW) 
-  FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/?] (NEW) 
-  FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/?] (NEW) 
-  FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/?] (NEW) 
-  FB driver for tinylcd.com display (FB_TFT_TINYLCD) [N/m/?] (NEW) 
-  FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/?] (NEW) 
-  Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/?] (NEW) 
-  Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m] (NEW) 
+Support for small TFT LCD display modules (FB_TFT) [Y/n/m] y
+  FB driver for the HX8340BN LCD Controller (FB_TFT_HX8340BN) [N/m/y/?] (NEW) 
+  FB driver for the HX8347D LCD Controller (FB_TFT_HX8347D) [N/m/y/?] (NEW) 
+  FB driver for the ILI9320 LCD Controller (FB_TFT_ILI9320) [N/m/y/?] (NEW) 
+  FB driver for the ILI9325 LCD Controller (FB_TFT_ILI9325) [N/m/y/?] (NEW) 
+  FB driver for the ILI9340 LCD Controller (FB_TFT_ILI9340) [N/m/y/?] (NEW) 
+  FB driver for the ILI9341 LCD Controller (FB_TFT_ILI9341) [N/m/y/?] (NEW) 
+  FB driver for the PCD8544 LCD Controller (FB_TFT_PCD8544) [N/m/y/?] (NEW) 
+  FB driver for the S6D1211 LCD Controller (FB_TFT_S6D1121) [N/m/y/?] (NEW) 
+  FB driver for the SSD1289 LCD Controller (FB_TFT_SSD1289) [N/m/y/?] (NEW) 
+  FB driver for the SSD1306 OLED Controller (FB_TFT_SSD1306) [N/m/y/?] (NEW) 
+  FB driver for the SSD1331 LCD Controller (FB_TFT_SSD1331) [N/m/y/?] (NEW) 
+  FB driver for the SSD1351 LCD Controller (FB_TFT_SSD1351) [N/m/y/?] (NEW) 
+  FB driver for the ST7735R LCD Controller (FB_TFT_ST7735R) [N/m/y/?] (NEW) 
+  FB driver for tinylcd.com display (FB_TFT_TINYLCD) [N/m/y/?] (NEW) 
+  FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/y/?] (NEW) 
+  Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/y/?] (NEW) 
+  Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m/y] (NEW) 
 #
 # configuration written to .config
 #
@@ -379,7 +378,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Fri Jan 24 19:02:09 2014
-# Elapsed: 0.64 min
+# Time: Fri Jan 24 20:20:18 2014
+# Elapsed: 0.48 min
 #
 

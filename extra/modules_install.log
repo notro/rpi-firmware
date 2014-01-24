@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Fri Jan 24 19:30:21 2014
+# Time: Fri Jan 24 20:48:06 2014
 #
 
 
@@ -691,7 +691,6 @@
   INSTALL drivers/scsi/osst.ko
   INSTALL drivers/scsi/sr_mod.ko
   INSTALL drivers/scsi/st.ko
-  INSTALL drivers/spi/spi-bcm2708.ko
   INSTALL drivers/ssb/ssb.ko
   INSTALL drivers/staging/media/as102/dvb-as102.ko
   INSTALL drivers/staging/media/lirc/lirc_igorplugusb.ko
@@ -803,28 +802,6 @@
   INSTALL drivers/usb/storage/ums-sddr55.ko
   INSTALL drivers/usb/storage/ums-usbat.ko
   INSTALL drivers/video/backlight/lcd.ko
-  INSTALL drivers/video/fb_sys_fops.ko
-  INSTALL drivers/video/fbtft/fb_hx8340bn.ko
-  INSTALL drivers/video/fbtft/fb_hx8347d.ko
-  INSTALL drivers/video/fbtft/fb_ili9320.ko
-  INSTALL drivers/video/fbtft/fb_ili9325.ko
-  INSTALL drivers/video/fbtft/fb_ili9340.ko
-  INSTALL drivers/video/fbtft/fb_ili9341.ko
-  INSTALL drivers/video/fbtft/fb_pcd8544.ko
-  INSTALL drivers/video/fbtft/fb_s6d1121.ko
-  INSTALL drivers/video/fbtft/fb_ssd1289.ko
-  INSTALL drivers/video/fbtft/fb_ssd1306.ko
-  INSTALL drivers/video/fbtft/fb_ssd1331.ko
-  INSTALL drivers/video/fbtft/fb_ssd1351.ko
-  INSTALL drivers/video/fbtft/fb_st7735r.ko
-  INSTALL drivers/video/fbtft/fb_tinylcd.ko
-  INSTALL drivers/video/fbtft/fb_watterott.ko
-  INSTALL drivers/video/fbtft/fbtft.ko
-  INSTALL drivers/video/fbtft/fbtft_device.ko
-  INSTALL drivers/video/fbtft/flexfb.ko
-  INSTALL drivers/video/syscopyarea.ko
-  INSTALL drivers/video/sysfillrect.ko
-  INSTALL drivers/video/sysimgblt.ko
   INSTALL drivers/w1/masters/ds1wm.ko
   INSTALL drivers/w1/masters/ds2482.ko
   INSTALL drivers/w1/masters/ds2490.ko
@@ -1295,7 +1272,7 @@
 
 #
 # End: modules_install
-# Time: Fri Jan 24 19:30:35 2014
-# Elapsed: 0.22 min
+# Time: Fri Jan 24 20:48:19 2014
+# Elapsed: 0.21 min
 #
 

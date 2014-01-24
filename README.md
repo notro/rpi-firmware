@@ -2,7 +2,7 @@
 notro/rpi-firmware
 =======================================================
 
-Raspberry Pi kernel and firmware with support for FBTFT.
+Raspberry Pi kernel and firmware with builtin support for FBTFT (not loadable modules).
 
 
 Build scripts used: https://github.com/notro/rpi-build  
@@ -19,7 +19,7 @@ sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin
 
 **Install**
 ```text
-sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
+sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update
 sudo shutdown -r now
 ```
 
@@ -41,7 +41,8 @@ https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea
 
 
 ### Kernel patches
-* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/master/fbtft.patch)
+* [bcm2708.c.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/bcm2708.c.patch)
+* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/fbtft.patch)
 
 
 ### Kernel configuration changes
@@ -49,6 +50,8 @@ https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea
 Deleted:  
 ```text
 CONFIG_BACKLIGHT_CLASS_DEVICE=m
+CONFIG_BCM2708_SPIDEV=y
+CONFIG_SPI_BCM2708=m
 ```
 
 Added:  
@@ -65,28 +68,28 @@ CONFIG_CAN_SLCAN=m
 CONFIG_CAN_VCAN=m
 CONFIG_FB_BACKLIGHT=y
 CONFIG_FB_DEFERRED_IO=y
-CONFIG_FB_FLEX=m
-CONFIG_FB_SYS_COPYAREA=m
-CONFIG_FB_SYS_FILLRECT=m
-CONFIG_FB_SYS_FOPS=m
-CONFIG_FB_SYS_IMAGEBLIT=m
-CONFIG_FB_TFT=m
-CONFIG_FB_TFT_FBTFT_DEVICE=m
-CONFIG_FB_TFT_HX8340BN=m
-CONFIG_FB_TFT_HX8347D=m
-CONFIG_FB_TFT_ILI9320=m
-CONFIG_FB_TFT_ILI9325=m
-CONFIG_FB_TFT_ILI9340=m
-CONFIG_FB_TFT_ILI9341=m
-CONFIG_FB_TFT_PCD8544=m
-CONFIG_FB_TFT_S6D1121=m
-CONFIG_FB_TFT_SSD1289=m
-CONFIG_FB_TFT_SSD1306=m
-CONFIG_FB_TFT_SSD1331=m
-CONFIG_FB_TFT_SSD1351=m
-CONFIG_FB_TFT_ST7735R=m
-CONFIG_FB_TFT_TINYLCD=m
-CONFIG_FB_TFT_WATTEROTT=m
+CONFIG_FB_FLEX=y
+CONFIG_FB_SYS_COPYAREA=y
+CONFIG_FB_SYS_FILLRECT=y
+CONFIG_FB_SYS_FOPS=y
+CONFIG_FB_SYS_IMAGEBLIT=y
+CONFIG_FB_TFT=y
+CONFIG_FB_TFT_FBTFT_DEVICE=y
+CONFIG_FB_TFT_HX8340BN=y
+CONFIG_FB_TFT_HX8347D=y
+CONFIG_FB_TFT_ILI9320=y
+CONFIG_FB_TFT_ILI9325=y
+CONFIG_FB_TFT_ILI9340=y
+CONFIG_FB_TFT_ILI9341=y
+CONFIG_FB_TFT_PCD8544=y
+CONFIG_FB_TFT_S6D1121=y
+CONFIG_FB_TFT_SSD1289=y
+CONFIG_FB_TFT_SSD1306=y
+CONFIG_FB_TFT_SSD1331=y
+CONFIG_FB_TFT_SSD1351=y
+CONFIG_FB_TFT_ST7735R=y
+CONFIG_FB_TFT_TINYLCD=y
+CONFIG_FB_TFT_WATTEROTT=y
 CONFIG_FONTS=y
 CONFIG_FONT_10x18=y
 CONFIG_FONT_6x11=y
@@ -103,5 +106,6 @@ CONFIG_INPUT_TOUCHSCREEN=y
 CONFIG_KEYBOARD_GPIO=m
 CONFIG_KEYBOARD_GPIO_POLLED=m
 CONFIG_MOUSE_GPIO=m
+CONFIG_SPI_BCM2708=y
 CONFIG_TOUCHSCREEN_ADS7846=m
 ```
