@@ -27,21 +27,26 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/ff9f6d87957877265086ab8368bdabf27d35f491
+https://github.com/raspberrypi/linux/tree/439def4b519a036cd5b12f88f7b90a4a833ffe9a
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
-https://github.com/notro/fbtft.git/tree/5fc26ff3be79745151b2dd59e24f01a7c1d3bc56
+https://github.com/notro/fbtft.git/tree/f2f198292cf577438d5954117c9862b0fbedb601
 * Various SPI device adding modules  
-https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
+https://github.com/notro/fbtft_tools/tree/cb1c93eb36f274ea2456aa8dc8946acd30a6dc6f
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/1b78f9ad6bb826dbce97b55862e06db8d4aea7f4
+https://github.com/richardghirst/PiBits/tree/bf455ee13b9ec03f6678f2cbf6827b792cc570c0
 * spi-config: SPI device adding module  
-https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea87
+https://github.com/msperl/spi-config/tree/878f592626db291b3a62b5054278c95e92bc0b39
 
 
 ### Kernel patches
-* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/master/fbtft.patch)
+* [01-fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/master/01-fbtft.patch)
+* [02-mach-bcm2708-Reserve-64-IRQs-for-peripherals.patch](https://github.com/notro/rpi-build/blob/master/patches/master/02-mach-bcm2708-Reserve-64-IRQs-for-peripherals.patch)
+* [03-make-room-for-gpio-chips.patch](https://github.com/notro/rpi-build/blob/master/patches/master/03-make-room-for-gpio-chips.patch)
+* [04-gpio_backlight.patch](https://github.com/notro/rpi-build/blob/master/patches/master/04-gpio_backlight.patch)
+* [05-gpio_backlight-gpio-can-sleep.patch](https://github.com/notro/rpi-build/blob/master/patches/master/05-gpio_backlight-gpio-can-sleep.patch)
+* [06-stmpe-ts-Don-t-report-empty-packets.patch](https://github.com/notro/rpi-build/blob/master/patches/master/06-stmpe-ts-Don-t-report-empty-packets.patch)
 
 
 ### Kernel configuration changes
@@ -49,11 +54,13 @@ https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea
 Deleted:  
 ```text
 CONFIG_BACKLIGHT_CLASS_DEVICE=m
+CONFIG_MFD_CORE=m
 ```
 
 Added:  
 ```text
 CONFIG_BACKLIGHT_CLASS_DEVICE=y
+CONFIG_BACKLIGHT_GPIO=m
 CONFIG_CAN=y
 CONFIG_CAN_BCM=m
 CONFIG_CAN_CALC_BITTIMING=y
@@ -97,11 +104,17 @@ CONFIG_FONT_PEARL_8x8=y
 CONFIG_FONT_SUN12x22=y
 CONFIG_FONT_SUN8x16=y
 CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+CONFIG_GPIO_STMPE=y
 CONFIG_INPUT_KEYBOARD=y
 CONFIG_INPUT_MOUSE=y
 CONFIG_INPUT_TOUCHSCREEN=y
 CONFIG_KEYBOARD_GPIO=m
 CONFIG_KEYBOARD_GPIO_POLLED=m
+CONFIG_MFD_CORE=y
+CONFIG_MFD_STMPE=y
 CONFIG_MOUSE_GPIO=m
+CONFIG_STMPE_I2C=y
+CONFIG_STMPE_SPI=y
 CONFIG_TOUCHSCREEN_ADS7846=m
+CONFIG_TOUCHSCREEN_STMPE=m
 ```

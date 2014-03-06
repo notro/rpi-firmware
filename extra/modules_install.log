@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Sat Dec 14 22:06:20 2013
+# Time: Thu Mar  6 19:44:28 2014
 #
 
 
@@ -152,6 +152,7 @@
   INSTALL drivers/input/serio/serio_raw.ko
   INSTALL drivers/input/serio/serport.ko
   INSTALL drivers/input/touchscreen/ads7846.ko
+  INSTALL drivers/input/touchscreen/stmpe-ts.ko
   INSTALL drivers/leds/led-class.ko
   INSTALL drivers/leds/leds-gpio.ko
   INSTALL drivers/leds/trigger/ledtrig-camera.ko
@@ -548,7 +549,6 @@
   INSTALL drivers/media/v4l2-core/videobuf2-memops.ko
   INSTALL drivers/media/v4l2-core/videobuf2-vmalloc.ko
   INSTALL drivers/media/v4l2-core/videodev.ko
-  INSTALL drivers/mfd/mfd-core.ko
   INSTALL drivers/mfd/wl1273-core.ko
   INSTALL drivers/misc/eeprom/eeprom_93cx6.ko
   INSTALL drivers/misc/ti-st/st_drv.ko
@@ -689,6 +689,7 @@
   INSTALL drivers/scsi/libiscsi.ko
   INSTALL drivers/scsi/libiscsi_tcp.ko
   INSTALL drivers/scsi/osst.ko
+  INSTALL drivers/scsi/sg.ko
   INSTALL drivers/scsi/sr_mod.ko
   INSTALL drivers/scsi/st.ko
   INSTALL drivers/spi/spi-bcm2708.ko
@@ -802,6 +803,7 @@
   INSTALL drivers/usb/storage/ums-sddr09.ko
   INSTALL drivers/usb/storage/ums-sddr55.ko
   INSTALL drivers/usb/storage/ums-usbat.ko
+  INSTALL drivers/video/backlight/gpio_backlight.ko
   INSTALL drivers/video/backlight/lcd.ko
   INSTALL drivers/video/fb_sys_fops.ko
   INSTALL drivers/video/fbtft/fb_hx8340bn.ko
@@ -996,6 +998,7 @@
   INSTALL net/ipv4/xfrm4_tunnel.ko
   INSTALL net/ipv6/ah6.ko
   INSTALL net/ipv6/esp6.ko
+  INSTALL net/ipv6/ip6_tunnel.ko
   INSTALL net/ipv6/ipcomp6.ko
   INSTALL net/ipv6/ipv6.ko
   INSTALL net/ipv6/netfilter/ip6_tables.ko
@@ -1243,9 +1246,11 @@
   INSTALL sound/pci/ac97/snd-ac97-codec.ko
   INSTALL sound/soc/bcm/snd-soc-bcm2708-i2s.ko
   INSTALL sound/soc/bcm/snd-soc-hifiberry-dac.ko
+  INSTALL sound/soc/bcm/snd-soc-hifiberry-digi.ko
   INSTALL sound/soc/bcm/snd-soc-rpi-dac.ko
   INSTALL sound/soc/codecs/snd-soc-pcm1794a.ko
   INSTALL sound/soc/codecs/snd-soc-pcm5102a.ko
+  INSTALL sound/soc/codecs/snd-soc-wm8804.ko
   INSTALL sound/soc/snd-soc-core.ko
   INSTALL sound/sound_firmware.ko
   INSTALL sound/usb/6fire/snd-usb-6fire.ko
@@ -1288,11 +1293,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.24+
+  DEPMOD  3.10.32+
 
 #
 # End: modules_install
-# Time: Sat Dec 14 22:06:33 2013
-# Elapsed: 0.22 min
+# Time: Thu Mar  6 19:44:42 2014
+# Elapsed: 0.24 min
 #
 
