@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Fri Jan 24 20:48:06 2014
+# Time: Thu Mar  6 18:38:52 2014
 #
 
 
@@ -152,6 +152,7 @@
   INSTALL drivers/input/serio/serio_raw.ko
   INSTALL drivers/input/serio/serport.ko
   INSTALL drivers/input/touchscreen/ads7846.ko
+  INSTALL drivers/input/touchscreen/stmpe-ts.ko
   INSTALL drivers/leds/led-class.ko
   INSTALL drivers/leds/leds-gpio.ko
   INSTALL drivers/leds/trigger/ledtrig-camera.ko
@@ -548,7 +549,6 @@
   INSTALL drivers/media/v4l2-core/videobuf2-memops.ko
   INSTALL drivers/media/v4l2-core/videobuf2-vmalloc.ko
   INSTALL drivers/media/v4l2-core/videodev.ko
-  INSTALL drivers/mfd/mfd-core.ko
   INSTALL drivers/mfd/wl1273-core.ko
   INSTALL drivers/misc/eeprom/eeprom_93cx6.ko
   INSTALL drivers/misc/ti-st/st_drv.ko
@@ -689,6 +689,7 @@
   INSTALL drivers/scsi/libiscsi.ko
   INSTALL drivers/scsi/libiscsi_tcp.ko
   INSTALL drivers/scsi/osst.ko
+  INSTALL drivers/scsi/sg.ko
   INSTALL drivers/scsi/sr_mod.ko
   INSTALL drivers/scsi/st.ko
   INSTALL drivers/ssb/ssb.ko
@@ -801,6 +802,7 @@
   INSTALL drivers/usb/storage/ums-sddr09.ko
   INSTALL drivers/usb/storage/ums-sddr55.ko
   INSTALL drivers/usb/storage/ums-usbat.ko
+  INSTALL drivers/video/backlight/gpio_backlight.ko
   INSTALL drivers/video/backlight/lcd.ko
   INSTALL drivers/w1/masters/ds1wm.ko
   INSTALL drivers/w1/masters/ds2482.ko
@@ -1268,11 +1270,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.27+
+  DEPMOD  3.10.32+
 
 #
 # End: modules_install
-# Time: Fri Jan 24 20:48:19 2014
-# Elapsed: 0.21 min
+# Time: Thu Mar  6 18:39:06 2014
+# Elapsed: 0.23 min
 #
 

@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Fri Jan 24 20:19:43 2014
+# Time: Thu Mar  6 18:05:18 2014
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-940dc3b5ea0a001096c5fbb2d483a961d42fe85c	refs/heads/master
+bec4bd0f70aa46f55a980996e8774547c0f909c8	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -39,12 +39,16 @@ Already cloned
 => cd /home/pi/linux-rpi-3.10.y && git checkout -- .
 
 => cd /home/pi/linux-rpi-3.10.y && git clean -fd
+Removing drivers/video/backlight/gpio_backlight.c
 Removing drivers/video/fbtft/
+Removing include/linux/platform_data/gpio_backlight.h
 
 => cd /home/pi/linux-rpi-3.10.y && git checkout rpi-3.10.y
 Already on 'rpi-3.10.y'
 
 => cd /home/pi/linux-rpi-3.10.y && git pull
+From https://github.com/raspberrypi/linux
+   dda811c..054755a  rpi-3.13.y-next -> origin/rpi-3.13.y-next
 Already up-to-date.
 
 
@@ -52,31 +56,64 @@ Already up-to-date.
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2014-01-24 20:19:48--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
-Resolving raw.github.com (raw.github.com)... 185.31.17.133
-Connecting to raw.github.com (raw.github.com)|185.31.17.133|:443... connected.
+--2014-03-06 18:05:46--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+Resolving raw.github.com (raw.github.com)... 185.31.16.133
+Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 26638 (26K) [text/plain]
+Length: 26641 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  855K=0.03s
+     0K .......... .......... ......                          100%  745K=0.03s
 
-2014-01-24 20:19:48 (855 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26638/26638]
+2014-03-06 18:05:46 (745 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
 
 
 
  Apply kernel patches
 ----------------------
 
-=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/bcm2708.c.patch
-Checking patch arch/arm/mach-bcm2708/bcm2708.c...
-Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
-
-=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/fbtft.patch
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/010-fbtft.patch
 Checking patch drivers/video/Kconfig...
 Checking patch drivers/video/Makefile...
 Applied patch drivers/video/Kconfig cleanly.
 Applied patch drivers/video/Makefile cleanly.
+
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/020-bcm2708.c.patch
+Checking patch arch/arm/mach-bcm2708/bcm2708.c...
+Hunk #1 succeeded at 87 (offset 2 lines).
+Hunk #2 succeeded at 790 (offset 2 lines).
+Hunk #3 succeeded at 808 (offset 2 lines).
+Hunk #4 succeeded at 1016 (offset 6 lines).
+Applied patch arch/arm/mach-bcm2708/bcm2708.c cleanly.
+
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/021-mach-bcm2708-Reserve-64-IRQs-for-peripherals.patch
+Checking patch arch/arm/mach-bcm2708/include/mach/irqs.h...
+Applied patch arch/arm/mach-bcm2708/include/mach/irqs.h cleanly.
+
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/030-make-room-for-gpio-chips.patch
+Checking patch arch/arm/mach-bcm2708/bcm2708_gpio.c...
+Checking patch arch/arm/mach-bcm2708/include/mach/gpio.h...
+Applied patch arch/arm/mach-bcm2708/bcm2708_gpio.c cleanly.
+Applied patch arch/arm/mach-bcm2708/include/mach/gpio.h cleanly.
+
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/040-gpio_backlight.patch
+Checking patch drivers/video/backlight/Kconfig...
+Checking patch drivers/video/backlight/Makefile...
+Checking patch drivers/video/backlight/gpio_backlight.c...
+Checking patch include/linux/platform_data/gpio_backlight.h...
+Applied patch drivers/video/backlight/Kconfig cleanly.
+Applied patch drivers/video/backlight/Makefile cleanly.
+Applied patch drivers/video/backlight/gpio_backlight.c cleanly.
+Applied patch include/linux/platform_data/gpio_backlight.h cleanly.
+
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/041-gpio_backlight-gpio-can-sleep.patch
+Checking patch drivers/video/backlight/gpio_backlight.c...
+Applied patch drivers/video/backlight/gpio_backlight.c cleanly.
+
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/050-stmpe-ts-Don-t-report-empty-packets.patch
+Checking patch drivers/input/touchscreen/stmpe-ts.c...
+Hunk #1 succeeded at 151 (offset 3 lines).
+Applied patch drivers/input/touchscreen/stmpe-ts.c cleanly.
 
 
  Get FBTFT
@@ -90,7 +127,7 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Fri Jan 24 20:19:50 2014
-# Elapsed: 0.10 min
+# Time: Thu Mar  6 18:05:48 2014
+# Elapsed: 0.49 min
 #
 

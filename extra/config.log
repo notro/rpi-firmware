@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Fri Jan 24 20:19:50 2014
+# Time: Thu Mar  6 18:05:48 2014
 #
 
 
@@ -12,11 +12,16 @@
 => cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
   CLEAN   .
   CLEAN   arch/arm/kernel
+  CLEAN   drivers/tty/vt
+  CLEAN   drivers/video/logo
+  CLEAN   firmware
   CLEAN   kernel/debug/kdb
   CLEAN   kernel
   CLEAN   lib/raid6
   CLEAN   lib
   CLEAN   usr
+  CLEAN   arch/arm/boot/compressed
+  CLEAN   arch/arm/boot
   CLEAN   .tmp_versions
   CLEAN   scripts/basic
   CLEAN   scripts/genksyms
@@ -24,7 +29,7 @@
   CLEAN   scripts/mod
   CLEAN   scripts
   CLEAN   include/config include/generated arch/arm/include/generated
-  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h
+  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
 
 
  make bcmrpi_defconfig
@@ -44,13 +49,9 @@
 
 => cp -a /home/pi/linux-rpi-3.10.y/.config /home/pi/linux-rpi-3.10.y/.config.standard
 
-=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable SPI_BCM2708
 
-=> cd /home/pi/linux-rpi-3.10.y && scripts/config --disable BCM2708_SPIDEV
-
-
- All FBTFT modules as loadable modules
----------------------------------------
+ FBTFT modules
+---------------
 
 => cd /home/pi/linux-rpi-3.10.y && scripts/config --enable FB_TFT
 
@@ -80,6 +81,16 @@ Support for small TFT LCD display modules (FB_TFT) [Y/n/m] y
   FB driver for the WATTEROTT LCD Controller (FB_TFT_WATTEROTT) [N/m/y/?] (NEW) 
   Generic FB driver for TFT LCD displays (FB_FLEX) [N/m/y/?] (NEW) 
   Module to for adding FBTFT devices (FB_TFT_FBTFT_DEVICE) [N/m/y] (NEW) 
+#
+# configuration written to .config
+#
+yes: standard output: Broken pipe
+yes: write error
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module CONFIG_BACKLIGHT_GPIO
+
+=> cd /home/pi/linux-rpi-3.10.y && yes y | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+scripts/kconfig/conf --oldconfig Kconfig
 #
 # configuration written to .config
 #
@@ -242,6 +253,152 @@ scripts/kconfig/conf --oldconfig Kconfig
 #
 
 
+ STMPE GPIO and Touch
+----------------------
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable MFD_STMPE
+
+=> cd /home/pi/linux-rpi-3.10.y && yes "" | ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+scripts/kconfig/conf --oldconfig Kconfig
+*
+* Restart config...
+*
+*
+* Keyboards
+*
+Keyboards (INPUT_KEYBOARD) [Y/n/?] y
+  ADP5588/87 I2C QWERTY Keypad and IO Expander (KEYBOARD_ADP5588) [N/m/y/?] n
+  ADP5585/ADP5589 I2C QWERTY Keypad and IO Expander (KEYBOARD_ADP5589) [N/m/y/?] n
+  AT keyboard (KEYBOARD_ATKBD) [N/m/y/?] n
+  Atmel AT42QT1070 Touch Sensor Chip (KEYBOARD_QT1070) [N/m/y/?] n
+  Atmel AT42QT2160 Touch Sensor Chip (KEYBOARD_QT2160) [N/m/y/?] n
+  DECstation/VAXstation LK201/LK401 keyboard (KEYBOARD_LKKBD) [N/m/y/?] n
+  GPIO Buttons (KEYBOARD_GPIO) [M/n/y/?] m
+  Polled GPIO buttons (KEYBOARD_GPIO_POLLED) [M/n/y/?] m
+  TCA6416/TCA6408A Keypad Support (KEYBOARD_TCA6416) [N/m/y/?] n
+  TCA8418 Keypad Support (KEYBOARD_TCA8418) [N/m/y/?] n
+  GPIO driven matrix keypad support (KEYBOARD_MATRIX) [N/m/y/?] n
+  LM8323 keypad chip (KEYBOARD_LM8323) [N/m/?] n
+  LM8333 keypad chip (KEYBOARD_LM8333) [N/m/y/?] n
+  Maxim MAX7359 Key Switch Controller (KEYBOARD_MAX7359) [N/m/y/?] n
+  MELFAS MCS Touchkey (KEYBOARD_MCS) [N/m/y/?] n
+  Freescale MPR121 Touchkey (KEYBOARD_MPR121) [N/m/y/?] n
+  Newton keyboard (KEYBOARD_NEWTON) [N/m/y/?] n
+  OpenCores Keyboard Controller (KEYBOARD_OPENCORES) [N/m/y/?] n
+  Samsung keypad support (KEYBOARD_SAMSUNG) [N/m/y/?] n
+  Stowaway keyboard (KEYBOARD_STOWAWAY) [N/m/y/?] n
+  Sun Type 4 and Type 5 keyboard (KEYBOARD_SUNKBD) [N/m/y/?] n
+  STMPE keypad support (KEYBOARD_STMPE) [N/m/y/?] (NEW) 
+  XT keyboard (KEYBOARD_XTKBD) [N/m/y/?] n
+*
+* Touchscreens
+*
+Touchscreens (INPUT_TOUCHSCREEN) [Y/n/?] y
+  ADS7846/TSC2046/AD7873 and AD(S)7843 based touchscreens (TOUCHSCREEN_ADS7846) [M/n/y/?] m
+  AD7877 based touchscreens (TOUCHSCREEN_AD7877) [N/m/y/?] n
+  Analog Devices AD7879-1/AD7889-1 touchscreen interface (TOUCHSCREEN_AD7879) [N/m/y/?] n
+  Atmel mXT I2C Touchscreen (TOUCHSCREEN_ATMEL_MXT) [N/m/y/?] n
+  AUO in-cell touchscreen using Pixcir ICs (TOUCHSCREEN_AUO_PIXCIR) [N/m/y/?] n
+  BU21013 based touch panel controllers (TOUCHSCREEN_BU21013) [N/m/y/?] n
+  cy8ctmg110 touchscreen (TOUCHSCREEN_CY8CTMG110) [N/m/y/?] n
+  Cypress TTSP touchscreen (TOUCHSCREEN_CYTTSP_CORE) [N/m/y/?] n
+  Dynapro serial touchscreen (TOUCHSCREEN_DYNAPRO) [N/m/y/?] n
+  Hampshire serial touchscreen (TOUCHSCREEN_HAMPSHIRE) [N/m/y/?] n
+  EETI touchscreen panel support (TOUCHSCREEN_EETI) [N/m/y/?] n
+  Fujitsu serial touchscreen (TOUCHSCREEN_FUJITSU) [N/m/y/?] n
+  Ilitek ILI210X based touchscreen (TOUCHSCREEN_ILI210X) [N/m/y/?] n
+  Gunze AHL-51S touchscreen (TOUCHSCREEN_GUNZE) [N/m/y/?] n
+  Elo serial touchscreens (TOUCHSCREEN_ELO) [N/m/y/?] n
+  Wacom W8001 penabled serial touchscreen (TOUCHSCREEN_WACOM_W8001) [N/m/y/?] n
+  Wacom Tablet support (I2C) (TOUCHSCREEN_WACOM_I2C) [N/m/y/?] n
+  MAX11801 based touchscreens (TOUCHSCREEN_MAX11801) [N/m/y/?] n
+  MELFAS MCS-5000 touchscreen (TOUCHSCREEN_MCS5000) [N/m/y/?] n
+  MELFAS MMS114 touchscreen (TOUCHSCREEN_MMS114) [N/m/y/?] n
+  MicroTouch serial touchscreens (TOUCHSCREEN_MTOUCH) [N/m/y/?] n
+  iNexio serial touchscreens (TOUCHSCREEN_INEXIO) [N/m/y/?] n
+  ICS MicroClock MK712 touchscreen (TOUCHSCREEN_MK712) [N/m/y/?] n
+  Penmount serial touchscreen (TOUCHSCREEN_PENMOUNT) [N/m/y/?] n
+  EDT FocalTech FT5x06 I2C Touchscreen support (TOUCHSCREEN_EDT_FT5X06) [N/m/y/?] n
+  Touchright serial touchscreen (TOUCHSCREEN_TOUCHRIGHT) [N/m/y/?] n
+  Touchwin serial touchscreen (TOUCHSCREEN_TOUCHWIN) [N/m/y/?] n
+  PIXCIR I2C touchscreens (TOUCHSCREEN_PIXCIR) [N/m/y/?] n
+  Support for WM97xx AC97 touchscreen controllers (TOUCHSCREEN_WM97XX) [N/m/?] n
+  USB Touchscreen Driver (TOUCHSCREEN_USB_COMPOSITE) [N/m/y/?] n
+  Sahara TouchIT-213 touchscreen (TOUCHSCREEN_TOUCHIT213) [N/m/y/?] n
+  TSC-10/25/40 serial touchscreen support (TOUCHSCREEN_TSC_SERIO) [N/m/y/?] n
+  TSC2005 based touchscreens (TOUCHSCREEN_TSC2005) [N/m/y/?] n
+  TSC2007 based touchscreens (TOUCHSCREEN_TSC2007) [N/m/y/?] n
+  W90P910 touchscreen driver (TOUCHSCREEN_W90X900) [N/m/y/?] n
+  Sitronix ST1232 touchscreen controllers (TOUCHSCREEN_ST1232) [N/m/y/?] n
+  STMicroelectronics STMPE touchscreens (TOUCHSCREEN_STMPE) [N/m/y/?] (NEW) 
+  TPS6507x based touchscreens (TOUCHSCREEN_TPS6507X) [N/m/y/?] n
+*
+* GPIO Support
+*
+GPIO Support (GPIOLIB) [Y/?] y
+  Debug GPIO calls (DEBUG_GPIO) [N/y/?] n
+  /sys/class/gpio/... (sysfs interface) (GPIO_SYSFS) [Y/n/?] y
+  *
+  * Memory mapped GPIO drivers:
+  *
+  Generic memory-mapped GPIO controller support (MMIO platform device) (GPIO_GENERIC_PLATFORM) [N/m/y/?] n
+  Emma Mobile GPIO (GPIO_EM) [N/m/y/?] n
+  PrimeCell PL061 GPIO support (GPIO_PL061) [N/y/?] n
+  Renesas R-Car GPIO (GPIO_RCAR) [N/m/y/?] n
+  TS-5500 DIO blocks and compatibles (GPIO_TS5500) [N/m/y/?] n
+  *
+  * I2C GPIO expanders:
+  *
+  Maxim MAX7300 GPIO expander (GPIO_MAX7300) [N/m/y/?] n
+  MAX7319, MAX7320-7327 I2C Port Expanders (GPIO_MAX732X) [N/m/y/?] n
+  PCA953x, PCA955x, PCA957x, TCA64xx, and MAX7310 I/O ports (GPIO_PCA953X) [N/m/y/?] n
+  PCF857x, PCA{85,96}7x, and MAX732[89] I2C GPIO expanders (GPIO_PCF857X) [N/m/y/?] n
+  Semtech SX150x I2C GPIO expander (GPIO_SX150X) [N/y/?] n
+  STMPE GPIOs (GPIO_STMPE) [N/y/?] (NEW) 
+  ADP5588 I2C GPIO expander (GPIO_ADP5588) [N/m/y/?] n
+  *
+  * PCI GPIO expanders:
+  *
+  *
+  * SPI GPIO expanders:
+  *
+  Maxim MAX7301 GPIO expander (GPIO_MAX7301) [N/m/y/?] n
+  Microchip MCP23xxx I/O expander (GPIO_MCP23S08) [N/m/y/?] n
+  Freescale MC33880 high-side/low-side switch (GPIO_MC33880) [N/m/y/?] n
+  74x164 serial-in/parallel-out 8-bits shift register (GPIO_74X164) [N/m/y/?] n
+  *
+  * AC97 GPIO expanders:
+  *
+  *
+  * MODULbus GPIO expanders:
+  *
+  *
+  * USB GPIO expanders:
+  *
+*
+* STMicroelectronics STMPE Interface Drivers
+*
+STMicroelectronics STMPE I2C Inteface (STMPE_I2C) [Y/n/?] (NEW) 
+STMicroelectronics STMPE SPI Inteface (STMPE_SPI) [N/y/?] (NEW) 
+#
+# configuration written to .config
+#
+yes: standard output: Broken pipe
+yes: write error
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable STMPE_SPI
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable GPIO_STMPE
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --module TOUCHSCREEN_STMPE
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+scripts/kconfig/conf --oldconfig Kconfig
+#
+# configuration written to .config
+#
+
+
  CAN bus
 ---------
 
@@ -376,9 +533,19 @@ scripts/kconfig/conf --oldconfig Kconfig
 # configuration written to .config
 #
 
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --enable SPI_BCM2708
+
+=> cd /home/pi/linux-rpi-3.10.y && scripts/config --disable BCM2708_SPIDEV
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make oldconfig
+scripts/kconfig/conf --oldconfig Kconfig
+#
+# configuration written to .config
+#
+
 #
 # End: config
-# Time: Fri Jan 24 20:20:18 2014
-# Elapsed: 0.48 min
+# Time: Thu Mar  6 18:06:30 2014
+# Elapsed: 0.71 min
 #
 

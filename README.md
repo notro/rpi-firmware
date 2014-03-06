@@ -27,22 +27,27 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/943b563ec9961b53b77a0e7b6c07289826c082a5
+https://github.com/raspberrypi/linux/tree/439def4b519a036cd5b12f88f7b90a4a833ffe9a
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
-https://github.com/notro/fbtft.git/tree/238c3ad645a5a8214ec3190e621958d7d837ca21
+https://github.com/notro/fbtft.git/tree/f2f198292cf577438d5954117c9862b0fbedb601
 * Various SPI device adding modules  
-https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
+https://github.com/notro/fbtft_tools/tree/cb1c93eb36f274ea2456aa8dc8946acd30a6dc6f
 * ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/e62579ecb7ab46f8c081c7283b964a736363290b
+https://github.com/richardghirst/PiBits/tree/bf455ee13b9ec03f6678f2cbf6827b792cc570c0
 * spi-config: SPI device adding module  
-https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea87
+https://github.com/msperl/spi-config/tree/878f592626db291b3a62b5054278c95e92bc0b39
 
 
 ### Kernel patches
-* [bcm2708.c.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/bcm2708.c.patch)
-* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/fbtft.patch)
+* [010-fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/010-fbtft.patch)
+* [020-bcm2708.c.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/020-bcm2708.c.patch)
+* [021-mach-bcm2708-Reserve-64-IRQs-for-peripherals.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/021-mach-bcm2708-Reserve-64-IRQs-for-peripherals.patch)
+* [030-make-room-for-gpio-chips.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/030-make-room-for-gpio-chips.patch)
+* [040-gpio_backlight.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/040-gpio_backlight.patch)
+* [041-gpio_backlight-gpio-can-sleep.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/041-gpio_backlight-gpio-can-sleep.patch)
+* [050-stmpe-ts-Don-t-report-empty-packets.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/050-stmpe-ts-Don-t-report-empty-packets.patch)
 
 
 ### Kernel configuration changes
@@ -51,12 +56,14 @@ Deleted:
 ```text
 CONFIG_BACKLIGHT_CLASS_DEVICE=m
 CONFIG_BCM2708_SPIDEV=y
+CONFIG_MFD_CORE=m
 CONFIG_SPI_BCM2708=m
 ```
 
 Added:  
 ```text
 CONFIG_BACKLIGHT_CLASS_DEVICE=y
+CONFIG_BACKLIGHT_GPIO=m
 CONFIG_CAN=y
 CONFIG_CAN_BCM=m
 CONFIG_CAN_CALC_BITTIMING=y
@@ -100,12 +107,18 @@ CONFIG_FONT_PEARL_8x8=y
 CONFIG_FONT_SUN12x22=y
 CONFIG_FONT_SUN8x16=y
 CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+CONFIG_GPIO_STMPE=y
 CONFIG_INPUT_KEYBOARD=y
 CONFIG_INPUT_MOUSE=y
 CONFIG_INPUT_TOUCHSCREEN=y
 CONFIG_KEYBOARD_GPIO=m
 CONFIG_KEYBOARD_GPIO_POLLED=m
+CONFIG_MFD_CORE=y
+CONFIG_MFD_STMPE=y
 CONFIG_MOUSE_GPIO=m
 CONFIG_SPI_BCM2708=y
+CONFIG_STMPE_I2C=y
+CONFIG_STMPE_SPI=y
 CONFIG_TOUCHSCREEN_ADS7846=m
+CONFIG_TOUCHSCREEN_STMPE=m
 ```
