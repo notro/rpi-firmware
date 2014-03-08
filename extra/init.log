@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Sat Mar  8 15:07:58 2014
+# Time: Sat Mar  8 18:20:36 2014
 #
 
 
@@ -54,16 +54,16 @@ Already up-to-date.
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2014-03-08 15:08:10--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2014-03-08 18:20:56--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26641 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  723K=0.04s
+     0K .......... .......... ......                          100%  661K=0.04s
 
-2014-03-08 15:08:11 (723 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
+2014-03-08 18:20:57 (661 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
 
 
 
@@ -125,7 +125,7 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Sat Mar  8 15:08:12 2014
-# Elapsed: 0.24 min
+# Time: Sat Mar  8 18:20:58 2014
+# Elapsed: 0.37 min
 #
 

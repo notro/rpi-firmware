@@ -1708,3 +1708,259 @@ include/linux/kernel.h:307:18: note: expected 'u16 *' but argument is of type 'u
 # Elapsed: 0.50 min
 #
 
+
+#
+# Begin: extra
+# Time: Sat Mar  8 18:17:17 2014
+#
+
+
+
+ gpio_mouse_device, gpio_keys_device, ads7846_device, gpio_backlight_device, stmpe_device
+------------------------------------------------------------------------------------------
+
+git.clone('https://github.com/notro/fbtft_tools', '/home/pi/fbtft_tools', '')
+Already cloned
+
+=> cd /home/pi/fbtft_tools && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device modules
+  CC [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/ads7846_device/ads7846_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_backlight_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_backlight_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/stmpe_device modules
+  CC [M]  /home/pi/fbtft_tools/stmpe_device/stmpe_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/stmpe_device/stmpe_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/stmpe_device/stmpe_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/stmpe_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/stmpe_device/stmpe_device.ko
+  DEPMOD  3.10.33+
+
+
+ ServoBlaster kernel module for board revision 2
+-------------------------------------------------
+
+git.clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
+Already cloned
+
+=> cd /home/pi/PiBits && git checkout -- .
+
+=> cd /home/pi/PiBits && git pull
+Already up-to-date.
+
+=> sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel modules
+  CC [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/PiBits/ServoBlaster/kernel/servoblaster.mod.o
+  LD [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+  DEPMOD  3.10.33+
+
+
+ spi-config
+------------
+
+git.clone('https://github.com/msperl/spi-config', '/home/pi/spi-config', '')
+Already cloned
+
+=> cd /home/pi/spi-config && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config modules
+  CC [M]  /home/pi/spi-config/spi-config.o
+/home/pi/spi-config/spi-config.c: In function 'register_device':
+/home/pi/spi-config/spi-config.c:170:4: warning: passing argument 3 of 'kstrtou16' from incompatible pointer type [enabled by default]
+In file included from /home/pi/spi-config/spi-config.c:23:0:
+include/linux/kernel.h:307:18: note: expected 'u16 *' but argument is of type 'u8 *'
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/spi-config/spi-config.mod.o
+  LD [M]  /home/pi/spi-config/spi-config.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/spi-config/spi-config.ko
+  DEPMOD  3.10.33+
+
+#
+# End: extra
+# Time: Sat Mar  8 18:17:47 2014
+# Elapsed: 0.50 min
+#
+
+
+#
+# Begin: extra
+# Time: Sat Mar  8 18:53:52 2014
+#
+
+
+
+ gpio_mouse_device, gpio_keys_device, ads7846_device, gpio_backlight_device, stmpe_device
+------------------------------------------------------------------------------------------
+
+git.clone('https://github.com/notro/fbtft_tools', '/home/pi/fbtft_tools', '')
+Already cloned
+
+=> cd /home/pi/fbtft_tools && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_mouse_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_mouse_device/gpio_mouse_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_keys_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_keys_device/gpio_keys_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device modules
+  CC [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/ads7846_device/ads7846_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/ads7846_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/ads7846_device/ads7846_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_backlight_device modules
+  CC [M]  /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/gpio_backlight_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/gpio_backlight_device/gpio_backlight_device.ko
+  DEPMOD  3.10.33+
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/stmpe_device modules
+  CC [M]  /home/pi/fbtft_tools/stmpe_device/stmpe_device.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/fbtft_tools/stmpe_device/stmpe_device.mod.o
+  LD [M]  /home/pi/fbtft_tools/stmpe_device/stmpe_device.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/fbtft_tools/stmpe_device INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/fbtft_tools/stmpe_device/stmpe_device.ko
+  DEPMOD  3.10.33+
+
+
+ ServoBlaster kernel module for board revision 2
+-------------------------------------------------
+
+git.clone('https://github.com/richardghirst/PiBits', '/home/pi/PiBits', '')
+Already cloned
+
+=> cd /home/pi/PiBits && git checkout -- .
+
+=> cd /home/pi/PiBits && git pull
+Already up-to-date.
+
+=> sed -i '1s/^/#define REV_2\n/' /home/pi/PiBits/ServoBlaster/kernel/servoblaster.c
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel modules
+  CC [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/PiBits/ServoBlaster/kernel/servoblaster.mod.o
+  LD [M]  /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/PiBits/ServoBlaster/kernel INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/PiBits/ServoBlaster/kernel/servoblaster.ko
+  DEPMOD  3.10.33+
+
+
+ spi-config
+------------
+
+git.clone('https://github.com/msperl/spi-config', '/home/pi/spi-config', '')
+Already cloned
+
+=> cd /home/pi/spi-config && git pull
+Already up-to-date.
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config modules
+  CC [M]  /home/pi/spi-config/spi-config.o
+/home/pi/spi-config/spi-config.c: In function 'register_device':
+/home/pi/spi-config/spi-config.c:170:4: warning: passing argument 3 of 'kstrtou16' from incompatible pointer type [enabled by default]
+In file included from /home/pi/spi-config/spi-config.c:23:0:
+include/linux/kernel.h:307:18: note: expected 'u16 *' but argument is of type 'u8 *'
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/pi/spi-config/spi-config.mod.o
+  LD [M]  /home/pi/spi-config/spi-config.ko
+
+=> cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make M=/home/pi/spi-config INSTALL_MOD_PATH=/home/pi/modules modules_install
+  INSTALL /home/pi/spi-config/spi-config.ko
+  DEPMOD  3.10.33+
+
+#
+# End: extra
+# Time: Sat Mar  8 18:54:22 2014
+# Elapsed: 0.50 min
+#
+
