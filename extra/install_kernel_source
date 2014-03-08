@@ -10,7 +10,7 @@ set -e
 [ -z $SUDO_USER ] && echo Run with sudo && exit 1
 
 # git ref used to build this kernel
-git_hash=$(cat /root/.rpi-firmware/git_hash)
+git_hash=$(cat /root/.rpi-firmware/extra/git_hash)
 
 # get the source at that particular point in time
 [ -e linux-$git_hash.tar.gz ] || sudo -u $SUDO_USER wget -O linux-$git_hash.tar.gz https://github.com/raspberrypi/linux/archive/$git_hash.tar.gz
