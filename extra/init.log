@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Thu Mar  6 19:10:25 2014
+# Time: Sat Mar  8 14:13:32 2014
 #
 
 
@@ -23,11 +23,64 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-bec4bd0f70aa46f55a980996e8774547c0f909c8	refs/heads/master
+a0eb06736a3f1583fc6cd575149c7835dc43582d	refs/heads/master
 
 
-git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
-Already up-to-date.
+=> rm -rf /home/pi/firmware
+
+=> wget --progress=dot:mega -O /tmp/tmpJtAYSv https://api.github.com/repos/raspberrypi/firmware/tarball
+--2014-03-08 14:13:35--  https://api.github.com/repos/raspberrypi/firmware/tarball
+Resolving api.github.com (api.github.com)... 192.30.252.137
+Connecting to api.github.com (api.github.com)|192.30.252.137|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master [following]
+--2014-03-08 14:13:35--  https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master
+Resolving codeload.github.com (codeload.github.com)... 192.30.252.144
+Connecting to codeload.github.com (codeload.github.com)|192.30.252.144|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/x-gzip]
+Saving to: `/tmp/tmpJtAYSv'
+
+     0K ........ ........ ........ ........ ........ ........ 1.39M
+  3072K ........ ........ ........ ........ ........ ........ 3.20M
+  6144K ........ ........ ........ ........ ........ ........ 3.26M
+  9216K ........ ........ ........ ........ ........ ........ 1.63M
+ 12288K ........ ........ ........ ........ ........ ........ 2.60M
+ 15360K ........ ........ ........ ........ ........ ........ 3.18M
+ 18432K ........ ........ ........ ........ ........ ........ 3.26M
+ 21504K ........ ........ ........ ........ ........ ........ 2.28M
+ 24576K ........ ........ ........ ........ ........ ........ 2.31M
+ 27648K ........ ........ ........ ........ ........ ........ 2.48M
+ 30720K ........ ........ ........ ........ ........ ........ 2.53M
+ 33792K ........ ........ ........ ........ ........ ........ 2.56M
+ 36864K ........ ........ ........ ........ ........ ........ 2.51M
+ 39936K ........ ........ ........ ........ ........ ........ 2.58M
+ 43008K ........ ........ ........ ........ ........ ........ 2.68M
+ 46080K ........ ........ ........ ........ ........ ........ 2.88M
+ 49152K ........ ........ ........ ........ ........ ........ 3.12M
+ 52224K ........ ........ ........ ........ ........ ........ 3.22M
+ 55296K ........ ........ ........ ........ ........ ........ 3.26M
+ 58368K ........ ........ ........ ........ ........ ........ 2.49M
+ 61440K ........ ........ ........ ........ ........ ........ 3.13M
+ 64512K ........ ........ ........ ........ ........ ........ 3.25M
+ 67584K ........ ........ ........ ........ ........ ........ 2.40M
+ 70656K ........ ........ ........ ........ ........ ........ 2.83M
+ 73728K ........ ........ ........ ........ ........ ........ 2.95M
+ 76800K ........ ........ ........ ........ ........ ........ 3.00M
+ 79872K ........ ........ ........ ........ ........ ........ 2.99M
+ 82944K ........ ........ ........ ........ ........ ........ 3.03M
+ 86016K ........ ........ ........ ........ ........ ........ 3.00M
+ 89088K ........ ........ ........ ........ ........ ........ 3.08M
+ 92160K ........ ......                                       1.97M=34s
+
+2014-03-08 14:14:10 (2.66 MB/s) - `/tmp/tmpJtAYSv' saved [95352878]
+
+
+=> tar -C /home/pi -zxf /tmp/tmpJtAYSv
+
+=> mv /home/pi/raspberrypi-firmware-a0eb067 /home/pi/firmware
+
+=> rm -rf /tmp/tmpJtAYSv
 
 
  Get kernel source
@@ -42,28 +95,162 @@ Already cloned
 Removing drivers/video/backlight/gpio_backlight.c
 Removing drivers/video/fbtft/
 Removing include/linux/platform_data/gpio_backlight.h
+Removing tar-install/
 
 => cd /home/pi/linux-rpi-3.10.y && git checkout rpi-3.10.y
 Already on 'rpi-3.10.y'
 
 => cd /home/pi/linux-rpi-3.10.y && git pull
-Already up-to-date.
+From https://github.com/raspberrypi/linux
+   439def4..a1baeb2  rpi-3.10.y -> origin/rpi-3.10.y
+ + 03f95f9...6e00e96 rpi-3.10.y-next -> origin/rpi-3.10.y-next  (forced update)
+ + 6a6b2b8...da28f2f rpi-3.13.y -> origin/rpi-3.13.y  (forced update)
+ + 054755a...ffe42d2 rpi-3.13.y-next -> origin/rpi-3.13.y-next  (forced update)
+Updating 439def4..a1baeb2
+Fast-forward
+ Makefile                                        |    2 +-
+ arch/arm/include/asm/cacheflush.h               |    1 +
+ arch/arm/include/asm/spinlock.h                 |   82 +++++++++++++----------
+ arch/arm/mach-omap2/gpmc.c                      |    4 +-
+ arch/arm/mach-tegra/common.c                    |   11 +++
+ arch/arm/mm/dma-mapping.c                       |    2 +-
+ arch/arm/mm/proc-v6.S                           |    3 +-
+ arch/arm/mm/proc-v7.S                           |    2 +-
+ arch/arm64/kernel/stacktrace.c                  |    6 +-
+ arch/avr32/Makefile                             |    2 +-
+ arch/avr32/boards/mimc200/fram.c                |    1 +
+ arch/powerpc/kernel/crash_dump.c                |    8 ++-
+ arch/powerpc/platforms/pseries/hotplug-cpu.c    |   22 +++---
+ arch/x86/kernel/cpu/perf_event.c                |    3 +
+ arch/x86/kernel/pci-dma.c                       |    4 +-
+ arch/x86/kvm/x86.c                              |    2 +-
+ arch/xtensa/include/asm/traps.h                 |   44 +++++++-----
+ arch/xtensa/kernel/entry.S                      |   60 +++++++++++++----
+ drivers/acpi/pci_irq.c                          |    1 +
+ drivers/acpi/processor_throttling.c             |   69 +++++++++----------
+ drivers/acpi/video.c                            |    8 ++-
+ drivers/ata/ahci.c                              |   14 ++++
+ drivers/ata/libata-pmp.c                        |    7 +-
+ drivers/ata/sata_sil.c                          |    1 +
+ drivers/cpufreq/powernow-k8.c                   |   10 ++-
+ drivers/dma/ioat/dma.c                          |   52 ++++++++++++--
+ drivers/dma/ioat/dma.h                          |    1 +
+ drivers/dma/ioat/dma_v2.c                       |   11 ++-
+ drivers/dma/ioat/dma_v3.c                       |    3 +
+ drivers/dma/ste_dma40.c                         |    4 +-
+ drivers/edac/i7300_edac.c                       |   38 ++++++-----
+ drivers/edac/i7core_edac.c                      |    9 ++-
+ drivers/gpu/drm/nouveau/core/engine/disp/nv50.c |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_drm.c           |    3 +
+ drivers/gpu/drm/radeon/atombios_crtc.c          |   16 ++++-
+ drivers/gpu/drm/radeon/radeon_atpx_handler.c    |    3 +-
+ drivers/gpu/drm/radeon/radeon_kms.c             |    6 ++
+ drivers/hwmon/max1668.c                         |    2 +-
+ drivers/iio/gyro/Kconfig                        |    2 +-
+ drivers/iio/gyro/st_gyro.h                      |    1 -
+ drivers/iio/gyro/st_gyro_core.c                 |    9 ++-
+ drivers/iio/gyro/st_gyro_i2c.c                  |    1 -
+ drivers/iio/gyro/st_gyro_spi.c                  |    1 -
+ drivers/input/misc/arizona-haptics.c            |   11 ++-
+ drivers/irqchip/irq-metag-ext.c                 |    2 +-
+ drivers/irqchip/irq-metag.c                     |    2 +-
+ drivers/md/dm-mpath.c                           |    7 +-
+ drivers/md/dm-thin-metadata.c                   |   17 +++++
+ drivers/md/dm-thin-metadata.h                   |    2 +
+ drivers/md/dm-thin.c                            |    8 ++-
+ drivers/misc/mei/client.c                       |    4 +-
+ drivers/net/bonding/bond_3ad.c                  |    6 +-
+ drivers/net/bonding/bond_3ad.h                  |    1 +
+ drivers/net/can/dev.c                           |   15 +----
+ drivers/net/can/janz-ican3.c                    |   18 ++---
+ drivers/net/can/usb/kvaser_usb.c                |    2 +
+ drivers/net/can/vcan.c                          |    9 ++-
+ drivers/net/ethernet/broadcom/tg3.c             |    4 +-
+ drivers/net/usb/asix_devices.c                  |    3 +-
+ drivers/net/usb/ax88179_178a.c                  |    4 ++
+ drivers/net/usb/gl620a.c                        |    4 ++
+ drivers/net/usb/mcs7830.c                       |    5 +-
+ drivers/net/usb/net1080.c                       |    4 ++
+ drivers/net/usb/qmi_wwan.c                      |    9 +--
+ drivers/net/usb/rndis_host.c                    |    4 ++
+ drivers/net/usb/smsc75xx.c                      |    4 ++
+ drivers/net/usb/smsc95xx.c                      |    4 ++
+ drivers/net/usb/usbnet.c                        |   25 +++----
+ drivers/net/wireless/rtl818x/rtl8187/rtl8187.h  |   10 ++-
+ drivers/net/wireless/rtlwifi/ps.c               |    2 +-
+ drivers/net/wireless/rtlwifi/rtl8192ce/hw.c     |   18 ++++-
+ drivers/pci/pci.c                               |   10 +++
+ drivers/scsi/qla2xxx/qla_target.c               |    3 +-
+ drivers/staging/android/binder.c                |    3 +-
+ drivers/usb/chipidea/udc.c                      |    4 +-
+ drivers/usb/gadget/bcm63xx_udc.c                |   58 +++++++++-------
+ drivers/usb/host/ehci-hcd.c                     |   13 +++-
+ drivers/usb/serial/ftdi_sio.c                   |    2 +
+ drivers/usb/serial/ftdi_sio_ids.h               |    6 ++
+ drivers/usb/serial/option.c                     |    3 +-
+ fs/attr.c                                       |    5 --
+ fs/btrfs/inode.c                                |    8 ++-
+ fs/cifs/file.c                                  |   37 +++++++++-
+ fs/cifs/smb2glob.h                              |    3 +
+ fs/cifs/smb2ops.c                               |   14 ++--
+ fs/cifs/smb2pdu.c                               |    3 +
+ fs/ext4/ext4.h                                  |    2 +
+ fs/ext4/inode.c                                 |    4 ++
+ fs/ext4/ioctl.c                                 |    3 +-
+ fs/ext4/resize.c                                |   34 ++++++----
+ fs/ext4/super.c                                 |   20 ++++--
+ fs/quota/dquot.c                                |   14 +++-
+ include/linux/can/skb.h                         |   38 +++++++++++
+ include/linux/ipc_namespace.h                   |    2 -
+ include/linux/netdevice.h                       |    7 +-
+ include/linux/skbuff.h                          |   19 ++++++
+ ipc/mq_sysctl.c                                 |   18 +++--
+ ipc/mqueue.c                                    |    6 +-
+ kernel/events/core.c                            |   12 ++--
+ kernel/workqueue.c                              |    7 ++
+ mm/memcontrol.c                                 |    4 +-
+ net/9p/trans_virtio.c                           |    5 +-
+ net/can/af_can.c                                |    3 +-
+ net/can/bcm.c                                   |    4 +-
+ net/core/dev.c                                  |   27 +++++---
+ net/core/fib_rules.c                            |    7 ++
+ net/core/netpoll.c                              |    4 +-
+ net/core/skbuff.c                               |   25 +++++++
+ net/core/sock.c                                 |    2 +-
+ net/ieee802154/6lowpan.c                        |   20 ++++++
+ net/ipv4/devinet.c                              |    3 +-
+ net/ipv4/ip_forward.c                           |   71 +++++++++++++++++++-
+ net/ipv4/route.c                                |    4 +-
+ net/ipv4/tcp_output.c                           |   13 +++-
+ net/ipv6/ip6_output.c                           |   17 ++++-
+ net/sctp/socket.c                               |   41 +++++++++---
+ net/sunrpc/xprtsock.c                           |    6 +-
+ security/selinux/ss/policydb.c                  |    8 +--
+ sound/pci/hda/patch_ca0132.c                    |   68 ++-----------------
+ sound/pci/hda/patch_sigmatel.c                  |   33 +++++++++
+ sound/soc/codecs/da732x.c                       |   12 ++++
+ sound/soc/codecs/max98090.c                     |   20 +++---
+ sound/soc/codecs/sta32x.c                       |   76 ++++++++++-----------
+ sound/soc/codecs/wm8770.c                       |    4 +-
+ sound/soc/codecs/wm8958-dsp2.c                  |    2 +-
+ sound/usb/mixer_maps.c                          |    9 +++
+ 126 files changed, 1078 insertions(+), 505 deletions(-)
 
 
  Get DMA capable SPI master driver
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2014-03-06 19:10:47--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2014-03-08 14:14:53--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26641 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  620K=0.04s
+     0K .......... .......... ......                          100%  767K=0.03s
 
-2014-03-06 19:10:48 (620 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
+2014-03-08 14:14:53 (767 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
 
 
 
@@ -117,7 +304,7 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Thu Mar  6 19:10:49 2014
-# Elapsed: 0.40 min
+# Time: Sat Mar  8 14:14:55 2014
+# Elapsed: 1.39 min
 #
 

@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Thu Mar  6 19:10:50 2014
+# Time: Sat Mar  8 14:14:55 2014
 #
 
 
@@ -27,8 +27,9 @@
   CLEAN   scripts/genksyms
   CLEAN   scripts/kconfig
   CLEAN   scripts/mod
+  CLEAN   /home/pi/linux-rpi-3.10.y/debian/
   CLEAN   scripts
-  CLEAN   include/config include/generated arch/arm/include/generated
+  CLEAN   include/config usr/include include/generated arch/arm/include/generated
   CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
 
 
@@ -535,7 +536,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Thu Mar  6 19:11:33 2014
-# Elapsed: 0.73 min
+# Time: Sat Mar  8 14:15:51 2014
+# Elapsed: 0.93 min
 #
 
