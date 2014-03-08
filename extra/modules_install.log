@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Thu Mar  6 18:38:52 2014
+# Time: Sat Mar  8 15:42:20 2014
 #
 
 
@@ -1270,11 +1270,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.32+
+  DEPMOD  3.10.33+
 
 #
 # End: modules_install
-# Time: Thu Mar  6 18:39:06 2014
-# Elapsed: 0.23 min
+# Time: Sat Mar  8 15:42:33 2014
+# Elapsed: 0.22 min
 #
 

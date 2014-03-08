@@ -27,13 +27,13 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/439def4b519a036cd5b12f88f7b90a4a833ffe9a
+https://github.com/raspberrypi/linux/tree/a1baeb25b631e0c9ff696368d40da07dd0cf3fa4
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
 https://github.com/notro/fbtft.git/tree/f2f198292cf577438d5954117c9862b0fbedb601
 * Various SPI device adding modules  
-https://github.com/notro/fbtft_tools/tree/cb1c93eb36f274ea2456aa8dc8946acd30a6dc6f
+https://github.com/notro/fbtft_tools/tree/981bb6d5b69251c6e15755ce997a8b2c81ea4505
 * ServoBlaster  
 https://github.com/richardghirst/PiBits/tree/bf455ee13b9ec03f6678f2cbf6827b792cc570c0
 * spi-config: SPI device adding module  

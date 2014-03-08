@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Thu Mar  6 18:05:18 2014
+# Time: Sat Mar  8 15:07:58 2014
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-bec4bd0f70aa46f55a980996e8774547c0f909c8	refs/heads/master
+a0eb06736a3f1583fc6cd575149c7835dc43582d	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -47,8 +47,6 @@ Removing include/linux/platform_data/gpio_backlight.h
 Already on 'rpi-3.10.y'
 
 => cd /home/pi/linux-rpi-3.10.y && git pull
-From https://github.com/raspberrypi/linux
-   dda811c..054755a  rpi-3.13.y-next -> origin/rpi-3.13.y-next
 Already up-to-date.
 
 
@@ -56,16 +54,16 @@ Already up-to-date.
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2014-03-06 18:05:46--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2014-03-08 15:08:10--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26641 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  745K=0.03s
+     0K .......... .......... ......                          100%  723K=0.04s
 
-2014-03-06 18:05:46 (745 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
+2014-03-08 15:08:11 (723 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
 
 
 
@@ -127,7 +125,7 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Thu Mar  6 18:05:48 2014
-# Elapsed: 0.49 min
+# Time: Sat Mar  8 15:08:12 2014
+# Elapsed: 0.24 min
 #
 
