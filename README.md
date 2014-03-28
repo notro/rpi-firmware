@@ -27,13 +27,13 @@ sudo shutdown -r now
 ### Sources
 
 * Linux Kernel  
-https://github.com/raspberrypi/linux/tree/a1baeb25b631e0c9ff696368d40da07dd0cf3fa4
+https://github.com/raspberrypi/linux/tree/9cecb89ac95ffe8f9963250334e3df848fb3732b
 * spi-bcm2708: DMA capable SPI master driver  
 https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 * FBTFT  
 https://github.com/notro/fbtft.git/tree/f2f198292cf577438d5954117c9862b0fbedb601
 * Various SPI device adding modules  
-https://github.com/notro/fbtft_tools/tree/981bb6d5b69251c6e15755ce997a8b2c81ea4505
+https://github.com/notro/fbtft_tools/tree/b5e2bd8e66fdd07333d82994559f737813cc7d3f
 * ServoBlaster  
 https://github.com/richardghirst/PiBits/tree/bf455ee13b9ec03f6678f2cbf6827b792cc570c0
 * spi-config: SPI device adding module  
@@ -47,7 +47,7 @@ https://github.com/msperl/spi-config/tree/878f592626db291b3a62b5054278c95e92bc0b
 * [030-make-room-for-gpio-chips.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/030-make-room-for-gpio-chips.patch)
 * [040-gpio_backlight.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/040-gpio_backlight.patch)
 * [041-gpio_backlight-gpio-can-sleep.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/041-gpio_backlight-gpio-can-sleep.patch)
-* [050-stmpe-ts-Don-t-report-empty-packets.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/050-stmpe-ts-Don-t-report-empty-packets.patch)
+* [050-stmpe-ts-Various-fixes.patch](https://github.com/notro/rpi-build/blob/master/patches/builtin/050-stmpe-ts-Various-fixes.patch)
 
 
 ### Kernel configuration changes

@@ -1,7 +1,7 @@
 
 #
 # Begin: modules_install
-# Time: Sat Mar  8 18:53:39 2014
+# Time: Fri Mar 28 20:12:56 2014
 #
 
 
@@ -616,6 +616,7 @@
   INSTALL drivers/net/usb/sierra_net.ko
   INSTALL drivers/net/usb/smsc75xx.ko
   INSTALL drivers/net/usb/zaurus.ko
+  INSTALL drivers/net/veth.ko
   INSTALL drivers/net/wimax/i2400m/i2400m-usb.ko
   INSTALL drivers/net/wimax/i2400m/i2400m.ko
   INSTALL drivers/net/wireless/at76c50x-usb.ko
@@ -1270,11 +1271,11 @@
   MKDIR   /home/pi/modules/lib/firmware/yam
   INSTALL /home/pi/modules/lib/firmware/yam/1200.bin
   INSTALL /home/pi/modules/lib/firmware/yam/9600.bin
-  DEPMOD  3.10.33+
+  DEPMOD  3.10.34+
 
 #
 # End: modules_install
-# Time: Sat Mar  8 18:53:52 2014
-# Elapsed: 0.22 min
+# Time: Fri Mar 28 20:13:14 2014
+# Elapsed: 0.29 min
 #
 

@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Sat Mar  8 18:20:36 2014
+# Time: Fri Mar 28 19:36:55 2014
 #
 
 
@@ -19,11 +19,65 @@ Already up-to-date.
  Get firmware
 --------------
 
-git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
-Already cloned
+=> git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
+9c7c2cd698ae24022c7aa74b16436c2966e82624	refs/heads/master
+
+
+=> rm -rf /home/pi/firmware
+
+=> wget --progress=dot:mega -O /tmp/tmp7ucWcX https://api.github.com/repos/raspberrypi/firmware/tarball
+--2014-03-28 19:36:58--  https://api.github.com/repos/raspberrypi/firmware/tarball
+Resolving api.github.com (api.github.com)... 192.30.252.136
+Connecting to api.github.com (api.github.com)|192.30.252.136|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master [following]
+--2014-03-28 19:36:58--  https://codeload.github.com/raspberrypi/firmware/legacy.tar.gz/master
+Resolving codeload.github.com (codeload.github.com)... 192.30.252.145
+Connecting to codeload.github.com (codeload.github.com)|192.30.252.145|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 85600276 (82M) [application/x-gzip]
+Saving to: `/tmp/tmp7ucWcX'
+
+     0K ........ ........ ........ ........ ........ ........  3% 1.56M 50s
+  3072K ........ ........ ........ ........ ........ ........  7% 3.24M 36s
+  6144K ........ ........ ........ ........ ........ ........ 11% 3.21M 31s
+  9216K ........ ........ ........ ........ ........ ........ 14% 2.40M 29s
+ 12288K ........ ........ ........ ........ ........ ........ 18% 2.46M 28s
+ 15360K ........ ........ ........ ........ ........ ........ 22% 2.77M 26s
+ 18432K ........ ........ ........ ........ ........ ........ 25% 2.93M 24s
+ 21504K ........ ........ ........ ........ ........ ........ 29% 3.00M 22s
+ 24576K ........ ........ ........ ........ ........ ........ 33% 2.97M 21s
+ 27648K ........ ........ ........ ........ ........ ........ 36% 2.99M 20s
+ 30720K ........ ........ ........ ........ ........ ........ 40% 3.03M 18s
+ 33792K ........ ........ ........ ........ ........ ........ 44% 3.06M 17s
+ 36864K ........ ........ ........ ........ ........ ........ 47% 3.12M 16s
+ 39936K ........ ........ ........ ........ ........ ........ 51% 3.23M 14s
+ 43008K ........ ........ ........ ........ ........ ........ 55% 2.43M 13s
+ 46080K ........ ........ ........ ........ ........ ........ 58% 2.68M 12s
+ 49152K ........ ........ ........ ........ ........ ........ 62% 3.02M 11s
+ 52224K ........ ........ ........ ........ ........ ........ 66% 3.13M 10s
+ 55296K ........ ........ ........ ........ ........ ........ 69% 3.20M 9s
+ 58368K ........ ........ ........ ........ ........ ........ 73% 3.23M 8s
+ 61440K ........ ........ ........ ........ ........ ........ 77% 1.22M 7s
+ 64512K ........ ........ ........ ........ ........ ........ 80% 2.48M 6s
+ 67584K ........ ........ ........ ........ ........ ........ 84% 1.82M 5s
+ 70656K ........ ........ ........ ........ ........ ........ 88% 2.03M 4s
+ 73728K ........ ........ ........ ........ ........ ........ 91% 2.19M 3s
+ 76800K ........ ........ ........ ........ ........ ........ 95% 1.99M 1s
+ 79872K ........ ........ ........ ........ ........ ........ 99% 2.18M 0s
+ 82944K ........ ..                                          100% 1.84M=33s
+
+2014-03-28 19:37:32 (2.49 MB/s) - `/tmp/tmp7ucWcX' saved [85600276/85600276]
+
+
+=> tar -C /home/pi -zxf /tmp/tmp7ucWcX
+
+=> mv /home/pi/raspberrypi-firmware-9c7c2cd /home/pi/firmware
+
+=> rm -rf /tmp/tmp7ucWcX
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-a0eb06736a3f1583fc6cd575149c7835dc43582d	refs/heads/master
+9c7c2cd698ae24022c7aa74b16436c2966e82624	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -39,6 +93,7 @@ Already cloned
 => cd /home/pi/linux-rpi-3.10.y && git checkout -- .
 
 => cd /home/pi/linux-rpi-3.10.y && git clean -fd
+Removing drivers/input/touchscreen/Module.symvers
 Removing drivers/video/backlight/gpio_backlight.c
 Removing drivers/video/fbtft/
 Removing include/linux/platform_data/gpio_backlight.h
@@ -47,23 +102,33 @@ Removing include/linux/platform_data/gpio_backlight.h
 Already on 'rpi-3.10.y'
 
 => cd /home/pi/linux-rpi-3.10.y && git pull
-Already up-to-date.
+From https://github.com/raspberrypi/linux
+   dea8280..9cecb89  rpi-3.10.y -> origin/rpi-3.10.y
+   f59363b..bdbfd96  rpi-3.13.y -> origin/rpi-3.13.y
+ + d404f17...2514e94 rpi-3.13.y-next -> origin/rpi-3.13.y-next  (forced update)
+Updating dea8280..9cecb89
+Fast-forward
+ arch/arm/configs/bcmrpi_defconfig                |    1 +
+ drivers/media/platform/bcm2835/bcm2835-camera.h  |    4 ++-
+ drivers/media/platform/bcm2835/controls.c        |   39 +++++++++++++++++++++-
+ drivers/media/platform/bcm2835/mmal-parameters.h |    8 ++++-
+ 4 files changed, 49 insertions(+), 3 deletions(-)
 
 
  Get DMA capable SPI master driver
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2014-03-08 18:20:56--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2014-03-28 19:37:55--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26641 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  661K=0.04s
+     0K .......... .......... ......                          100%  909K=0.03s
 
-2014-03-08 18:20:57 (661 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
+2014-03-28 19:37:55 (909 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
 
 
 
@@ -108,10 +173,12 @@ Applied patch include/linux/platform_data/gpio_backlight.h cleanly.
 Checking patch drivers/video/backlight/gpio_backlight.c...
 Applied patch drivers/video/backlight/gpio_backlight.c cleanly.
 
-=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/050-stmpe-ts-Don-t-report-empty-packets.patch
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/builtin/050-stmpe-ts-Various-fixes.patch
+/home/pi/rpi-build/patches/builtin/050-stmpe-ts-Various-fixes.patch:105: trailing whitespace.
+	/* 
 Checking patch drivers/input/touchscreen/stmpe-ts.c...
-Hunk #1 succeeded at 151 (offset 3 lines).
 Applied patch drivers/input/touchscreen/stmpe-ts.c cleanly.
+warning: 1 line adds whitespace errors.
 
 
  Get FBTFT
@@ -125,7 +192,7 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Sat Mar  8 18:20:58 2014
-# Elapsed: 0.37 min
+# Time: Fri Mar 28 19:37:57 2014
+# Elapsed: 1.04 min
 #
 
