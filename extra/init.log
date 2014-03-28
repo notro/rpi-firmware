@@ -1,7 +1,7 @@
 
 #
 # Begin: init
-# Time: Sat Mar  8 17:44:12 2014
+# Time: Fri Mar 28 22:20:09 2014
 #
 
 
@@ -23,7 +23,7 @@ git.clone('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
 Already cloned
 
 => git ls-remote -h https://github.com/raspberrypi/firmware refs/heads/master
-a0eb06736a3f1583fc6cd575149c7835dc43582d	refs/heads/master
+9c7c2cd698ae24022c7aa74b16436c2966e82624	refs/heads/master
 
 
 git.pull('https://github.com/raspberrypi/firmware', '/home/pi/firmware', '')
@@ -54,16 +54,16 @@ Already up-to-date.
 -----------------------------------
 
 => wget -O /home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
---2014-03-08 17:44:36--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
+--2014-03-28 22:20:19--  https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
 Resolving raw.github.com (raw.github.com)... 185.31.16.133
 Connecting to raw.github.com (raw.github.com)|185.31.16.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 26641 (26K) [text/plain]
 Saving to: `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c'
 
-     0K .......... .......... ......                          100%  749K=0.03s
+     0K .......... .......... ......                          100%  885K=0.03s
 
-2014-03-08 17:44:37 (749 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
+2014-03-28 22:20:20 (885 KB/s) - `/home/pi/linux-rpi-3.10.y/drivers/spi/spi-bcm2708.c' saved [26641/26641]
 
 
 
@@ -100,10 +100,12 @@ Applied patch include/linux/platform_data/gpio_backlight.h cleanly.
 Checking patch drivers/video/backlight/gpio_backlight.c...
 Applied patch drivers/video/backlight/gpio_backlight.c cleanly.
 
-=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/master/06-stmpe-ts-Don-t-report-empty-packets.patch
+=> cd /home/pi/linux-rpi-3.10.y && git apply -v /home/pi/rpi-build/patches/master/050-stmpe-ts-Various-fixes.patch
+/home/pi/rpi-build/patches/master/050-stmpe-ts-Various-fixes.patch:105: trailing whitespace.
+	/* 
 Checking patch drivers/input/touchscreen/stmpe-ts.c...
-Hunk #1 succeeded at 151 (offset 3 lines).
 Applied patch drivers/input/touchscreen/stmpe-ts.c cleanly.
+warning: 1 line adds whitespace errors.
 
 
  Get FBTFT
@@ -117,7 +119,7 @@ Already up-to-date.
 
 #
 # End: init
-# Time: Sat Mar  8 17:44:39 2014
-# Elapsed: 0.45 min
+# Time: Fri Mar 28 22:20:21 2014
+# Elapsed: 0.19 min
 #
 

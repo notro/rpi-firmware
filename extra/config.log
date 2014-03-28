@@ -1,7 +1,7 @@
 
 #
 # Begin: config
-# Time: Sat Mar  8 17:44:39 2014
+# Time: Fri Mar 28 22:20:21 2014
 #
 
 
@@ -11,17 +11,7 @@
 
 => cd /home/pi/linux-rpi-3.10.y && ARCH=arm CROSS_COMPILE=/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi- make mrproper
   CLEAN   .
-  CLEAN   arch/arm/kernel
-  CLEAN   drivers/tty/vt
-  CLEAN   drivers/video/logo
-  CLEAN   firmware
-  CLEAN   kernel/debug/kdb
-  CLEAN   kernel
-  CLEAN   lib/raid6
-  CLEAN   lib
   CLEAN   usr
-  CLEAN   arch/arm/boot/compressed
-  CLEAN   arch/arm/boot
   CLEAN   .tmp_versions
   CLEAN   scripts/basic
   CLEAN   scripts/genksyms
@@ -29,7 +19,7 @@
   CLEAN   scripts/mod
   CLEAN   scripts
   CLEAN   include/config include/generated arch/arm/include/generated
-  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h Module.symvers
+  CLEAN   .config .config.old .version include/generated/uapi/linux/version.h
 
 
  make bcmrpi_defconfig
@@ -535,7 +525,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 #
 # End: config
-# Time: Sat Mar  8 17:45:25 2014
-# Elapsed: 0.77 min
+# Time: Fri Mar 28 22:20:56 2014
+# Elapsed: 0.58 min
 #
 
