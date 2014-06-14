@@ -1,0 +1,4 @@
+if [ -d ${FW_REPOLOCAL}/firmware ]; then
+        echo "     /lib/firmware"
+        cp -R "${FW_REPOLOCAL}/firmware/"* /lib/firmware/
+fi
