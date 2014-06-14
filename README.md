@@ -1,13 +1,13 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.12.21+ with support for FBTFT.
+Raspberry Pi kernel 3.15.0+ with support for FBTFT.
 
 Install
 -------
 
 ```text
-sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update
+sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=latest rpi-update
 ```
 
 
@@ -80,7 +80,7 @@ Sources
 -------
 * [raspberrypi/tools](https://github.com/raspberrypi/tools/archive/108317fde2ffb56d1dc7f14ac69c42f34a49342a.tar.gz)
 * [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/e45a4a25cd6ec19912de3310194ebaf8f02676f6.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/342abe67d0e1f12eae17562bfe7615143d2618d1.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/959a708cea1c7e044032bd7e904e72dcf0a51db4.tar.gz)
 * [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
 * [notro/fbtft](https://github.com/notro/fbtft/archive/b0503147c90869341905509c37d7ce866e7832a7.tar.gz)
 * [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
@@ -89,7 +89,7 @@ Sources
 
 Patches
 --------
-* /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.12
+* /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.15
 * /home/pi/rpi-build/fbtft-build/patches/gpio_backlight-gpio-can-sleep.patch/3.10
 * /home/pi/rpi-build/fbtft-build/patches/stmpe-ts-Various-fixes.patch/3.10
 
@@ -115,31 +115,31 @@ CAN_VCAN=m
 DYNAMIC_DEBUG=y
 FB_BACKLIGHT=y
 FB_DEFERRED_IO=y
-FB_FLEX=y
-FB_SYS_COPYAREA=y
-FB_SYS_FILLRECT=y
-FB_SYS_FOPS=y
-FB_SYS_IMAGEBLIT=y
-FB_TFT=y
-FB_TFT_BD663474=y
-FB_TFT_FBTFT_DEVICE=y
-FB_TFT_HX8340BN=y
-FB_TFT_HX8347D=y
-FB_TFT_HX8353D=y
-FB_TFT_ILI9320=y
-FB_TFT_ILI9325=y
-FB_TFT_ILI9340=y
-FB_TFT_ILI9341=y
-FB_TFT_PCD8544=y
-FB_TFT_S6D1121=y
-FB_TFT_SSD1289=y
-FB_TFT_SSD1306=y
-FB_TFT_SSD1331=y
-FB_TFT_SSD1351=y
-FB_TFT_ST7735R=y
-FB_TFT_TINYLCD=y
-FB_TFT_UPD161704=y
-FB_TFT_WATTEROTT=y
+FB_FLEX=m
+FB_SYS_COPYAREA=m
+FB_SYS_FILLRECT=m
+FB_SYS_FOPS=m
+FB_SYS_IMAGEBLIT=m
+FB_TFT=m
+FB_TFT_BD663474=m
+FB_TFT_FBTFT_DEVICE=m
+FB_TFT_HX8340BN=m
+FB_TFT_HX8347D=m
+FB_TFT_HX8353D=m
+FB_TFT_ILI9320=m
+FB_TFT_ILI9325=m
+FB_TFT_ILI9340=m
+FB_TFT_ILI9341=m
+FB_TFT_PCD8544=m
+FB_TFT_S6D1121=m
+FB_TFT_SSD1289=m
+FB_TFT_SSD1306=m
+FB_TFT_SSD1331=m
+FB_TFT_SSD1351=m
+FB_TFT_ST7735R=m
+FB_TFT_TINYLCD=m
+FB_TFT_UPD161704=m
+FB_TFT_WATTEROTT=m
 FONTS=y
 FONT_10x18=y
 FONT_6x11=y
@@ -150,7 +150,6 @@ FONT_PEARL_8x8=y
 FONT_SUN12x22=y
 FONT_SUN8x16=y
 FRAMEBUFFER_CONSOLE_ROTATION=y
-GPIO_MCP23S08=m
 GPIO_STMPE=y
 INPUT_KEYBOARD=y
 INPUT_MOUSE=y
@@ -171,13 +170,6 @@ Changed:
 ```text
 BACKLIGHT_CLASS_DEVICE m -> y
 MFD_CORE m -> y
-SPI_BCM2708 m -> y
-```
-
-
-Deleted:
-```text
-BCM2708_SPIDEV=y
 ```
 
 
