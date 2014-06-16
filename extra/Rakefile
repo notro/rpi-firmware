@@ -1,0 +1,46 @@
+load 'stdlib/Rakefile'
+
+# expand on :rpi_linux_dt in stdlib/Rakefile
+# this action will run after all prerequisites have run
+release :rpi_linux_dt do
+  VAR['FW_BRANCH'] = 'dt'
+  VAR['DIFFPREP'] = 'u-boot,linux'
+  # use delayed assignement of COMMIT_MESSAGE and Readme.desc,
+  # since KERNEL_RELEASE is set during the kbuild target
+  VAR.default('COMMIT_MESSAGE') { "Second release. Core DT support. Kernel: #{VAR['KERNEL_RELEASE']}" }
+  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with experimental Device Tree support using ARCH_BCM2708" }
+  Readme.body = """
+Parts used to build this kernel
+----------------------------------
+* [rpi-build](https://github.com/notro/rpi-build)
+* [stdlib/Rakefile](https://github.com/notro/rpi-build-stdlib/blob/master/Rakefile)  
+* [stdlib/rpi-linux-dt.rb](https://github.com/notro/rpi-build-stdlib/blob/master/rpi-linux-dt.rb)  
+* [stdlib/uboot.rb](https://github.com/notro/rpi-build-stdlib/blob/master/uboot.rb)  
+* [stdlib/base.rb](https://github.com/notro/rpi-build-stdlib/blob/master/base.rb)  
+
+See the [extra directory](https://github.com/notro/rpi-firmware/tree/master/extra) which contain accumulated patch files, and the [Rakefile](https://github.com/notro/rpi-firmware/blob/master/extra/Rakefile) used do this build.
+
+
+Changelog
+---------
+#{Time.now.strftime('%Y-%m-%d')}
+* Minimal DT support. Core only, except for SPI and I2C drivers
+
+2013-11-06
+* First release. DT support for all BCM2708 drivers except USB.
+
+"""
+
+  target :build do
+    cp Rake.application.rakefile, workdir('out/extra/')
+  end
+  target :readme do
+    begin
+      cp workdir('u-boot-unpack.patch'), workdir('out/extra/u-boot.patch')
+      cp workdir('linux-unpack.patch'), workdir('out/extra/linux.patch')
+    rescue
+      puts "\n\nERROR: Forgot to run diff target\n\n"
+      raise
+    end
+  end
+end

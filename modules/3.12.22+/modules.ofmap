@@ -1,0 +1,12 @@
+# of module          name                 type                 compatible
+spi-bcm2708          *                    *                    brcm,bcm2708-spi
+rotary_encoder       *                    *                    rotary-encoder
+rtc-pcf2127          *                    *                    nxp,pcf2127
+rtc-pcf8523          *                    *                    nxp,pcf8523
+rtc-pcf8563          *                    *                    nxp,pcf8563
+i2c-bcm2708          *                    *                    brcm,bcm2708-i2c
+gpio-ir-recv         *                    *                    gpio-ir-receiver
+w1-gpio              *                    *                    w1-gpio
+snd-soc-pcm512x      *                    *                    ti,pcm5121
+snd-soc-pcm512x      *                    *                    ti,pcm5122
+snd-soc-wm8804       *                    *                    wlf,wm8804

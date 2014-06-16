@@ -1,107 +1,96 @@
-
 notro/rpi-firmware
-=======================================================
+==========
 
+Raspberry Pi kernel 3.12.22+ with experimental Device Tree support using ARCH_BCM2708
 
-Raspberry Pi kernel with Device Tree support.  
-See [wiki](https://github.com/notro/rpi-firmware/wiki/Device-Tree) for more info.
+Install
+-------
 
-
-
-Build scripts used: https://github.com/notro/rpi-build  
-Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/extra) directory
-
-
-
-### Install
-
-If [rpi-update](https://github.com/Hexxeh/rpi-update) is older than 12. august 2013, then it has to be manually updated first (or REPO_URI will be overwritten):
-```text
-sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
-```
-
-Because of an [issue](https://github.com/Hexxeh/rpi-update/issues/106), the following command is needed when going from the vanilla kernel to this kernel (not needed on subsequent notro/rpi-firmware updates):
-```text
-sudo mv /lib/modules/$(uname -r) /lib/modules/$(uname -r).bak
-```
-
-**Install**
 ```text
 sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=dt rpi-update
-sudo shutdown -r now
 ```
 
 
-### Sources
 
-* Linux Kernel  
-https://github.com/raspberrypi/linux/tree/a987a783807aeed2232280248a49ed8fa5981858
+Parts used to build this kernel
+----------------------------------
+* [rpi-build](https://github.com/notro/rpi-build)
+* [stdlib/Rakefile](https://github.com/notro/rpi-build-stdlib/blob/master/Rakefile)  
+* [stdlib/rpi-linux-dt.rb](https://github.com/notro/rpi-build-stdlib/blob/master/rpi-linux-dt.rb)  
+* [stdlib/uboot.rb](https://github.com/notro/rpi-build-stdlib/blob/master/uboot.rb)  
+* [stdlib/base.rb](https://github.com/notro/rpi-build-stdlib/blob/master/base.rb)  
 
-
-### Kernel patches
-* [dt_enable_bcm2708_part2.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/dt_enable_bcm2708_part2.patch)
-* [dt_enable_bcm2708.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/dt_enable_bcm2708.patch)
-* [enable_i2c-bcm2835_and_spi-bcm2835.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/enable_i2c-bcm2835_and_spi-bcm2835.patch)
-* [add_a_few_pr_debug_to_core.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/add_a_few_pr_debug_to_core.patch)
-* [enable_driver_debug_output.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/enable_driver_debug_output.patch)
-* [dt_enable_drivers.patch](https://github.com/notro/rpi-build/blob/master/patches/dt/dt_enable_drivers.patch)
+See the [extra directory](https://github.com/notro/rpi-firmware/tree/master/extra) which contain accumulated patch files, and the [Rakefile](https://github.com/notro/rpi-firmware/blob/master/extra/Rakefile) used do this build.
 
 
-### Kernel configuration changes
+Changelog
+---------
+2014-06-16
+* Minimal DT support. Core only, except for SPI and I2C drivers
 
-Deleted:  
+2013-11-06
+* First release. DT support for all BCM2708 drivers except USB.
+
+
+
+Sources
+-------
+* [raspberrypi/tools](https://github.com/raspberrypi/tools/archive/108317fde2ffb56d1dc7f14ac69c42f34a49342a.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/5bb031721026b6d84561f3cc96b9b6a7e6921431.tar.gz)
+* [http://git.denx.de/?p=u-boot/u-boot-arm.git](http://git.denx.de/?p=u-boot/u-boot-arm.git;a=snapshot;h=0a26e1d6c394aacbf1153977b7348d1dff85db3f;sf=tbz2)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/99df631ec39cbd4afaf2d3b8d8483d7f2489add2.tar.gz)
+
+
+Patches
+--------
+* U-Boot: Copy ATAG_CMDLINE to bootargs environment variable
+* Add drivers/pinctrl/pinctrl-bcm2708.c
+* Add Device Tree support BCM2708_DT
+* /home/pi/rpi-build/stdlib/patches/armctrl.patch
+* /home/pi/rpi-build/stdlib/patches/dt-enable-drivers.patch
+* Disable spi0, i2c0 and i2c1 devices in /home/pi/rpi-firmware/dt/workdir/linux/arch/arm/mach-bcm2708/bcm2708.c
+* i2c: bcm2708: Linking platform nodes to adapter nodes
+* Make it possible to choose I2C_BCM2835 and SPI_BCM2835 with MACH_BCM2708
+* /home/pi/rpi-build/stdlib/patches/i2c--bcm2835--Linking-platform-nodes-to-adapter-nodes.patch/3.12
+
+
+Kernel config
+-------------
+Default config: bcmrpi_defconfig
+
+
+
+Added:
 ```text
-CONFIG_BCM2708_SPIDEV=y
-CONFIG_I2C_BCM2708=m
-CONFIG_I2C_CHARDEV=m
-CONFIG_INPUT_POLLDEV=m
-CONFIG_LEDS_CLASS=m
-CONFIG_LEDS_GPIO=m
-CONFIG_SPI_BCM2708=m
-CONFIG_W1=m
-CONFIG_W1_MASTER_GPIO=m
+BCM2708_DT=y
+COMMON_CLK=y
+COMMON_CLK_DEBUG=y
+DMA_OF=y
+DTC=y
+DYNAMIC_DEBUG=y
+HAVE_CLK_PREPARE=y
+IRQCHIP=y
+OF=y
+OF_ADDRESS=y
+OF_EARLY_FLATTREE=y
+OF_FLATTREE=y
+OF_GPIO=y
+OF_IRQ=y
+OF_MDIO=m
+OF_NET=y
+PINCONF=y
+PINCTRL=y
+PINCTRL_BCM2708=y
+PINMUX=y
+PROC_DEVICETREE=y
+USE_OF=y
 ```
 
-Added:  
+
+Deleted:
 ```text
-CONFIG_BCM2708_DT=y
-CONFIG_COMMON_CLK=y
-CONFIG_COMMON_CLK_DEBUG=y
-CONFIG_DTC=y
-CONFIG_DYNAMIC_DEBUG=y
-CONFIG_HAVE_CLK_PREPARE=y
-CONFIG_I2C_BCM2708=y
-CONFIG_I2C_CHARDEV=y
-CONFIG_INPUT_KEYBOARD=y
-CONFIG_INPUT_MOUSE=y
-CONFIG_INPUT_POLLDEV=y
-CONFIG_INPUT_TOUCHSCREEN=y
-CONFIG_IRQCHIP=y
-CONFIG_IRQ_DOMAIN=y
-CONFIG_KEYBOARD_GPIO=y
-CONFIG_KEYBOARD_GPIO_POLLED=y
-CONFIG_LEDS_CLASS=y
-CONFIG_LEDS_GPIO=y
-CONFIG_MOUSE_GPIO=y
-CONFIG_NEED_MACH_GPIO_H=y
-CONFIG_OF=y
-CONFIG_OF_ADDRESS=y
-CONFIG_OF_DEVICE=y
-CONFIG_OF_EARLY_FLATTREE=y
-CONFIG_OF_FLATTREE=y
-CONFIG_OF_GPIO=y
-CONFIG_OF_I2C=y
-CONFIG_OF_IRQ=y
-CONFIG_OF_MDIO=y
-CONFIG_OF_NET=y
-CONFIG_PINCONF=y
-CONFIG_PINCTRL=y
-CONFIG_PINCTRL_BCM2708=y
-CONFIG_PINMUX=y
-CONFIG_PROC_DEVICETREE=y
-CONFIG_SPI_BCM2708=y
-CONFIG_TOUCHSCREEN_ADS7846=y
-CONFIG_USE_OF=y
-CONFIG_W1=y
-CONFIG_W1_MASTER_GPIO=y
+BCM2708_SPIDEV=y
 ```
+
+
+<p align="center">Built with <a href="https://github.com/notro/rpi-build/wiki">rpi-build</a></p>

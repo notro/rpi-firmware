@@ -1,23 +1,8 @@
+if [ -d ${FW_REPOLOCAL}/firmware ]; then
+        echo "     /lib/firmware"
+        cp -R "${FW_REPOLOCAL}/firmware/"* /lib/firmware/
+fi
+cp "${FW_REPOLOCAL}/"uEnv.txt "${FW_PATH}/"
 
-cat <<EOM
+cp "${FW_REPOLOCAL}/zImage" "${FW_PATH}/"
 
-
-
-
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    !!                       !!
-    !!       IMPORTANT       !!
-    !!                       !!
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-Make sure /boot/config.txt contains the following:
-
-device_tree=bcm2708-rpi-b.dtb
-device_tree_address=0x100
-kernel_address=0x8000
-disable_commandline_tags=1
-
-
-
-
-EOM
