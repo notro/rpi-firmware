@@ -62,6 +62,7 @@ kernel/drivers/leds/trigger/ledtrig-heartbeat.ko
 kernel/drivers/leds/trigger/ledtrig-backlight.ko
 kernel/drivers/leds/trigger/ledtrig-gpio.ko
 kernel/drivers/leds/trigger/ledtrig-default-on.ko
+kernel/drivers/mfd/mfd-core.ko
 kernel/drivers/misc/vc04_services/vchiq.ko
 kernel/drivers/mmc/card/mmc_block.ko
 kernel/drivers/mmc/core/mmc_core.ko
@@ -69,6 +70,7 @@ kernel/drivers/mmc/host/sdhci.ko
 kernel/drivers/mmc/host/sdhci-bcm2708.ko
 kernel/drivers/mmc/host/sdhci-pltfm.ko
 kernel/drivers/net/mii.ko
+kernel/drivers/net/can/can-dev.ko
 kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/scsi/scsi_mod.ko
@@ -90,10 +92,17 @@ kernel/drivers/video/cfbfillrect.ko
 kernel/drivers/video/cfbcopyarea.ko
 kernel/drivers/video/cfbimgblt.ko
 kernel/drivers/video/bcm2708_fb.ko
+kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/video/console/fbcon.ko
 kernel/drivers/video/console/bitblit.ko
 kernel/drivers/video/console/softcursor.ko
+kernel/drivers/video/console/fbcon_rotate.ko
+kernel/drivers/video/console/fbcon_cw.ko
+kernel/drivers/video/console/fbcon_ud.ko
+kernel/drivers/video/console/fbcon_ccw.ko
 kernel/sound/soundcore.ko
+kernel/net/can/can.ko
+kernel/net/can/can-gw.ko
 kernel/net/dns_resolver/dns_resolver.ko
 kernel/net/ipv4/tcp_cubic.ko
 kernel/net/packet/af_packet.ko

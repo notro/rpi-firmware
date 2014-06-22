@@ -1,57 +1,36 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.12.22+ with experimental Device Tree support using ARCH_BCM2708
+Raspberry Pi kernel 3.12.22+ with support for FBTFT.
+
+Test release: RA8875 and SSD1322 support
 
 Install
 -------
 
 ```text
-sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=dt rpi-update
+sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=test rpi-update
 ```
 
-
-
-Parts used to build this kernel
-----------------------------------
-* [rpi-build](https://github.com/notro/rpi-build)
-* [stdlib/Rakefile](https://github.com/notro/rpi-build-stdlib/blob/master/Rakefile)  
-* [stdlib/rpi-linux-dt.rb](https://github.com/notro/rpi-build-stdlib/blob/master/rpi-linux-dt.rb)  
-* [stdlib/uboot.rb](https://github.com/notro/rpi-build-stdlib/blob/master/uboot.rb)  
-* [stdlib/base.rb](https://github.com/notro/rpi-build-stdlib/blob/master/base.rb)  
-
-See the [extra directory](https://github.com/notro/rpi-firmware/tree/master/extra) which contain accumulated patch files, and the [Rakefile](https://github.com/notro/rpi-firmware/blob/master/extra/Rakefile) used do this build.
-
-
-Changelog
----------
-2014-06-16
-* Minimal DT support. Core only, except for SPI and I2C drivers
-
-2013-11-06
-* First release. DT support for all BCM2708 drivers except USB.
 
 
 
 Sources
 -------
-* [raspberrypi/tools](https://github.com/raspberrypi/tools/archive/108317fde2ffb56d1dc7f14ac69c42f34a49342a.tar.gz)
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/5bb031721026b6d84561f3cc96b9b6a7e6921431.tar.gz)
-* [http://git.denx.de/?p=u-boot/u-boot-arm.git](http://git.denx.de/?p=u-boot/u-boot-arm.git;a=snapshot;h=0a26e1d6c394aacbf1153977b7348d1dff85db3f;sf=tbz2)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/99df631ec39cbd4afaf2d3b8d8483d7f2489add2.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/462f3e3f476f7b6200004040c09e992f3c551f38.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/1981ddebd4d3108cc942680a75ea151a479d65a8.tar.gz)
+* [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/b0503147c90869341905509c37d7ce866e7832a7.tar.gz)
+* [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/de14557bae567e80f7a5a41a79e8cc1b0c7d99fd.tar.gz)
+* [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
+* https://raw.githubusercontent.com/presslab-us/fbtft/master/fb_ssd1322.c
 
 
 Patches
 --------
-* U-Boot: Copy ATAG_CMDLINE to bootargs environment variable
-* Add drivers/pinctrl/pinctrl-bcm2708.c
-* Add Device Tree support BCM2708_DT
-* /home/pi/rpi-build/stdlib/patches/armctrl.patch
-* /home/pi/rpi-build/stdlib/patches/dt-enable-drivers.patch
-* Disable spi0, i2c0 and i2c1 devices in /home/pi/rpi-firmware/dt/workdir/linux/arch/arm/mach-bcm2708/bcm2708.c
-* i2c: bcm2708: Linking platform nodes to adapter nodes
-* Make it possible to choose I2C_BCM2835 and SPI_BCM2835 with MACH_BCM2708
-* /home/pi/rpi-build/stdlib/patches/i2c--bcm2835--Linking-platform-nodes-to-adapter-nodes.patch/3.12
+* /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.12
+* /home/pi/rpi-build/fbtft-build/patches/gpio_backlight-gpio-can-sleep.patch/3.10
+* /home/pi/rpi-build/fbtft-build/patches/stmpe-ts-Various-fixes.patch/3.10
 
 
 Kernel config
@@ -62,34 +41,77 @@ Default config: bcmrpi_defconfig
 
 Added:
 ```text
-BCM2708_DT=y
-COMMON_CLK=y
-COMMON_CLK_DEBUG=y
-DMA_OF=y
-DTC=y
+BACKLIGHT_GPIO=m
+CAN=y
+CAN_BCM=m
+CAN_CALC_BITTIMING=y
+CAN_DEV=y
+CAN_GW=y
+CAN_MCP251X=m
+CAN_RAW=m
+CAN_SLCAN=m
+CAN_VCAN=m
 DYNAMIC_DEBUG=y
-HAVE_CLK_PREPARE=y
-IRQCHIP=y
-OF=y
-OF_ADDRESS=y
-OF_EARLY_FLATTREE=y
-OF_FLATTREE=y
-OF_GPIO=y
-OF_IRQ=y
-OF_MDIO=m
-OF_NET=y
-PINCONF=y
-PINCTRL=y
-PINCTRL_BCM2708=y
-PINMUX=y
-PROC_DEVICETREE=y
-USE_OF=y
+FB_BACKLIGHT=y
+FB_DEFERRED_IO=y
+FB_FLEX=m
+FB_SYS_COPYAREA=m
+FB_SYS_FILLRECT=m
+FB_SYS_FOPS=m
+FB_SYS_IMAGEBLIT=m
+FB_TFT=m
+FB_TFT_BD663474=m
+FB_TFT_FBTFT_DEVICE=m
+FB_TFT_HX8340BN=m
+FB_TFT_HX8347D=m
+FB_TFT_HX8353D=m
+FB_TFT_ILI9320=m
+FB_TFT_ILI9325=m
+FB_TFT_ILI9340=m
+FB_TFT_ILI9341=m
+FB_TFT_PCD8544=m
+FB_TFT_RA8875=m
+FB_TFT_S6D1121=m
+FB_TFT_SSD1289=m
+FB_TFT_SSD1306=m
+FB_TFT_SSD1322=m
+FB_TFT_SSD1331=m
+FB_TFT_SSD1351=m
+FB_TFT_ST7735R=m
+FB_TFT_TINYLCD=m
+FB_TFT_UPD161704=m
+FB_TFT_WATTEROTT=m
+FONTS=y
+FONT_10x18=y
+FONT_6x11=y
+FONT_7x14=y
+FONT_ACORN_8x8=y
+FONT_MINI_4x6=y
+FONT_PEARL_8x8=y
+FONT_SUN12x22=y
+FONT_SUN8x16=y
+FRAMEBUFFER_CONSOLE_ROTATION=y
+GPIO_MCP23S08=m
+GPIO_STMPE=y
+INPUT_KEYBOARD=y
+INPUT_MOUSE=y
+INPUT_TOUCHSCREEN=y
+KEYBOARD_GPIO=m
+MFD_STMPE=y
+MOUSE_GPIO=m
+SPI_BITBANG=m
+SPI_GPIO=m
+STMPE_I2C=y
+STMPE_SPI=y
+TOUCHSCREEN_ADS7846=m
+TOUCHSCREEN_STMPE=m
 ```
 
 
-Deleted:
+Changed:
 ```text
-BCM2708_SPIDEV=y
+BACKLIGHT_CLASS_DEVICE m -> y
+MFD_CORE m -> y
 ```
 
 

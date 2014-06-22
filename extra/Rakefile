@@ -1,46 +1,135 @@
-load 'stdlib/Rakefile'
+load 'fbtft-build/Rakefile'
 
-# expand on :rpi_linux_dt in stdlib/Rakefile
-# this action will run after all prerequisites have run
-release :rpi_linux_dt do
-  VAR['FW_BRANCH'] = 'dt'
-  VAR['DIFFPREP'] = 'u-boot,linux'
-  # use delayed assignement of COMMIT_MESSAGE and Readme.desc,
-  # since KERNEL_RELEASE is set during the kbuild target
-  VAR.default('COMMIT_MESSAGE') { "Second release. Core DT support. Kernel: #{VAR['KERNEL_RELEASE']}" }
-  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with experimental Device Tree support using ARCH_BCM2708" }
-  Readme.body = """
-Parts used to build this kernel
-----------------------------------
-* [rpi-build](https://github.com/notro/rpi-build)
-* [stdlib/Rakefile](https://github.com/notro/rpi-build-stdlib/blob/master/Rakefile)  
-* [stdlib/rpi-linux-dt.rb](https://github.com/notro/rpi-build-stdlib/blob/master/rpi-linux-dt.rb)  
-* [stdlib/uboot.rb](https://github.com/notro/rpi-build-stdlib/blob/master/uboot.rb)  
-* [stdlib/base.rb](https://github.com/notro/rpi-build-stdlib/blob/master/base.rb)  
+VAR['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-'
 
-See the [extra directory](https://github.com/notro/rpi-firmware/tree/master/extra) which contain accumulated patch files, and the [Rakefile](https://github.com/notro/rpi-firmware/blob/master/extra/Rakefile) used do this build.
-
-
-Changelog
----------
-#{Time.now.strftime('%Y-%m-%d')}
-* Minimal DT support. Core only, except for SPI and I2C drivers
-
-2013-11-06
-* First release. DT support for all BCM2708 drivers except USB.
-
-"""
+release :fbtft_master => [:ra8875, :ssd1322] do
+  desc = "RA8875 and SSD1322 support"
+  VAR['FW_BRANCH'] = 'test'
+#  VAR['DIFFPREP'] = 'linux'
+  ENV['COMMIT_MESSAGE'] = desc
+  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT.\n\nTest release: #{desc}" }
 
   target :build do
     cp Rake.application.rakefile, workdir('out/extra/')
   end
-  target :readme do
-    begin
-      cp workdir('u-boot-unpack.patch'), workdir('out/extra/u-boot.patch')
-      cp workdir('linux-unpack.patch'), workdir('out/extra/linux.patch')
-    rescue
-      puts "\n\nERROR: Forgot to run diff target\n\n"
-      raise
-    end
+end
+
+
+package :ra8875 do
+  target :patch do
+    cp findfile('files/fb_ra8875.c'), workdir('linux/drivers/video/fbtft/fb_ra8875.c')
+
+    fbtft_driver_add "obj-$(CONFIG_FB_TFT_RA8875)      += fb_ra8875.o\n", <<'EOM'
+
+config FB_TFT_RA8875
+        tristate "FB driver for the RA8875 LCD Controller"
+        depends on FB_TFT
+	help
+	  Generic Framebuffer support for RA8875
+
+EOM
+
+    fbtft_device_insert_before '		.name = "flexfb"', <<'EOM'
+		.name = "er_tftm050_2",
+		.spi = &(struct spi_board_info) {
+			.modalias = "fb_ra8875",
+			.max_speed_hz = 5000000,
+			.mode = SPI_MODE_3,
+			.platform_data = &(struct fbtft_platform_data) {
+				.display = {
+					.buswidth = 8,
+					.backlight = 1,
+					.width = 480,
+					.height = 272,
+				},
+				.bgr = true,
+				.gpios = (const struct fbtft_gpio []) {
+					{ "reset", 25 },
+					{ "dc", 24 },
+					{},
+				},
+			}
+		}
+	}, {
+		.name = "er_tftm070_5",
+		.spi = &(struct spi_board_info) {
+			.modalias = "fb_ra8875",
+			.max_speed_hz = 5000000,
+			.mode = SPI_MODE_3,
+			.platform_data = &(struct fbtft_platform_data) {
+				.display = {
+					.buswidth = 8,
+					.backlight = 1,
+					.width = 800,
+					.height = 480,
+				},
+				.bgr = true,
+				.gpios = (const struct fbtft_gpio []) {
+					{ "reset", 25 },
+					{ "dc", 24 },
+					{},
+				},
+			}
+		}
+	}, {
+EOM
   end
+
+  config 'FB_TFT_RA8875', :module
+end
+
+
+package :ssd1322 do
+  download 'https://raw.githubusercontent.com/presslab-us/fbtft/master/fb_ssd1322.c', 'fb_ssd1322.c'
+
+  target :patch do
+    cp findfile('fb_ssd1322.c'), workdir('linux/drivers/video/fbtft/')
+  end
+
+  target :patch do
+    fbtft_driver_add "obj-$(CONFIG_FB_TFT_SSD1322)     += fb_ssd1322.o\n", <<'EOM'
+config FB_TFT_SSD1322
+	tristate "FB driver for the SSD1322 OLED Controller"
+	depends on FB_TFT
+	help
+	  Framebuffer support for SSD1322
+
+EOM
+
+    fbtft_device_insert_before '		.name = "mi0283qt-2"', <<'EOM'
+		.name = "lm560g",
+		.spi = &(struct spi_board_info) {
+			.modalias = "fb_ssd1322",
+			.max_speed_hz = 5000000,
+			.mode = SPI_MODE_0,
+			.platform_data = &(struct fbtft_platform_data) {
+				.display = {
+					.buswidth = 8,
+					.backlight = 0,
+				},
+				.gpios = (const struct fbtft_gpio []) {
+					{ "reset", 24 },
+					{ "dc", 25 },
+					{},
+				},
+			}
+		}
+	}, {
+EOM
+  end
+
+  config 'FB_TFT_SSD1322', :module
+end
+
+
+def fbtft_driver_add(makefile, kconfig)
+  fn = workdir 'linux/drivers/video/fbtft/Makefile'
+  File.open(fn, 'a') { |f| f.write makefile }
+  fn = workdir 'linux/drivers/video/fbtft/Kconfig'
+  File.open(fn, 'a') { |f| f.write kconfig }
+end
+
+def fbtft_device_insert_before(search, str)
+  fn = workdir 'linux/drivers/video/fbtft/fbtft_device.c'
+  insert_before fn, search, str
 end
