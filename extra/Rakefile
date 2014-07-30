@@ -1,29 +1,84 @@
 load 'stdlib/Rakefile'
 
+##package :vcboot_dt do
+##  target :build do
+##    dst = workdir 'out'
+##    ksrc = workdir 'linux'
+###    cp(ksrc + "/arch/arm/boot/zImage", dst)
+##    sh "cp #{ksrc}/arch/arm/boot/dts/*.dtb #{dst}"
+##  end
+##
+###  target :build do
+###		cp findfile('files/start_dtrev2.elf'), workdir('out/start.elf')
+###  end
+##
+##  target :kbuild do
+##    post_install """
+##cat <<EOM
+##
+##
+##    !!!!!!!!!!!!!!!!!!!!!!!!!!!
+##    !!                       !!
+##    !!       IMPORTANT       !!
+##    !!                       !!
+##    !!!!!!!!!!!!!!!!!!!!!!!!!!!
+##
+##Make sure /boot/config.txt contains the following:
+##
+##device_tree=bcm2708-rpi-b.dtb
+##device_tree_address=0x100
+##kernel_address=0x8000
+##disable_commandline_tags=2
+##
+##
+##EOM
+##"""
+##  end
+##end
+
+
+# tools are already unpacked
+#ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-'
+ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-'
+
 # expand on :rpi_linux_dt in stdlib/Rakefile
 # this action will run after all prerequisites have run
 release :rpi_linux_dt do
   VAR['FW_BRANCH'] = 'dt'
-  VAR['DIFFPREP'] = 'u-boot,linux'
+#  VAR['DIFFPREP'] = 'u-boot,linux'
   # use delayed assignement of COMMIT_MESSAGE and Readme.desc,
   # since KERNEL_RELEASE is set during the kbuild target
-  VAR.default('COMMIT_MESSAGE') { "Second release. Core DT support. Kernel: #{VAR['KERNEL_RELEASE']}" }
-  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with experimental Device Tree support using ARCH_BCM2708" }
+  VAR.default('COMMIT_MESSAGE') { "Basic in-tree DT support. Kernel: #{VAR['KERNEL_RELEASE']}" }
+
+  config ['BCM2708_DT', 'DYNAMIC_DEBUG', 'PROC_DEVICETREE'], :enable
+  config ['SPI_BCM2835', 'I2C_BCM2835'], :module
+
+
+  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with Device Tree support on ARCH_BCM2708" }
   Readme.body = """
-Parts used to build this kernel
+ Upstreaming
+--------------
+Adding DT support to ARCH_BCM2708 is part of an effort to move to upstream drivers and get DT sooner.
+* [Upstreaming](https://github.com/raspberrypi/linux/wiki/Upstreaming)
+* [Device Tree on ARCH_BCM2708](https://github.com/raspberrypi/linux/wiki/Device-Tree-on-ARCH_BCM2708)
+
+ Parts used to build this kernel
 ----------------------------------
 * [rpi-build](https://github.com/notro/rpi-build)
 * [stdlib/Rakefile](https://github.com/notro/rpi-build-stdlib/blob/master/Rakefile)  
-* [stdlib/rpi-linux-dt.rb](https://github.com/notro/rpi-build-stdlib/blob/master/rpi-linux-dt.rb)  
-* [stdlib/uboot.rb](https://github.com/notro/rpi-build-stdlib/blob/master/uboot.rb)  
+* [stdlib/rpi-linux.rb](https://github.com/notro/rpi-build-stdlib/blob/master/rpi-linux.rb)  
 * [stdlib/base.rb](https://github.com/notro/rpi-build-stdlib/blob/master/base.rb)  
 
-See the [extra directory](https://github.com/notro/rpi-firmware/tree/master/extra) which contain accumulated patch files, and the [Rakefile](https://github.com/notro/rpi-firmware/blob/master/extra/Rakefile) used do this build.
+[Rakefile](https://github.com/notro/rpi-firmware/blob/dt/extra/Rakefile) used to do this build.
 
 
 Changelog
 ---------
 #{Time.now.strftime('%Y-%m-%d')}
+* DT support is in-tree now. Supports platform, i2c and spi devices
+* i2c-bcm2835 and spi-bcm2835 are also built
+
+2014-06-16
 * Minimal DT support. Core only, except for SPI and I2C drivers
 
 2013-11-06
@@ -31,16 +86,24 @@ Changelog
 
 """
 
+#  target :unpack do
+#    dst = workdir 'linux'
+#    rm dst
+#    # the git repo is in the Rakefile directory
+#    ln_s findfile('raspberrypi-linux'), dst
+#  end
+
   target :build do
     cp Rake.application.rakefile, workdir('out/extra/')
   end
-  target :readme do
-    begin
-      cp workdir('u-boot-unpack.patch'), workdir('out/extra/u-boot.patch')
-      cp workdir('linux-unpack.patch'), workdir('out/extra/linux.patch')
-    rescue
-      puts "\n\nERROR: Forgot to run diff target\n\n"
-      raise
-    end
-  end
+
+#  target :readme do
+#    begin
+#      cp workdir('u-boot-unpack.patch'), workdir('out/extra/u-boot.patch')
+#      cp workdir('linux-unpack.patch'), workdir('out/extra/linux.patch')
+#    rescue
+#      puts "\n\nERROR: Forgot to run diff target\n\n"
+#      raise
+#    end
+#  end
 end
