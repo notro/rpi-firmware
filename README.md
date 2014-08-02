@@ -1,7 +1,7 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.12.21+ with support for FBTFT.
+Raspberry Pi kernel 3.12.25+ with support for FBTFT.
 
 Install
 -------
@@ -14,6 +14,14 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update
 
 Changelog
 ---------
+2014-08-02
+* add er_tftm050_2 and er_tftm070_5 support
+* add RA8875 support
+* add support for PiScreen
+* add ILI9486 support
+* add S6D02A1 support (Wolfgang Buening)
+* rpi_power_switch was missing in the previous release
+
 2014-06-14
 * fb_ssd1351: Add rotation support
 * Add Waveshare 2.2" (bd663474 & upd161704) support
@@ -78,13 +86,12 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 
 Sources
 -------
-* [raspberrypi/tools](https://github.com/raspberrypi/tools/archive/108317fde2ffb56d1dc7f14ac69c42f34a49342a.tar.gz)
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/e45a4a25cd6ec19912de3310194ebaf8f02676f6.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/342abe67d0e1f12eae17562bfe7615143d2618d1.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/a6fe2977ae7292adae1816bd13a828c71b74bc17.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/a58c89292b7fa399624e40047b699ae910b41880.tar.gz)
 * [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
-* [notro/fbtft](https://github.com/notro/fbtft/archive/b0503147c90869341905509c37d7ce866e7832a7.tar.gz)
-* [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/71994224c5ed951eab7ca9da2c919456d1632d15.tar.gz)
 * [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/de14557bae567e80f7a5a41a79e8cc1b0c7d99fd.tar.gz)
+* [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 
 
 Patches
@@ -130,7 +137,10 @@ FB_TFT_ILI9320=y
 FB_TFT_ILI9325=y
 FB_TFT_ILI9340=y
 FB_TFT_ILI9341=y
+FB_TFT_ILI9486=y
 FB_TFT_PCD8544=y
+FB_TFT_RA8875=y
+FB_TFT_S6D02A1=y
 FB_TFT_S6D1121=y
 FB_TFT_SSD1289=y
 FB_TFT_SSD1306=y
