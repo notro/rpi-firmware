@@ -6,13 +6,27 @@ release :fbtft_builtin => :new_release
 release :fbtft_latest => :new_release
 
 
+#ENV['FBTFT_GIT'] = '1' # use FTBFT git repo instead of downloading snapshot
+
+# tools are already unpacked
+ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-'
+
+
 package :new_release do
-  ENV['COMMIT_MESSAGE'] = "Merge pull request #109 from swkim01/waveshare2_2"
+  ENV['COMMIT_MESSAGE'] = "ILI9486 and RA8875 support added"
   Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
   Readme.body = """
 Changelog
 ---------
 #{Time.now.strftime('%Y-%m-%d')}
+* add er_tftm050_2 and er_tftm070_5 support
+* add RA8875 support
+* add support for PiScreen
+* add ILI9486 support
+* add S6D02A1 support (Wolfgang Buening)
+* rpi_power_switch was missing in the previous release
+
+2014-06-14
 * fb_ssd1351: Add rotation support
 * Add Waveshare 2.2\" (bd663474 & upd161704) support
 * install_kernel_source is removed
@@ -76,5 +90,22 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 
   target :build do
     cp Rake.application.rakefile, workdir('out/extra/')
+  end
+end
+
+VAR.store('FBTFT_GIT')
+if VAR['FBTFT_GIT']
+  package :fbtft do
+    target :patch do
+      if LinuxVersion.new(ENV['LINUX_KERNEL_VERSION']) >= LinuxVersion.new('3.15')
+        dst = workdir('linux/drivers/video/fbdev/fbtft')
+      else
+        dst = workdir('linux/drivers/video/fbtft')
+      end
+      rm dst
+      rm_r workdir 'fbtft'
+      # the git repo is in the Rakefile directory
+      ln_s findfile('fbtft'), dst
+    end
   end
 end
