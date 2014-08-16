@@ -1,7 +1,7 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.15.8+ with support for FBTFT.
+Raspberry Pi Device Tree kernel 3.16.1+ with support for FBTFT.
 
 Install
 -------
@@ -14,6 +14,9 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=latest rpi-update
 
 Changelog
 ---------
+2014-08-16
+* add support for the TLS8204 used in the latest Nokia 3310 displays
+
 2014-08-02
 * add er_tftm050_2 and er_tftm070_5 support
 * add RA8875 support
@@ -86,10 +89,10 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 
 Sources
 -------
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/a6fe2977ae7292adae1816bd13a828c71b74bc17.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/5cde34892b3eac8216baaf8f3f1ef137f09b65e9.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/43c5b2fc9bdb0a43ba67661b8677445e71ae9e82.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/33f49e8bf532404304798189d98393f6b2b055df.tar.gz)
 * [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
-* [notro/fbtft](https://github.com/notro/fbtft/archive/71994224c5ed951eab7ca9da2c919456d1632d15.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/d12b9c1de7fe72fd020419411f73740d7a995a81.tar.gz)
 * [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/de14557bae567e80f7a5a41a79e8cc1b0c7d99fd.tar.gz)
 * [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 
@@ -97,8 +100,8 @@ Sources
 Patches
 --------
 * /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.15
-* /home/pi/rpi-build/fbtft-build/patches/gpio_backlight-gpio-can-sleep.patch/3.10
 * /home/pi/rpi-build/fbtft-build/patches/stmpe-ts-Various-fixes.patch/3.10
+* /home/pi/rpi-build/fbtft-build/patches/disable-spidev-dts.patch
 
 
 Kernel config
@@ -110,6 +113,7 @@ Default config: bcmrpi_defconfig
 Added:
 ```text
 BACKLIGHT_GPIO=m
+BCM2708_DT=y
 CAN=y
 CAN_BCM=m
 CAN_CALC_BITTIMING=y
@@ -119,6 +123,8 @@ CAN_MCP251X=m
 CAN_RAW=m
 CAN_SLCAN=m
 CAN_VCAN=m
+DMA_OF=y
+DTC=y
 DYNAMIC_DEBUG=y
 FB_BACKLIGHT=y
 FB_DEFERRED_IO=y
@@ -148,6 +154,7 @@ FB_TFT_SSD1331=m
 FB_TFT_SSD1351=m
 FB_TFT_ST7735R=m
 FB_TFT_TINYLCD=m
+FB_TFT_TLS8204=m
 FB_TFT_UPD161704=m
 FB_TFT_WATTEROTT=m
 FONTS=y
@@ -160,19 +167,40 @@ FONT_PEARL_8x8=y
 FONT_SUN12x22=y
 FONT_SUN8x16=y
 FRAMEBUFFER_CONSOLE_ROTATION=y
+GPIO_MCP23S08=m
 GPIO_STMPE=y
+I2C_BCM2835=m
 INPUT_KEYBOARD=y
 INPUT_MOUSE=y
 INPUT_TOUCHSCREEN=y
+IRQCHIP=y
 KEYBOARD_GPIO=m
+LIBFDT=y
 MFD_STMPE=y
 MOUSE_GPIO=m
+OF=y
+OF_ADDRESS=y
+OF_EARLY_FLATTREE=y
+OF_FLATTREE=y
+OF_GPIO=y
+OF_IRQ=y
+OF_MDIO=m
+OF_NET=y
+OF_RESERVED_MEM=y
+OF_TOUCHSCREEN=y
+PINCONF=y
+PINCTRL=y
+PINCTRL_BCM2708=y
+PINMUX=y
+SPI_BCM2835=m
 SPI_BITBANG=m
 SPI_GPIO=m
 STMPE_I2C=y
 STMPE_SPI=y
+THERMAL_OF=y
 TOUCHSCREEN_ADS7846=m
 TOUCHSCREEN_STMPE=m
+USE_OF=y
 ```
 
 
@@ -180,6 +208,12 @@ Changed:
 ```text
 BACKLIGHT_CLASS_DEVICE m -> y
 MFD_CORE m -> y
+```
+
+
+Deleted:
+```text
+BCM2708_SPIDEV=y
 ```
 
 
