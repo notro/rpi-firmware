@@ -1,0 +1,7 @@
+# UEnv.txt is imported during the preboot variable execution.
+
+# Override the default bootargs adding some debug output:
+#bootargs=earlyprintk loglevel=8 console=ttyAMA0 verbose rootwait root=/dev/mmcblk0p2 rw debug dyndbg=\"module pinctrl_bcm2835 +p; file drivers/gpio/gpiolib.c +p; file drivers/of/platform.c +p; file kernel/irq/irqdomain.c +p; file kernel/irq/manage.c +p; file kernel/resource.c +p;\"
+
+# Override bootcmd
+#bootcmd=echo Overriding bootcmd...; for target in ${boot_targets}; do run bootcmd_${target}; done

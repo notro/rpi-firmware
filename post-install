@@ -2,30 +2,8 @@ if [ -d ${FW_REPOLOCAL}/firmware ]; then
         echo "     /lib/firmware"
         cp -R "${FW_REPOLOCAL}/firmware/"* /lib/firmware/
 fi
+cp "${FW_REPOLOCAL}/"*.uimg "${FW_PATH}/"
+cp "${FW_REPOLOCAL}/"uEnv.txt "${FW_PATH}/"
 
-src=${BOOT_PATH}/config.txt
-dst=${src}.$(date +%Y-%m-%d--%H-%M-%S)
-
-if grep -q "^device_tree=bcm2708-rpi-b.dtb" ${src}; then
-  echo "     ${src}: DT is already enabled"
-else
-  echo "     Backup ${src} -> ${dst}"
-  cp -a ${src} ${dst}
-  echo "     Adding Device Tree options to ${src}"
-  cat <<EOM >> ${src}
-
-# Boot a Device Tree enabled kernel
-device_tree=bcm2708-rpi-b.dtb
-device_tree_address=0x100
-kernel_address=0x8000
-disable_commandline_tags=2
-EOM
-  echo
-  echo "     Remember to restore/edit ${src} when installing a non-DT kernel"
-  echo
-fi
-
-dst=/usr/local/src/fbtft_dts
-echo "     DT source files in: ${dst}"
-cp -R "${FW_REPOLOCAL}/extra/dts" ${dst}
+cp "${FW_REPOLOCAL}/zImage" "${FW_PATH}/"
 
