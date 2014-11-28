@@ -1,7 +1,7 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.12.25+ with support for FBTFT.
+Raspberry Pi kernel 3.12.33+ with support for FBTFT.
 
 Install
 -------
@@ -14,6 +14,13 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
 
 Changelog
 ---------
+2014-11-28
+* [add support for AGM1264K-FL](https://github.com/notro/fbtft/commit/de1c2adfbb7b04b90a02d0e4cf6d7d923bab3656)
+* [uc1701: add support for UC1701](https://github.com/notro/fbtft/commit/43d452d3b2f4ce9193103603bb453d4a97ff11f6)
+* [fbtft_device: add adafruit28](https://github.com/notro/fbtft/commit/32995715c7fb161bf539fefc7e250fef3599cd61)
+* [add ILI9481 support](https://github.com/notro/fbtft/commit/a693c8e3692f6a4fb67468a2d3b3fdd35b9aa2e2)
+* [add support for the TLS8204 used in the latest Nokia 3310 displays](https://github.com/notro/fbtft/commit/6da654310724c31622afa8c7d12211a6e33ec18d)
+
 2014-08-02
 * add er_tftm050_2 and er_tftm070_5 support
 * add RA8875 support
@@ -86,11 +93,11 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 
 Sources
 -------
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/a6fe2977ae7292adae1816bd13a828c71b74bc17.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/a58c89292b7fa399624e40047b699ae910b41880.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/c48462f6bb99bff75f04db65c276ab87827b295e.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/e790c757e08c33ff3b0ddc01ff31aa408335371c.tar.gz)
 * [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
-* [notro/fbtft](https://github.com/notro/fbtft/archive/71994224c5ed951eab7ca9da2c919456d1632d15.tar.gz)
-* [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/de14557bae567e80f7a5a41a79e8cc1b0c7d99fd.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/de1c2adfbb7b04b90a02d0e4cf6d7d923bab3656.tar.gz)
+* [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/22cee1fadb55bcb22fd220ed76926661e6d6b225.tar.gz)
 * [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 
 
@@ -128,6 +135,7 @@ FB_SYS_FILLRECT=m
 FB_SYS_FOPS=m
 FB_SYS_IMAGEBLIT=m
 FB_TFT=m
+FB_TFT_AGM1264K_FL=m
 FB_TFT_BD663474=m
 FB_TFT_FBTFT_DEVICE=m
 FB_TFT_HX8340BN=m
@@ -137,6 +145,7 @@ FB_TFT_ILI9320=m
 FB_TFT_ILI9325=m
 FB_TFT_ILI9340=m
 FB_TFT_ILI9341=m
+FB_TFT_ILI9481=m
 FB_TFT_ILI9486=m
 FB_TFT_PCD8544=m
 FB_TFT_RA8875=m
@@ -148,6 +157,8 @@ FB_TFT_SSD1331=m
 FB_TFT_SSD1351=m
 FB_TFT_ST7735R=m
 FB_TFT_TINYLCD=m
+FB_TFT_TLS8204=m
+FB_TFT_UC1701=m
 FB_TFT_UPD161704=m
 FB_TFT_WATTEROTT=m
 FONTS=y
