@@ -1,7 +1,7 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.12.33+ with support for FBTFT.
+Raspberry Pi kernel 3.12.34+ with support for FBTFT.
 
 Install
 -------
@@ -14,6 +14,12 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
 
 Changelog
 ---------
+2014-12-07
+* [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
+* [fbtft_device: add Tontec 3.5 support](https://github.com/notro/fbtft/commit/8116d7273be8816ce70c1a017b4466ae17e27d53)
+* [fb_ili9481,6: regwidth was incorrect](https://github.com/notro/fbtft/commit/c92097b5a5ef82e298a4fe8ec7859c9378e435d8)
+* [fbtft: make it possible to override regwidth](https://github.com/notro/fbtft/commit/566dca0e9d531b54c11ea9aea47f76695472776c)
+
 2014-11-28
 * [add support for AGM1264K-FL](https://github.com/notro/fbtft/commit/de1c2adfbb7b04b90a02d0e4cf6d7d923bab3656)
 * [uc1701: add support for UC1701](https://github.com/notro/fbtft/commit/43d452d3b2f4ce9193103603bb453d4a97ff11f6)
@@ -93,10 +99,10 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 
 Sources
 -------
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/c48462f6bb99bff75f04db65c276ab87827b295e.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/e790c757e08c33ff3b0ddc01ff31aa408335371c.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/9d58d7bcc9d1442610ee82a18fbb203d49e915a1.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/b82491cb94745a8cac9ac6b79763a8e281ae7add.tar.gz)
 * [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
-* [notro/fbtft](https://github.com/notro/fbtft/archive/de1c2adfbb7b04b90a02d0e4cf6d7d923bab3656.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/e67014490a9df34b9a4bf04e49c50254aebc10a8.tar.gz)
 * [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/22cee1fadb55bcb22fd220ed76926661e6d6b225.tar.gz)
 * [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 

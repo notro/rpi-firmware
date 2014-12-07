@@ -32,12 +32,22 @@ ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabih
 # there was a single latest release 2014-08-16 adding DT, no release was made for master and builtin.
 
 package :new_release do
+
+
   ENV['COMMIT_MESSAGE'] = "add support for AGM1264K-FL"
+
+
   Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
   Readme.body = """
 Changelog
 ---------
 #{Time.now.strftime('%Y-%m-%d')}
+* [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
+* [fbtft_device: add Tontec 3.5 support](https://github.com/notro/fbtft/commit/8116d7273be8816ce70c1a017b4466ae17e27d53)
+* [fb_ili9481,6: regwidth was incorrect](https://github.com/notro/fbtft/commit/c92097b5a5ef82e298a4fe8ec7859c9378e435d8)
+* [fbtft: make it possible to override regwidth](https://github.com/notro/fbtft/commit/566dca0e9d531b54c11ea9aea47f76695472776c)
+
+2014-11-28
 * [add support for AGM1264K-FL](https://github.com/notro/fbtft/commit/de1c2adfbb7b04b90a02d0e4cf6d7d923bab3656)
 * [uc1701: add support for UC1701](https://github.com/notro/fbtft/commit/43d452d3b2f4ce9193103603bb453d4a97ff11f6)
 * [fbtft_device: add adafruit28](https://github.com/notro/fbtft/commit/32995715c7fb161bf539fefc7e250fef3599cd61)
