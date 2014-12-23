@@ -1,0 +1,167 @@
+load 'fbtft-build/Rakefile'
+
+
+
+ENV['COMMIT_MESSAGE'] = "fbtft_device: added support for waveshare32b"
+
+
+
+
+ENV['FBTFT_GIT'] = '1' # use FTBFT git repo instead of downloading snapshot
+
+# tools are already unpacked
+ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-'
+
+
+
+
+release :fbtft_master => :new_release
+
+release :fbtft_builtin => :new_release
+
+release :fbtft_next => [:fbtft_kernel_common, :rpi_overlays, :fbtft_overlays] do
+
+  Readme.desc { "Raspberry Pi Device Tree kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
+
+  VAR['FW_BRANCH'] = 'next'
+  ENV['FBTFT_KERNEL_CONFIG'] = 'y'
+#  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= raspberrypi_linux_latest
+  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-3.18.y'
+  VAR.store 'RASPBERRYPI_LINUX_BRANCH'
+  info "RASPBERRYPI_LINUX_BRANCH = #{VAR['RASPBERRYPI_LINUX_BRANCH']}"
+  config ['BCM2708_DT', 'DYNAMIC_DEBUG', 'PROC_DEVICETREE'], :enable
+
+  target :build do
+    cp Rake.application.rakefile, workdir('out/extra/')
+  end
+end
+release :fbtft_next do
+  config ['SPI_BCM2708', 'SPI_BCM2835'], :enable
+  config ['I2C_BCM2835'], :module
+end
+
+release :fbtft_test => [:fbtft_kernel_common] do
+  ENV['FBTFT_KERNEL_CONFIG'] = 'm'
+  VAR['RASPBERRYPI_LINUX_BRANCH'] = raspberrypi_linux_latest
+  info "RASPBERRYPI_LINUX_BRANCH = #{ENV['RASPBERRYPI_LINUX_BRANCH']}"
+  VAR['FW_BRANCH'] = 'test'
+end
+
+
+
+# there was a single latest release 2014-08-16 adding DT, no release was made for master and builtin.
+
+package :new_release do
+
+  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
+  Readme.body = """
+Changelog
+---------
+#{Time.now.strftime('%Y-%m-%d')}
+*
+
+2014-12-07
+* [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
+* [fbtft_device: add Tontec 3.5 support](https://github.com/notro/fbtft/commit/8116d7273be8816ce70c1a017b4466ae17e27d53)
+* [fb_ili9481,6: regwidth was incorrect](https://github.com/notro/fbtft/commit/c92097b5a5ef82e298a4fe8ec7859c9378e435d8)
+* [fbtft: make it possible to override regwidth](https://github.com/notro/fbtft/commit/566dca0e9d531b54c11ea9aea47f76695472776c)
+
+2014-11-28
+* [add support for AGM1264K-FL](https://github.com/notro/fbtft/commit/de1c2adfbb7b04b90a02d0e4cf6d7d923bab3656)
+* [uc1701: add support for UC1701](https://github.com/notro/fbtft/commit/43d452d3b2f4ce9193103603bb453d4a97ff11f6)
+* [fbtft_device: add adafruit28](https://github.com/notro/fbtft/commit/32995715c7fb161bf539fefc7e250fef3599cd61)
+* [add ILI9481 support](https://github.com/notro/fbtft/commit/a693c8e3692f6a4fb67468a2d3b3fdd35b9aa2e2)
+* [add support for the TLS8204 used in the latest Nokia 3310 displays](https://github.com/notro/fbtft/commit/6da654310724c31622afa8c7d12211a6e33ec18d)
+
+2014-08-02
+* add er_tftm050_2 and er_tftm070_5 support
+* add RA8875 support
+* add support for PiScreen
+* add ILI9486 support
+* add S6D02A1 support (Wolfgang Buening)
+* rpi_power_switch was missing in the previous release
+
+2014-06-14
+* fb_ssd1351: Add rotation support
+* Add Waveshare 2.2\" (bd663474 & upd161704) support
+* install_kernel_source is removed
+* rpi-source support added
+
+2014-03-28
+* fix stmpe-ts  
+  Interrupts was missed resulting in driver hang
+* add rpi_power_switch module  
+  Turn on/off the Raspberry Pi with a button
+
+2014-03-08
+* fix path in install_kernel_source
+
+2014-03-08
+* add extra/{git_hash,install_kernel_source} 
+
+2014-03-06
+* Add displays rpi-display and pitft
+* Add modules 'stmpe' and 'gpio_backlight'
+* DMA is enabled by default
+
+2013-12-14
+* add tinylcd35 support
+
+2013-12-08
+* Moved to Linux version 3.10
+* fbtft_device: add hy28b support
+* Add support for S6D1121
+
+2013-11-18
+* fb_ssd1306: add support for Adafruit OLED 1.3\" monochrome display
+* fb_ili9340: add support for the new Adafruit 2.2\" display
+* Enable console rotation support (fbcon=rotate:1)
+
+2013-09-18
+* fbtft: fix performance debug output
+* flexfb: add 9-bit SPI emulation support
+* fb_watterott: add support for mi0283qt-v2
+* fbtft: experimental DMA support
+* fbtft: turn off backlight before device removal
+
+Thanks to Derek Campbell (guzunty) there is now experimental DMA support for SPI in FBTFT.  
+The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#testing-with-dma-support
+
+2013-09-02
+* fbtft_device: Add support for Freetronics OLED128 module and Tianma TM022HDH26
+* fb_ssd1351: added chip gpio support (backlight)
+* ads7846_device: moved to https://github.com/notro/fbtft_tools
+* fbtft: add active low backlight pinname: 'led_'
+
+2013-08-22
+* All drivers have been rewritten (except flexfb). They now contain only LCD Controller specific logic and a default init sequence. fbtft_device contains the display specific information.  
+  Show supported displays like this: sudo modprobe fbtft_device name=list; dmesg | tail -30
+* 'rotate' argument is now a conter clockwise angle: 0, 90, 180, 270
+* All drivers support all interface modes: SPI 8-bit + D/C, 8-bit + startbyte, 9-bit, GPIO 8, 16 bit (even though the LCD controller might not).
+* The drivers will also load automatically when the device is present (need only load fbtft_device).
+* The init sequence can be overridden on all drivers with the fbtft_device init argument.
+
+"""
+
+  target :build do
+    cp Rake.application.rakefile, workdir('out/extra/')
+  end
+end
+
+VAR.store('FBTFT_GIT')
+if VAR['FBTFT_GIT']
+  package :fbtft do
+    target :patch do
+      if LinuxVersion.new(ENV['LINUX_KERNEL_VERSION']) >= LinuxVersion.new('3.15')
+        dst = workdir('linux/drivers/video/fbdev/fbtft')
+      else
+        dst = workdir('linux/drivers/video/fbtft')
+      end
+      rm dst
+      rm_r workdir 'fbtft'
+      # the git repo is in the Rakefile directory
+      ln_s findfile('fbtft'), dst
+    end
+    config ['LCDREG_PAR'], :module
+  end
+end

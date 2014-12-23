@@ -1,106 +1,121 @@
-
 notro/rpi-firmware
-=======================================================
+==========
 
-Raspberry Pi kernel and firmware with support for FBTFT.
+Raspberry Pi Device Tree kernel 3.18.1+ with support for FBTFT.
 
+Install
+-------
 
-Build scripts used: https://github.com/notro/rpi-build  
-Build logs in the [extra/](https://github.com/notro/rpi-firmware/tree/master/extra) directory
-
-
-
-### Install
-
-Update [rpi-update](https://github.com/Hexxeh/rpi-update) to make sure we have REPO_URI support:
-```text
-sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
-```
-
-**Install**
 ```text
 sudo REPO_URI=https://github.com/notro/rpi-firmware BRANCH=next rpi-update
-sudo shutdown -r now
 ```
 
 
-### Sources
-
-* Linux Kernel  
-https://github.com/raspberrypi/linux/tree/7dac37b9865ab51f7a68b7703bf6792b698fee1b
-* spi-bcm2708: DMA capable SPI master driver  
-https://raw.github.com/notro/spi-bcm2708/master/spi-bcm2708.c
-* FBTFT  
-https://github.com/notro/fbtft.git/tree/6938e0049b728b02276f552592fc9b0ebda7c5ff
-* Various SPI device adding modules  
-https://github.com/notro/fbtft_tools/tree/3c63895e612ceacd48c5a6956535a363e5685439
-* ServoBlaster  
-https://github.com/richardghirst/PiBits/tree/1b78f9ad6bb826dbce97b55862e06db8d4aea7f4
-* spi-config: SPI device adding module  
-https://github.com/msperl/spi-config/tree/88e5cd81dd54b4dca2c1bb29fd95701d7a5aea87
 
 
-### Kernel patches
-* [fbtft.patch](https://github.com/notro/rpi-build/blob/master/patches/next/fbtft.patch)
+Sources
+-------
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/2f9828c4577a858571b76eef3f7e1d3ff7ac1ba9.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/5fdce56c57f419a8f8a57a6c5b90d63deabca713.tar.gz)
+* [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/76352b8f54652ecce70dfa3415b2de73ed9aa2bd.tar.gz)
+* [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/8553a4b1f5262c6dd076bb5fdd3e97ec7e3cdebe.tar.gz)
+* [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 
 
-### Kernel configuration changes
+Patches
+--------
+* /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.15
+* /home/pi/rpi-build/fbtft-build/patches/stmpe-ts-Various-fixes.patch/3.10
 
-Deleted:  
+
+Kernel config
+-------------
+Default config: bcmrpi_defconfig
+
+
+
+Added:
 ```text
-CONFIG_BACKLIGHT_CLASS_DEVICE=m
+BACKLIGHT_GPIO=m
+CAN=y
+CAN_BCM=m
+CAN_CALC_BITTIMING=y
+CAN_DEV=y
+CAN_GW=y
+CAN_MCP251X=m
+CAN_RAW=m
+CAN_SLCAN=m
+CAN_VCAN=m
+DYNAMIC_DEBUG=y
+FB_BACKLIGHT=y
+FB_DEFERRED_IO=y
+FB_FLEX=y
+FB_SYS_COPYAREA=y
+FB_SYS_FILLRECT=y
+FB_SYS_FOPS=y
+FB_SYS_IMAGEBLIT=y
+FB_TFT=y
+FB_TFT_AGM1264K_FL=y
+FB_TFT_BD663474=y
+FB_TFT_FBTFT_DEVICE=y
+FB_TFT_HX8340BN=y
+FB_TFT_HX8347D=y
+FB_TFT_HX8353D=y
+FB_TFT_ILI9320=y
+FB_TFT_ILI9325=y
+FB_TFT_ILI9340=y
+FB_TFT_ILI9341=y
+FB_TFT_ILI9481=y
+FB_TFT_ILI9486=y
+FB_TFT_PCD8544=y
+FB_TFT_RA8875=y
+FB_TFT_S6D02A1=y
+FB_TFT_S6D1121=y
+FB_TFT_SSD1289=y
+FB_TFT_SSD1306=y
+FB_TFT_SSD1331=y
+FB_TFT_SSD1351=y
+FB_TFT_ST7735R=y
+FB_TFT_TINYLCD=y
+FB_TFT_TLS8204=y
+FB_TFT_UC1701=y
+FB_TFT_UPD161704=y
+FB_TFT_WATTEROTT=y
+FONTS=y
+FONT_10x18=y
+FONT_6x10=y
+FONT_6x11=y
+FONT_7x14=y
+FONT_ACORN_8x8=y
+FONT_MINI_4x6=y
+FONT_PEARL_8x8=y
+FONT_SUN12x22=y
+FONT_SUN8x16=y
+FRAMEBUFFER_CONSOLE_ROTATION=y
+GPIOLIB_IRQCHIP=y
+GPIO_MCP23S08=m
+GPIO_STMPE=y
+I2C_BCM2835=m
+INPUT_KEYBOARD=y
+INPUT_MOUSE=y
+KEYBOARD_GPIO=m
+MFD_STMPE=y
+MOUSE_GPIO=m
+SPI_BCM2835=y
+SPI_BITBANG=m
+SPI_GPIO=m
+STMPE_I2C=y
+STMPE_SPI=y
+TOUCHSCREEN_STMPE=m
 ```
 
-Added:  
+
+Changed:
 ```text
-CONFIG_BACKLIGHT_CLASS_DEVICE=y
-CONFIG_CAN=y
-CONFIG_CAN_BCM=m
-CONFIG_CAN_CALC_BITTIMING=y
-CONFIG_CAN_DEV=y
-CONFIG_CAN_GW=y
-CONFIG_CAN_MCP251X=m
-CONFIG_CAN_RAW=m
-CONFIG_CAN_SLCAN=m
-CONFIG_CAN_VCAN=m
-CONFIG_FB_BACKLIGHT=y
-CONFIG_FB_DEFERRED_IO=y
-CONFIG_FB_FLEX=m
-CONFIG_FB_SYS_COPYAREA=m
-CONFIG_FB_SYS_FILLRECT=m
-CONFIG_FB_SYS_FOPS=m
-CONFIG_FB_SYS_IMAGEBLIT=m
-CONFIG_FB_TFT=m
-CONFIG_FB_TFT_FBTFT_DEVICE=m
-CONFIG_FB_TFT_HX8340BN=m
-CONFIG_FB_TFT_HX8347D=m
-CONFIG_FB_TFT_ILI9320=m
-CONFIG_FB_TFT_ILI9325=m
-CONFIG_FB_TFT_ILI9340=m
-CONFIG_FB_TFT_ILI9341=m
-CONFIG_FB_TFT_PCD8544=m
-CONFIG_FB_TFT_S6D1121=m
-CONFIG_FB_TFT_SSD1289=m
-CONFIG_FB_TFT_SSD1306=m
-CONFIG_FB_TFT_SSD1331=m
-CONFIG_FB_TFT_SSD1351=m
-CONFIG_FB_TFT_ST7735R=m
-CONFIG_FB_TFT_WATTEROTT=m
-CONFIG_FONTS=y
-CONFIG_FONT_10x18=y
-CONFIG_FONT_6x11=y
-CONFIG_FONT_7x14=y
-CONFIG_FONT_ACORN_8x8=y
-CONFIG_FONT_MINI_4x6=y
-CONFIG_FONT_PEARL_8x8=y
-CONFIG_FONT_SUN12x22=y
-CONFIG_FONT_SUN8x16=y
-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
-CONFIG_INPUT_KEYBOARD=y
-CONFIG_INPUT_MOUSE=y
-CONFIG_INPUT_TOUCHSCREEN=y
-CONFIG_KEYBOARD_GPIO=m
-CONFIG_KEYBOARD_GPIO_POLLED=m
-CONFIG_MOUSE_GPIO=m
-CONFIG_TOUCHSCREEN_ADS7846=m
+BACKLIGHT_CLASS_DEVICE m -> y
+SPI_BCM2708 m -> y
 ```
+
+
+<p align="center">Built with <a href="https://github.com/notro/rpi-build/wiki">rpi-build</a></p>
