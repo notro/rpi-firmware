@@ -18,13 +18,14 @@ Sources
 * [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/2f9828c4577a858571b76eef3f7e1d3ff7ac1ba9.tar.gz)
 * [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/5fdce56c57f419a8f8a57a6c5b90d63deabca713.tar.gz)
 * [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
-* [notro/fbtft](https://github.com/notro/fbtft/archive/76352b8f54652ecce70dfa3415b2de73ed9aa2bd.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/277db6290388de64bfa251c9acbe3ffda381e5b5.tar.gz)
 * [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/8553a4b1f5262c6dd076bb5fdd3e97ec7e3cdebe.tar.gz)
 * [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 
 
 Patches
 --------
+* /home/pi/rpi-firmware/fbtft/patches/dts_irq.patch
 * /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.15
 * /home/pi/rpi-build/fbtft-build/patches/stmpe-ts-Various-fixes.patch/3.10
 
@@ -37,7 +38,7 @@ Default config: bcmrpi_defconfig
 
 Added:
 ```text
-BACKLIGHT_GPIO=m
+BACKLIGHT_GPIO=y
 CAN=y
 CAN_BCM=m
 CAN_CALC_BITTIMING=y
@@ -50,7 +51,7 @@ CAN_VCAN=m
 DYNAMIC_DEBUG=y
 FB_BACKLIGHT=y
 FB_DEFERRED_IO=y
-FB_FLEX=y
+FB_FLEX=m
 FB_SYS_COPYAREA=y
 FB_SYS_FILLRECT=y
 FB_SYS_FOPS=y
@@ -58,7 +59,7 @@ FB_SYS_IMAGEBLIT=y
 FB_TFT=y
 FB_TFT_AGM1264K_FL=y
 FB_TFT_BD663474=y
-FB_TFT_FBTFT_DEVICE=y
+FB_TFT_FBTFT_DEVICE=m
 FB_TFT_HX8340BN=y
 FB_TFT_HX8347D=y
 FB_TFT_HX8353D=y

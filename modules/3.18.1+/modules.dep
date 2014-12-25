@@ -102,7 +102,8 @@ kernel/crypto/async_tx/async_raid6_recov.ko: kernel/lib/raid6/raid6_pq.ko kernel
 kernel/drivers/gpio/gpio-arizona.ko:
 kernel/drivers/gpio/gpio-mcp23s08.ko:
 kernel/drivers/video/backlight/lcd.ko:
-kernel/drivers/video/backlight/gpio_backlight.ko:
+kernel/drivers/video/fbdev/fbtft/flexfb.ko:
+kernel/drivers/video/fbdev/fbtft/fbtft_device.ko:
 kernel/drivers/char/hw_random/bcm2708-rng.ko:
 kernel/drivers/base/regmap/regmap-i2c.ko:
 kernel/drivers/base/regmap/regmap-spi.ko:

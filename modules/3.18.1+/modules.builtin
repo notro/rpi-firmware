@@ -97,6 +97,7 @@ kernel/drivers/usb/host/dwc_common_port/dwc_common_port_lib.ko
 kernel/drivers/usb/host/dwc_otg/dwc_otg.ko
 kernel/drivers/usb/storage/usb-storage.ko
 kernel/drivers/video/backlight/backlight.ko
+kernel/drivers/video/backlight/gpio_backlight.ko
 kernel/drivers/video/console/fbcon.ko
 kernel/drivers/video/console/bitblit.ko
 kernel/drivers/video/console/softcursor.ko
@@ -139,8 +140,6 @@ kernel/drivers/video/fbdev/fbtft/fb_tls8204.ko
 kernel/drivers/video/fbdev/fbtft/fb_uc1701.ko
 kernel/drivers/video/fbdev/fbtft/fb_upd161704.ko
 kernel/drivers/video/fbdev/fbtft/fb_watterott.ko
-kernel/drivers/video/fbdev/fbtft/flexfb.ko
-kernel/drivers/video/fbdev/fbtft/fbtft_device.ko
 kernel/sound/soundcore.ko
 kernel/net/can/can.ko
 kernel/net/can/can-gw.ko

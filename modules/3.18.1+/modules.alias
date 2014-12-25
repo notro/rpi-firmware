@@ -66,7 +66,6 @@ alias i2c:mcp23017 gpio_mcp23s08
 alias i2c:mcp23008 gpio_mcp23s08
 alias spi:mcp23s17 gpio_mcp23s08
 alias spi:mcp23s08 gpio_mcp23s08
-alias platform:gpio-backlight gpio_backlight
 alias block-major-147-* drbd
 alias i2c:at24 at24
 alias i2c:24c1024 at24

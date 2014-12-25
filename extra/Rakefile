@@ -2,7 +2,7 @@ load 'fbtft-build/Rakefile'
 
 
 
-ENV['COMMIT_MESSAGE'] = "fbtft_device: added support for waveshare32b"
+ENV['COMMIT_MESSAGE'] = "overlays: add rpi-display"
 
 
 
@@ -31,6 +31,8 @@ release :fbtft_next => [:fbtft_kernel_common, :rpi_overlays, :fbtft_overlays] do
   info "RASPBERRYPI_LINUX_BRANCH = #{VAR['RASPBERRYPI_LINUX_BRANCH']}"
   config ['BCM2708_DT', 'DYNAMIC_DEBUG', 'PROC_DEVICETREE'], :enable
 
+  patch 'dts_irq.patch'
+
   target :build do
     cp Rake.application.rakefile, workdir('out/extra/')
   end
@@ -38,6 +40,8 @@ end
 release :fbtft_next do
   config ['SPI_BCM2708', 'SPI_BCM2835'], :enable
   config ['I2C_BCM2835'], :module
+  config ['FB_TFT_FBTFT_DEVICE', 'FB_FLEX'], :module
+  config ['BACKLIGHT_GPIO'], :enable
 end
 
 release :fbtft_test => [:fbtft_kernel_common] do
@@ -58,7 +62,7 @@ package :new_release do
 Changelog
 ---------
 #{Time.now.strftime('%Y-%m-%d')}
-*
+* overlays: add rpi-display ?? maybe not here?
 
 2014-12-07
 * [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
