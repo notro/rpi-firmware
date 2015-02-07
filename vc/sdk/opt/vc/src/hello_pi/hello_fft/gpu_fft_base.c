@@ -1,5 +1,5 @@
 /*
-BCM2835 "GPU_FFT" release 2.0 BETA
+BCM2835 "GPU_FFT" release 2.0
 Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
@@ -26,11 +26,11 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "bcm_host.h"
 #include "gpu_fft.h"
 #include "mailbox.h"
 
-#define PERI_BASE 0x20000000
-#define PERI_SIZE 0x02000000
+#define BUS_TO_PHYS(x) ((x)&~0xC0000000)
 
 // V3D spec: http://www.broadcom.com/docs/support/videocore/VideoCoreIV-AG100-R.pdf
 #define V3D_L2CACTL (0xC00020>>2)
@@ -42,11 +42,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define V3D_DBQITE  (0xC00e2c>>2)
 #define V3D_DBQITC  (0xC00e30>>2)
 
-#define GPU_FFT_MEM_FLG 0xC // cached=0xC; direct=0x4
 #define GPU_FFT_MEM_MAP 0x0 // cached=0x0; direct=0x20000000
 
 #define GPU_FFT_NO_FLUSH 1
-#define GPU_FFT_TIMEOUT 1000 // ms
+#define GPU_FFT_TIMEOUT 2000 // ms
 
 unsigned gpu_fft_base_exec_direct (
     struct GPU_FFT_BASE *base,
@@ -82,6 +81,7 @@ unsigned gpu_fft_base_exec(
 
     if (base->vc_msg) {
         // Use mailbox
+        // Returns: 0x0 for success; 0x80000000 for timeout
         return execute_qpu(base->mb, num_qpus, base->vc_msg, GPU_FFT_NO_FLUSH, GPU_FFT_TIMEOUT);
     }
     else {
@@ -101,14 +101,15 @@ int gpu_fft_alloc (
 
     if (qpu_enable(mb, 1)) return -1;
 
-    // Shared memory
-    handle = mem_alloc(mb, size, 4096, GPU_FFT_MEM_FLG);
+    // Shared memory : cached=0xC; direct=0x4
+    unsigned mem_flg = bcm_host_get_sdram_address() == 0x40000000 ? 0xC : 0x4;
+    handle = mem_alloc(mb, size, 4096, mem_flg);
     if (!handle) {
         qpu_enable(mb, 0);
         return -3;
     }
 
-    peri = (volatile unsigned *) mapmem(PERI_BASE, PERI_SIZE);
+    peri = (volatile unsigned *) mapmem(bcm_host_get_peripheral_address(), bcm_host_get_peripheral_size());
     if (!peri) {
         mem_free(mb, handle);
         qpu_enable(mb, 0);
@@ -116,7 +117,7 @@ int gpu_fft_alloc (
     }
 
     ptr->vc = mem_lock(mb, handle);
-    ptr->arm.vptr = mapmem(ptr->vc+GPU_FFT_MEM_MAP, size);
+    ptr->arm.vptr = mapmem(BUS_TO_PHYS(ptr->vc+GPU_FFT_MEM_MAP), size);
 
     base = (struct GPU_FFT_BASE *) ptr->arm.vptr;
     base->peri   = peri;
@@ -130,7 +131,7 @@ int gpu_fft_alloc (
 void gpu_fft_base_release(struct GPU_FFT_BASE *base) {
     int mb = base->mb;
     unsigned handle = base->handle, size = base->size;
-    unmapmem((void*)base->peri, PERI_SIZE);
+    unmapmem((void*)base->peri, bcm_host_get_peripheral_size());
     unmapmem((void*)base, size);
     mem_unlock(mb, handle);
     mem_free(mb, handle);

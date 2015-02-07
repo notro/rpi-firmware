@@ -2,7 +2,48 @@ load 'fbtft-build/Rakefile'
 
 
 
+ENV['COMMIT_MESSAGE'] = "Supports both Pi 1 and 2 (Device Tree)"
 
+
+
+
+ENV['FBTFT_GIT'] = '1' # use FTBFT git repo instead of downloading snapshot
+
+# tools are already unpacked
+ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-'
+
+
+#ENV['LINUX_DEFCONFIG'] = 'bcm2709_defconfig'
+
+
+release :fbtft_master => [:new_release, :fbtft_overlays]
+
+release :fbtft_builtin => :new_release
+
+release :fbtft_next => [:fbtft_kernel_common, :fbtft_overlays, :fbdbi] do
+
+  Readme.desc { "Raspberry Pi Device Tree kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
+
+  VAR['FW_BRANCH'] = 'next'
+  ENV['FBTFT_KERNEL_CONFIG'] = 'y'
+#  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= raspberrypi_linux_latest
+  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-3.18.y'
+  VAR.store 'RASPBERRYPI_LINUX_BRANCH'
+  info "RASPBERRYPI_LINUX_BRANCH = #{VAR['RASPBERRYPI_LINUX_BRANCH']}"
+#  config ['BCM2708_DT', 'DYNAMIC_DEBUG', 'PROC_DEVICETREE'], :enable
+  config ['DYNAMIC_DEBUG'], :enable
+
+  target :build do
+    cp Rake.application.rakefile, workdir('out/extra/')
+  end
+end
+release :fbtft_next do
+  config ['SPI_BCM2708', 'SPI_BCM2835'], :enable
+  config ['I2C_BCM2835'], :module
+  config ['FB_TFT_FBTFT_DEVICE', 'FB_FLEX'], :module
+  config ['BACKLIGHT_GPIO'], :enable
+  config ['TOUCHSCREEN_STMPE'], :enable
+end
 
 release :fbtft_test => [:fbtft_kernel_common] do
   ENV['FBTFT_KERNEL_CONFIG'] = 'm'
@@ -12,36 +53,70 @@ release :fbtft_test => [:fbtft_kernel_common] do
 end
 
 
+release :fbtft_staging => [:fbtft_kernel_common, :rpi_overlays, :fbtft_overlays] do
 
-
-
-
-release :fbtft_master => :new_release
-release :fbtft_builtin => :new_release
-release :fbtft_latest => :new_release do
   Readme.desc { "Raspberry Pi Device Tree kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
+
+  VAR['FW_BRANCH'] = 'next'
+  ENV['FBTFT_KERNEL_CONFIG'] = 'y'
+#  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= raspberrypi_linux_latest
+  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-3.18.y'
+  VAR.store 'RASPBERRYPI_LINUX_BRANCH'
+  info "RASPBERRYPI_LINUX_BRANCH = #{VAR['RASPBERRYPI_LINUX_BRANCH']}"
+  config ['BCM2708_DT', 'DYNAMIC_DEBUG', 'PROC_DEVICETREE'], :enable
+
+  info "Clear package :fbtft"
+  Rake::Task[:fbtft].clear
+
+  target :patch do
+    info "Hook up fbtft from staging-testing"
+    ln_s findfile('linux-staging/drivers/staging/fbtft'), workdir('linux/drivers/staging/fbtft')
+
+    insert_before workdir('linux/drivers/staging/Kconfig'), "\nendif # STAGING", "\nsource \"drivers/staging/fbtft/Kconfig\"\n"
+
+    open(workdir('linux/drivers/staging/Makefile'), 'a') do |f|
+      f.puts "\nobj-$(CONFIG_FB_TFT)		+= fbtft/"
+    end
+  end
+
+  target :kmodules do
+    fl = FileList["#{workdir('../fbdbi/dts/overlays/rpi/*overlay.dts')}"]
+    unless fl.empty?
+      mkdir_p workdir('overlays')
+      cp fl, workdir('overlays')
+    end
+  end
+
+  target :build do
+    cp Rake.application.rakefile, workdir('out/extra/')
+  end
+
+end
+release :fbtft_staging do
+  config 'FB_TFT', 'm', 'm'
+  config ['SPI_BCM2708', 'SPI_BCM2835'], :enable
+  config ['I2C_BCM2835'], :module
+  config ['FB_TFT_FBTFT_DEVICE', 'FB_FLEX'], :module
+  config ['BACKLIGHT_GPIO'], :enable
+  config ['TOUCHSCREEN_STMPE'], :enable
+
 end
 
 
-#ENV['FBTFT_GIT'] = '1' # use FTBFT git repo instead of downloading snapshot
-
-# tools are already unpacked
-ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-'
 
 
 # there was a single latest release 2014-08-16 adding DT, no release was made for master and builtin.
 
 package :new_release do
 
-
-  ENV['COMMIT_MESSAGE'] = "add support for AGM1264K-FL"
-
-
   Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with support for FBTFT." }
   Readme.body = """
 Changelog
 ---------
 #{Time.now.strftime('%Y-%m-%d')}
+* Pi 2 support
+
+2014-12-07
 * [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
 * [fbtft_device: add Tontec 3.5 support](https://github.com/notro/fbtft/commit/8116d7273be8816ce70c1a017b4466ae17e27d53)
 * [fb_ili9481,6: regwidth was incorrect](https://github.com/notro/fbtft/commit/c92097b5a5ef82e298a4fe8ec7859c9378e435d8)
@@ -69,16 +144,16 @@ Changelog
 * rpi-source support added
 
 2014-03-28
-* fix stmpe-ts  
+* fix stmpe-ts
   Interrupts was missed resulting in driver hang
-* add rpi_power_switch module  
+* add rpi_power_switch module
   Turn on/off the Raspberry Pi with a button
 
 2014-03-08
 * fix path in install_kernel_source
 
 2014-03-08
-* add extra/{git_hash,install_kernel_source} 
+* add extra/{git_hash,install_kernel_source}
 
 2014-03-06
 * Add displays rpi-display and pitft
@@ -105,7 +180,7 @@ Changelog
 * fbtft: experimental DMA support
 * fbtft: turn off backlight before device removal
 
-Thanks to Derek Campbell (guzunty) there is now experimental DMA support for SPI in FBTFT.  
+Thanks to Derek Campbell (guzunty) there is now experimental DMA support for SPI in FBTFT.
 The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#testing-with-dma-support
 
 2013-09-02
@@ -115,7 +190,7 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 * fbtft: add active low backlight pinname: 'led_'
 
 2013-08-22
-* All drivers have been rewritten (except flexfb). They now contain only LCD Controller specific logic and a default init sequence. fbtft_device contains the display specific information.  
+* All drivers have been rewritten (except flexfb). They now contain only LCD Controller specific logic and a default init sequence. fbtft_device contains the display specific information.
   Show supported displays like this: sudo modprobe fbtft_device name=list; dmesg | tail -30
 * 'rotate' argument is now a conter clockwise angle: 0, 90, 180, 270
 * All drivers support all interface modes: SPI 8-bit + D/C, 8-bit + startbyte, 9-bit, GPIO 8, 16 bit (even though the LCD controller might not).
@@ -143,6 +218,25 @@ if VAR['FBTFT_GIT']
       # the git repo is in the Rakefile directory
       ln_s findfile('fbtft'), dst
     end
-    config ['LCDREG_PAR'], :module
+  end
+end
+
+
+package :fbdbi do
+  target :patch do
+    ln_s findfile('fbdbi'), workdir('linux/drivers/video/fbdev/fbdbi')
+
+    open(workdir('linux/drivers/video/fbdev/Makefile'), 'a') do |f|
+      f.puts "\nobj-y                             += fbdbi/"
+    end
+
+  end
+
+  target :kmodules do
+    fl = FileList["#{workdir('linux/drivers/video/fbdev/fbdbi/dts/overlays/rpi/*overlay.dts')}"]
+    unless fl.empty?
+      mkdir_p workdir('overlays')
+      cp fl, workdir('overlays')
+    end
   end
 end

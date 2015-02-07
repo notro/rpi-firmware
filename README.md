@@ -1,7 +1,7 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.12.34+ with support for FBTFT.
+Raspberry Pi kernel 3.18.5-v7+ with support for FBTFT.
 
 Install
 -------
@@ -14,6 +14,9 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
 
 Changelog
 ---------
+2015-02-07
+* Pi 2 support
+
 2014-12-07
 * [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
 * [fbtft_device: add Tontec 3.5 support](https://github.com/notro/fbtft/commit/8116d7273be8816ce70c1a017b4466ae17e27d53)
@@ -42,16 +45,16 @@ Changelog
 * rpi-source support added
 
 2014-03-28
-* fix stmpe-ts  
+* fix stmpe-ts
   Interrupts was missed resulting in driver hang
-* add rpi_power_switch module  
+* add rpi_power_switch module
   Turn on/off the Raspberry Pi with a button
 
 2014-03-08
 * fix path in install_kernel_source
 
 2014-03-08
-* add extra/{git_hash,install_kernel_source} 
+* add extra/{git_hash,install_kernel_source}
 
 2014-03-06
 * Add displays rpi-display and pitft
@@ -78,7 +81,7 @@ Changelog
 * fbtft: experimental DMA support
 * fbtft: turn off backlight before device removal
 
-Thanks to Derek Campbell (guzunty) there is now experimental DMA support for SPI in FBTFT.  
+Thanks to Derek Campbell (guzunty) there is now experimental DMA support for SPI in FBTFT.
 The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#testing-with-dma-support
 
 2013-09-02
@@ -88,7 +91,7 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 * fbtft: add active low backlight pinname: 'led_'
 
 2013-08-22
-* All drivers have been rewritten (except flexfb). They now contain only LCD Controller specific logic and a default init sequence. fbtft_device contains the display specific information.  
+* All drivers have been rewritten (except flexfb). They now contain only LCD Controller specific logic and a default init sequence. fbtft_device contains the display specific information.
   Show supported displays like this: sudo modprobe fbtft_device name=list; dmesg | tail -30
 * 'rotate' argument is now a conter clockwise angle: 0, 90, 180, 270
 * All drivers support all interface modes: SPI 8-bit + D/C, 8-bit + startbyte, 9-bit, GPIO 8, 16 bit (even though the LCD controller might not).
@@ -99,18 +102,17 @@ The CPU runs much lighter using DMA:  https://github.com/notro/fbtft/wiki/FPS#te
 
 Sources
 -------
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/9d58d7bcc9d1442610ee82a18fbb203d49e915a1.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/b82491cb94745a8cac9ac6b79763a8e281ae7add.tar.gz)
-* [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/1ca01f95d00ab0aae1a07ab5cf18f1090d6981fe.tar.gz)
-* [notro/fbtft](https://github.com/notro/fbtft/archive/e67014490a9df34b9a4bf04e49c50254aebc10a8.tar.gz)
-* [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/22cee1fadb55bcb22fd220ed76926661e6d6b225.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/e42a747e8d5c4a2fb3e837d0924c7cc39999936a.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/a6cf3c99bc89e2c010c2f78fbf9e3ed478ccfd46.tar.gz)
+* [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/57fc2d1ea38e337ea04bd4e05a24cc94eea11a8b.tar.gz)
+* [notro/fbtft](https://github.com/notro/fbtft/archive/855b2908380e8ca996768bf94cb4d8573690bc30.tar.gz)
+* [notro/fbtft_tools](https://github.com/notro/fbtft_tools/archive/8553a4b1f5262c6dd076bb5fdd3e97ec7e3cdebe.tar.gz)
 * [msperl/spi-config](https://github.com/msperl/spi-config/archive/878f592626db291b3a62b5054278c95e92bc0b39.tar.gz)
 
 
 Patches
 --------
-* /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.12
-* /home/pi/rpi-build/fbtft-build/patches/gpio_backlight-gpio-can-sleep.patch/3.10
+* /home/pi/rpi-build/fbtft-build/patches/fbtft.patch/3.15
 * /home/pi/rpi-build/fbtft-build/patches/stmpe-ts-Various-fixes.patch/3.10
 
 
@@ -169,6 +171,7 @@ FB_TFT_UPD161704=m
 FB_TFT_WATTEROTT=m
 FONTS=y
 FONT_10x18=y
+FONT_6x10=y
 FONT_6x11=y
 FONT_7x14=y
 FONT_ACORN_8x8=y
@@ -177,11 +180,11 @@ FONT_PEARL_8x8=y
 FONT_SUN12x22=y
 FONT_SUN8x16=y
 FRAMEBUFFER_CONSOLE_ROTATION=y
+GPIOLIB_IRQCHIP=y
 GPIO_MCP23S08=m
 GPIO_STMPE=y
 INPUT_KEYBOARD=y
 INPUT_MOUSE=y
-INPUT_TOUCHSCREEN=y
 KEYBOARD_GPIO=m
 MFD_STMPE=y
 MOUSE_GPIO=m
@@ -189,7 +192,6 @@ SPI_BITBANG=m
 SPI_GPIO=m
 STMPE_I2C=y
 STMPE_SPI=y
-TOUCHSCREEN_ADS7846=m
 TOUCHSCREEN_STMPE=m
 ```
 
@@ -197,7 +199,6 @@ TOUCHSCREEN_STMPE=m
 Changed:
 ```text
 BACKLIGHT_CLASS_DEVICE m -> y
-MFD_CORE m -> y
 ```
 
 
