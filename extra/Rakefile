@@ -4,27 +4,19 @@ rpi-firmware release
 --------------------
 
 WORKDIR=workdir.bcm2708 LINUX_DEFCONFIG=bcmrpi_defconfig  rpi-build clean log fbtft_master build
-
 WORKDIR=workdir.bcm2709 LINUX_DEFCONFIG=bcm2709_defconfig rpi-build clean log fbtft_master build
 
-rm -rf workdir; mkdir -p workdir/out
-cd workdir && ln -s ../workdir.bcm2709/firmware firmware && cd -
-cp workdir.bcm2709/*.{variable,target} workdir/
-cp -r workdir.bcm2709/out/* workdir/out/
-mv workdir/out/extra/build.log workdir/out/extra/build7.log
-cp workdir.bcm2708/out/{*.img,*.dtb,Module.symvers} workdir/out/
-cp -r workdir.bcm2708/out/modules/* workdir/out/modules/
-cp workdir.bcm2708/out/extra/* workdir.bcm2708/out/extra/.config workdir/out/extra/
+rpi-build fbtft_master merge install SSHIP=192.168.10.104
 
-rpi-build fbtft_master merge install SSHIP=192.168.10.129
-
+rpi-build fbtft_master commit
+rpi-build fbtft_master push
 
 =end
 
 require 'stdlib/rpi-linux'
 
 
-ENV['COMMIT_MESSAGE'] = "BCM270x_DT: Add interrupt pin to enc28j60-overlay"
+ENV['COMMIT_MESSAGE'] = "Update to 4.0.7"
 
 
 # tools are already unpacked
@@ -36,11 +28,17 @@ release :fbtft_master => [:rpi_linux_common, :new_release, :spi_bcm2708_dma]
 
 package :new_release do
 
+  patch 'bcm2708-spi-dts.patch'
+  patch '0001-staging-fbtft-Add-reset-to-fbtft_init_display_dt.patch'
+
   Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with SPI DMA support." }
   Readme.body = """
 Changelog
 ---------
 #{Time.now.strftime('%Y-%m-%d')}
+* Update to 4.0.7 @ [13f82f4](https://github.com/raspberrypi/linux/commit/151dc845f920bb8f38abc0a6fc89093a913f82f4)
+
+2015-03-27
 * FBTFT support is now in raspberrypi/linux.
   This release only adds SPI DMA support on top of that.
 * pitft overlay changed name to pitft28-resistive

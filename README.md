@@ -1,7 +1,7 @@
 notro/rpi-firmware
 ==========
 
-Raspberry Pi kernel 3.18.10+ with SPI DMA support.
+Raspberry Pi kernel 4.0.7+ with SPI DMA support.
 
 Install
 -------
@@ -14,6 +14,9 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
 
 Changelog
 ---------
+2015-07-11
+* Update to 4.0.7 @ [13f82f4](https://github.com/raspberrypi/linux/commit/151dc845f920bb8f38abc0a6fc89093a913f82f4)
+
 2015-03-27
 * FBTFT support is now in raspberrypi/linux.
   This release only adds SPI DMA support on top of that.
@@ -46,14 +49,16 @@ Changelog
 
 Sources
 -------
-* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/7baf63aeb395947fa1f0a9f18b7ce120f2c4af07.tar.gz)
-* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/7afb1c5b7cf33a3182c97ac9be7379394b9b462a.tar.gz)
-* [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/57fc2d1ea38e337ea04bd4e05a24cc94eea11a8b.tar.gz)
+* [raspberrypi/firmware](https://github.com/raspberrypi/firmware/archive/47d51d6192bdfb37568f21b5810375d1b6d45217.tar.gz)
+* [raspberrypi/linux](https://github.com/raspberrypi/linux/archive/5d5a5ceb829329f490dd1c5cb634da66ef5d0f92.tar.gz)
+* [notro/spi-bcm2708](https://github.com/notro/spi-bcm2708/archive/3322e8ef23c015941726f0402edfd9c64956b4f7.tar.gz)
 
 
 Patches
 --------
-None
+* /home/pi/rpi-firmware/fbtft/patches/bcm2708-spi-dts.patch
+* /home/pi/rpi-firmware/fbtft/patches/0001-staging-fbtft-Add-reset-to-fbtft_init_display_dt.patch
+
 
 Kernel config
 -------------
