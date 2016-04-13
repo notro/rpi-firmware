@@ -1,6 +1,10 @@
 notro/rpi-firmware
 ==========
 
+**Deprecated**  
+The offical Raspberry Pi kernel has SPI DMA support now, so rpi-firmware is deprecated.
+
+
 Raspberry Pi kernel 4.0.7+ with SPI DMA support.
 
 Install
