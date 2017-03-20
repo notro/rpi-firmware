@@ -3,81 +3,189 @@
 rpi-firmware release
 --------------------
 
-WORKDIR=workdir.bcm2708 LINUX_DEFCONFIG=bcmrpi_defconfig  rpi-build clean log fbtft_master build
-WORKDIR=workdir.bcm2709 LINUX_DEFCONFIG=bcm2709_defconfig rpi-build clean log fbtft_master build
+WORKDIR=workdir.bcm2708 LINUX_DEFCONFIG=bcmrpi_defconfig  rpi-build tinydrm clean log build
+WORKDIR=workdir.bcm2709 LINUX_DEFCONFIG=bcm2709_defconfig rpi-build tinydrm clean log build
 
-rpi-build fbtft_master merge install SSHIP=192.168.10.104
+rpi-build tinydrm merge install SSHIP=192.168.10.120
 
-rpi-build fbtft_master commit
-rpi-build fbtft_master push
+rpi-build tinydrm commit
+rpi-build tinydrm push
+
+
+---
+
+WORKDIR=workdir.bcm2708 LINUX_DEFCONFIG=bcmrpi_defconfig  rpi-build tinydrm49 clean log build
+WORKDIR=workdir.bcm2709 LINUX_DEFCONFIG=bcm2709_defconfig rpi-build tinydrm49 clean log build
+
+rpi-build tinydrm49 merge install SSHIP=192.168.10.104
+
+rpi-build tinydrm49 commit
+rpi-build tinydrm49 push
 
 =end
 
 require 'stdlib/rpi-linux'
 
 
-ENV['COMMIT_MESSAGE'] = "Update to 4.0.7"
-
 
 # tools are already unpacked
 ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-'
 
 
-release :fbtft_master => [:rpi_linux_common, :new_release, :spi_bcm2708_dma]
+
+release :tinydrm => [:rpi_linux_common, :tinydrm_kernel, :linux_headers] do
+  ENV['COMMIT_MESSAGE'] = "v4.11-rc2"
+  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-4.11.y'
+  VAR['FW_BRANCH'] ||= 'tinydrm'
+  Readme.defconfig = 'bcmrpi_defconfig and bcm2709_defconfig'
+end
+
+release :tinydrm49 => [:rpi_linux_common, :tinydrm49_patches, :tinydrm_kernel] do
+  ENV['COMMIT_MESSAGE'] = "4.9.16"
+  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-4.9.y'
+  VAR['FW_BRANCH'] ||= 'tinydrm49'
+  Readme.defconfig = 'bcmrpi_defconfig and bcm2709_defconfig'
+
+#  Readme.body = """
+#Changelog
+#---------
+##{Time.now.strftime('%Y-%m-%d')}
+#*
+#
+#2015-07-11
+#* Update to 4.0.7 @ [13f82f4](https://github.com/raspberrypi/linux/commit/151dc845f920bb8f38abc0a6fc89093a913f82f4)
+#
+#"""
+end
 
 
-package :new_release do
+package :tinydrm_kernel do
+  target :patch do
+    rpi_display = 'https://raw.githubusercontent.com/notro/tinydrm/master/rpi-overlays/rpi-display-overlay.dts'
+    sh "wget #{rpi_display} -O #{workdir('linux/arch/arm/boot/dts/overlays/rpi-display-overlay.dts')}"
+    Readme.patch "* Use #{rpi_display}\n"
 
-  patch 'bcm2708-spi-dts.patch'
-  patch '0001-staging-fbtft-Add-reset-to-fbtft_init_display_dt.patch'
+    pitft = 'https://raw.githubusercontent.com/notro/tinydrm/master/rpi-overlays/pitft28-resistive-overlay.dts'
+    sh "wget #{pitft} -O #{workdir('linux/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts')}"
+    Readme.patch "* Use #{pitft}\n"
+  end
 
-  Readme.desc { "Raspberry Pi kernel #{VAR['KERNEL_RELEASE']} with SPI DMA support." }
-  Readme.body = """
-Changelog
----------
-#{Time.now.strftime('%Y-%m-%d')}
-* Update to 4.0.7 @ [13f82f4](https://github.com/raspberrypi/linux/commit/151dc845f920bb8f38abc0a6fc89093a913f82f4)
+#  config ['CONFIG_IKCONFIG', 'CONFIG_IKCONFIG_PROC'], :enable
 
-2015-03-27
-* FBTFT support is now in raspberrypi/linux.
-  This release only adds SPI DMA support on top of that.
-* pitft overlay changed name to pitft28-resistive
-* These modules are no longer present:
-  - gpio_keys_device - [DT overlay example](https://github.com/raspberrypi/linux/blob/rpi-3.18.y/arch/arm/boot/dts/tinylcd35-overlay.dts)
-  - ads7846_device - Use ads7846 DT overlay instead. See [/boot/overlays/README](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README)
-  - gpio_mouse_device
-  - stmpe_device
-  - gpio_backlight_device
-  - rpi_power_switch
-  - spi-config
-* Builtin console fonts are not enabled (fbcon=font:XX).
-  - [sudo dpkg-reconfigure console-setup](https://github.com/notro/fbtft/wiki/Boot-console#console-font)
-* Other kconfig options no longer enabled:
-  - MOUSE_GPIO
-  - GPIO_MCP23S08
-  - DYNAMIC_DEBUG
+  config ['DRM_TINYDRM'], :module
+  config ['TINYDRM_MI0283QT'], :module
 
-2015-02-07
-* Pi 2 support
+#  config ['FB_TFT'], :disable
+#  config ['FB_SSD1307'], :disable
 
-2014-12-07
-* [fbtft_device: added support for waveshare32b](https://github.com/notro/fbtft/commit/e67014490a9df34b9a4bf04e49c50254aebc10a8)
-* [fbtft_device: add Tontec 3.5 support](https://github.com/notro/fbtft/commit/8116d7273be8816ce70c1a017b4466ae17e27d53)
-* [fb_ili9481,6: regwidth was incorrect](https://github.com/notro/fbtft/commit/c92097b5a5ef82e298a4fe8ec7859c9378e435d8)
-* [fbtft: make it possible to override regwidth](https://github.com/notro/fbtft/commit/566dca0e9d531b54c11ea9aea47f76695472776c)
-
-"""
+  Readme.desc { "Raspberry Pi kernels #{VAR['KERNEL_RELEASE']} with [tinydrm](https://github.com/notro/tinydrm/wiki) support." }
 
   target :build do
     cp Rake.application.rakefile, workdir('out/extra/')
   end
 end
 
-# DMA capable SPI master driver
-package :spi_bcm2708_dma do
-  github_tarball 'notro/spi-bcm2708', 'spi-bcm2708-dma'
+package :tinydrm49_patches do
+  patch '0001-drm-debugfs-Remove-all-files-automatically-on-cleanu.patch'
+  patch '0002-drm-Add-DRM-support-for-tiny-LCD-displays.patch'
+  patch '0003-drm-tinydrm-Add-helper-functions.patch'
+  patch '0004-drm-tinydrm-Add-MIPI-DBI-support.patch'
+  patch '0005-of-Add-vendor-prefix-for-Multi-Inno.patch'
+  patch '0006-dt-bindings-display-panel-Add-common-rotation-proper.patch'
+  patch '0007-dt-bindings-Add-Multi-Inno-MI0283QT-binding.patch'
+  patch '0008-drm-tinydrm-Add-support-for-Multi-Inno-MI0283QT-disp.patch'
+  patch '0009-drm-tinydrm-mipi-dbi-Silence-cmd-may-be-used-uniniti.patch'
+  patch '0010-drm-tinydrm-mipi-dbi-Fix-field-width-specifier-warni.patch'
+end
 
-  target :patch do
-    sh "cp #{workdir('spi-bcm2708-dma/spi-bcm2708.c')} #{workdir('linux/drivers/spi')}"
+
+def linux_header_script(srcdir, dstdir)
+  script = %{#!/bin/sh
+
+set -e
+
+srctree=#{srcdir}
+objtree=$srctree
+SRCARCH=arm
+KCONFIG_CONFIG=$srctree/.config
+kernel_headers_dir=#{dstdir}
+version=ref
+
+mkdir -p $objtree/debian
+
+# Copied from scripts/package/builddeb (Linux 4.11)
+# Start VERBATIM
+# Escaped \*
+
+# Build kernel header package
+(cd $srctree; find . -name Makefile\\* -o -name Kconfig\\* -o -name \\*.pl) > "$objtree/debian/hdrsrcfiles"
+(cd $srctree; find arch/*/include include scripts -type f) >> "$objtree/debian/hdrsrcfiles"
+(cd $srctree; find arch/$SRCARCH -name module.lds -o -name Kbuild.platforms -o -name Platform) >> "$objtree/debian/hdrsrcfiles"
+(cd $srctree; find $(find arch/$SRCARCH -name include -o -name scripts -type d) -type f) >> "$objtree/debian/hdrsrcfiles"
+if grep -q '^CONFIG_STACK_VALIDATION=y' $KCONFIG_CONFIG ; then
+	(cd $objtree; find tools/objtool -type f -executable) >> "$objtree/debian/hdrobjfiles"
+fi
+(cd $objtree; find arch/$SRCARCH/include Module.symvers include scripts -type f) >> "$objtree/debian/hdrobjfiles"
+if grep -q '^CONFIG_GCC_PLUGINS=y' $KCONFIG_CONFIG ; then
+	(cd $objtree; find scripts/gcc-plugins -name \\*.so -o -name gcc-common.h) >> "$objtree/debian/hdrobjfiles"
+fi
+destdir=$kernel_headers_dir/usr/src/linux-headers-$version
+mkdir -p "$destdir"
+(cd $srctree; tar -c -f - -T -) < "$objtree/debian/hdrsrcfiles" | (cd $destdir; tar -xf -)
+(cd $objtree; tar -c -f - -T -) < "$objtree/debian/hdrobjfiles" | (cd $destdir; tar -xf -)
+(cd $objtree; cp $KCONFIG_CONFIG $destdir/.config) # copy .config manually to be where it's expected to be
+
+# End VERBATIM
+
+# make modules_prepare has to be run on the host to rebuild the tools
+
+# make prepare
+(cd $srctree; find arch/$SRCARCH/tools -type f) > "$objtree/debian/extrafiles"
+
+# make scripts
+(cd $srctree; find tools/include/tools -type f) >> "$objtree/debian/extrafiles"
+
+(cd $objtree; tar -c -f - -T -) < "$objtree/debian/extrafiles" | (cd $destdir; tar -xf -)
+
+rm -r $objtree/debian
+
+}
+
+  fn = workdir('linux-headers')
+  File.open(fn, 'w') { |file| file.write script }
+  sh "chmod +x #{fn}"
+  fn
+end
+
+package :linux_headers do
+
+  # post_install is additive and cleared in kbuild
+  target :kbuild do
+    post_install %q[
+find "${FW_REPOLOCAL}/modules" -mindepth 1 -maxdepth 1 -type d | while read DIR; do
+	BASEDIR=$(basename "${DIR}")
+	echo "     Preparing kernel headers ${BASEDIR}"
+	(cd ${FW_MODPATH}/${BASEDIR}/build; make modules_prepare)
+done
+]
   end
+
+  target :external do
+    script = linux_header_script(workdir('linux'), workdir('headers'))
+    sh "#{script}"
+    File.write workdir('headers/usr/src/linux-headers-ref/.scmversion') , '+'
+  end
+
+  target :build do
+    rel = VAR['KERNEL_RELEASE']
+    src = workdir('headers/usr/src/linux-headers-ref/.')
+    build = workdir("out/modules/#{rel}/build")
+
+    rm workdir("out/modules/#{rel}/source")
+    rm build
+
+    mkdir build
+    sh "cp -r #{src} #{build}"
+  end
+
 end
