@@ -12,16 +12,6 @@ rpi-build tinydrm commit
 rpi-build tinydrm push
 
 
----
-
-WORKDIR=workdir.bcm2708 LINUX_DEFCONFIG=bcmrpi_defconfig  rpi-build tinydrm49 clean log build
-WORKDIR=workdir.bcm2709 LINUX_DEFCONFIG=bcm2709_defconfig rpi-build tinydrm49 clean log build
-
-rpi-build tinydrm49 merge install SSHIP=192.168.10.104
-
-rpi-build tinydrm49 commit
-rpi-build tinydrm49 push
-
 =end
 
 require 'stdlib/rpi-linux'
@@ -34,16 +24,12 @@ ENV['CROSS_COMPILE'] = '/home/pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabih
 
 
 release :tinydrm => [:rpi_linux_common, :tinydrm_kernel, :linux_headers] do
-  ENV['COMMIT_MESSAGE'] = "v4.11-rc2"
-  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-4.11.y'
+  ENV['COMMIT_MESSAGE'] = "4.10.4"
+  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-4.10.y'
   VAR['FW_BRANCH'] ||= 'tinydrm'
-  Readme.defconfig = 'bcmrpi_defconfig and bcm2709_defconfig'
-end
 
-release :tinydrm49 => [:rpi_linux_common, :tinydrm49_patches, :tinydrm_kernel] do
-  ENV['COMMIT_MESSAGE'] = "4.9.16"
-  VAR['RASPBERRYPI_LINUX_BRANCH'] ||= 'rpi-4.9.y'
-  VAR['FW_BRANCH'] ||= 'tinydrm49'
+  Readme.desc { "Raspberry Pi kernels #{VAR['KERNEL_RELEASE']} with [tinydrm](https://github.com/notro/tinydrm/wiki) support including kernel headers." }
+
   Readme.defconfig = 'bcmrpi_defconfig and bcm2709_defconfig'
 
 #  Readme.body = """
@@ -60,6 +46,29 @@ end
 
 
 package :tinydrm_kernel do
+
+  patch '0001-drm-Store-a-pointer-to-drm_format_info-under-drm_fra.patch'
+  patch '0002-drm-cma-helper-simplify-setup-for-drivers-with-dirty.patch'
+  patch '0003-drm-fb-cma-helper-Add-drm_fbdev_cma_set_suspend_unlo.patch'
+  patch '0004-drm-debugfs-Remove-all-files-automatically-on-cleanu.patch'
+  patch '0005-drm-simple-helpers-Add-missing-includes.patch'
+  patch '0006-drm-Rely-on-mode_config-data-for-fb_helper-initializ.patch'
+  patch '0007-drm-Add-DRM-support-for-tiny-LCD-displays.patch'
+  patch '0008-drm-tinydrm-Add-helper-functions.patch'
+  patch '0009-drm-tinydrm-Add-MIPI-DBI-support.patch'
+  patch '0010-drm-tinydrm-Add-support-for-Multi-Inno-MI0283QT-disp.patch'
+  patch '0011-drm-tinydrm-mipi-dbi-Silence-cmd-may-be-used-uniniti.patch'
+  patch '0012-drm-tinydrm-mipi-dbi-Fix-field-width-specifier-warni.patch'
+  patch '0013-drm-tinydrm-helpers-Properly-fix-backlight-dependenc.patch'
+  patch '0014-drm-tinydrm-fix-semicolon.cocci-warnings.patch'
+
+  target :patch do
+    fn = workdir('linux/drivers/gpu/drm/tinydrm/core/tinydrm-helpers.c')
+    s = File.read fn
+    File.write fn, "#define DEBUG\n" + s
+    Readme.patch "* Build tinydrm-helpers.c with DEBUG to get SPI transfer details\n"
+  end
+
   target :patch do
     rpi_display = 'https://raw.githubusercontent.com/notro/tinydrm/master/rpi-overlays/rpi-display-overlay.dts'
     sh "wget #{rpi_display} -O #{workdir('linux/arch/arm/boot/dts/overlays/rpi-display-overlay.dts')}"
@@ -70,7 +79,7 @@ package :tinydrm_kernel do
     Readme.patch "* Use #{pitft}\n"
   end
 
-#  config ['CONFIG_IKCONFIG', 'CONFIG_IKCONFIG_PROC'], :enable
+  config ['CONFIG_IKCONFIG', 'CONFIG_IKCONFIG_PROC'], :enable
 
   config ['DRM_TINYDRM'], :module
   config ['TINYDRM_MI0283QT'], :module
@@ -78,26 +87,10 @@ package :tinydrm_kernel do
 #  config ['FB_TFT'], :disable
 #  config ['FB_SSD1307'], :disable
 
-  Readme.desc { "Raspberry Pi kernels #{VAR['KERNEL_RELEASE']} with [tinydrm](https://github.com/notro/tinydrm/wiki) support." }
-
   target :build do
     cp Rake.application.rakefile, workdir('out/extra/')
   end
 end
-
-package :tinydrm49_patches do
-  patch '0001-drm-debugfs-Remove-all-files-automatically-on-cleanu.patch'
-  patch '0002-drm-Add-DRM-support-for-tiny-LCD-displays.patch'
-  patch '0003-drm-tinydrm-Add-helper-functions.patch'
-  patch '0004-drm-tinydrm-Add-MIPI-DBI-support.patch'
-  patch '0005-of-Add-vendor-prefix-for-Multi-Inno.patch'
-  patch '0006-dt-bindings-display-panel-Add-common-rotation-proper.patch'
-  patch '0007-dt-bindings-Add-Multi-Inno-MI0283QT-binding.patch'
-  patch '0008-drm-tinydrm-Add-support-for-Multi-Inno-MI0283QT-disp.patch'
-  patch '0009-drm-tinydrm-mipi-dbi-Silence-cmd-may-be-used-uniniti.patch'
-  patch '0010-drm-tinydrm-mipi-dbi-Fix-field-width-specifier-warni.patch'
-end
-
 
 def linux_header_script(srcdir, dstdir)
   script = %{#!/bin/sh

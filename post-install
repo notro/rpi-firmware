@@ -1,0 +1,6 @@
+
+find "${FW_REPOLOCAL}/modules" -mindepth 1 -maxdepth 1 -type d | while read DIR; do
+	BASEDIR=$(basename "${DIR}")
+	echo "     Preparing kernel headers ${BASEDIR}"
+	(cd ${FW_MODPATH}/${BASEDIR}/build; make modules_prepare)
+done

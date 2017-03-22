@@ -1,0 +1,1 @@
+cmd_arch/arm/include/generated/uapi/asm/unistd-common.h := /bin/bash './arch/arm/tools/syscallhdr.sh' 'arch/arm/tools/syscall.tbl' 'arch/arm/include/generated/uapi/asm/unistd-common.h' 'common' '' '__NR_SYSCALL_BASE'
